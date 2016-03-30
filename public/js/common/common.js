@@ -1,0 +1,139 @@
+var moka = {
+	customer:{//用户管理
+		user : {},
+		model : {}
+	},
+	album : {},
+	article:{//用户管理
+		detail : {},
+		list : {}
+	},
+	fileType:{
+		'JSON' : '0',
+		'PPT' : '0',
+		'PPTX' : '0',
+		'DOC' : '1',
+		'DOCX' : '1',
+		'PDF' : '2',
+		'PNG' : '3',
+		'JPEG' : '3',
+		'JPG' : '3',
+		'BMP' : '3',
+		'GIF' : '3',		
+		'WMV' : '4',
+		'AVI' : '4',
+		'RM' : '4',
+		'RMVB' : '4',
+		'DAT' : '4',
+		'ASF' : '4',
+		'RAM' : '4',
+		'MPG' : '4',
+		'MPEG' : '4',
+		'3GP' : '4',
+		'MOV' : '4',
+		'MP4' : '4',
+		'M4V' : '4',
+		'DVIX' : '4',
+		'DV' : '4',
+		'MKV' : '4',
+		'FLV' : '4',
+		'VOB' : '4',
+		'QT' : '4',
+		'CPK' : '4',
+		'VOB' : '4',
+		'MP3' : '5',
+		'WAV' : '5',
+		'TXT' : '6'
+	}
+};
+
+var util = {
+	formatIndex : function(index){
+		return parseInt(index, 10) + 1;
+	},
+	loadingPanel : '<div id="loading_panel" style="height:28px;line-height:28px;padding:15px 0;text-align: center">'
+			+ '<span style="display:inline-block;font-size:15px;color:#999999;"><img src="/img/loading.gif" style="float:left;margin-right:15px;">正在加载...</span>'
+			+ '</div>',
+	date : {
+		format : function(longTime){
+			var date = new Date(longTime);
+
+			var Year= date.getFullYear();//ie火狐下都可以 
+			var Month= date.getMonth()+1; 
+			var Day = date.getDate(); 
+			var Hour = date.getHours(); 
+			var Minute = date.getMinutes(); 
+			var Second = date.getSeconds(); 
+
+			if (Month < 10 ) { 
+				Month = "0" + Month; 
+			} 
+			if (Day < 10 ) { 
+				Day = "0" + Day; 
+			}
+			if (Hour < 10 ) { 
+				Hour = "0" + Hour; 
+			} 
+			if (Minute < 10 ) { 
+				Minute = "0" + Minute; 
+			} 
+			if (Second < 10 ) { 
+				Second = "0" + Second; 
+			}  
+
+			var CurrentDate = Year + '-' + Month + '-' + Day + ' ' + Hour + ':' + Minute + ':' + Second;
+
+			return CurrentDate;
+		}
+	},
+	dialog : {
+		infoDialog : function(msg, callback){
+			var dd = dialog({
+			    title: '信息',
+			    content: msg,
+			    width : 240,
+			    okValue : '确定',
+			    ok : function(){
+			    	if(callback){
+			    		callback();
+			    	}
+			    }
+			});
+			dd.showModal();
+		},
+		errorDialog : function(msg){
+			var d = dialog({
+			    title: '错误信息',
+			    content: msg,
+			    width : 240,
+			    okValue : '确定',
+			    ok : function(){}
+			});
+			d.showModal();	
+		},
+		confirmDialog : function(content,successCallback,cancelCallback,title){
+			if(!title)
+				title = "信息";
+			if(!successCallback){
+				successCallback = function(){};
+			}
+			if(!cancelCallback){
+				cancelCallback = function(){};
+			}
+
+			var d = dialog({
+			    title: title,
+			    content: content,
+			    width : 240,
+			    okValue : '确认',
+     	        ok : successCallback,
+     	        cancelValue : '取消',
+     	        cancel : cancelCallback
+			});
+			d.showModal();	
+		}
+	}
+};
+
+juicer.register('dateFormat', util.date.format);
+juicer.register('formatIndex', util.formatIndex);

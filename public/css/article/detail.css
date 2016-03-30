@@ -1,0 +1,36 @@
+*{box-sizing: content-box;}
+.article-title{
+	font-family: Arial;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.article-title .edit {position: absolute;top: 30px;right: 20px;}
+.article-info{
+	color: #9e9e9e;
+    font-size: 0;
+    line-height: 40px;
+}
+.article-info .article-date{
+	width: 55%;
+	text-align: left;
+	font-size: 16px;
+	display: inline-block;*display: inline;
+}
+.article-info .article-author{
+	width: 45%;
+	text-align: left;	
+	font-size: 16px;
+	display: inline-block;*display: inline;
+}
+
+.article-content{
+
+}
+
+.article-content p img{
+	margin: auto;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>标签管理</title>
+    <%- include ../common/meta.ejs %>
+  </head>
+  <body>
+  	<input type="hidden" id="tag_id" value="<%= tagId %>" >
+  	<div class="container">
+    	<div class="title" >
+    		标签管理-<%= tagName %>
+    	</div>
+
+		<div id="tab-panel" class="tab-panel" >
+			<span data-val="1" class="simp-tab current" >已添加标签</span>
+			<span data-val="0" class="simp-tab" >未添加标签</span>
+		</div>
+
+    	<div class="list-table" >
+    		<table>
+    			<thead>
+    				<tr>
+    					<th>ID</th>
+    					<th>姓名</th>
+    					<th>手机</th>
+    					<th>状态</th>
+    					<th>注册时间</th>
+    					<th>推荐人</th>
+    					<th>创建渠道</th>
+    					<th>是否虚拟</th>
+    					<th style="width:120px;">操作</th>
+    				</tr>
+    			</thead>
+    			<tbody id="model_list"></tbody>
+    		</table>
+    		<div id="pagebar"></div>
+    	</div>
+	</div>
+
+	<script type="text/juicer" id="model_withtag_tpl">
+	{@each list as obj}
+		<tr>
+			<td>${obj.id}</td>
+			<td>${obj.name}</td>
+			<td>${obj.tel}</td>
+			<td>
+				{@if obj.status == -1}
+					禁用
+				{@/if}
+				{@if obj.status == 0}
+					未审核
+				{@/if}
+				{@if obj.status == 1}
+					已审核通过
+				{@/if}
+				{@if obj.status == 2}
+					审核拒绝
+				{@/if}
+			</td>
+			<td>${obj.create_time|dateFormat}</td>
+			<td>${obj.invite_id}</td>
+			<td>
+				{@if obj.create_from == 0}
+					前台
+				{@else}
+					后台
+				{@/if}
+			</td>
+			<td>
+				{@if obj.is_virtual == 0}
+					否
+				{@else}
+					是
+				{@/if}
+			</td>
+			<td class="oper">
+				<span data-id="${obj.id}" class="view-info">图片</span>
+				<span data-id="${obj.id}" class="del">删除</span>
+			</td>
+		</tr>
+	{@/each}
+	</script>
+
+
+	<script type="text/juicer" id="model_withouttag_tpl">
+	{@each list as obj}
+		<tr>
+			<td>${obj.id}</td>
+			<td>${obj.name}</td>
+			<td>${obj.tel}</td>
+			<td>
+				{@if obj.status == -1}
+					禁用
+				{@/if}
+				{@if obj.status == 0}
+					未审核
+				{@/if}
+				{@if obj.status == 1}
+					已审核通过
+				{@/if}
+				{@if obj.status == 2}
+					审核拒绝
+				{@/if}
+			</td>
+			<td>${obj.create_time|dateFormat}</td>
+			<td>${obj.invite_id}</td>
+			<td>
+				{@if obj.create_from == 0}
+					前台
+				{@else}
+					后台
+				{@/if}
+			</td>
+			<td>
+				{@if obj.is_virtual == 0}
+					否
+				{@else}
+					是
+				{@/if}
+			</td>
+			<td class="oper">
+				<span data-id="${obj.id}" class="view-info">图片</span>
+				<span data-id="${obj.id}" class="add">添加</span>
+			</td>
+		</tr>
+	{@/each}
+	</script>
+
+	<script type="text/juicer" id="dlg_add_model" >
+		<dl>
+			<dt>标签名</dt><dd><input id="add_tag_name" name="name" value=""></dd>
+		</dl>
+		<dl>
+			<dt>说明</dt><dd><input id="add_tag_desc" name="desc" value=""></dd>
+		</dl>
+	</div>
+	</script>
+
+	<script type="text/juicer" id="dlg_view_album" >
+	<div id="album_list">
+		{@each list as obj, index}
+		{@if obj.pic}
+		<div class="album-box" data-id="${obj.id}" data-index="${index}">
+			<div class="album-img-wraper" >
+				<img src="${host}${obj.pic}">
+			</div>
+		</div>
+		{@/if}
+		{@/each}
+	</div>
+	</script>
+
+
+	<script type="text/javascript" src='/js/common/component.js'></script>
+	<script type="text/javascript" src='/js/customer/tag-model.js'></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.customer.tagmodel.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>

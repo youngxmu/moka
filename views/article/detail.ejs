@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/article/detail.css' />
+  </head>
+  <body>
+  	<input type="hidden" id="article_id" value="<%= id %>">
+  	<div class="container">
+    	<div class="article-title" ><%= title %><% if(isAdmin){%><span id="btn_edit" class="u-button edit">编辑</span><% } %></div>
+    	<div class="article-info" >
+    		<span class="article-date">发布时间：<%= update_time %></span>
+    		<span class="article-author">作者：<%= author %></span>
+    	</div>
+    	<div id="article_content" class="article-content" ><%- content %></div>
+    	<div class="footer"></div>
+	</div>
+	<script type="text/javascript" src='/js/article/detail.js'></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.article.detail.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>

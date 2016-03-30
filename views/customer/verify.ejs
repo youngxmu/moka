@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>模特管理</title>
+    <%- include ../common/meta.ejs %>
+  </head>
+  <body>
+  	<div class="container">
+    	<div class="title" >
+    		模特审核
+    		<a class="btn" style="float:right;margin-right:10px;" href="/customer" >返回</a>
+    	</div>
+    	<div class="search-panel" >
+    		<dl>
+    			<dt>ID</dt><dd><input id="user_id" ></dd>
+    			<dt>姓名</dt><dd><input id="user_name" ></dd>
+    			<dt>手机</dt><dd><input id="user_tel" ></dd>
+    			<dd>
+    				<span id="btn_search" class="s-btn" >查询</span>
+    			</dd>
+    		</dl>
+    	</div>
+
+		<div class="oper-panel" style="display:none;">
+			<span id="btn_pass" class="btn" >通过</span>
+			<span id="btn_reject" class="btn" >不通过</span>
+		</div>
+
+    	<div class="list-table" style="margin-top:15px;">
+    		<table>
+    			<thead>
+    				<tr>
+    					<th><input id="btn_check_all" type="checkbox" ></th>
+    					<th>ID</th>
+    					<th>姓名</th>
+    					<th>手机</th>
+    					<th>状态</th>
+    					<th>注册时间</th>
+    					<th>审核次数</th>
+    					<th>最后审核时间</th>
+    					<th>是否虚拟</th>
+    					<th style="width:120px;">操作</th>
+    				</tr>
+    			</thead>
+    			<tbody id="model_list"></tbody>
+    		</table>
+    		<div id="pagebar"></div>
+    	</div>
+
+	</div>
+
+	<script type="text/juicer" id="model_list_tpl">
+	{@each list as obj}
+		<tr>
+			<th><input type="checkbox" value="${obj.id}" ></th>
+			<td>${obj.id}</td>
+			<td>${obj.name}</td>
+			<td>${obj.tel}</td>
+			<td>
+				{@if obj.status == -1}
+					禁用
+				{@/if}
+				{@if obj.status == 0}
+					未审核
+				{@/if}
+				{@if obj.status == 1}
+					已审核通过
+				{@/if}
+				{@if obj.status == 2}
+					审核拒绝
+				{@/if}
+			</td>
+			<td>${obj.create_time|dateFormat}</td>
+			<td>${obj.invite_id}</td>
+			<td>
+				{@if obj.create_from == 0}
+					前台
+				{@else}
+					后台
+				{@/if}
+			</td>
+			<td>
+				{@if obj.is_virtual == 0}
+					否
+				{@else}
+					是
+				{@/if}
+			</td>
+			<td class="oper">
+				<span data-id="${obj.id}" class="detail" >详情</span>
+				<span data-id="${obj.id}" class="history">审核历史</span>
+			</td>
+		</tr>
+	{@/each}
+	</script>
+
+	<script type="text/juicer" id="dlg_model_detail">
+	<div id="model_detail_panel" class="d-table" >
+		<div>
+			<div class="d-left">
+				<dl>
+					<dt>姓名</dt><dd><span>${name}</span></dd>
+				</dl>
+				<dl>
+					<dt>手机</dt><dd><span>${tel}</span></dd>
+				</dl>
+				<dl>
+					<dt>生日</dt><dd><span>${birth}</span></dd>
+				</dl>
+				<dl>
+					<dt>身高</dt><dd><span>${height}</span></dd>
+				</dl>
+				<dl>
+					<dt>三围</dt><dd><span>${b}-${w}-${h}</span></dd>
+				</dl>
+				<dl>
+					<dt>罩杯</dt><dd><span>${cup}</span></dd>
+				</dl>
+				<dl>
+					<dt>体重</dt><dd><span>${weight}</span></dd>
+				</dl>
+				<dl>
+					<dt>积分</dt><dd><span>${jifen}</span></dd>
+				</dl>
+				<dl>
+					<dt>微信</dt><dd><span>${weixin}</span></dd>
+				</dl>
+			</div>
+			<div class="d-right">
+				<dl><dt>添加标签</dt></dl>
+				<dl>
+					{@each tags as tag}
+					<span {@if tag.selected}class="selected"{@/if} data-id="${tag.id}" >${tag.name}</span>
+					{@/each}
+				</dl>
+			</div>
+		</div>
+		<div class="img-list-panel" >
+			{@each pics as pic}
+			{@if pic}
+			<div>
+			<span><img src="${host}${pic}"></span>
+			</div>
+			{@/if}
+			{@/each}
+		</div>
+	</div>
+	</script>
+	
+	<script type="text/javascript" src='/js/common/component.js'></script>
+	<script type="text/javascript" src='/js/customer/verify.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.customer.verify.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>

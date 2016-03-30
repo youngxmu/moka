@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>宅男管理</title>
+    <%- include ../common/meta.ejs %>
+  </head>
+  <body>
+  	<div class="container">
+    	<div class="title" >
+    		宅男管理
+    		<a class="btn" style="float:right;margin-right:10px;" href="/customer" >返回</a>
+    	</div>
+    	<div class="search-panel" >
+    		<dl>
+    			<dt>ID</dt><dd><input id="user_id" ></dd>
+    			<dt>姓名</dt><dd><input id="user_name" ></dd>
+    			<dt>手机</dt><dd><input id="user_tel" ></dd>
+    			<dt>创建渠道</dt>
+    			<dt>创建渠道</dt>
+    			<dd>
+    				<select id="create_from">
+    					<option value="-2" selected="selected">请选择</option>
+    					<option value="0" >前台</option>
+    					<option value="1" >后台</option>
+    				</select>
+    			</dd>
+    			<dt>是否虚拟</dt>
+    			<dd>
+    				<select id="is_virtual" >
+    					<option value="-2"  selected="selected">请选择</option>
+						<option value="1" >是</option>
+    					<option value="0" >否</option>
+    				</select>
+    			</dd>
+    			<dd>
+    				<span id="btn_search" class="s-btn" >查询</span>
+    			</dd>
+    		</dl>
+    	</div>
+
+		<div class="oper-panel" >
+			<span id="btn_add_user" class="btn" >添加</span>
+		</div>
+
+    	<div class="list-table" >
+    		<table>
+    			<thead>
+    				<tr>
+    					<th>ID</th>
+    					<th>姓名</th>
+    					<th>手机</th>
+    					<th>状态</th>
+    					<th>注册时间</th>
+    					<th>推荐人</th>
+    					<th>创建渠道</th>
+    					<th>是否虚拟</th>
+    					<th style="width:80px;">操作</th>
+    				</tr>
+    			</thead>
+    			<tbody id="user_list"></tbody>
+    		</table>
+    		<div id="pagebar"></div>
+    	</div>
+
+	</div>
+
+	<script type="text/juicer" id="user_list_tpl">
+	{@each list as obj}
+		<tr>
+			<td>${obj.id}</td>
+			<td>${obj.nickname}</td>
+			<td>${obj.tel}</td>
+			<td>
+				{@if obj.status == -1}
+					禁用
+				{@/if}
+				{@if obj.status == 0}
+					未审核
+				{@/if}
+				{@if obj.status == 1}
+					已审核通过
+				{@/if}
+				{@if obj.status == 2}
+					审核拒绝
+				{@/if}
+			</td>
+			<td>${obj.create_time|dateFormat}</td>
+			<td>${obj.invite_id}</td>
+			<td>
+				{@if obj.create_from == 0}
+					前台
+				{@else}
+					后台
+				{@/if}
+			</td>
+			<td>
+				{@if obj.is_virtual == 0}
+					否
+				{@else}
+					是
+				{@/if}
+			</td>
+			<td class="oper">
+				<span data-id="${obj.id}" class="info" >资料</span>
+				<span data-id="${obj.id}" class="edit" >编辑</span>
+			</td>
+		</tr>
+	{@/each}
+	</script>
+
+	<script type="text/juicer" id="dlg_add_user">
+	<div class="v-table" >
+		<dl>
+			<dt>昵称</dt><dd><input name="nickname" value=""></dd>
+			<dt>手机</dt><dd><input name="tel" value=""></dd>
+		</dl>
+		<dl>
+			<dt>乐豆</dt><dd><input name="" value=""></dd>
+			<dt>密码</dt><dd><input name="passwd" value=""></dd>
+		</dl>
+		<dl>
+			<dt>虚拟</dt>
+			<dd>
+				<select name="isVirtual">
+					<option value="1">是</option>
+					<option value="0">否</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>头像</dt>
+			<dd style="width:200px;">
+				<input id="profile_url" type="hidden" name="profile" >
+				<span id="dlg_btn_upload" class="s-btn">上传头像</span>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">至少500*500像素</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">头像区域</em>
+			</dd>
+		</dl>
+	</div>
+	</script>
+
+	<script type="text/juicer" id="dlg_edit_user">
+	<div class="v-table" >
+		<dl>
+			<dt>昵称</dt><dd><input name="nickname" value="${nickname}"></dd>
+			<dt>手机</dt><dd><input name="tel" value="${tel}"></dd>
+		</dl>
+		<dl>
+			<dt>乐豆</dt><dd><input name="" value="${bean_count}"></dd>
+			<dt>密码</dt><dd><input name="passwd" value=""></dd>
+		</dl>
+		<dl>
+			
+			<dt>虚拟</dt>
+			<dd>
+				<select name="isVirtual">
+					<option value="1">是</option>
+					<option value="0">否</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>头像</dt>
+			<dd style="width:200px;">
+				<input id="profile_url" type="hidden" name="profile" >
+				<span id="dlg_btn_upload" class="s-btn">上传头像</span>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">至少500*500像素</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">头像区域</em>
+			</dd>
+		</dl>
+	</div>
+	</script>
+
+	<script type="text/juicer" id="dlg_user_info">
+	<div class="v-table" style="width:480px;">
+		<div style="width:230px;display:inline-block;float:left;">
+		<dl>
+			<dt>昵称</dt><dd>${nickname}</dd>
+			<dt>手机</dt><dd>${tel}</dd>
+			<dt>乐豆</dt><dd>${bean_count}</dd>
+		</dl>
+		</div>
+		<div style="width:230px;display:inline-block;">
+			<dl>
+				<dt>&nbsp;</dt>
+				<dd>
+					<span class="dlg-avator" style="width:120px;height:120px;">
+						{@if profile}
+							<img style="max-width:120px;max-height:120px;" src="${host}${profile}" />
+						{@/if}
+					</span>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	</script>
+	
+	<script type="text/javascript" src='/js/customer/user.js'></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.customer.user.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>

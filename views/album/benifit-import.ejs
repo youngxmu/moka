@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>导入的福利</title>
+    
+    <%- include ../common/meta.ejs %>
+	<link href="/css/lib/jqueryui/jquery-ui-timepicker-addon.min.css" rel="stylesheet" type="text/css" media="all"/>
+	<link href="/css/lib/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" media="all"/>
+  </head>
+  <body>
+  	<div class="container">
+    	<div class="title" >
+    		系统福利
+    		<a class="btn" style="float:right;margin-right:10px;" href="/customer" >返回</a>
+    	</div>
+    	<div class="oper-panel" style="display:none;">
+			<span id="btn_add_benefit" class="btn" >添加至福利列表</span>
+		</div>
+    	<div class="list-table" >
+    		<div id="album_list" ></div>
+    		<div id="pagebar"></div>
+    	</div>
+	</div>
+
+	<script type="text/juicer" id="album_list_tpl">
+	{@each list as obj, index}
+	<div class="album-box" data-id="${obj.id}" data-index="${index}" >
+		<div class="album-img-wraper" >
+			<img src="${host}${obj.pic}">
+		</div>
+	</div>
+	{@/each}
+	</script>
+
+	<script type="text/juicer" id="dlg_album_send_tpl">
+	<div>
+		<dl>
+			已选择X张图片
+		</dl>
+		<dl>
+			<dt>发送日期</dt><dd><input id="publish_date" placeholder="发布日期" class="date" ></dd>
+		</dl>
+	</div>
+	</script>
+	
+	<script type="text/javascript" src="/js/lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/datetimepicker/jquery-ui-timepicker-addon.min.js"></script>
+	<script type="text/javascript" src="/js/lib/datetimepicker/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src='/js/common/component.js'></script>
+	<script type="text/javascript" src='/js/album/benifit-import.js'></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.album.benifitImport.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>

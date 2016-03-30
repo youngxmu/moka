@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>模特管理</title>
+    
+    <%- include ../common/meta.ejs %>
+
+  </head>
+  <body>
+  	<div class="container">
+    	<div class="title" >
+    		模特管理
+    		<a class="btn" style="float:right;margin-right:10px;" href="/customer" >返回</a>
+    	</div>
+    	<div class="search-panel" >
+    		<dl>
+    			<dt>ID</dt><dd><input id="user_id" ></dd>
+    			<dt>姓名</dt><dd><input id="user_name" ></dd>
+    			<dt>手机</dt><dd><input id="user_tel" ></dd>
+    			<dt>创建渠道</dt>
+    			<dd>
+    				<select id="create_from">
+    					<option value="-2" selected="selected">请选择</option>
+    					<option value="0" >前台</option>
+    					<option value="1" >后台</option>
+    				</select>
+    			</dd>
+    			<dt>是否虚拟</dt>
+    			<dd>
+    				<select id="is_virtual" >
+    					<option value="-2"  selected="selected">请选择</option>
+						<option value="1" >是</option>
+    					<option value="0" >否</option>
+    				</select>
+    			</dd>
+    			<dd>
+    				<span id="btn_search" class="s-btn" >查询</span>
+    			</dd>
+    		</dl>
+    	</div>
+
+		<div class="oper-panel" >
+			<span id="btn_add_model" class="btn" >单个添加</span>
+			<span id="btn_add_models" class="btn" >批量添加</span>
+		</div>
+
+    	<div class="list-table" >
+    		<table>
+    			<thead>
+    				<tr>
+    					<th>ID</th>
+    					<th>姓名</th>
+    					<th>手机</th>
+    					<th>状态</th>
+    					<th>注册时间</th>
+    					<th>推荐人</th>
+    					<th>创建渠道</th>
+    					<th>是否虚拟</th>
+    					<th style="width:120px;">操作</th>
+    				</tr>
+    			</thead>
+    			<tbody id="model_list"></tbody>
+    		</table>
+    		<div id="pagebar"></div>
+    	</div>
+
+	</div>
+
+	<script type="text/juicer" id="model_list_tpl">
+	{@each list as obj}
+		<tr>
+			<td>${obj.id}</td>
+			<td>${obj.name}</td>
+			<td>${obj.tel}</td>
+			<td>
+				{@if obj.status == -1}
+					禁用
+				{@/if}
+				{@if obj.status == 0}
+					未审核
+				{@/if}
+				{@if obj.status == 1}
+					已审核通过
+				{@/if}
+				{@if obj.status == 2}
+					审核拒绝
+				{@/if}
+			</td>
+			<td>${obj.create_time|dateFormat}</td>
+			<td>${obj.invite_id}</td>
+			<td>
+				{@if obj.create_from == 0}
+					前台
+				{@else}
+					后台
+				{@/if}
+			</td>
+			<td>
+				{@if obj.is_virtual == 0}
+					否
+				{@else}
+					是
+				{@/if}
+			</td>
+			<td class="oper">
+				<span data-id="${obj.id}" class="view-info">资料</span>
+				<span data-id="${obj.id}" class="view-img">图片</span>
+				<span data-id="${obj.id}" class="edit">编辑</span>
+			</td>
+		</tr>
+	{@/each}
+	</script>
+
+	<script type="text/juicer" id="dlg_add_model">
+	<div id="add_model_panel" class="v-table" >
+		<dl>
+			<dt>姓名</dt><dd><input name="name" value=""></dd>
+			<dt>手机</dt><dd><input name="tel" value=""></dd>
+		</dl>
+		<dl>
+			<dt>生日</dt><dd><input name="birth" value=""></dd>
+			<dt>身高</dt><dd><input name="height" value=""></dd>
+		</dl>
+		<dl>
+			<dt>胸围</dt><dd><input name="b" value=""></dd>
+			<dt>腰围</dt><dd><input name="w" value=""></dd>
+		</dl>
+		<dl>
+			<dt>臀围</dt><dd><input name="h" value=""></dd>
+			<dt>罩杯</dt>
+			<dd>
+				<select name="cup">
+					<option value="A">A</option>
+					<option value="B">B</option>
+					<option value="C">C</option>
+					<option value="D">D</option>
+					<option value="E">E</option>
+					<option value="F">F</option>
+					<option value="G">G</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>体重</dt><dd><input value=""></dd>
+			<dt>积分</dt><dd><input name="jifen" value=""></dd>
+		</dl>
+		<dl>
+			<dt>微信</dt><dd><input name="weixin" value=""></dd>
+			<dt>密码</dt><dd><input type="password" value=""></dd>
+		</dl>
+		<dl>
+			<dt>虚拟</dt>
+			<dd>
+				<select name="isVirtual">
+					<option value="1">是</option>
+					<option value="0">否</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>头像</dt>
+			<dd style="width:200px;">
+				<input id="profile_url" type="hidden" name="profile" >
+				<span id="dlg_btn_upload" class="s-btn">上传头像</span>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">至少500*500像素</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<span id="dlg_avator_${id}" class="dlg-avator">
+					{@if profile}
+						<img style="max-width:80px;max-height:80px;" src="${host}${profile}" />
+					{@/if}
+				</span>
+			</dd>
+		</dl>
+	</div>
+	</script>
+
+	<script type="text/juicer" id="dlg_add_models">
+		<div class="edit-table" >
+    		<table>
+    			<thead>
+    				<tr>
+    					<th width="30px">序号</th>
+    					<th>姓名</th>
+    					<th>性别</th>
+    					<th>手机</th>
+    					<th>生日</th>
+    					<th>身高</th>
+    					<th>胸围</th>
+    					<th>腰围</th>
+    					<th>臀围</th>
+    					<th>罩杯</th>
+    					<th>体重</th>
+    					<th>虚拟</th>
+    					<th>积分</th>
+    					<th>微信</th>
+    					<th>密码</th>
+    					<th>头像</th>
+    				</tr>
+    			</thead>
+    			<tbody id="model_list">
+				{@each i in range(1, 21)}
+					<tr>
+						<td>${i}</td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+						<td><input name="" ></td>
+					</tr>
+				{@/each}
+    			</tbody>
+    		</table>
+
+    	</div>
+	</script>
+
+	<script type="text/juicer" id="dlg_edit_model">
+	<div id="edit_model_panel" class="v-table" >
+		<dl>
+			<dt>姓名</dt><dd><input name="name" value="${name}"></dd>
+			<dt>手机</dt><dd><input name="tel" value="${tel}"></dd>
+		</dl>
+		<dl>
+			<dt>生日</dt><dd><input name="birth" value="${birthday}"></dd>
+			<dt>身高</dt><dd><input name="height" value="${height}"></dd>
+		</dl>
+		<dl>
+			<dt>胸围</dt><dd><input name="b" value="${b}"></dd>
+			<dt>腰围</dt><dd><input name="w" value="${w}"></dd>
+		</dl>
+		<dl>
+			<dt>臀围</dt><dd><input name="h" value="${h}"></dd>
+			<dt>罩杯</dt>
+			<dd>
+				<select name="cup">
+					<option value="A" {@if cup == "A"}selected="selected"{@/if}>A</option>
+					<option value="B" {@if cup == "B"}selected="selected"{@/if}>B</option>
+					<option value="C" {@if cup == "C"}selected="selected"{@/if}>C</option>
+					<option value="D" {@if cup == "D"}selected="selected"{@/if}>D</option>
+					<option value="E" {@if cup == "E"}selected="selected"{@/if}>E</option>
+					<option value="F" {@if cup == "F"}selected="selected"{@/if}>F</option>
+					<option value="G" {@if cup == "G"}selected="selected"{@/if}>G</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>体重</dt><dd><input value=""></dd>
+			<dt>积分</dt><dd><input name="jifen" value="${jifen}"></dd>
+		</dl>
+		<dl>
+			<dt>微信</dt><dd><input name="weixin" value=""></dd>
+			<dt>密码</dt><dd><input type="password" name="password" value=""></dd>
+		</dl>
+		<dl>
+			<dt>虚拟</dt>
+			<dd>
+				<select name="isVirtual">
+					<option value="1" {@if is_virtual == 1}selected="selected"{@/if}>是</option>
+					<option value="0" {@if is_virtual == 0}selected="selected"{@/if}>否</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>头像</dt>
+			<dd style="width:200px;">
+				<input id="profile_url" type="hidden" name="profile" >
+				<span id="dlg_btn_upload" class="s-btn">上传头像</span>
+				<em class="tag" style="color:#cccccc;margin-left:5px;">至少500*500像素</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<span id="dlg_avator_${id}" class="dlg-avator">
+					{@if profile}
+						<img style="max-width:80px;max-height:80px;" src="${host}${profile}" />
+					{@/if}
+				</span>
+			</dd>
+		</dl>
+	</div>
+	</script>
+	
+	<script type="text/juicer" id="dlg_view_album" >
+	<div id="album_list">
+		{@each list as obj, index}
+		{@if obj.pic}
+		<div class="album-box" data-id="${obj.id}" data-index="${index}">
+			<div class="album-img-wraper" >
+				<img src="${host}${obj.pic}">
+			</div>
+			<span data-id="${obj.id}" class='album-del'></span>
+		</div>
+		{@/if}
+		{@/each}
+	</div>
+	</script>
+
+	<script type="text/javascript" src='/js/common/component.js'></script>
+	<script type="text/javascript" src='/js/customer/model.js'></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			moka.customer.model.init();
+		});
+	</script>
+  </body>
+  </body>
+</html>
