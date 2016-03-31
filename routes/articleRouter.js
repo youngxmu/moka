@@ -6,7 +6,66 @@ var config = require("../config");
 var router = express.Router();
 
 
-router.get('list', function(req, res, next) {
+var menu = {
+    m_1 : {
+        name : '中心介绍',
+        submenu : {
+
+        }
+    },
+    m_2 : {
+        name : '',
+        submenu : {
+
+        }
+    },
+    m_3 : {
+        name : '中心介绍',
+        submenu : {
+
+        }
+    },
+    m_4 : {
+        name : '数字资源',
+        submenu : {
+            m_4_1 : {
+                name : '国防理论'
+            },
+            m_4_2 : {
+                name : '国防知识'
+            },
+            m_4_3 : {
+                name : '国防历史'
+            },
+            m_4_4 : {
+                name : '国防法规'
+            },
+            m_4_5 : {
+                name : '国防形势'
+            },
+            m_4_6 : {
+                name : '国防技能'
+            },
+            m_4_7 : {
+                name : '外军知识'
+            },
+            m_4_8 : {
+                name : '武器装备'
+            },
+            m_4_9 : {
+                name : '图片视频'
+            }
+        }
+    },
+    m_5 : {
+        name : '中心介绍',
+        submenu : {
+
+        }
+    }
+};
+
+router.get('/list', function(req, res, next) {
     var id = req.params.id;
     res.render('article/list');
 });

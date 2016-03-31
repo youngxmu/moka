@@ -1,65 +1,95 @@
 (function(P){
 	var _this = null;
 	_this = P.article.list = {
-		articleId : null,
-		editor : null,
+		searchUrl : '/article/list',
+		tpl : {
+			articleListTpl : null
+		},
 		data : {
-			
+			userMap : {}
+		},
+		queryData : {
+			pageNo : 1,
+			pageSize : 15
 		},
 		init : function() {
+			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.initEvent();
-			_this.initEditor();
+			_this.search();
 		},
 		initEvent : function(){
 			$('#btn_commit').on('click', _this.commit);
 		},
-		initEditor : function(){
-			_this.editor = new Simditor({
-			  	textarea: $('#editor'),
-			  	upload : {
-			    	url: '/upload/img',
-				    params: null,
-				    fileKey: 'upload_file',
-				    connectionCount: 3,
-				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
-			  	}
+		loadList : function(){
+
+		},
+		search : function(){
+			$.ajax({
+				type : 'post',
+				url : _this.searchUrl,
+				data : _this.queryData,
+				beforeSend : function(){
+					$('#article_list').html(util.loadingPanel);
+				},
+				success : _this.initPage
 			});
 		},
-		commit : function() {
-			var content = _this.editor.getValue();
-			var title = $('#title').val();
-			var author = $('#author').val();
-			var url = '/article/save';
-			
-			var postData = {
-				title : title,
-				author : author,
-				content : content
-			};
+		initPage : function(result) {
+			var data = result.data;
+		    $('#article_list').html(_this.tpl.articleListTpl.render(data));
 
-			if(_this.articleId != null){
-				postData.id = _this.articleId;
+			var userList = data.list;
+			for(var index in userList){
+				var user = userList[index];
+				_this.data.userMap[user.id] = user;
 			}
+		
+			var totalPage = data.totalPage;
+			var totalCount = data.totalCount;
+		    if (totalPage <= 1) {
+		        $("#pagebar").html('');
+		    }
+		    if (totalPage >= 2) {
+		        $(function() {
+		            $.fn.jpagebar({
+		                renderTo : $("#pagebar"),
+		                totalpage : totalPage,
+		                totalcount : totalCount,
+		                pagebarCssName : 'pagination2',
+		                currentPage: parseInt(data.currentPage),
+		                onClickPage : function(pageNo) {
+		                    $.fn.setCurrentPage(this, pageNo);
+		                    if (_this.instance_papers == null)
+		                    	_this.instance_papers = this;
+	
+		                    _this.queryData.pageNo = parseInt(pageNo),
 
-			$.ajax({
-				url : url,
-				type : 'post',
-				data : postData,
-				success : function(data){
-					util.dialog.confirmDialog('继续提交',
-						function(){
-
-						},
-						function(){
-							window.location.href = '/article/detail/' + data.id;
-						},
-						'提交成功'
-					);
-				},
-				error : function(){
-					util.dialog.errorDialog('提交失败请重试');
-				}
-			});
+		                    $.ajax({
+		                    	url:  _this.searchUrl,
+		                        type: 'POST',
+		                        data: _this.queryData,
+		                        beforeSend : function(){
+									$('#article_list').html(util.loadingPanel);
+								},
+		                        success : function(result){
+		                        	if (result != null && result.success) {
+		                        		var data = result.data;
+		                		        $('#article_list').html(_this.tpl.articleListTpl.render(data));
+										var userList = data.list;
+										for(var index in userList){
+											var user = userList[index];
+											_this.data.userMap[user.id] = user;
+										}
+		                		    }
+		                		    else {
+		                		        util.dialog.infoDialog("查询信息失败，请重试。");
+		                		    }
+		                        }
+		                    });
+		                }
+		            });
+		        });
+		    }
 		}
 	};
 }(moka));

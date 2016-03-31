@@ -3,49 +3,68 @@
   <head>
     <title>数字资源</title>
     <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/article/list.css' />
   </head>
   <body>
-  	<div class="container">
-      <div class="banner">
-        <div class="t-logo"></div>
-        <div class="search-bar"></div>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <div class="search-box">
+         <div class="input-group clearfix">
+             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+             <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+             </div>
+         </div>
       </div>
-    	<div class="nav">
-    		<span>
-    			<a href="/article/list" >中心介绍</a>
-    		</span>
-    		<span>
-    			<a href="/article/list" >英模人物</a>
-    		</span>
-        <span>
-          <a href="/article/list" >数字资源</a>
-        </span>
-    	</div>
-      <div class="main">
-        <div class="thp-1">
-          <div class="thp-banner">
-            中心介绍
-            <div class="more-link">更多</div>
-          </div>
-          <ul class="thp-list">
+    </div>
+    <div class="nav">
+      <span>
+        <a href="/article/list" >国防理论</a>
+      </span>
+      <span>
+        <a href="/article/list" >国防知识</a>
+      </span>
+      <span>
+        <a href="/article/list" >国防历史</a>
+      </span>
+    </div>
+  	<div class="container">
+      <div class="main-atlist">
+        <div class="crumb">
+          <a href="/index">首页</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="/article/list">数字资源</a>
+        </div>
+        <div class="twop">
+          <ul class="twop-nav">
             <li>
-              <a href="javascript:void(0);">中心性质、发展规划、建设计划、中心设置及职能</a>
-              <span class="date"></span>
+              <span>马列经典</span>
+            </li>
+            <li>
+              <span>领导人论国防</span>
+            </li>
+            <li>
+              <span>军事战略</span>
+            </li>
+            <li>
+              <span>国防政策</span>
             </li>
           </ul>
         </div>
-        <div class="thp-2">
-          <div class="thp-banner">
-            中心介绍
-            <div class="more-link">更多</div>
-          </div>
+        <div class="twop">
+          <ul class="twop-list">
+            <li>
+              <a href="javascript:void(0);">中心性质、发展规划、建设计划、中心设置及职能</a>
+              <span class="date">12-19</span>
+            </li>
+            <li>
+              <a href="javascript:void(0);">中心性质、发展规划、建设计划、中心设置及职能</a>
+              <span class="date">12-19</span>
+            </li>
+          </ul>
+          <div id="pagebar"></div>
         </div>
-        <div class="thp-3">
-          <div class="thp-banner">
-            中心介绍
-            <div class="more-link">更多</div>
-          </div>
-        </div>
+        
       </div>
 	</div>
   </body>
