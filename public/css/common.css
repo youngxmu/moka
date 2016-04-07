@@ -164,3 +164,7 @@ width: 960px;margin: auto;padding: 0 20px;
     line-height: 1px;
     width: 26px;
 }
+
+
+.disabled {opacity: 1 !important;color: #999999 !important;cursor: default !important;}
+.disabled:hover {opacity: 1 !important;color: #999999 !important;cursor: default !important;}

@@ -7,7 +7,7 @@ module.exports = {
 	views: path.resolve(__dirname, '..', 'views'),
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
-	imgHost: 'http://10.99.13.32:8200',
+	imgHost: 'http://localhost:8200',
 
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
@@ -15,9 +15,9 @@ module.exports = {
 	sessionSecret: 'session_secret_random_seed',
 
 	//mysql config
-	host: "127.0.0.1",
+	host: "10.99.113.69",
 	user: "root",
-	password: "root",
+	password: "123a321",
 	database: "moka",
 	enableDBLog: false,
 

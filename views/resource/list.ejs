@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理</title>
+    <%- include common/meta.ejs %>
+    <link rel='stylesheet' href='/css/lib／zTreeStyle/zTreeStyle.css' />
+    <link rel='stylesheet' href='/css/resource/list.css' />
+    
+  </head>
+  <body>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
+      <div class="search-box">
+         <div class="input-group clearfix">
+             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+             <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+             </div>
+         </div>
+      </div>
+    </div>    
+  	<div class="container">
+      <div class="sidebar">
+
+      </div>
+      <div class="main">
+        <input id="upload" type="button" value="提交">
+      </div>
+	  </div>
+
+    <script type="text/javascript" src="/js/lib／jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/js/resource／list.js"></script>
+
+
+    <script>
+      $(document).ready(function() {
+            moka.resource.list.init();
+        });
+    </script>
+  </body>
+</html>

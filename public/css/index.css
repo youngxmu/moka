@@ -19,8 +19,11 @@
 .main .thp .thp-banner{line-height: 40px;border-bottom: 1px solid #cccccc;}
 .main .thp .thp-banner .more-link{line-height: 40px;float: right;
   font-size: 12px;
-  color: #999999;
+  color: #999999 !important;
+  cursor: pointer;
 }
+.main .thp .thp-banner .more-link a{color: #999999 !important;}
+
 .main .thp .thp-list{margin: 0;padding: 0;}
 .main .thp .thp-list li{line-height: 40px;border-bottom: 1px dashed #cccccc;font-size: 0;
 }
