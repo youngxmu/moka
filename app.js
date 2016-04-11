@@ -156,3 +156,7 @@ server.listen(app.get('port'), function() {
 process.on('uncaughtException', function(err) {
     console.log('Holy shit!!!!! Fatal Errors!!!!!!! ' + err);
 });
+
+
+var menuUtils = require("./lib/menuUtils.js");
+console.log(menuUtils.getMenuList());

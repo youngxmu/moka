@@ -15,9 +15,9 @@ module.exports = {
 	sessionSecret: 'session_secret_random_seed',
 
 	//mysql config
-	host: "10.99.113.69",
+	host: "127.0.0.1",
 	user: "root",
-	password: "123a321",
+	password: "root",
 	database: "moka",
 	enableDBLog: false,
 

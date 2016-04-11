@@ -91,3 +91,30 @@ exports.updateArticle = function (id, title, author, content, status, callback) 
 };
 
 
+exports.getArticleByMenu = function (menu_id, start, pageSize, callback) {
+    var sql = 'select * from article where 1=1 ';
+    var params = [];
+    sql += ' and status = 1 ';
+    sql += ' and menu_id in ('+ menu_id +') ';
+    sql += ' order by create_time desc limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+exports.getArticleByMenuTotalCount = function (menu_id, callback) {
+    var sql = 'select count(id) as count from article where 1=1 ';
+    var params = [];
+    sql += ' and status = 1 ';
+    sql += ' and menu_id in ('+ menu_id +') ;';
+   
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找文章总数出错", err);
+            callback(0);
+        }
+    });
+};
+
