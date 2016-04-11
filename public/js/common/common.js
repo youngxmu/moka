@@ -8,6 +8,7 @@ var moka = {
 		detail : {},
 		list : {}
 	},
+	resource : {},
 	fileType:{
 		'JSON' : '0',
 		'PPT' : '0',
@@ -125,6 +126,27 @@ var util = {
 			    title: title,
 			    content: content,
 			    width : 240,
+			    okValue : '确认',
+     	        ok : successCallback,
+     	        cancelValue : '取消',
+     	        cancel : cancelCallback
+			});
+			d.showModal();	
+		},
+		defaultDialog : function(content,successCallback,cancelCallback,title){
+			if(!title)
+				title = "信息";
+			if(!successCallback){
+				successCallback = function(){};
+			}
+			if(!cancelCallback){
+				cancelCallback = function(){};
+			}
+
+			var d = dialog({
+			    title: title,
+			    content: content,
+			    width : 600,
 			    okValue : '确认',
      	        ok : successCallback,
      	        cancelValue : '取消',
