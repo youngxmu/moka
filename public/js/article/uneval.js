@@ -1,6 +1,7 @@
 (function(P){
 	var _this = null;
-	_this = P.resource.list = {
+	_this = P.article.uneval = {
+		searchUrl : '/article/uneval',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -15,11 +16,11 @@
 			}
 		},
 		init : function() {
-			$('#hd_menu_resource').addClass('current');
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
 			_this.initTopic();
+			_this.searchResource();
 		},
 		initEvent : function(){
 			$('#resource_list').on('click','.view',function(){
@@ -79,14 +80,13 @@
 			_this.initTree();
 		},
 		searchResource : function() {
-			var url = '/article/queryArticleByMenu';
 			var data = _this.data.searchData;
 			$.ajax({
 				type : "post",
-				url : url,
+				url : _this.searchUrl,
 				data : data,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					$('#resource_list').html('<div style="text-align:center;margin-top:20px;font-size:12px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
 				success : _this.initPageResource 
 			});
@@ -107,7 +107,7 @@
 			var totalcount = data.totalCount;
 			var html = _this.data.resourceTpl.render(data);
 			if(totalcount == 0){
-				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
+				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;font-size:12px;">当前条件下搜索，获得0条结果!</div>';
 			}
 			$('#resource_list').html(html);
 			
@@ -267,6 +267,7 @@
 				data : node,
 				success : function(result){
 					if(result.success){
+						console.log(node);
 						pmenu.name = name
 						_this.getCurrTree().updateNode(pmenu);
 					}
