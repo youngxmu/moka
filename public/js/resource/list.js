@@ -26,30 +26,34 @@
 				var id = $(this).attr('data-id');
 				var data = _this.data.resourceList[id];
 				var options = {isPreview : false, resourceType : 2};
-				
-			});
-			/** 初始化知识点树 */
-			$('.opAll').on('click',function(){
-				var zTree = _this.getCurrTree();
-				zTree.cancelSelectedNode();
-				zTree.checkAllNodes(false);
-				_this.data.searchData.pageNo=1;
-				if(_this.theme == 0){
-					_this.data.searchData.topicId='';
-				}else{
-					_this.data.searchData.seriesid='';
-				}
-				_this.searchResource();
 			});
 			
-			$('.treeOper .unfold').click(function(){
+			$('.tree-opr').on('click', '.unfold',function(){
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(true);
+				$(this).removeClass('unfold').addClass('shrink').text('收缩');
 			});
 				
-			$('.treeOper .shrink').click(function(){
+			$('.tree-opr').on('click', '.shrink',function(){
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(false);
+				$(this).removeClass('shrink').addClass('unfold').text('展开');
+			});
+
+			$('.tree-opr').on('click', '.add',function(){
+				console.log(1);
+				var zTree = _this.getCurrTree();
+				_this.showAddMenuDlg();
+			});
+
+			$('.tree-opr').on('click', '.edit',function(){
+				var zTree = _this.getCurrTree();
+				_this.showEditMenuDlg();
+			});
+
+			$('.tree-opr').on('click', '.del',function(){
+				var zTree = _this.getCurrTree();
+				_this.showDelMenuDlg();
 			});
 		},
 		
@@ -134,7 +138,8 @@
 			view : {
 				dblClickExpand : false,
 				showLine : true,
-				selectedMulti : false
+				selectedMulti : false,
+				showIcon : false
 			},
 			data : {
 				simpleData : {
@@ -145,7 +150,7 @@
 				}
 			},
 			check : {
-				enable : true
+				enable : false
 			},
 			callback : {
 				beforeClick : function(treeId, treeNode) {
@@ -160,14 +165,13 @@
 				},
 				onClick: function(event,treeId, treeNode) {
 					var zTree = _this.getCurrTree();
-					// if (!treeNode.isParent) {
-						var nodes = zTree.getCheckedNodes(true);
-						// console.log(treeNode);
-						_this.data.searchData.mid = treeNode.id;
-						_this.data.searchData.pageNo = 1;
-						_this.searchResource();
-						return true;
-					// }
+					var nodes = zTree.getCheckedNodes(true);
+					console.log(treeNode);
+
+					_this.data.searchData.mid = treeNode.id;
+					_this.data.searchData.pageNo = 1;
+					_this.searchResource();
+					return true;
 				}
 			}
 		},
@@ -180,41 +184,115 @@
 			return _this.topicTree;
 		},
 		showAddMenuDlg : function(){
-			
+			var data = {name : ''};
 			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl,
+				_this.data.editMenuDlgTpl.render(data),
 				_this.addMenu,
 				function(){},
 				'确认添加菜单'
 			);
 		},
+		showEditMenuDlg : function(){
+			var pmenu = _this.currNode;
+			console.log(pmenu);
+			var data = {name : pmenu.name};
+			util.dialog.confirmDialog(
+				_this.data.editMenuDlgTpl.render(data),
+				_this.updateMenu,
+				function(){},
+				'确认修改菜单'
+			);
+		},
+		showDelMenuDlg : function(){
+			util.dialog.confirmDialog(
+				'确认删除',
+				_this.delMenu,
+				function(){},
+				'确认删除菜单'
+			);
+		},
 		addMenu : function(){
-			var parent_id = _this.data.searchData.mid;
-			var level = 1;
-			if(!parent_id){
-				parent_id = 0;
-			}else{
-				var pmenu = _this.currNode;
-				level = pmenu.level;
-				parent_id = pmenu.parent_id;
+			var pmenu = _this.currNode;
+			var parent_id = 0;
+			var mlevel = 1;
+			if(pmenu){
+				mlevel = pmenu.mlevel + 1;
+				parent_id = pmenu.id;
 			}
 
-			var name = $('menu_name').val();
+			var name = $('#menu_name').val();
+			
 			if(!name){
-				return;
+				return false;
 			}
+
+			var node = {
+				mlevel : mlevel,
+				parent_id : parent_id,
+				name : name
+			};
 
 			$.ajax({
 				type : "post",
 				cache : false,
 				url : '/menu/add',
-				data : {
-					level : level,
-					parent_id : parent_id,
-					name : name
-				},
-				success : function(){
+				data : node,
+				success : function(result){
 					console.log('reload');
+					if(result.success){
+						node.id = result.data.insert_id;	
+					}
+					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+				}
+			});
+		},
+		updateMenu : function(){
+			var pmenu = _this.currNode;
+
+			var name = $('#menu_name').val();
+			
+			if(!name){
+				return false;
+			}
+
+			var node = {
+				id : pmenu.id,
+				mlevel : pmenu.mlevel,
+				parent_id : pmenu.parent_id,
+				name : name
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : '/menu/update',
+				data : node,
+				success : function(result){
+					if(result.success){
+						console.log(node);
+						pmenu.name = name
+						_this.getCurrTree().updateNode(pmenu);
+					}
+					
+				}
+			});
+		},
+		delMenu : function(){
+			var pmenu = _this.currNode;
+			var node = {
+				id : pmenu.id
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : '/menu/del',
+				data : node,
+				success : function(result){
+					if(result.success){
+						_this.getCurrTree().removeNode(pmenu);
+					}
+					
 				}
 			});
 		}

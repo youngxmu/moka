@@ -246,6 +246,13 @@ router.post('/queryArticleByMenu', function (req, res, next) {
     var pageSize = parseInt(req.body.pageSize);
     var menuMap = menuUtils.getMenuMap();
     var menu = menuMap[mid];
+    if(!menu){
+        return res.json({
+            success: false,
+            msg: "查找文章出错"
+        });
+    }
+
     var mids = [];
     mids.push(mid);
     for(var index in menu.submenu){
