@@ -17,7 +17,7 @@ module.exports = {
 	host: "115.28.47.35",
 	user: "kk_f",
 	password: "kkld_^#321",
-	database: "imtest",
+	database: "moka",
 	enableDBLog: false,
 
 	winston:{
