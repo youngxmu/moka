@@ -3,6 +3,50 @@ var logger = require("../lib/log.js").logger("articleArticle");
 var commonUtils = require("../lib/utils.js");
 
 
+exports.queryArticles = function (status, menu_id, start, pageSize, callback) {
+    var sql = 'select * from article where 1=1 ';
+    var params = [];
+    if (status || status == 0) {
+        sql += ' and status = ? ';
+        params.push(status);
+    }
+
+    if(menu_id){
+        sql += ' and menu_id in ('+ menu_id +') ';    
+    }
+    
+   
+
+    sql += ' order by create_time desc limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+//根据“是否虚拟”“创建来源”查找文章总数
+exports.queryArticleTotalCount = function (status, menu_id, callback) {
+    var sql = 'select count(id) as count from article where 1=1 ';
+    var params = [];
+    if (status || status == 0) {
+        sql += ' and status = ? ';
+        params.push(status);
+    }
+
+    if(menu_id){
+        sql += ' and menu_id in ('+ menu_id +') ';    
+    }
+   
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找文章总数出错", err);
+            callback(0);
+        }
+    });
+};
+
+
 exports.queryArticleList = function (status, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
     var params = [];
@@ -34,6 +78,7 @@ exports.getArticleTotalCount = function (status, callback) {
         }
     });
 };
+
 
 //根据id查询文章
 exports.queryArticleById = function (articleId, callback) {

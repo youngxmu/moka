@@ -246,6 +246,13 @@ router.post('/queryArticleByMenu', function (req, res, next) {
     var pageSize = parseInt(req.body.pageSize);
     var menuMap = menuUtils.getMenuMap();
     var menu = menuMap[mid];
+    if(!menu){
+        return res.json({
+            success: false,
+            msg: "查找文章出错"
+        });
+    }
+
     var mids = [];
     mids.push(mid);
     for(var index in menu.submenu){
@@ -275,6 +282,70 @@ router.post('/queryArticleByMenu', function (req, res, next) {
                  for (var i in result) {
                     var date = new Date(result[i].create_time);
                     result[i].create_time = commonUtils.formatDate(date);
+                }
+                res.json({
+                    success: true,
+                    msg: "查找文章成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
+
+
+
+router.get('/uneval', function(req, res, next) {
+    var id = req.params.id;
+    res.render('article/uneval');
+});
+
+//根据”创建渠道“和”是否虚拟“查询文章
+router.post('/uneval', function (req, res, next) {
+    var mid = req.body.mid;
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+    var menuMap = menuUtils.getMenuMap();
+    var menu = menuMap[mid];
+    if(!menu){
+        mid = null;
+    }else{
+        var mids = [];
+        mids.push(mid);
+        for(var index in menu.submenu){
+            var subId = menu.submenu[index];
+            mids.push(subId);
+            smenu = menuMap[subId];
+            mids = mids.concat(smenu.submenu);
+        }
+        mid = mids.join(',');
+    }
+    
+    var status = 0;
+    articleModel.queryArticleTotalCount(status, mid, function (totalCount) {
+        logger.info("文章总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+
+        logger.info("查找文章:", start, pageSize);
+        articleModel.queryArticles(status, mid, start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找文章出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找文章出错"
+                });
+            } else {
+                for (var i in result) {
+                    result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time));
                 }
                 res.json({
                     success: true,

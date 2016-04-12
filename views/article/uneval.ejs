@@ -42,8 +42,7 @@
       </div>
 	  </div>
 
-    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="/js/resource/list.js"></script>
+   
     <script type="text/template" id="resource-tpl">
     <div class="res-list">
       <span class="res-title">标题</a>
@@ -67,11 +66,12 @@
       <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
     </div>
     </script>
-
+     <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/js/article/uneval.js"></script>
     
     <script>
       $(document).ready(function() {
-            moka.resource.list.init();
+            moka.article.uneval.init();
         });
     </script>
   </body>
