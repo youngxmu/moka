@@ -269,7 +269,6 @@
 				data : node,
 				success : function(result){
 					if(result.success){
-						console.log(node);
 						pmenu.name = name
 						_this.getCurrTree().updateNode(pmenu);
 					}
