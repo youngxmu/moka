@@ -71,6 +71,26 @@ router.get('/list', function(req, res, next) {
     res.render('article/list');
 });
 
+
+router.get('/list/:mid', function(req, res, next) {
+    var mid = req.params.mid;
+    var menuMap = menuUtils.getMenuMap();
+    var menu = menuMap[mid];
+    var submenu = menu.submenu;
+    var submenuList = [];
+    if(submenu && submenu.length > 0){
+        for(var index in submenu){
+            var sid = submenu[index];
+            var midmenu = menuMap[sid];
+            submenuList.push(midmenu);
+        }
+    }
+    console.log(submenuList);
+    res.render('article/list2', {
+        submenuList : submenuList
+    });
+});
+
 //根据”创建渠道“和”是否虚拟“查询文章
 router.post('/list', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);

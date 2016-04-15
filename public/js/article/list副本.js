@@ -13,16 +13,12 @@
 			pageSize : 15
 		},
 		init : function() {
-			_this.tpl.twopTpl = juicer($('#twop_tpl').html());
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.initEvent();
 			_this.search();
 		},
 		initEvent : function(){
 			$('#btn_commit').on('click', _this.commit);
-		},
-		initView : function(){
-
 		},
 		loadList : function(){
 
