@@ -9,11 +9,11 @@
 }
 
 .sidebar .tree-opr a{display: inline-block;width: 40px;text-align: center;
-	font-size: 12px;
+	font-size: 12px;vertical-align: top;
 }
 
-.main{width: 720px;display: inline-block;vertical-align: top;
-	padding: 20px;
+.main{width: 760px;display: inline-block;vertical-align: top;
+	padding: 10px 0 20px 20px;
 	
 }
 
@@ -28,3 +28,13 @@
 .main .res-list span:nth-child(1){width:450px;}
 .main .res-list span:nth-child(2){width:100px;}
 .main .res-list span:nth-child(3){width:150px;}
+
+.main .resource-opr{
+	line-height: 24px;font-size: 0;
+	border-bottom: 1px solid #cccccc;
+	text-align: right;
+}
+
+.main .resource-opr a{display: inline-block;width: 40px;text-align: center;
+	font-size: 12px;vertical-align: top;
+}

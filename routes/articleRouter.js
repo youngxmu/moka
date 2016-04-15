@@ -87,6 +87,7 @@ router.get('/list/:mid', function(req, res, next) {
     }
     console.log(submenuList);
     res.render('article/list2', {
+        mid : mid,
         submenuList : submenuList
     });
 });
@@ -144,7 +145,7 @@ router.get('/detail/:id', function (req, res, next) {
         });
     }else{
         articleModel.queryArticleById(id, function (err, result) {
-            if (!err) {
+            if (!err && result && result.length == 1) {
                 var article = result;
                 article.isAdmin = true;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
@@ -165,9 +166,10 @@ router.post('/save', function (req, res) {
     var title = req.body.title;
     var author = req.body.author;
     var content = req.body.content;//明文
+    var mid = req.body.mid;//明文
     
     if(id == null || id == undefined){
-        articleModel.insertArticle(title, author, content, function (err, data) {
+        articleModel.insertArticle(title, author, content, mid, function (err, data) {
             if (!err) {
                 console.log(data);
                 res.json({
@@ -184,8 +186,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改文章信息", id);
-        articleModel.updateArticle(id, title, author, content, -1, function (err, result) {
-            console.log(err);
+        articleModel.updateArticle(id, title, author, content, -1, mid,  function (err, result) {
             if (!err) {
                 res.json({
                     success: true,
@@ -205,6 +206,7 @@ router.post('/save', function (req, res) {
 
 router.get('/edit', function(req, res, next) {
     var id = req.query.id;
+    var menuPath = req.query.menuPath;
     var isAdmin = true;
     if(!isAdmin){
         res.render('error', {
@@ -213,9 +215,20 @@ router.get('/edit', function(req, res, next) {
         });
         return;
     }
+
+    var menuList = [];
+    if(menuPath != null && menuPath != ''){
+        var menuMap = menuUtils.getMenuMap();
+        var menuArr = menuPath.split(',');
+        var lastIndex = menuArr.length - 1;
+        console.log(menuArr);
+        for(var i=lastIndex;i>=0;i--){
+            var menu = menuMap[menuArr[i]];
+            menuList.push(menu);
+        }
+    }
     if(id == null || id == undefined){
-        console.log(id);
-        res.render('article/edit');
+        res.render('article/edit', {menuList: menuList});
     }else{
         articleModel.queryArticleById(id, function (err, result) {
             if (!err) {

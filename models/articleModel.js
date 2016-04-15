@@ -99,9 +99,9 @@ exports.queryArticleByTitle = function (name, callback) {
 };
 
 
-exports.insertArticle = function (title, author, content, callback) {
-    db.query("insert into article (title, author, content, status, create_time, update_time) values(?,?,?,?,?,?);",
-        [title, author, content, 0 , new Date(), new Date()],
+exports.insertArticle = function (title, author, content, menu_id, callback) {
+    db.query("insert into article (title, author, content, status, create_time, update_time, menu_id) values(?,?,?,?,?,?,?);",
+        [title, author, content, 0 , new Date(), new Date(), menu_id],
         function (err, result) {
             callback(err, result);
         }
@@ -109,7 +109,7 @@ exports.insertArticle = function (title, author, content, callback) {
 };
 
 //编辑、修改文章个人信息
-exports.updateArticle = function (id, title, author, content, status, callback) {
+exports.updateArticle = function (id, title, author, content, status, menu_id, callback) {
     var sql = 'update article set title=?,author=?,content=?';
     var params = [];
     params.push(title);
@@ -121,6 +121,8 @@ exports.updateArticle = function (id, title, author, content, status, callback) 
     }
     sql += ',update_time = ? ';
     params.push(new Date());
+    sql += ',menu_id = ? ';
+    params.push(menu_id);
     sql += ' where id = ?;';
     params.push(id);
 

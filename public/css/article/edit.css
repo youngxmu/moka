@@ -4,4 +4,7 @@
 .t-input input{line-height: 40px;border: 1px solid #cccccc; width: 838px;font-size: 20px;padding: 0 10px;}
 .t-input label{line-height: 40px;width: 90px;text-align: right;padding-right: 10px;display: inline-block;*display: inline;font-size: 20px;}
 
-.t-btn{margin-top: 20px;}
+.t-btn{margin-top: 20px;height: 40px;}
+
+.u-select-p{float: right;}
+.u-select-p span{line-height: 32px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;display: inline-block;}

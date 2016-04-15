@@ -1,4 +1,5 @@
 var moka = {
+	building : '<div class="building">资源建设中...</div>',
 	customer:{//用户管理
 		user : {},
 		model : {}

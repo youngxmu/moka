@@ -12,8 +12,8 @@
   font-size: 18px;
   width: 960px;margin: auto;padding: 0 20px;
 }
-.nav span{text-align: center;margin-right: 20px;}
-.nav span a{color: #ffffff;}
+.nav span{text-align: center;margin-right: 20px;display: inline-block;cursor: pointer;padding: 0 10px;}
+.nav span.active{background-color: #f8f8f8;color: #000000;};
 .nav span:hover{opacity: 0.8;}
 
 
@@ -40,20 +40,41 @@
   	vertical-align: top;
 }
 
-
-
-
 .main-atlist .twop .twop-list{margin: 0;padding: 0;padding: 0 10px;}
 .main-atlist .twop .twop-list li{line-height: 40px;border-bottom: 1px dashed #cccccc;font-size: 0;
 	
 }
 .main-atlist .twop .twop-list li:last-child{border-bottom: 0;}
-.main-atlist .twop .twop-list li a{width: 704px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
+.main-atlist .twop .twop-list li a{width: 600px;margin-right: 9px;overflow: hidden;text-overflow: ellipsis;
   font-size: 14px;color: #000000;
   display: inline-block;*display: inline;
   white-space: nowrap;vertical-align: top;
 }
-.main-atlist .twop .twop-list li span{width: 45px;font-size: 14px;color: #999999;
+.main-atlist .twop .twop-list li span{width: 150px;font-size: 14px;color: #999999;
   display: inline-block;*display: inline;
   vertical-align: top;
 }
+
+/**/
+.main-atlist .onep{width: 100%;font-size: 14px;display: inline-block;*display: inline;
+  vertical-align: top;
+}
+
+
+.main-atlist .onep .onep-list{margin: 0;padding: 0;padding: 0 10px;}
+.main-atlist .onep .onep-list li{line-height: 40px;border-bottom: 1px dashed #cccccc;font-size: 0;
+  
+}
+.main-atlist .onep .onep-list li:last-child{border-bottom: 0;}
+.main-atlist .onep .onep-list li a{width: 790px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
+  font-size: 14px;color: #000000;
+  display: inline-block;*display: inline;
+  white-space: nowrap;vertical-align: top;
+}
+.main-atlist .onep .onep-list li span{width: 140px;font-size: 14px;color: #999999;
+  display: inline-block;*display: inline;
+  vertical-align: top;
+}
+
+
+.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}

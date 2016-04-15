@@ -7,6 +7,13 @@
 			
 		},
 		init : function() {
+			var $span = $('.u-select-p').find('span');
+			if($span.length == 0){
+				_this.mid = 0;
+			}else{
+				_this.mid = $span.last().attr('data-id');
+			}
+			
 			_this.initEvent();
 			_this.initEditor();
 		},
@@ -34,7 +41,8 @@
 			var postData = {
 				title : title,
 				author : author,
-				content : content
+				content : content,
+				mid : _this.mid
 			};
 
 			if(_this.articleId != null){

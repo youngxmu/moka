@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/css/article/list.css' />
   </head>
   <body>
+    <input type="hidden" id="mid" value="<%= mid %>">
     <div class="banner">
       <div class="t-logo">系统logo占位</div>
       <div class="search-box">
@@ -22,9 +23,7 @@
     <div class="nav">
       <% for(var index in submenuList){ %>
       <% var menu = submenuList[index]; %>
-        <span>
-          <a href="javascript:void(0);" data-id="<%= menu.id %>" ><%= menu.name %></a>
-        </span>
+        <span data-id="<%= menu.id %>" ><%= menu.name %></span>
       <% } %>
     </div>
     <div class="container">
@@ -53,13 +52,27 @@
     </div>
     </script>
 
+    <script type="text/template" id="onep_tpl">
+    <div class="onep">
+      <ul id="article_list" class="onep-list"></ul>
+      <div id="pagebar"></div>
+    </div>
+    </script>
+
     <script type="text/template" id="article_list_tpl">
     {@each list as resource}
     <li>
-      <a href="/article/detail/${resource.id}">${resource.title}</a>
+      <a href="/article/detail/${resource.id}" target="_blank">${resource.title}</a>
       <span class="date">${resource.create_time}</span>
     </li>
     {@/each}
+    </script>
+
+    <script type="text/javascript" src="/js/article/list.js"></script>
+    <script>
+      $(document).ready(function() {
+            moka.article.list.init({});
+        });
     </script>
   </body>
 </html>
