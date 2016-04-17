@@ -1,7 +1,8 @@
 var db = require('../lib/db.js');
 var logger = require("../lib/log.js").logger("modelModel");
 var commonUtils = require("../lib/utils.js");
-var easemobUtils = require("../lib/easemobUtils.js");
+
+
 
 //根据“是否虚拟”“创建来源”查找宅男列表
 exports.queryUserList = function (isVirtual, createFrom, start, pageSize, callback) {
@@ -28,6 +29,11 @@ exports.queryUserById = function (userId, callback) {
     db.query("select * from user where id=? limit 1", [userId], callback);
 };
 
+//根据id查询宅男
+exports.queryUserByEmail = function (email, callback) {
+    db.query("select * from user where email=? limit 1", [email], callback);
+};
+
 
 //根据昵称模糊查询宅男
 exports.queryUserByName = function (nickname, callback) {
@@ -41,35 +47,20 @@ exports.queryUserByTel = function (tel, callback) {
 };
 
 
-//新建宅男，注意这里的参数password应该与手机端的加密方式一样，目前是md5("真实密码","-weimo")
-exports.insertUser = function (tel, nickname, password, inviteId, beanCount, isVirtual, profile, callback) {
-    if (!inviteId) {
-        inviteId = 0;
-    }
+exports.insertUser = function (email, tel, name, password, score, status, callback) {
+    var sql = 'insert into user ';
+    sql += '(email, tel, name, password, score, create_time, status) ';
+    sql += 'values(?,?,?,?,?,?,?);';
 
-    var imUser = "u_" + tel;
-    //模特以"m_"为环信用户前缀
-    var imPasswd = "default_passwd";
-    try {
-        imPasswd = commonUtils.md5(password, "easemob_salt");//与moka_mobile项目统一这个salt
-    } catch (e) {
-    }
-
-    db.query("insert into user (tel, nickname, passwd, invite_id, bean_count, is_virtual, create_from, profile, im_user, im_passwd," +
-        "create_time) values(?,?,?,?,?,?,?,?,?,?,?);",
-        [tel, nickname, password, inviteId, beanCount, isVirtual, 1, profile, imUser, imPasswd, new Date()],
+    db.query(sql, [email, tel, name, password, score, new Date(), status],
         function (err, result) {
             if (!err) {
-                //在环信上注册一个对应用户 start
-                easemobUtils.registerUser(imUser, imPasswd);
-                //在环信上注册一个对应用户 stop
+                callback(null, result);
             }
             callback(err, result);
         });
 };
 
-//编辑、修改宅男个人信息
-exports.updateUser = function (userId, tel, nickname, password,beanCount, isVirtual, profile, callback) {
-    db.query("update user set tel=?,nickname=?,passwd=?,bean_count=?,is_virtual=?, profile=?, update_time=? where id=?",
-        [tel, nickname, password, beanCount,isVirtual,profile, new Date(), userId], callback);
+exports.updateUserStatus = function (email, status, callback) {
+    db.query("update user set status = ? where email = ?;", [status, email], callback);
 }

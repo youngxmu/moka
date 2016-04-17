@@ -6,5 +6,6 @@
 
 .t-btn{margin-top: 20px;height: 40px;}
 
-.u-select-p{float: right;}
+.u-select-p{display: inline-block;}
 .u-select-p span{line-height: 32px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;display: inline-block;}
+.u-button{float: right;}

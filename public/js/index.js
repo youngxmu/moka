@@ -1,47 +1,56 @@
 (function(P){
 	var _this = null;
 	_this = P.index = {
-		editor : null,
+		searchUrl : '/article/queryArticleByMenu',
+		tpl : {
+			articleListTpl : null
+		},
 		data : {
-			
+			userMap : {}
+		},
+		queryData : {
+			pageSize : 5,
+			pageNo : 1
 		},
 		init : function() {
+			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.initEvent();
-			_this.initEditor();
+			_this.loadList();
 		},
 		initEvent : function(){
-			$('#btn_commit').on('click', _this.commit);
 		},
-		initEditor : function(){
-			_this.editor = new Simditor({
-			  	textarea: $('#editor'),
-			  	upload : {
-			    	url: '/upload/img',
-				    params: null,
-				    fileKey: 'upload_file',
-				    connectionCount: 3,
-				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
-			  	}
+		loadList : function(){
+			var $thps = $('.thp');
+			$thps.each(function(){
+				var $this = $(this);
+				var id = $this.attr('data-id');
+				var $panel = $this.find('.thp-list');
+				var sendData = _this.queryData;
+				sendData.mid = id;
+				$.ajax({
+					type : 'post',
+					url : _this.searchUrl,
+					data : sendData,
+					beforeSend : function(){
+						$panel.html(util.loadingPanel);
+					},
+					success : function(result){
+						var data = result.data;
+					    $panel.html(_this.tpl.articleListTpl.render(data));
+						var totalCount = data.totalCount;
+						if(totalCount == 0){
+							$panel.html(P.building);
+							return;
+						}
+					}
+				});
 			});
 		},
-		commit : function() {
-			var content = _this.editor.getValue();
-			var title = $('#title').val();
-			var author = $('#author').val();
-			var url = '/article/save';
-			var postData = {
-				title : title,
-				author : author,
-				content : content
-			};
-			$.ajax({
-				url : url,
-				type : 'post',
-				data : postData,
-				success : function(){
-					alert('保存成功');
-				}
-			});
+		getMD : function(dateStr){
+			var sa1 = dateStr.split(' ')[0];
+			var sa2 = sa1.split('-');
+			return sa2[1] + '-' + sa2[2];
 		}
 	};
 }(moka));
+juicer.register('getMD', moka.index.getMD);

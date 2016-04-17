@@ -107,6 +107,14 @@ li{list-style-type: none;}
 width: 960px;margin: auto;padding: 0 20px;
 }
 .banner .t-logo{width: 200px;display: inline-block;*display: inline;}
+.banner .t-right{
+  float:right;
+  display: inline-block;
+  *display: inline;
+}
+
+.banner .t-btn{display: inline-block;*display: inline;padding: 0 15px;cursor: pointer;}
+.banner .t-btn :hover{opacity: 0.7;}
 
 .banner .search-box {
     float: right;

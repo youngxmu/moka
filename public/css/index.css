@@ -1,21 +1,22 @@
-
-
-
 /** 导航 */
 .nav{height: 50px;line-height: 50px;background-color: #268de1;color: #ffffff;
   font-size: 18px;
   width: 960px;margin: auto;padding: 0 20px;
 }
-.nav span{text-align: center;margin-right: 20px;}
-.nav span a{color: #ffffff;}
-.nav span:hover{opacity: 0.8;}
+.nav a{text-align: center;margin-right: 20px;cursor: pointer;display: inline-block;}
+.nav a{color: #ffffff;}
+.nav a:hover{opacity: 0.8;}
 
 /** 主页面 */
 .main{font-size: 0;}
-.main .thp{width: 350px;margin-right: 20px;font-size: 14px;display: inline-block;*display: inline;
+.main .thp{
+  width: 290px;
+  margin-right: 25px;font-size: 14px;display: inline-block;*display: inline;
   vertical-align: top;
 }
-.main .thp:last-child{width: 220px;margin-right: 0;}
+.main .thp:last-child{
+  /*width: 220px;*/
+  margin-right: 0;}
 .main .thp .thp-banner{line-height: 40px;border-bottom: 1px solid #cccccc;}
 .main .thp .thp-banner .more-link{line-height: 40px;float: right;
   font-size: 12px;
@@ -28,7 +29,7 @@
 .main .thp .thp-list li{line-height: 40px;border-bottom: 1px dashed #cccccc;font-size: 0;
 }
 .main .thp .thp-list li:last-child{border-bottom: 0;}
-.main .thp .thp-list li a{width: 295px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
+.main .thp .thp-list li a{width: 235px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
   font-size: 14px;color: #000000;
   display: inline-block;*display: inline;
   white-space: nowrap;vertical-align: top;
@@ -36,7 +37,10 @@
 .main .thp .thp-list li span{width: 45px;font-size: 14px;color: #999999;
   display: inline-block;*display: inline;
   vertical-align: top;
+  text-align: right;
 }
+
+/*.main .thp:last-child .thp-list li a{width: 165px;}*/
 
 
 .icon {
