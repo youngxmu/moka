@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
 var config = require('../config');
+var path = require('path');
 var logger =  require('../lib/log.js').logger('uploadRouter');
-
+var router = express.Router();
 //var imgPrefix = "http://115.28.47.35:3000/uploads";
 //var imgPrefix = "http://localhost:3000/uploads";
 
@@ -13,23 +13,33 @@ router.get('/img', function(req, res) {
 
 //uri: upload/img
 router.post('/img', function(req, res, next) {
-	// the uploaded file can be found as `req.files.image` and the
-	// title field as `req.body.title` 
-	// 
-
-	
 	var files = req.files.upload_file;
-	console.dir(files);
-
-	//res.send(req.fields.name);
-	
 	var file = files[0];//?req.files.file[0]:req.files.profile[0];
+	var file_path = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
+	var index = filePath.lastIndexOf('/');
+	var fileName = filePath.substr(index + 1);
 	res.json({
-		success:true,
-		msg: "error message", 
-		file_path: file.path.replace(config.uploadDir, config.imgHost + '/uploads')
+		success: true,
+		fileName : fileName,
+		filePath: filePath
 	});
 });
+
+
+router.post('/file', function(req, res, next) {
+	var files = req.files.file;
+	var file = files[0];//?req.files.file[0]:req.files.profile[0];
+	var filePath = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
+	var index = filePath.lastIndexOf('/');
+	var fileName = filePath.substr(index + 1);
+	res.json({
+		success: true,
+		fileName : fileName,
+		filePath: filePath
+	});
+});
+
+
 
 // router.post('/img', function(req, res, next) {
 // 	if(req.session && req.session.admin){

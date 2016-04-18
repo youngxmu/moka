@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理</title>
+    <%- include ../../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='/css/resource/list.css' >
+    
+  </head>
+  <body>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
+      <div class="search-box">
+         <div class="input-group clearfix">
+             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+             <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+             </div>
+         </div>
+      </div>
+    </div>    
+  	<div class="container">
+      <div class="sidebar">
+        <div class="tree-opr">
+          <a href="javascript:void(0);" class="unfold">展开</a>
+          |<a href="javascript:void(0);" class="add">增加</a>
+          |<a href="javascript:void(0);" class="edit">编辑</a>
+          |<a href="javascript:void(0);" class="del">删除</a>
+          
+        </div>
+        <div style="overflow:auto;height:500px;" >
+          <ul id="topic_tree" class="ztree"></ul>
+          <ul id="series_tree" class="ztree" style="display:none;"></ul>
+        </div>
+      </div>
+      <div class="main">
+        <div id="resource_list"></div>
+        <div id="pagebar"></div>
+      </div>
+	  </div>
+
+   
+    <script type="text/template" id="resource-tpl">
+    <div class="res-list">
+      <span class="res-title">标题</a>
+      </span>
+      <span>作者</span>
+      <span>时间</span>
+    </div>
+    {@each list as resource}
+    <div class="res-list">
+      <span class="res-title">
+        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="edit_menu_dlg">
+    <div class="">
+      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
+    </div>
+    </script>
+     <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/js/admin/article/uneval.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+            moka.article.uneval.init();
+        });
+    </script>
+  </body>
+</html>

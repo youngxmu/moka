@@ -54,7 +54,13 @@ if(config.env!='devvvv'){//开发环境不需要过滤
             if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
                 next();
             }else{
-                res.redirect("/auth/user/login");
+                var url = req.url;
+                if(url.indexOf('/admin/') != -1){
+                    res.redirect("/auth/login");    
+                }else{
+                    res.redirect("/auth/user/login");
+                }
+                
             }
         }
     });

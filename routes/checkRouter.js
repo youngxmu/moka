@@ -1,12 +1,13 @@
 var express = require('express');
 var async = require('async');
-var checkModel = require('../models/checkModel.js');
-var modelModel = require("../models/modelModel.js");
+var smsUtils = require("../../lib/smsUtils.js");
+var commonUtils = require("../../lib/utils.js");
+var logger = require("../../lib/log.js").logger("checkRouter");
+var config = require("../../config");
 
-var smsUtils = require("../lib/smsUtils.js");
-var commonUtils = require("../lib/utils.js");
-var logger = require("../lib/log.js").logger("checkRouter");
-var config = require("../config");
+var userModel = require('../../models/checkModel.js');
+var articleModel = require("../../models/modelModel.js");
+
 var router = express.Router();
 
 

@@ -166,6 +166,8 @@ router.post('/save', function (req, res) {
     var author = req.body.author;
     var content = req.body.content;//明文
     var mid = req.body.mid;//明文
+    var fileName = '';//明文
+    var type = 1;//resource
 
     var user = req.session.user;
     if(!user){
@@ -175,13 +177,10 @@ router.post('/save', function (req, res) {
         });
     }
     
-    console.log(req.session.user);
-
-    console.log();
 
     
     if(id == null || id == undefined){
-        articleModel.insertArticle(title, author, content, mid, user.id, function (err, data) {
+        articleModel.insertArticle(title, author, content, mid, user.id, fileName, type, function (err, data) {
             if (!err) {
                 console.log(data);
                 res.json({
@@ -198,7 +197,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改文章信息", id);
-        articleModel.updateArticle(id, title, author, content, -1, mid,  user.id, function (err, result) {
+        articleModel.updateArticle(id, title, author, content, -1, mid,  user.id, fileName, type, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,

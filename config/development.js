@@ -7,7 +7,9 @@ module.exports = {
 	views: path.resolve(__dirname, '..', 'views'),
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
+	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
 	imgHost: 'http://localhost:8200',
+	host: 'http://localhost:8200',
 
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),

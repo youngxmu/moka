@@ -80,6 +80,18 @@ exports.getArticleTotalCount = function (status, callback) {
 };
 
 
+//根据id获取文章
+exports.getArticleById = function (articleId, callback) {
+    db.query("select * from article where id = ?;", [articleId], function (err, result) {
+        if(!err && result && result[0]){
+            callback(err, result[0]);
+        }else{
+            callback(err);    
+        }
+    });
+};
+
+
 //根据id查询文章
 exports.queryArticleById = function (articleId, callback) {
     db.query("select * from article where id = ? and status = 1;", [articleId], function (err, result) {
@@ -99,12 +111,12 @@ exports.queryArticleByTitle = function (name, callback) {
 };
 
 
-exports.insertArticle = function (title, author, content, menu_id, author_id, callback) {
+exports.insertArticle = function (title, author, content, menu_id, author_id, file_name, type, callback) {
     var sql = 'insert into article ( ';
-        sql += 'title, author, content, status, create_time, update_time, menu_id, author_id) ';
-        sql += 'values(?,?,?,?,?,?,?,?);';
+        sql += 'title, author, content, status, create_time, update_time, menu_id, author_id, file_name, type) ';
+        sql += 'values(?,?,?,?,?,?,?,?,?,?);';
     db.query(sql,
-        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id],
+        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id, file_name, type],
         function (err, result) {
             callback(err, result);
         }
@@ -112,7 +124,7 @@ exports.insertArticle = function (title, author, content, menu_id, author_id, ca
 };
 
 //编辑、修改文章个人信息
-exports.updateArticle = function (id, title, author, content, status, menu_id, callback) {
+exports.updateArticle = function (id, title, author, content, status, menu_id, file_name, type, callback) {
     var sql = 'update article set title=?,author=?,content=?';
     var params = [];
     params.push(title);
@@ -126,6 +138,10 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, c
     params.push(new Date());
     sql += ',menu_id = ? ';
     params.push(menu_id);
+    sql += ',file_name = ? ';
+    params.push(file_name);
+    sql += ',type = ? ';
+    params.push(type);
     sql += ' where id = ?;';
     params.push(id);
 

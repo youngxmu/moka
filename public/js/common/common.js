@@ -1,9 +1,9 @@
 var moka = {
 	building : '<div class="building">资源建设中...</div>',
-	customer:{//用户管理
-		user : {},
-		model : {}
+	user : {
+		resource : {}
 	},
+	model : {},
 	album : {},
 	article:{//用户管理
 		detail : {},
@@ -89,6 +89,24 @@ var util = {
 		}
 	},
 	dialog : {
+		toastDialog : function(msg, timeout, callback){
+			if(!timeout){
+				timeout = 2000;
+			}
+			var dd = dialog({
+			    content: msg,
+			    width : 240,
+			    onclose : function(){
+			    	if(callback){
+			    		callback();
+			    	}
+			    }
+			});
+			dd.showModal();
+			setTimeout(function(){
+				dd.close();
+			}, timeout);
+		},
 		infoDialog : function(msg, callback){
 			var dd = dialog({
 			    title: '信息',
