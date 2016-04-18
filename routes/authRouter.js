@@ -32,11 +32,10 @@ router.post('/login', function (req, res, next) {
     adminModel.query(username, password, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var admin = result[0];
-            delete admin.passwd;
+            delete admin.password;
             req.session.admin = admin;
-console.log(req.session.admin);
             //登录成功
-            res.render('customer');
+            res.redirect('/article/uneval');
             // res.send(admin);
         } else {
             res.render('error', {
