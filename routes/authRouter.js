@@ -1,5 +1,6 @@
 var express = require('express');
 var adminModel = require('../models/adminModel.js');
+var userModel = require('../models/userModel.js');
 var config = require("../config");
 var commonUtils = require("../lib/utils.js");
 var logger = require("../lib/log.js").logger("authRouter");
@@ -7,6 +8,10 @@ var router = express.Router();
 
 router.get('/login', function (req, res, next) {
     res.render('login');
+});
+
+router.get('/user/login', function (req, res, next) {
+    res.render('user/login');
 });
 
 router.post('/login', function (req, res, next) {
@@ -41,6 +46,56 @@ router.post('/login', function (req, res, next) {
             res.render('error', {
                 success: false,
                 msg: "用户不存在"
+            });
+        }
+    });
+});
+
+
+router.post('/user/login', function (req, res, next) {
+    var password = req.body.password.trim();
+    var email = req.body.email.trim();
+
+    logger.info("用户尝试登陆", email, password);
+
+    if (!email) {
+        return res.render('error', {
+            success: false,
+            msg: "登录邮箱不能为空"
+        });
+    }
+    if (!password) {
+        return res.render('error', {
+            success: false,
+            msg: "密码不能为空"
+        });
+    }
+
+    password = commonUtils.md5(password, config.md5Salt);
+    userModel.queryUserByEmail(email, function (err, result) {
+        if (!err && commonUtils.isArray(result) && result.length > 0) {
+            var user = result[0];
+            if(user.password != password){
+                return res.json({
+                    success: false,
+                    msg: "用户名或密码错误"
+                });
+            }
+
+            if(user.status != 1){
+                return res.json({
+                    success: false,
+                    msg: "账户未激活"
+                });
+            }
+            delete user.password;
+            req.session.user = user;
+            //登录成功
+            res.redirect('/index');
+        } else {
+            res.render('error', {
+                success: false,
+                msg: "用户名或密码错误"
             });
         }
     });

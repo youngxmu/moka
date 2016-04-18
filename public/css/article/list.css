@@ -1,4 +1,4 @@
-*{box-sizing: content-box;}
+/**{box-sizing: content-box;}*/
 .main-atlist{position: relative;}
 .crumb {
     color: #008186;
@@ -66,12 +66,12 @@
   
 }
 .main-atlist .onep .onep-list li:last-child{border-bottom: 0;}
-.main-atlist .onep .onep-list li a{width: 790px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
+.main-atlist .onep .onep-list li a{width: 780px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
   font-size: 14px;color: #000000;
   display: inline-block;*display: inline;
   white-space: nowrap;vertical-align: top;
 }
-.main-atlist .onep .onep-list li span{width: 140px;font-size: 14px;color: #999999;
+.main-atlist .onep .onep-list li span{width: 150px;font-size: 14px;color: #999999;
   display: inline-block;*display: inline;
   vertical-align: top;
 }

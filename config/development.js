@@ -39,6 +39,7 @@ module.exports = {
 		"/",
 		"/out/insertModelFromOut",
 		"/auth/login",
+		"/auth/user/login",
 		"/version"
 	],
 

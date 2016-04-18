@@ -85,7 +85,6 @@ router.get('/list/:mid', function(req, res, next) {
             submenuList.push(midmenu);
         }
     }
-    console.log(submenuList);
     res.render('article/list2', {
         mid : mid,
         submenuList : submenuList
@@ -137,7 +136,7 @@ router.post('/list', function (req, res, next) {
 //根据文章id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    
+    var isAdmin = req.session.admin ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -145,9 +144,9 @@ router.get('/detail/:id', function (req, res, next) {
         });
     }else{
         articleModel.queryArticleById(id, function (err, result) {
-            if (!err && result && result.length == 1) {
+            if (!err && result) {
                 var article = result;
-                article.isAdmin = true;
+                article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 res.render('article/detail', article);
             } else {
@@ -167,9 +166,22 @@ router.post('/save', function (req, res) {
     var author = req.body.author;
     var content = req.body.content;//明文
     var mid = req.body.mid;//明文
+
+    var user = req.session.user;
+    if(!user){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
+    
+    console.log(req.session.user);
+
+    console.log();
+
     
     if(id == null || id == undefined){
-        articleModel.insertArticle(title, author, content, mid, function (err, data) {
+        articleModel.insertArticle(title, author, content, mid, user.id, function (err, data) {
             if (!err) {
                 console.log(data);
                 res.json({
@@ -186,7 +198,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改文章信息", id);
-        articleModel.updateArticle(id, title, author, content, -1, mid,  function (err, result) {
+        articleModel.updateArticle(id, title, author, content, -1, mid,  user.id, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,
@@ -208,12 +220,8 @@ router.get('/edit', function(req, res, next) {
     var id = req.query.id;
     var menuPath = req.query.menuPath;
     var isAdmin = true;
-    if(!isAdmin){
-        res.render('error', {
-            success: false,
-            msg: "没有权限"
-        });
-        return;
+    if(!req.session.admin){
+        isAdmin = false;
     }
 
     var menuList = [];
@@ -228,14 +236,20 @@ router.get('/edit', function(req, res, next) {
         }
     }
     if(id == null || id == undefined){
-        res.render('article/edit', {menuList: menuList});
+        res.render('article/edit', {
+            menuList: menuList,
+            isAdmin : isAdmin
+        });
     }else{
         articleModel.queryArticleById(id, function (err, result) {
             if (!err) {
                 var article = result;
-                article.isAdmin = true;
+                article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                res.render('article/edit', article);
+                article.menuList = menuList;
+                res.render('article/edit', 
+                    article
+                );
             } else {
                 res.render('error', {
                     success: false,

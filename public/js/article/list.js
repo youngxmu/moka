@@ -42,12 +42,19 @@
 			$('#btn_commit').on('click', _this.commit);
 		},
 		initMenu : function(){
+			var $nav = $('.nav');
+			var $spans = $nav.find('span')
+			if($spans.length == 0){
+				var html = _this.tpl.onepTpl.render({leafMenus : []});
+				$('#main_list').html(html);
+				$('#article_list').html(P.building);
+				return;
+			}
 			$.ajax({
 				type : 'get',
 				url : '/menu/map',
 				success : function(menuMap){
 					_this.menuMap = menuMap;
-					var $nav = $('.nav');
 					var fmid = $nav.find('span').first().attr('data-id');
 					 _this.initView(fmid);
 				}

@@ -99,9 +99,12 @@ exports.queryArticleByTitle = function (name, callback) {
 };
 
 
-exports.insertArticle = function (title, author, content, menu_id, callback) {
-    db.query("insert into article (title, author, content, status, create_time, update_time, menu_id) values(?,?,?,?,?,?,?);",
-        [title, author, content, 0 , new Date(), new Date(), menu_id],
+exports.insertArticle = function (title, author, content, menu_id, author_id, callback) {
+    var sql = 'insert into article ( ';
+        sql += 'title, author, content, status, create_time, update_time, menu_id, author_id) ';
+        sql += 'values(?,?,?,?,?,?,?,?);';
+    db.query(sql,
+        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id],
         function (err, result) {
             callback(err, result);
         }
