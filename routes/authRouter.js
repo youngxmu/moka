@@ -76,14 +76,14 @@ router.post('/user/login', function (req, res, next) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var user = result[0];
             if(user.password != password){
-                return res.json({
+                return res.render('error', {
                     success: false,
                     msg: "用户名或密码错误"
                 });
             }
 
             if(user.status != 1){
-                return res.json({
+                return res.render('error', {
                     success: false,
                     msg: "账户未激活"
                 });
