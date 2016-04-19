@@ -21,13 +21,19 @@
 .main .res-list:last-child{border-bottom: 0;}
 .main .res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
 .main .res-list-title span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;text-align: center;}
-.main .res-list-title span:nth-child(1){width:450px;}
-.main .res-list-title span:nth-child(2){width:100px;}
-.main .res-list-title span:nth-child(3){width:150px;}
+.main .res-list-title span:nth-child(1){width:50px;}
+.main .res-list-title span:nth-child(2){width:400px;}
+.main .res-list-title span:nth-child(3){width:100px;}
+.main .res-list-title span:nth-child(4){width:150px;}
 
-.main .res-list span:nth-child(1){width:450px;}
-.main .res-list span:nth-child(2){width:100px;}
-.main .res-list span:nth-child(3){width:150px;}
+.main .res-list span:nth-child(1){width:50px;}
+.main .res-list span:nth-child(2){width:400px;}
+.main .res-list span:nth-child(3){width:100px;}
+.main .res-list span:nth-child(4){width:150px;}
+.main .res-list .ico {
+	width: 28px;	height: 28px;
+	vertical-align: middle;
+}
 
 .main .resource-opr{
 	line-height: 24px;font-size: 0;
@@ -38,3 +44,5 @@
 .main .resource-opr a{display: inline-block;width: 40px;text-align: center;
 	font-size: 12px;vertical-align: top;
 }
+
+

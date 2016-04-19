@@ -28,6 +28,7 @@ router.get('/detail/:id', function (req, res, next) {
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 article.file_name = config.imgHost + '/' + article.file_name;
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
                 res.render('user/resource/detail', article);
             } else {
                 res.render('error', {

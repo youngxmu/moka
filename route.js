@@ -7,8 +7,13 @@ var resourceRouter = require('./routes/user/resourceRouter.js');
 var registerRouter = require('./routes/registerRouter.js');
 
 
+/**admin*/
+var adminIndexRouter = require('./routes/admin/indexRouter.js');
 var adminArticleRouter = require('./routes/admin/articleRouter.js');
+var adminRrsourceRouter = require('./routes/admin/resourceRouter.js');
 var checkRouter = require('./routes/admin/checkRouter.js');
+
+var adminUserRouter = require('./routes/admin/userRouter.js');
 
 
 var menuRouter = require('./routes/menuRouter.js');
@@ -23,9 +28,11 @@ module.exports = function (app) {
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
 
-
+    app.use('/admin', adminIndexRouter);//主页
     app.use('/admin/article', adminArticleRouter);//主页
+    app.use('/admin/resource', adminRrsourceRouter);//主页
     app.use('/admin/check', checkRouter);//主页
+    app.use('/admin/user', adminUserRouter);//主页
     
     app.use('/upload', uploadRouter);//通用文件上传
     app.get("/", function (req, res, next) {

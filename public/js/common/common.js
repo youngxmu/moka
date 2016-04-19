@@ -46,6 +46,15 @@ var moka = {
 		'MP3' : '5',
 		'WAV' : '5',
 		'TXT' : '6'
+	},
+	fileTypeName : {
+		0 : 'ppt',
+		1 : 'doc',
+		2 : 'pdf',
+		3 : 'pic',
+		4 : 'video',
+		5 : 'mp3',
+		6 : 'txt'
 	}
 };
 
@@ -173,8 +182,20 @@ var util = {
 			});
 			d.showModal();	
 		}
+	},
+
+	getFileType : function(fileName){
+		if(!fileName || fileName == ''){
+			fileName = '1.TXT';
+		}
+		var index = fileName.lastIndexOf('.');
+		var tail = fileName.substr(index + 1);
+		var fileType = moka.fileType[tail.toUpperCase()];
+
+		return moka.fileTypeName[fileType];
 	}
 };
 
 juicer.register('dateFormat', util.date.format);
 juicer.register('formatIndex', util.formatIndex);
+juicer.register('getFileType', util.getFileType);

@@ -9,6 +9,52 @@ var articleModel = require('../../models/articleModel.js');
 var router = express.Router();
 
 
+router.get('/list', function (req, res, next) {
+    res.render('article/list');
+});
+
+
+//根据”创建渠道“和”是否虚拟“查询文章
+router.post('/list', function (req, res, next) {
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+
+    articleModel.getArticleTotalCount(status, function (totalCount) {
+        logger.info("文章总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+
+        logger.info("查找文章:", start, pageSize);
+        articleModel.queryModelList(isVirtual, createFrom, start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找文章出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找文章出错"
+                });
+            } else {
+                for (var i in result) {
+                    delete result[i].im_passwd;
+                    result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                }
+                res.json({
+                    success: true,
+                    msg: "查找文章成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
+
 //根据文章id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
@@ -24,6 +70,9 @@ router.get('/detail/:id', function (req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
                 res.render('admin/article/detail', article);
             } else {
                 res.render('error', {
