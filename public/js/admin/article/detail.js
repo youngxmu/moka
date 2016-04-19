@@ -22,20 +22,19 @@
 			
 		},
 		oncheck : function(){
+			console.log(123);
 			var content = '<div>';
 			content += '<p>拒绝理由：</p><textarea id="check_reason" style="width:220px;padding: 10px;line-height:24px;"></textarea>';
 			content += '</div>';
-			if(!_this.dlg.checkDlg){
-				_this.dlg.checkDlg =  dialog({
-				    title: '审核',
-				    content: content,
-				    width : 240,
-				    okValue : '通过',
-	     	        ok : _this.pass,
-	     	        cancelValue : '拒绝',
-	     	        cancel : _this.reject
-				});
-			}
+			_this.dlg.checkDlg =  dialog({
+			    title: '审核',
+			    content: content,
+			    width : 240,
+			    okValue : '通过',
+     	        ok : _this.pass,
+     	        cancelValue : '拒绝',
+     	        cancel : _this.reject
+			});
 			_this.dlg.checkDlg.showModal();	
 		},
 		pass : function(){
@@ -52,8 +51,12 @@
 			});
 		},
 		reject : function(){
-			var reason = $('#check_reason').text();
+			var reason = $('#check_reason').val();
 			console.log(reason);
+			if(!reason || reason == ''){
+				util.dialog.toastDialog('请输入拒绝理由', 1500);
+				return false;
+			}
 			$.ajax({
 				url : '/admin/check/article',
 				type : 'post',

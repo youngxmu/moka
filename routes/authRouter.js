@@ -40,7 +40,7 @@ router.post('/login', function (req, res, next) {
             delete admin.password;
             req.session.admin = admin;
             //登录成功
-            res.redirect('/admin/article/uneval');
+            res.redirect('/admin/index');
             // res.send(admin);
         } else {
             res.render('error', {

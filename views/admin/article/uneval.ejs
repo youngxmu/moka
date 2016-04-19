@@ -45,15 +45,21 @@
    
     <script type="text/template" id="resource-tpl">
     <div class="res-list">
-      <span class="res-title">标题</a>
-      </span>
+      <span class="res-type">类型</span>
+      <span class="res-title">标题</span>
       <span>作者</span>
       <span>时间</span>
     </div>
     {@each list as resource}
     <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
+        {@if resource.type == 1}
         <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
+        {@if resource.type == 2}
+        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
