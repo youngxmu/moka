@@ -9,30 +9,14 @@
   	<div class="container">
     	<div class="title" >
     		用户管理
-    		<a class="btn" style="float:right;margin-right:10px;" href="/customer" >返回</a>
+    		<a class="btn" style="float:right;margin-right:10px;" href="/admin/index" >返回</a>
     	</div>
     	<div class="search-panel" >
     		<dl>
     			<dt>ID</dt><dd><input id="user_id" ></dd>
     			<dt>姓名</dt><dd><input id="user_name" ></dd>
     			<dt>手机</dt><dd><input id="user_tel" ></dd>
-    			<dt>创建渠道</dt>
-    			<dt>创建渠道</dt>
-    			<dd>
-    				<select id="create_from">
-    					<option value="-2" selected="selected">请选择</option>
-    					<option value="0" >前台</option>
-    					<option value="1" >后台</option>
-    				</select>
-    			</dd>
-    			<dt>是否虚拟</dt>
-    			<dd>
-    				<select id="is_virtual" >
-    					<option value="-2"  selected="selected">请选择</option>
-						<option value="1" >是</option>
-    					<option value="0" >否</option>
-    				</select>
-    			</dd>
+    			<dt>邮箱</dt><dd><input id="user_email" ></dd>
     			<dd>
     				<span id="btn_search" class="s-btn" >查询</span>
     			</dd>
@@ -40,7 +24,7 @@
     	</div>
 
 		<div class="oper-panel" >
-			<span id="btn_add_user" class="btn" >添加</span>
+			<!-- <span id="btn_add_user" class="btn" >添加</span> -->
 		</div>
 
     	<div class="list-table" >

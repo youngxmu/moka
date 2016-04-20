@@ -6,14 +6,14 @@ var commonUtils = require("../lib/utils.js");
 
 //根据“是否虚拟”“创建来源”查找宅男列表
 exports.queryUserList = function (isVirtual, createFrom, start, pageSize, callback) {
-    db.query("select * from user where is_virtual=? and create_from=? order by create_time desc limit ?,?;",
-        [isVirtual, createFrom, start, pageSize], callback);
+    db.query("select * from user order by create_time desc limit ?,?;",
+        [start, pageSize], callback);
 };
 
 //根据“是否虚拟”“创建来源”查找宅男总数
 exports.getUserTotalCount = function (isVirtual, createFrom, callback) {
-    db.query("select count(id) as count from user where is_virtual=? and create_from=?",
-        [isVirtual, createFrom],
+    db.query("select count(id) as count from user;",
+        [],
         function (err, result) {
             if (!err && result && result[0]) {
                 callback(result[0].count);
@@ -37,7 +37,7 @@ exports.queryUserByEmail = function (email, callback) {
 
 //根据昵称模糊查询宅男
 exports.queryUserByName = function (nickname, callback) {
-    db.query('select * from user where nickname like "%' + nickname + '%" order by create_time desc',
+    db.query('select * from user where name like "%' + nickname + '%" order by create_time desc',
         [], callback);
 };
 

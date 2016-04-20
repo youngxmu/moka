@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
-	_this = moka.admin.user.list = {
-		searchUrl : '/user/queryList',
+	_this = P.admin.user.list = {
+		searchUrl : '/admin/user/queryList',
 		tpl : {
 			userListTpl : null//模特列表模板
 		},
@@ -24,26 +24,21 @@
 					pageNo : 1,
 					pageSize : 15
 				};
-				if ($('#create_from').val() && $('#create_from').val() != -2 ) {
-					_this.queryData.createFrom = $('#create_from').val();
-				}
-
-				if ($('#is_virtual').val() && $('#is_virtual').val() != -2 ) {
-					_this.queryData.isVirtual = $('#is_virtual').val();
-				}
-
 
 				if($('#user_id').val()){
 					_this.queryData.userId = $('#user_id').val();
-					_this.searchUrl = '/user/queryUserById';
+					_this.searchUrl = '/admin/user/queryUserById';
 				}else if($('#user_name').val()){
 					_this.queryData.name = $('#user_name').val();
-					_this.searchUrl = '/user/queryUserByName';
+					_this.searchUrl = '/admin/user/queryUserByName';
 				}else if($('#user_tel').val()){
 					_this.queryData.tel = $('#user_tel').val();
-					_this.searchUrl = '/user/queryUserByTel';
+					_this.searchUrl = '/admin/user/queryUserByTel';
+				}else if($('#user_email').val()){
+					_this.queryData.email = $('#user_email').val();
+					_this.searchUrl = '/admin/user/queryUserByEmail';
 				}else{
-					_this.searchUrl = '/user/queryList';
+					_this.searchUrl = '/admin/user/queryList';
 				}
 				_this.search();
 			});
@@ -56,7 +51,7 @@
 				url : _this.searchUrl,
 				data : _this.queryData,
 				beforeSend : function(){
-					$('#user_list').html(util.loadingPanel);
+					$('#user_list').html('<tr><td colspan=8>' + util.loadingPanel + '</td></tr>');
 				},
 				success : _this.initPage
 			});

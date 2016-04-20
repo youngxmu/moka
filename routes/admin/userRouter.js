@@ -110,9 +110,9 @@ router.post('/queryUserByTel', function (req, res, next) {
 
 //根据宅男姓名模糊查询
 router.post('/queryUserByName', function (req, res, next) {
-    var nickname = req.body.nickname;
+    var name = req.body.name;
 
-    userModel.queryUserByName(nickname, function (err, result) {
+    userModel.queryUserByName(name, function (err, result) {
         if (!err) {
             for (var i in result) {
                 delete result[i].passwd;
@@ -133,6 +133,34 @@ router.post('/queryUserByName', function (req, res, next) {
         }
     })
 });
+
+//根据宅男姓名模糊查询
+router.post('/queryUserByEmail', function (req, res, next) {
+    var name = req.body.email;
+
+    userModel.queryUserByEmail(email, function (err, result) {
+        if (!err) {
+            for (var i in result) {
+                delete result[i].passwd;
+                delete result[i].im_passwd;
+                result[i].create_time = new Date(result[i].create_time).getTime();
+            }
+            res.json({
+                success: true,
+                data: {
+                    list: result
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: "根据电话查询宅男出错"
+            });
+        }
+    })
+});
+
+
 
 //创建宅男
 router.post('/create', function (req, res) {
