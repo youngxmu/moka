@@ -158,7 +158,6 @@
 			callback : {
 				beforeClick : function(treeId, treeNode) {
 					var zTree = _this.getCurrTree();
-					_this.currNode = treeNode;
 					if (treeNode.isParent) {
 						zTree.expandNode(treeNode);
 						return true;
@@ -166,10 +165,15 @@
 						return true;
 					}
 				},
-
 				onClick: function(event,treeId, treeNode) {
 					var zTree = _this.getCurrTree();
 					var nodes = zTree.getCheckedNodes(true);
+					if(_this.currNode && _this.currNode.id == treeNode.id){
+						zTree.cancelSelectedNode(treeNode);
+						_this.currNode = null;
+						return false;
+					}
+					_this.currNode = treeNode;
 					_this.data.searchData.mid = treeNode.id;
 					_this.data.searchData.pageNo = 1;
 					_this.searchResource();
@@ -240,10 +244,10 @@
 				url : '/menu/add',
 				data : node,
 				success : function(result){
-					console.log('reload');
 					if(result.success){
-						node.id = result.data.insert_id;	
+						node.id = result.data.insertId;
 					}
+					console.log(_this.currNode);
 					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
 				}
 			});
@@ -271,7 +275,7 @@
 				data : node,
 				success : function(result){
 					if(result.success){
-						pmenu.name = name
+						pmenu.name = name;
 						_this.getCurrTree().updateNode(pmenu);
 					}
 					
