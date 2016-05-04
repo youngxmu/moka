@@ -47,7 +47,7 @@ exports.queryArticleTotalCount = function (status, menu_id, callback) {
 };
 
 
-exports.queryArticleList = function (status, start, pageSize, callback) {
+exports.getArticleList = function (status, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
     var params = [];
     if (status || status == 0) {
