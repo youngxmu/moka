@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理</title>
+    <%- include ../../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/admin/question/list.css' >
+    
+  </head>
+  <body>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
+      <div class="search-box">
+         <div class="input-group clearfix">
+             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+             <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+             </div>
+         </div>
+      </div>
+    </div>    
+  	<div class="container">
+      <div class="main">
+        <div class="top-bar">
+          <select id="question_type">
+            <option value="0">全部题型</option>
+            <option value="1">填空题</option>
+            <option value="2">选择题</option>
+          </select>
+          <span id="btn_add" >添加题目</span>
+        </div>
+        <div id="resource_list"></div>
+        <div id="pagebar"></div>
+      </div>
+	  </div>
+
+   
+    <script type="juicer/template" id="question-list-tpl">
+    {@each list as resource}
+    <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
+      <span class="res-title">
+        {@if resource.type == 1}
+        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
+        {@if resource.type == 2}
+        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="juicer/template" id="dlg-edit-question-tpl">
+    <div class="question-edit">
+      <dl>
+        <dt>题目类型：</dt>
+        <dd>
+          <select id="question_type">
+            <option value="0">全部题型</option>
+            <option value="1">填空题</option>
+            <option value="2">选择题</option>
+          </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>题干</dt>
+        <dd>
+          <textarea id="question_body"></textarea>
+        </dd>
+        
+      </dl>
+      <dl class="question-option">
+        <dt>选项</dt>
+        <dd class="option-panel">
+          <p><em>A</em>:<input></p>
+          <p><em>B</em>:<input></p>
+        </dd>
+        <span class="btn-op add">＋</span>
+        <span class="btn-op del disabled">－</span>
+      </dl>
+      <dl>
+        <dt>答案</dt>
+        <dd>
+          <textarea id="question_rtanswer"></textarea>
+        </dd>
+      </dl>
+    </div>
+    </script>
+
+    <script type="text/template" id="edit_menu_dlg">
+    <div class="">
+      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
+    </div>
+    </script>
+    <script type="text/javascript" src="/js/admin/question/list.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+            moka.admin.question.list.init();
+        });
+    </script>
+  </body>
+</html>

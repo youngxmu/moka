@@ -1,7 +1,8 @@
 var moka = {
 	building : '<div class="building">资源建设中...</div>',
 	admin : {
-		user : {}
+		user : {},
+		question : {}
 	},
 	user : {
 		resource : {}
@@ -196,6 +197,13 @@ var util = {
 		var fileType = moka.fileType[tail.toUpperCase()];
 
 		return moka.fileTypeName[fileType];
+	},
+	_word : ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'],
+	getOption : function(index){
+		if(index > 0){
+			index = index - 1;
+		}
+		return util._word[index];
 	}
 };
 
