@@ -12,6 +12,7 @@ var adminIndexRouter = require('./routes/admin/indexRouter.js');
 var adminArticleRouter = require('./routes/admin/articleRouter.js');
 var adminRrsourceRouter = require('./routes/admin/resourceRouter.js');
 var checkRouter = require('./routes/admin/checkRouter.js');
+var questionRouter = require('./routes/admin/questionRouter.js');
 
 var adminUserRouter = require('./routes/admin/userRouter.js');
 
@@ -33,6 +34,7 @@ module.exports = function (app) {
     app.use('/admin/resource', adminRrsourceRouter);//主页
     app.use('/admin/check', checkRouter);//主页
     app.use('/admin/user', adminUserRouter);//主页
+    app.use('/admin/question', questionRouter);//主页
     
     app.use('/upload', uploadRouter);//通用文件上传
     app.get("/", function (req, res, next) {

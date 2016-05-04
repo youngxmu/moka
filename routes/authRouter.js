@@ -34,6 +34,7 @@ router.post('/login', function (req, res, next) {
     }
 
     password = commonUtils.md5(password, config.md5Salt);
+    console.log(password);
     adminModel.query(username, password, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var admin = result[0];
