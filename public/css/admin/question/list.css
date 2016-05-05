@@ -56,6 +56,14 @@
 
 .building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
 
+.question-list{font-size: 14px;line-height: 30px;border: 1px solid #cccccc;padding: 0 10px;}
+.question-list div{}
+.question-list .qbody{}
+.question-list .qanswer{}
+.question-list .rtanswer{}
+
+
+
 
 .question-edit{width:600px;}
 .question-edit dl {line-height: 30px;}
