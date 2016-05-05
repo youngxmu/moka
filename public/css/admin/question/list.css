@@ -62,7 +62,7 @@
 .question-edit dl dt{display: inline-block;margin: 0;width: 80px;vertical-align: top;}
 .question-edit dl dd{display: inline-block;margin: 0;}
 .question-edit dl dd select{border: 1px solid #cccccc;width: 100px;}
-.question-edit dl dd textarea{border: 1px solid #cccccc;width: 500px;}
+.question-edit dl dd textarea{border: 1px solid #cccccc;width: 500px;resize:vertical;}
 .question-edit .question-option{position: relative;}
 .question-edit .question-option p{margin: 0 0 5px 0;}
 .question-edit .question-option input{ width: 420px;margin-left:5px;border: 1px solid #cccccc;line-height: 30px;
