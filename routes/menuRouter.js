@@ -55,7 +55,6 @@ router.post('/update', function(req, res, next) {
     var name = req.body.name;
     var id = req.body.id;
     
-    
     menuModel.updateMenu(id, name, function (err, result) {
         if (err) {
             res.json({

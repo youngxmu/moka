@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.question.list = {
-		searchUrl : '/question/list',
+		searchUrl : '/admin/question/list',
 		tpl : {
 			questionListTpl : null
 		},
@@ -16,6 +16,7 @@
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.tpl.dlgEditQuestionTpl = juicer($('#dlg-edit-question-tpl').html());
 			_this.initEvent();
+			_this.search();
 		},
 		initEvent : function(){
 			$('.nav').on('click', 'span', function(){
@@ -85,25 +86,30 @@
 			    },
 			    ok : function(){
 					var user = {};
-                    $('#edit_user_panel').find('input').each(function(){
-                    	var $this = $(this);
-                    	if($this.val()){
-                    		user[$this.attr('name')] = $this.val();
-                    		console.log($this.val());
-                    	}
-                    });
-                    $('#edit_user_panel').find('select').each(function(){
-                    	var $this = $(this);
-                    	if($this.val()){
-                    		user[$this.attr('name')] = $this.val();
-                    		console.log($this.val());
-                    	}
-                    });
-            		user.week = _this.queryData.week;
+					var questionType = $('#question_type').val();
+					var questionBody = $('#question_body').val();
+					var questionRtanswer = $('#question_rtanswer').val();
+
+					var answer = '';
+					var answerArr = [];
+					var $inputs = $('.question-option').find('input');
+					$inputs.each(function(){
+						var $input = $(this);
+						answerArr.push($input.val());
+					});
+					answer = answerArr.join(',');
+
+    				var question = {
+    					qbody : questionBody,
+    					qtype : questionType,
+    					qanswer : answer,
+    					rtanswer : questionRtanswer 
+    				};
+
                     $.ajax({
 						type : 'post',
-						url : '/gsw/admin/uedit',
-						data : user,
+						url : '/admin/question/save',
+						data : question,
 						success : function(result){
 							_this.search();
 						}
@@ -193,6 +199,21 @@
 		            });
 		        });
 		    }
+		},
+
+		formatAnswer : function(answerStr){
+			var answerArr = answerStr.split(',');
+			var html = '';
+
+			for(var i in answerArr){
+				var index = parseInt(i) + 1;
+				var word = util.getOption(index);
+				console.log(word + ' ' +answerArr[i]);
+				html += '<p>' + word + ':' + answerArr[i] + '</p>';
+			}
+			return html;
 		}
 	};
 }(moka));
+
+juicer.register('formatAnswer', moka.admin.question.list.formatAnswer );

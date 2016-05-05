@@ -3,7 +3,7 @@ var logger = require("../lib/log.js").logger("questionQuestion");
 var commonUtils = require("../lib/utils.js");
 
 
-exports.queryQuestions = function (type, pageSize, callback) {
+exports.queryQuestions = function (type, start, pageSize, callback) {
     var sql = 'select * from question where 1=1 ';
     var params = [];
     if (type || type == 0) {
@@ -18,7 +18,7 @@ exports.queryQuestions = function (type, pageSize, callback) {
 };
 
 //根据“是否虚拟”“创建来源”查找题目总数
-exports.queryQuestionTotalCount = function (type, menu_id, callback) {
+exports.queryQuestionTotalCount = function (type, callback) {
     var sql = 'select count(id) as count from question where 1=1 ';
     var params = [];
     if (type || type == 0) {

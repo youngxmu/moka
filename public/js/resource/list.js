@@ -1,6 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.resource.list = {
+		searchUrl : '/article/queryArticleByMenu',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -20,6 +21,7 @@
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
 			_this.initTopic();
+			_this.searchResource();
 		},
 		initEvent : function(){
 			$('#resource_list').on('click','.view',function(){
@@ -83,11 +85,15 @@
 			_this.initTree();
 		},
 		searchResource : function() {
-			var url = '/article/queryArticleByMenu';
 			var data = _this.data.searchData;
+			if(_this.currNode == null){
+				_this.searchUrl = '/article/list';
+			}else{
+				_this.searchUrl = '/article/queryArticleByMenu';
+			}
 			$.ajax({
 				type : "post",
-				url : url,
+				url : _this.searchUrl,
 				data : data,
 				beforeSend : function() {
 					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
@@ -131,7 +137,35 @@
 							_this.data.searchData.pageNo = pageNo;
 							if (_this.instance_resource == null)
 								_this.instance_resource = this;
-							_this.searchResource();
+							var data = _this.data.searchData;
+							$.ajax({
+								type : "post",
+								url : _this.searchUrl,
+								data : data,
+								beforeSend : function() {
+									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+								},
+								success : function(data){
+									if (!data.success) {
+										util.dialog.infoDialog('查询出错');
+										return;
+									}
+							
+									_this.data.resourceList = {};
+									for ( var index in data.list) {
+										var resource = data.list[index];
+										_this.data.resourceList[resource.id] = resource;
+									}
+									data = data.data;
+									var totalPage = data.totalPage;
+									var totalcount = data.totalCount;
+									var html = _this.data.resourceTpl.render(data);
+									if(totalcount == 0){
+										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
+									}
+									$('#resource_list').html(html);
+								}
+							});
 						}
 					});
 				});
@@ -158,7 +192,6 @@
 			callback : {
 				beforeClick : function(treeId, treeNode) {
 					var zTree = _this.getCurrTree();
-					_this.currNode = treeNode;
 					if (treeNode.isParent) {
 						zTree.expandNode(treeNode);
 						return true;
@@ -166,10 +199,15 @@
 						return true;
 					}
 				},
-
 				onClick: function(event,treeId, treeNode) {
 					var zTree = _this.getCurrTree();
 					var nodes = zTree.getCheckedNodes(true);
+					if(_this.currNode && _this.currNode.id == treeNode.id){
+						zTree.cancelSelectedNode(treeNode);
+						_this.currNode = null;
+						return false;
+					}
+					_this.currNode = treeNode;
 					_this.data.searchData.mid = treeNode.id;
 					_this.data.searchData.pageNo = 1;
 					_this.searchResource();
@@ -240,10 +278,10 @@
 				url : '/menu/add',
 				data : node,
 				success : function(result){
-					console.log('reload');
 					if(result.success){
-						node.id = result.data.insert_id;	
+						node.id = result.data.insertId;
 					}
+					console.log(_this.currNode);
 					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
 				}
 			});
@@ -271,7 +309,7 @@
 				data : node,
 				success : function(result){
 					if(result.success){
-						pmenu.name = name
+						pmenu.name = name;
 						_this.getCurrTree().updateNode(pmenu);
 					}
 					

@@ -28,7 +28,7 @@ router.post('/list', function (req, res, next) {
         var start = pageSize * (pageNo - 1);
 
         logger.info("查找题目:", start, pageSize);
-        questionModel.queryModelList(type, start, pageSize, function (err, result) {
+        questionModel.queryQuestions(type, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找题目出错", err);
                 res.json({

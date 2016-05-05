@@ -24,33 +24,27 @@
   	<div class="container">
       <div class="main">
         <div class="top-bar">
-          <select id="question_type">
+          <select id="s_q_type">
             <option value="0">全部题型</option>
             <option value="1">填空题</option>
             <option value="2">选择题</option>
           </select>
           <span id="btn_add" >添加题目</span>
         </div>
-        <div id="resource_list"></div>
+        <div id="question_list"></div>
         <div id="pagebar"></div>
       </div>
 	  </div>
 
    
     <script type="juicer/template" id="question-list-tpl">
-    {@each list as resource}
-    <div class="res-list">
-      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
-      <span class="res-title">
-        {@if resource.type == 1}
-        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+    {@each list as obj}
+    <div class="question-list">
+        <div class="qbody">${obj.qbody}</div>
+        {@if obj.qtype == 2}
+          <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
-        {@if resource.type == 2}
-        <a href="/admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
-        {@/if}
-      </span>
-      <span>${resource.author}</span>
-      <span>${resource.create_time}</span>
+        <div class="rtanswer">${obj.rtanswer}</div>
     </div>
     {@/each}
     </script>
@@ -61,7 +55,6 @@
         <dt>题目类型：</dt>
         <dd>
           <select id="question_type">
-            <option value="0">全部题型</option>
             <option value="1">填空题</option>
             <option value="2">选择题</option>
           </select>
@@ -72,7 +65,6 @@
         <dd>
           <textarea id="question_body"></textarea>
         </dd>
-        
       </dl>
       <dl class="question-option">
         <dt>选项</dt>
@@ -92,11 +84,9 @@
     </div>
     </script>
 
-    <script type="text/template" id="edit_menu_dlg">
-    <div class="">
-      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
-    </div>
-    </script>
+
+    
+
     <script type="text/javascript" src="/js/admin/question/list.js"></script>
     
     <script>

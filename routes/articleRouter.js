@@ -95,7 +95,7 @@ router.get('/list/:mid', function(req, res, next) {
 router.post('/list', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
-
+    var status = 1;
     articleModel.getArticleTotalCount(status, function (totalCount) {
         logger.info("文章总数:", totalCount);
         var totalPage = 0;
@@ -105,7 +105,7 @@ router.post('/list', function (req, res, next) {
         var start = pageSize * (pageNo - 1);
 
         logger.info("查找文章:", start, pageSize);
-        articleModel.queryModelList(isVirtual, createFrom, start, pageSize, function (err, result) {
+        articleModel.getArticleList(status, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找文章出错", err);
                 res.json({
@@ -114,8 +114,9 @@ router.post('/list', function (req, res, next) {
                 });
             } else {
                 for (var i in result) {
-                    delete result[i].im_passwd;
-                    result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                    // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                    var date = new Date(result[i].create_time);
+                    result[i].create_time = commonUtils.formatDate(date);
                 }
                 res.json({
                     success: true,
@@ -148,11 +149,43 @@ router.get('/detail/:id', function (req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
+                res.render('article/detail', article);
+
                 res.render('article/detail', article);
             } else {
                 res.render('error', {
                     success: false,
                     msg: "根据id查询文章出错"
+                });
+            }
+        });
+    }
+});
+
+
+//根据文章id查询
+router.get('/download/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.admin ? true : false;
+    if(id == null || id == undefined){
+        res.render('error', {
+            success: false,
+            msg: "资源不存在"
+        });
+    }else{
+        articleModel.queryArticleById(id, function (err, result) {
+            if (!err && result) {
+                var article = result;
+                var link = config.imgHost + '/uploads/' + article.file_name;
+                console.log(link);
+                res.redirect(link);
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "资源不存在"
                 });
             }
         });
