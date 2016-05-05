@@ -1,20 +1,19 @@
 (function(P){
 	var _this = null;
-	_this = P.admin.question.list = {
-		searchUrl : '/admin/question/list',
+	_this = P.admin.paper.list = {
+		searchUrl : '/admin/paper/list',
 		tpl : {
-			questionListTpl : null
+			paperListTpl : null
 		},
 		data : {
-			questionMap : {}
+			paperMap : {}
 		},
 		queryData : {
 			pageNo : 1,
 			pageSize : 15
 		},
 		init : function() {
-			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
-			_this.tpl.dlgEditQuestionTpl = juicer($('#dlg-edit-question-tpl').html());
+			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
 			_this.initEvent();
 			_this.search();
 		},
@@ -75,36 +74,36 @@
 				}
 			});
 
-			$('body').on('change', '#question_type', function(){
+			$('body').on('change', '#paper_type', function(){
 				var $this = $(this);
 				console.log($this.val());
 				if($this.val() == 2){
-					$('.question-option').show();
+					$('.paper-option').show();
 				}else{
-					$('.question-option').hide();
+					$('.paper-option').hide();
 				}
 			});
 
-			$('body').on('click', '.question-oper .edit', _this.onEdit);
+			$('body').on('click', '.paper-oper .edit', _this.onEdit);
 			
-			$('body').on('click', '.question-oper .del', _this.onDel);
+			$('body').on('click', '.paper-oper .del', _this.onDel);
 			
 		},
 		onAdd : function(){
 			var d = dialog({
 			    title: '新建题目',
-			    content: _this.tpl.dlgEditQuestionTpl.render(),
+			    content: _this.tpl.dlgEditPaperTpl.render(),
 			    okValue : '确定',
 			    ok : function(){
 					var user = {};
-					var questionType = $('#question_type').val();
-					var questionBody = $('#question_body').val();
-					var questionRtanswer = $('#question_rtanswer').val();
+					var paperType = $('#paper_type').val();
+					var paperBody = $('#paper_body').val();
+					var paperRtanswer = $('#paper_rtanswer').val();
 
 					var answer = '';
-					if(questionType == 2){
+					if(paperType == 2){
 						var answerArr = [];
-						var $inputs = $('.question-option').find('input');
+						var $inputs = $('.paper-option').find('input');
 						$inputs.each(function(){
 							var $input = $(this);
 							answerArr.push($input.val());
@@ -113,17 +112,17 @@
 					}
 					
 
-    				var question = {
-    					qbody : questionBody,
-    					qtype : questionType,
+    				var paper = {
+    					qbody : paperBody,
+    					qtype : paperType,
     					qanswer : answer,
-    					rtanswer : questionRtanswer 
+    					rtanswer : paperRtanswer 
     				};
 
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/save',
-						data : question,
+						url : '/admin/paper/save',
+						data : paper,
 						success : function(result){
 							_this.search();
 						}
@@ -137,14 +136,14 @@
 		onEdit : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');
-			var question = _this.data.questionMap[id];
+			var paper = _this.data.paperMap[id];
 			var d = dialog({
 			    title: '编辑题目',
-			    content: _this.tpl.dlgEditQuestionTpl.render(question),
+			    content: _this.tpl.dlgEditPaperTpl.render(paper),
 		     	onshow: function(){
-		     		$('#question_type').val(question.qtype);
-		     		if(question.qtype == 2){
-		     			var answerArr = question.qanswer.split(',');
+		     		$('#paper_type').val(paper.qtype);
+		     		if(paper.qtype == 2){
+		     			var answerArr = paper.qanswer.split(',');
 						var html = '';
 
 						for(var i in answerArr){
@@ -153,20 +152,20 @@
 							html += '<p><em>' + word + '</em>:<input value="' + answerArr[i] + '"></p>';
 						}
 						$('.option-panel').html(html);
-		     			$('.question-option').show();
+		     			$('.paper-option').show();
 		     		}
 		     		
 			    },
 			    okValue : '确定',
 			    ok : function(){
-					var questionType = $('#question_type').val();
-					var questionBody = $('#question_body').val();
-					var questionRtanswer = $('#question_rtanswer').val();
+					var paperType = $('#paper_type').val();
+					var paperBody = $('#paper_body').val();
+					var paperRtanswer = $('#paper_rtanswer').val();
 
 					var answer = '';
-					if(questionType == 2){
+					if(paperType == 2){
 						var answerArr = [];
-						var $inputs = $('.question-option').find('input');
+						var $inputs = $('.paper-option').find('input');
 						$inputs.each(function(){
 							var $input = $(this);
 							answerArr.push($input.val());
@@ -175,15 +174,15 @@
 					}
 					
 
-					question.qbody = questionBody;
-					question.qtype = questionType;
-					question.qanswer = answer;
-					question.rtanswer = questionRtanswer;
+					paper.qbody = paperBody;
+					paper.qtype = paperType;
+					paper.qanswer = answer;
+					paper.rtanswer = paperRtanswer;
 
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/save',
-						data : question,
+						url : '/admin/paper/save',
+						data : paper,
 						success : function(result){
 							_this.search();
 						}
@@ -204,7 +203,7 @@
 			    ok : function(){
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/del',
+						url : '/admin/paper/del',
 						data : {id : id},
 						success : function(result){
 							_this.search();
@@ -222,7 +221,7 @@
 				url : _this.searchUrl,
 				data : _this.queryData,
 				beforeSend : function(){
-					$('#question_list').html(util.loadingPanel);
+					$('#paper_list').html(util.loadingPanel);
 				},
 				success : _this.initPage
 			});
@@ -232,19 +231,19 @@
 				return;
 			}
 			var data = result.data;
-		    $('#question_list').html(_this.tpl.questionListTpl.render(data));
+		    $('#paper_list').html(_this.tpl.paperListTpl.render(data));
 
-			var questionList = data.list;
-			for(var index in questionList){
-				var user = questionList[index];
-				_this.data.questionMap[user.id] = user;
+			var paperList = data.list;
+			for(var index in paperList){
+				var user = paperList[index];
+				_this.data.paperMap[user.id] = user;
 			}
 		
 			var totalPage = data.totalPage;
 			var totalCount = data.totalCount;
 
 			if(totalCount == 0){
-				$('#question_list').html(P.building);
+				$('#paper_list').html(P.building);
 				return;
 			}
 
@@ -271,16 +270,16 @@
 		                        type: 'POST',
 		                        data: _this.queryData,
 		                        beforeSend : function(){
-									$('#question_list').html(util.loadingPanel);
+									$('#paper_list').html(util.loadingPanel);
 								},
 		                        success : function(result){
 		                        	if (result != null && result.success) {
 		                        		var data = result.data;
-		                		        $('#question_list').html(_this.tpl.questionListTpl.render(data));
-										var questionList = data.list;
-										for(var index in questionList){
-											var user = questionList[index];
-											_this.data.questionMap[user.id] = user;
+		                		        $('#paper_list').html(_this.tpl.paperListTpl.render(data));
+										var paperList = data.list;
+										for(var index in paperList){
+											var user = paperList[index];
+											_this.data.paperMap[user.id] = user;
 										}
 		                		    }
 		                		    else {
@@ -308,4 +307,4 @@
 	};
 }(moka));
 
-juicer.register('formatAnswer', moka.admin.question.list.formatAnswer );
+juicer.register('formatAnswer', moka.admin.paper.list.formatAnswer );

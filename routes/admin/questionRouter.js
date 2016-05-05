@@ -15,11 +15,14 @@ router.get('/list', function (req, res, next) {
 
 //根据”创建渠道“和”是否虚拟“查询题目
 router.post('/list', function (req, res, next) {
-    var type = req.body.type;
+    var qtype = req.body.qtype;
+    if(qtype == 0){
+        qtype = '';
+    }
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
 
-    questionModel.queryQuestionTotalCount(type, function (totalCount) {
+    questionModel.queryQuestionTotalCount(qtype, function (totalCount) {
         logger.info("题目总数:", totalCount);
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
@@ -28,7 +31,7 @@ router.post('/list', function (req, res, next) {
         var start = pageSize * (pageNo - 1);
 
         logger.info("查找题目:", start, pageSize);
-        questionModel.queryQuestions(type, start, pageSize, function (err, result) {
+        questionModel.queryQuestions(qtype, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找题目出错", err);
                 res.json({
@@ -131,8 +134,41 @@ router.post('/save', function (req, res) {
             }
         });
     }
-    
 });
-
+//创建题目
+router.post('/del', function (req, res) {
+    var id = req.body.id;
+    var admin = req.session.admin;
+    if(!admin){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
+    
+    
+    if(id == null || id == undefined){
+        res.json({
+            success: false,
+            msg: "删除失败"
+        });
+    }else{
+        logger.info("管理员删除题目信息", id);
+        questionModel.delQuestion(id, function (err, result) {
+            if (!err) {
+                res.json({
+                    success: true,
+                    msg: "删除题目信息成功"
+                });
+            } else {
+                logger.error("删除题目发生错误", err);
+                res.json({
+                    success: false,
+                    msg: "删除题目失败"
+                });
+            }
+        });
+    }
+});
 module.exports = router;
 

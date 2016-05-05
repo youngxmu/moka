@@ -38,13 +38,20 @@
 
    
     <script type="juicer/template" id="question-list-tpl">
-    {@each list as obj}
+    {@each list as obj, index}
     <div class="question-list">
+        <div class="qtype">
+          ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
+          <div class="question-oper">
+            <span data-id="${obj.id}" class="edit">编辑</span>
+            <span data-id="${obj.id}" class="del">删除</span>
+          </div>
+        </div>
         <div class="qbody">${obj.qbody}</div>
         {@if obj.qtype == 2}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
-        <div class="rtanswer">${obj.rtanswer}</div>
+        <div class="rtanswer">正确答案：${obj.rtanswer}</div>
     </div>
     {@/each}
     </script>
@@ -63,7 +70,7 @@
       <dl>
         <dt>题干</dt>
         <dd>
-          <textarea id="question_body"></textarea>
+          <textarea id="question_body">${qbody}</textarea>
         </dd>
       </dl>
       <dl class="question-option">
@@ -78,7 +85,7 @@
       <dl>
         <dt>答案</dt>
         <dd>
-          <textarea id="question_rtanswer"></textarea>
+          <textarea id="question_rtanswer">${rtanswer}</textarea>
         </dd>
       </dl>
     </div>
@@ -86,7 +93,7 @@
 
 
     
-
+    <script type="text/javascript" src="/js/common/question.js"></script>
     <script type="text/javascript" src="/js/admin/question/list.js"></script>
     
     <script>

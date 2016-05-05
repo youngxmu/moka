@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>试题库</title>
+    <%- include ../../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/admin/paper/list.css' >
+    
+  </head>
+  <body>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
+      <div class="search-box">
+         <div class="input-group clearfix">
+             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+             <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+             </div>
+         </div>
+      </div>
+    </div>    
+  	<div class="container">
+      <div class="main">
+        <div class="top-bar">
+          <span id="btn_add" >添加试卷</span>
+        </div>
+        <div id="paper_list"></div>
+        <div id="pagebar"></div>
+      </div>
+	  </div>
+
+   
+    <script type="juicer/template" id="paper-list-tpl">
+    <div class="paper-list-title">
+        <div class="name">名称</div>
+        <div class="oper">操作</div>
+    </div>
+    {@each list as obj, index}
+    <div class="paper-list">
+      <div class="name">${obj.name}</div>
+      <div class="oper">
+        <span data-id="${obj.id}" class="edit">编辑</span>
+        <span data-id="${obj.id}" class="del">删除</span>
+      </div>
+    </div>
+    {@/each}
+    </script>
+    
+    <script type="text/javascript" src="/js/admin/paper/list.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+            moka.admin.paper.list.init();
+        });
+    </script>
+  </body>
+</html>

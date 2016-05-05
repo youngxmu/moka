@@ -2,6 +2,7 @@ var moka = {
 	building : '<div class="building">资源建设中...</div>',
 	admin : {
 		user : {},
+		paper : {},
 		question : {}
 	},
 	user : {

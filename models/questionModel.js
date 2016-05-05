@@ -3,12 +3,12 @@ var logger = require("../lib/log.js").logger("questionQuestion");
 var commonUtils = require("../lib/utils.js");
 
 
-exports.queryQuestions = function (type, start, pageSize, callback) {
-    var sql = 'select * from question where 1=1 ';
+exports.queryQuestions = function (qtype, start, pageSize, callback) {
+    var sql = 'select * from question where status = 1 ';
     var params = [];
-    if (type || type == 0) {
-        sql += ' and type = ? ';
-        params.push(type);
+    if (qtype || qtype == 0) {
+        sql += ' and qtype = ? ';
+        params.push(qtype);
     }
 
     sql += ' limit ?,?;';
@@ -18,12 +18,12 @@ exports.queryQuestions = function (type, start, pageSize, callback) {
 };
 
 //根据“是否虚拟”“创建来源”查找题目总数
-exports.queryQuestionTotalCount = function (type, callback) {
-    var sql = 'select count(id) as count from question where 1=1 ';
+exports.queryQuestionTotalCount = function (qtype, callback) {
+    var sql = 'select count(id) as count from question where status = 1 ';
     var params = [];
-    if (type || type == 0) {
-        sql += ' and type = ? ';
-        params.push(type);
+    if (qtype || qtype == 0) {
+        sql += ' and qtype = ? ';
+        params.push(qtype);
     }
 
     db.query(sql, params, function (err, result) {
@@ -60,7 +60,7 @@ exports.insertQuestion = function (qbody, qtype, qanswer, rtanswer, callback) {
     sql += 'qbody, qtype, qanswer, rtanswer, create_time) ';
     sql += 'values(?,?,?,?,?);';
     db.query(sql,
-        [qbody, qtype, qanswer, rtanswer, 0 , new Date()],
+        [qbody, qtype, qanswer, rtanswer, new Date()],
         function (err, result) {
             callback(err, result);
         }
@@ -75,8 +75,6 @@ exports.updateQuestion = function (id, qbody, qtype, qanswer, rtanswer, callback
     params.push(qtype);
     params.push(qanswer);
     params.push(rtanswer);
-    sql += ',update_time = ? ';
-    params.push(new Date());
     sql += ' where id = ?;';
     params.push(id);
 
@@ -89,4 +87,23 @@ exports.updateQuestion = function (id, qbody, qtype, qanswer, rtanswer, callback
         }
     });
 };
+
+
+//编辑、修改题目个人信息
+exports.delQuestion = function (id, callback) {
+    var sql = 'update question set status = 0';
+    var params = [];
+    sql += ' where id = ?;';
+    params.push(id);
+
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            logger.error("修改题目出错", err);
+            callback(err);
+        } else {
+            callback(null);
+        }
+    });
+};
+
 
