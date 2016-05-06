@@ -48,6 +48,42 @@
     {@/each}
     </script>
     
+    <script type="juicer/template" id="dlg-edit-paper-tpl">
+    <div class="paper-edit">
+      <dl>
+        <dt>题目类型：</dt>
+        <dd>
+          <select id="paper_type">
+            <option value="1">填空题</option>
+            <option value="2">选择题</option>
+          </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>题干</dt>
+        <dd>
+          <textarea id="paper_body">${qbody}</textarea>
+        </dd>
+      </dl>
+      <dl class="paper-option">
+        <dt>选项</dt>
+        <dd class="option-panel">
+          <p><em>A</em>:<input></p>
+          <p><em>B</em>:<input></p>
+        </dd>
+        <span class="btn-op add">＋</span>
+        <span class="btn-op del disabled">－</span>
+      </dl>
+      <dl>
+        <dt>答案</dt>
+        <dd>
+          <textarea id="paper_rtanswer">${rtanswer}</textarea>
+        </dd>
+      </dl>
+    </div>
+    </script>
+
+    <script type="text/javascript" src="/js/common/question.js"></script>
     <script type="text/javascript" src="/js/admin/paper/list.js"></script>
     
     <script>

@@ -78,7 +78,7 @@
 			$('body').on('change', '#question_type', function(){
 				var $this = $(this);
 				console.log($this.val());
-				if($this.val() == 2){
+				if($this.val() == 2 || $this.val() == 3){
 					$('.question-option').show();
 				}else{
 					$('.question-option').hide();
@@ -102,7 +102,7 @@
 					var questionRtanswer = $('#question_rtanswer').val();
 
 					var answer = '';
-					if(questionType == 2){
+					if(questionType == 2 || questionType == 3){
 						var answerArr = [];
 						var $inputs = $('.question-option').find('input');
 						$inputs.each(function(){
@@ -143,7 +143,7 @@
 			    content: _this.tpl.dlgEditQuestionTpl.render(question),
 		     	onshow: function(){
 		     		$('#question_type').val(question.qtype);
-		     		if(question.qtype == 2){
+		     		if(question.qtype == 2 || question.qtype == 3){
 		     			var answerArr = question.qanswer.split(',');
 						var html = '';
 
@@ -164,7 +164,7 @@
 					var questionRtanswer = $('#question_rtanswer').val();
 
 					var answer = '';
-					if(questionType == 2){
+					if(questionType == 2 || question.qtype == 3){
 						var answerArr = [];
 						var $inputs = $('.question-option').find('input');
 						$inputs.each(function(){

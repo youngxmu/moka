@@ -3,6 +3,13 @@ var logger = require("../lib/log.js").logger("questionQuestion");
 var commonUtils = require("../lib/utils.js");
 
 
+exports.queryQuestionsByIds = function (qids, callback) {
+    var sql = 'select * from question where status = 1 and id in(' + qids + ') ';
+    var params = [];
+    db.query(sql, params, callback);
+};
+
+
 exports.queryQuestions = function (qtype, start, pageSize, callback) {
     var sql = 'select * from question where status = 1 ';
     var params = [];
