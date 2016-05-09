@@ -16,6 +16,7 @@
 			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
 			_this.initEvent();
 			_this.search();
+			P.admin.question.import.init();
 		},
 		initEvent : function(){
 			$('.nav').on('click', 'span', function(){
@@ -91,7 +92,7 @@
 		},
 		onAdd : function(){
 			var d = dialog({
-			    title: '新建题目',
+			    title: '新建试卷',
 			    content: _this.tpl.dlgEditPaperTpl.render(),
 			    okValue : '确定',
 			    ok : function(){
@@ -138,7 +139,7 @@
 			var id = $this.attr('data-id');
 			var paper = _this.data.paperMap[id];
 			var d = dialog({
-			    title: '编辑题目',
+			    title: '编辑试卷',
 			    content: _this.tpl.dlgEditPaperTpl.render(paper),
 		     	onshow: function(){
 		     		$('#paper_type').val(paper.qtype);
@@ -197,7 +198,7 @@
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			var d = dialog({
-			    title: '删除题目',
+			    title: '删除试卷',
 			    content: '确认删除',
 			    okValue : '确定',
 			    ok : function(){
