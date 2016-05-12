@@ -10,7 +10,7 @@ var router = express.Router();
 
 
 router.get('/list', function (req, res, next) {
-    res.render('admin/paper/list');
+    res.render('user/paper/list');
 });
 
 
@@ -54,7 +54,7 @@ router.post('/list', function (req, res, next) {
 
 router.post('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
+    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.json({
             success: false,
@@ -93,7 +93,7 @@ router.post('/detail/:id', function (req, res, next) {
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
+    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -108,7 +108,7 @@ router.get('/detail/:id', function (req, res, next) {
                 paper.file_name = config.imgHost + '/uploads/' + paper.file_name;
                 paper.menuList = menuUtils.getMenuPathList(paper.menu_id);
                 paper.file_type = commonUtils.getFileTypeName(paper.file_name);
-                res.render('admin/paper/detail', paper);
+                res.render('user/paper/detail', paper);
             } else {
                 res.render('error', {
                     success: false,
@@ -120,13 +120,13 @@ router.get('/detail/:id', function (req, res, next) {
 });
 
 //创建试卷
-router.post('/save', function (req, res) {
+router.post('/commit', function (req, res) {
     var id = req.body.id;
     var name = req.body.name;
     var description = req.body.description;
     var qids = req.body.qids;//明文
-    var admin = req.session.admin;
-    if(!admin){
+    var user = req.session.user;
+    if(!user){
         return res.json({
             success: false,
             msg: "请登录"
@@ -162,41 +162,6 @@ router.post('/save', function (req, res) {
                 res.json({
                     success: false,
                     msg: "修改试卷个人信息失败"
-                });
-            }
-        });
-    }
-});
-
-router.post('/del', function (req, res) {
-    var id = req.body.id;
-    var admin = req.session.admin;
-    if(!admin){
-        return res.json({
-            success: false,
-            msg: "请登录"
-        });
-    }
-    
-    
-    if(id == null || id == undefined){
-        res.json({
-            success: false,
-            msg: "删除失败"
-        });
-    }else{
-        logger.info("管理员删除试卷信息", id);
-        paperModel.delPaper(id, function (err, result) {
-            if (!err) {
-                res.json({
-                    success: true,
-                    msg: "删除试卷信息成功"
-                });
-            } else {
-                logger.error("删除试卷发生错误", err);
-                res.json({
-                    success: false,
-                    msg: "删除试卷失败"
                 });
             }
         });

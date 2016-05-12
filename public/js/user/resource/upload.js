@@ -154,11 +154,13 @@
 
 			var title = $('#title').val();
 			var author = $('#author').val();
+			var description = $('#description').val();
 			var url = '/resource/save';
 			
 			var postData = {
 				title : title,
 				author : author,
+				description : description,
 				fileName : _this.fileName,
 				mid : mid
 			};

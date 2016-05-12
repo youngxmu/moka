@@ -1,9 +1,12 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.question.import = {
+		callback : function(){
+
+		},
 		searchUrl : '/admin/question/list',
 		tpl : {
-			dlgTpl : '',
+			dlgTpl : '<div id="im_question_dlg" class="im-question-dlg"><div class="result-panel"><ul id="selected_list" class="selected-list"><li></li></ul></div><div class="list-panel"><div id="question_list" class="import-question-list"></div><div id="question_pagebar"></div></div></div>',
 			questionListTpl : '{@each list as obj, index}<div class="question-list"><div class="qtype">${index|formatIndex}.&nbsp;${obj.qtype|getQType}<div class="question-oper"><span data-id="${obj.id}" class="check">选择</span></div></div><div class="qbody">${obj.qbody}</div>{@if obj.qtype == 2}<div class="qanswer">$${obj.qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${obj.rtanswer}</div></div>{@/each}',
 			resultListTpl : '{@each list as obj, index}<li data-id="${obj.id}" title="${obj.qbody}">${index|formatIndex}.&nbsp;${obj.qtype|getQType}-${obj.qbody}<em class="del" data-id="${obj.id}">×</em></li>{@/each}'
 		},
@@ -16,18 +19,14 @@
 			pageSize : 15
 		},
 		init : function(options) {
+			_this.tpl.dlgTpl = juicer(_this.tpl.dlgTpl);
 			_this.tpl.questionListTpl = juicer(_this.tpl.questionListTpl);
 			_this.tpl.resultListTpl = juicer(_this.tpl.resultListTpl);
 			_this.initEvent();
-			_this.search();
 		},
 		initEvent : function(){
-
-			$('#btn_commit').on('click', _this.commit);
-
 			$('body').on('change', '#question_type', function(){
 				var $this = $(this);
-				console.log($this.val());
 				if($this.val() == 2 || $this.val() == 3){
 					$('.question-option').show();
 				}else{
@@ -54,6 +53,48 @@
 					_this.showSelected();
 				}
 			});
+		},
+		show : function(options){
+			if(options.paper){
+				_this.paper = options.paper;
+				var questions = _this.paper.questions;
+				for(var index in questions){
+					var question = questions[index];
+					_this.data.selectedQestionMap[question.id] = question;
+				}
+			}else{
+				_this.paper = null;
+				_this.data.selectedQestionMap = {};
+			}
+				
+			if(options.callback){
+				_this.callback = options.callback;
+			}
+
+			var d = dialog({
+			    title: '题目选择',
+			    content: _this.tpl.dlgTpl.render(),
+			    okValue : '确定',
+			    onshow : function(){
+					_this.showSelected();
+			    	_this.search();
+			    },
+			    ok : function(){
+			    	var $lis = $('#selected_list').find('li');
+			    	var qidArr = [];
+			    	var questions = [];
+			    	$lis.each(function(){
+			    		var $this = $(this);
+			    		var qid = $this.attr('data-id');
+			    		qidArr.push(qid);
+			    		questions.push(_this.data.questionMap[qid]);
+			    	});
+			    	_this.callback(qidArr.join(','), questions);
+			    },
+			    cancelValue : '取消',
+			    cancel : function(){}
+			});
+			d.showModal();
 		},
 		showSelected : function(){
 			var list = [];
@@ -146,7 +187,6 @@
 			for(var i in answerArr){
 				var index = parseInt(i) + 1;
 				var word = util.getOption(index);
-				console.log(word + ' ' +answerArr[i]);
 				html += '<p>' + word + ':' + answerArr[i] + '</p>';
 			}
 			return html;
