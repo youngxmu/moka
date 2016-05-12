@@ -6,7 +6,8 @@ var articleRouter = require('./routes/articleRouter.js');
 var resourceRouter = require('./routes/user/resourceRouter.js');
 var registerRouter = require('./routes/registerRouter.js');
 
-
+/** user */
+var userPaperRouter = require('./routes/user/paperRouter.js');
 /**admin*/
 var adminIndexRouter = require('./routes/admin/indexRouter.js');
 var adminArticleRouter = require('./routes/admin/articleRouter.js');
@@ -29,6 +30,9 @@ module.exports = function (app) {
     app.use('/resource', resourceRouter);//通用文件上传
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
+
+    app.use('/user/paper', userPaperRouter);//主页
+
 
     app.use('/admin', adminIndexRouter);//主页
     app.use('/admin/article', adminArticleRouter);//主页

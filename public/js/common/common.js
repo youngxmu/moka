@@ -6,7 +6,9 @@ var moka = {
 		question : {}
 	},
 	user : {
-		resource : {}
+		resource : {},
+		paper : {},
+		question : {}
 	},
 	model : {},
 	album : {},

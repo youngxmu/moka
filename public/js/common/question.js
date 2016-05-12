@@ -13,7 +13,7 @@ var question = {
 	}
 };
 
-var util : {
+var util = {
 	_word : ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'],
 	getOption : function(index){
 		if(index > 0){

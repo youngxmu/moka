@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+	    <title>测试</title>
+	    <%- include ../../common/meta.ejs %>
+	    <link href="/css/user/paper/detail.css" rel="stylesheet" type="text/css" media="all"/> 
+  	</head>
+  	<body>
+  		<div id="wrapper" class="container" >
+  			<ul id="question_panel" class="question-panel">
+  				
+  			</ul>
+  			<div class="btn-wrapper">
+				<span id="btn_commit" class="btn-red">答题参与抽奖</span>
+			</div>
+	    </div>
+
+	    <script type="template/javascript" id="question-list-tpl">
+		{@each list as obj, index}
+		<li>
+			<div class="qtitle">
+				<span class="qindex">${index|formatIndex}</span>
+				${obj.qbody }
+				{@if obj.qtype == 3}
+				（多选）
+				{@/if}
+			</div>
+			<div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}">
+				$${obj.qanswer|formatAnswer}
+			</div>
+		</li>
+		{@/each}
+		</script>
+		<script type="text/javascript"  src="/js/user/paper/detail.js"></script>
+     	<script type="text/javascript">
+		    $(document).ready(function(){
+		    	moka.user.paper.detail.init();
+		    });
+	  	</script>
+  	</body>
+</html>
