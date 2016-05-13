@@ -90,7 +90,6 @@ router.post('/del', function(req, res, next) {
     });
 });
 
-
 router.get('/map', function(req, res, next) {
     var menuMap = menuUtils.getMenuMap();
     res.json(menuMap);

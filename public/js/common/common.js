@@ -3,14 +3,21 @@ var moka = {
 	admin : {
 		user : {},
 		paper : {},
-		question : {}
+		question : {},
+		article : {},
+		expert : {}
 	},
 	user : {
-		resource : {}
+		resource : {},
+		user : {},
+		paper : {},
+		question : {},
+		article : {},
+		expert : {}
 	},
 	model : {},
 	album : {},
-	article:{//用户管理
+	article :{//用户管理
 		detail : {},
 		list : {}
 	},

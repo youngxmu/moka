@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>师资力量</title>
+    <%- include ../../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/admin/expert/list.css' >
+    
+  </head>
+  <body>
+    <div class="banner">
+      <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
+    </div>    
+  	<div class="container">
+      <div class="main">
+        <div class="top-bar">
+          <span id="btn_add" >添加专家</span>
+        </div>
+        <div id="expert_list"></div>
+        <div id="pagebar"></div>
+      </div>
+	  </div>
+
+   
+    <script type="juicer/template" id="expert-list-tpl">
+    <div class="expert-list-title" style="display:none;">
+      <div class="">序号</div>
+      <div class="name">姓名</div>
+      <div class="name">出生年月</div>
+      <div class="name">职称</div>
+      <div class="name">研究方向</div>
+      <div class="name">简介</div>
+      <div class="oper">操作</div>
+    </div>
+    {@each list as obj, index}
+    <div class="expert-list">
+      <div class="name">${obj.name}</div>
+      <div class="desc">${obj.description}</div>
+      <div class="oper">
+        <span data-id="${obj.id}" class="edit">编辑</span>
+        <span data-id="${obj.id}" class="del">删除</span>
+      </div>
+    </div>
+    {@/each}
+    </script>
+    
+    <script type="juicer/template" id="dlg-edit-expert-tpl">
+    <div class="expert-edit">
+      <dl>
+        <dt>试卷名称</dt>
+        <dd>
+          <input id="expert_name" value="${name}">
+        </dd>
+      </dl>
+      <dl>
+        <dt>试卷描述</dt>
+        <dd>
+          <input id="expert_desc" value="${desc}">
+        </dd>
+      </dl>
+      <dl id="expert_questions" class="expert-questions">
+        <dt>试卷题目<div data-id="${id}" class="btn-edit-questions">编辑题目</div></dt>
+        <dd>
+          {@include questionListTpl, questionListData}
+        </dd>
+      </dl>
+    </div>
+    </script>
+
+    <script type="juicer/template" id="question-list-tpl">
+    {@each list as obj, index}
+    <div data-id="${obj.id}" class="expert-list">
+        <div class="qtype">
+          ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
+        </div>
+        <div class="qbody">${obj.qbody}</div>
+        {@if obj.qtype == 2}
+          <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
+        {@/if}
+        <div class="rtanswer">正确答案：${obj.rtanswer}</div>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="text/javascript" src="/js/admin/expert/list.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+            moka.admin.expert.list.init();
+        });
+    </script>
+  </body>
+</html>

@@ -55,12 +55,15 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                 next();
             }else{
                 var url = req.url;
-                if(url.indexOf('/admin/') != -1){
-                    res.redirect("/auth/login");    
+                if(url.indexOf('login') != -1){
+                    next();
                 }else{
-                    res.redirect("/auth/user/login");
+                    if(url.indexOf('/admin/') != -1){
+                        res.redirect("/auth/admin/login");    
+                    }else{
+                        res.redirect("/auth/user/login");
+                    }    
                 }
-                
             }
         }
     });

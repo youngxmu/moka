@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>数字资源</title>
-    <%- include ../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/article/list.css' />
+    <title>后台管理</title>
+    <%- include ../../common/meta.ejs %>
+    <link rel='stylesheet' href='/css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='/css/admin/article/list.css' >
+    
   </head>
   <body>
-    <input type="hidden" id="mid" value="<%= mid %>">
     <div class="banner">
       <div class="t-logo">系统logo占位</div>
+      <!-- <div class="search-bar"></div> -->
       <div class="search-box">
          <div class="input-group clearfix">
              <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
@@ -19,59 +21,66 @@
              </div>
          </div>
       </div>
-    </div>
-    <div class="nav">
-      <% for(var index in submenuList){ %>
-      <% var menu = submenuList[index]; %>
-        <span data-id="<%= menu.id %>" ><%= menu.name %></span>
-      <% } %>
-    </div>
-    <div class="container">
-      <div id="main_list" class="main-atlist">
-        <!-- <div class="crumb">
-          <a href="/index">首页</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="/article/list">数字资源</a>
-        </div> -->
-        
+    </div>    
+  	<div class="container">
+      <div class="sidebar">
+        <div class="tree-opr">
+          <a href="javascript:void(0);" class="unfold">展开</a>
+          |<a href="javascript:void(0);" class="add">增加</a>
+          |<a href="javascript:void(0);" class="edit">编辑</a>
+          |<a href="javascript:void(0);" class="del">删除</a>
+          
+        </div>
+        <div style="overflow:auto;height:500px;" >
+          <ul id="topic_tree" class="ztree"></ul>
+          <ul id="series_tree" class="ztree" style="display:none;"></ul>
+        </div>
       </div>
-    </div>
+      <div class="main">
+        <div class="resource-opr">
+          <a href="javascript:void(0);" class="add">增加</a>
+        </div>
+        <div id="resource_list"></div>
+        <div id="pagebar"></div>
+      </div>
+	  </div>
 
-
-    <script type="text/template" id="twop_tpl">
-    <div class="twop">
-      <ul class="twop-nav">
-        {@each leafMenus as menu}
-        <li>
-          <span data-id="${menu.id}">${menu.name}</span>
-        </li>
-        {@/each}
-      </ul>
+    
+    <script type="text/template" id="resource-tpl">
+    <div class="res-list">
+      <span class="res-type">类型</span>
+      <span class="res-title">标题</span>
+      <span>作者</span>
+      <span>时间</span>
+      <span>操作</span>
     </div>
-    <div class="twop">
-      <ul id="article_list" class="twop-list"></ul>
-      <div id="pagebar"></div>
-    </div>
-    </script>
-
-    <script type="text/template" id="onep_tpl">
-    <div class="onep">
-      <ul id="article_list" class="onep-list"></ul>
-      <div id="pagebar"></div>
-    </div>
-    </script>
-
-    <script type="text/template" id="article_list_tpl">
     {@each list as resource}
-    <li>
-      <a href="/article/detail/${resource.id}" target="_blank">${resource.title}</a>
-      <span class="date">${resource.create_time}</span>
-    </li>
+    <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
+      <span class="res-title">
+        <a href="/admin/article/detail/${resource.id}">${resource.title}</a>
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+      <span class="oper">
+        <a href="javascript:void(0);" data-id="${resource.id}" class="edit">编辑</a>
+        <a href="javascript:void(0);" data-id="${resource.id}" class="del">删除</a>
+      </span>
+    </div>
     {@/each}
     </script>
 
-    <script type="text/javascript" src="/js/article/list.js"></script>
+    <script type="text/template" id="edit_menu_dlg">
+    <div class="">
+      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
+    </div>
+    </script>
+
+    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/js/admin/article/list.js"></script>
     <script>
       $(document).ready(function() {
-            moka.article.list.init({});
+            moka.admin.article.list.init();
         });
     </script>
   </body>
