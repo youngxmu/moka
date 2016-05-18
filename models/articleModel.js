@@ -111,12 +111,12 @@ exports.queryArticleByTitle = function (name, callback) {
 };
 
 
-exports.insertArticle = function (title, author, content, menu_id, author_id, file_name, type, callback) {
+exports.insertArticle = function (title, author, content, menu_id, author_id, file_name, type, description, callback) {
     var sql = 'insert into article ( ';
-        sql += 'title, author, content, status, create_time, update_time, menu_id, author_id, file_name, type) ';
-        sql += 'values(?,?,?,?,?,?,?,?,?,?);';
+        sql += 'title, author, content, status, create_time, update_time, menu_id, author_id, file_name, type, description) ';
+        sql += 'values(?,?,?,?,?,?,?,?,?,?,?);';
     db.query(sql,
-        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id, file_name, type],
+        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id, file_name, type,description],
         function (err, result) {
             callback(err, result);
         }
@@ -124,7 +124,7 @@ exports.insertArticle = function (title, author, content, menu_id, author_id, fi
 };
 
 //编辑、修改文章个人信息
-exports.updateArticle = function (id, title, author, content, status, menu_id, file_name, type, callback) {
+exports.updateArticle = function (id, title, author, content, status, menu_id, file_name, type, description, callback) {
     var sql = 'update article set title=?,author=?,content=?';
     var params = [];
     params.push(title);
@@ -142,6 +142,8 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, f
     params.push(file_name);
     sql += ',type = ? ';
     params.push(type);
+    sql += ',description = ? ';
+    params.push(description);
     sql += ' where id = ?;';
     params.push(id);
 
@@ -150,7 +152,7 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, f
         if (!err && result && result[0]) {
             callback(result[0].count);
         } else {
-            logger.error("查找文章总数出错", err);
+            logger.error("修改文章出错", err);
             callback(err);
         }
     });

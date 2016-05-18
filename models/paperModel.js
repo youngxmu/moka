@@ -47,12 +47,12 @@ exports.getPaperById = function (paperId, callback) {
 };
 
 
-exports.insertPaper = function (qbody, qtype, qanswer, rtanswer, callback) {
+exports.insertPaper = function (name, description, qids, callback) {
     var sql = 'insert into paper ( ';
-    sql += 'qbody, qtype, qanswer, rtanswer, create_time) ';
+    sql += 'name, description, qids, status, create_time) ';
     sql += 'values(?,?,?,?,?);';
     db.query(sql,
-        [qbody, qtype, qanswer, rtanswer, new Date()],
+        [name, description, qids, 1, new Date()],
         function (err, result) {
             callback(err, result);
         }
@@ -60,13 +60,13 @@ exports.insertPaper = function (qbody, qtype, qanswer, rtanswer, callback) {
 };
 
 //编辑、修改试卷个人信息
-exports.updatePaper = function (id, qbody, qtype, qanswer, rtanswer, callback) {
-    var sql = 'update paper set qbody = ?, qtype =?, qanswer = ?, rtanswer = ?';
+exports.updatePaper = function (id, name, description, qids, callback) {
+    var sql = 'update paper set name = ?, description =?, qids = ?, update_time = ?';
     var params = [];
-    params.push(qbody);
-    params.push(qtype);
-    params.push(qanswer);
-    params.push(rtanswer);
+    params.push(name);
+    params.push(description);
+    params.push(qids);
+    params.push(new Date());
     sql += ' where id = ?;';
     params.push(id);
 

@@ -4,12 +4,13 @@ var commonUtils = require("../../lib/utils.js");
 var logger = require("../../lib/log.js").logger("paperRouter");
 
 var paperModel = require('../../models/paperModel.js');
+var questionModel = require('../../models/questionModel.js');
 
 var router = express.Router();
 
 
 router.get('/list', function (req, res, next) {
-    res.render('admin/paper/list');
+    res.render('user/paper/list');
 });
 
 
@@ -52,9 +53,47 @@ router.post('/list', function (req, res, next) {
 });
 
 //根据试卷id查询
+router.post('/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.user ? true : false;
+    if(id == null || id == undefined){
+        res.json({
+            success: false,
+            msg: "根据id查询试卷出错"
+        });
+    }else{
+        paperModel.getPaperById(id, function (err, result) {
+            if (!err && result) {
+                var paper = result;
+                questionModel.queryQuestionsByIds(paper.qids, function(err, result){
+                    if(err){
+                        res.json({
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }else{
+                        paper.questions = result;
+                        res.json({
+                            success: true,
+                            paper : paper
+                        });
+                    }
+                });
+            } else {
+                 res.json({
+                    success: false,
+                    msg: "根据id查询试卷出错"
+                });
+            }
+        });
+    }
+});
+
+
+//根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
+    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -65,6 +104,11 @@ router.get('/detail/:id', function (req, res, next) {
             if (!err && result) {
                 var paper = result;
                 paper.update_time = commonUtils.formatDate(new Date(paper.update_time));
+                paper.isAdmin = isAdmin;
+                paper.update_time = commonUtils.formatDate(new Date(paper.update_time));
+                paper.file_name = config.imgHost + '/uploads/' + paper.file_name;
+                paper.menuList = menuUtils.getMenuPathList(paper.menu_id);
+                paper.file_type = commonUtils.getFileTypeName(paper.file_name);
                 res.render('user/paper/detail', paper);
             } else {
                 res.render('error', {
@@ -76,39 +120,13 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
-//根据试卷id查询
-router.post('/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
-    if(id == null || id == undefined){
-        res.json({
-            success: false,
-            msg: "根据id查询试卷出错"
-        });
-    }else{
-        paperModel.getPaperById(id, function (err, result) {
-            if (!err && result) {
-                var paper = result;
-                paper.update_time = commonUtils.formatDate(new Date(paper.update_time));
-                res.json({
-                    success: true,
-                    paper: paper
-                });
-            } else {
-                res.json({
-                    success: false,
-                    msg: "根据id查询试卷出错"
-                });
-            }
-        });
-    }
-});
-
 //创建试卷
 router.post('/commit', function (req, res) {
+    var id = req.body.id;
+    var name = req.body.name;
+    var description = req.body.description;
+    var qids = req.body.qids;//明文
     var user = req.session.user;
-    var paperId = req.body.paperId;
-    var answer = req.body.answer;
     if(!user){
         return res.json({
             success: false,
@@ -116,9 +134,8 @@ router.post('/commit', function (req, res) {
         });
     }
     
-    
     if(id == null || id == undefined){
-        paperModel.insertPaper(name, desc, qids, function (err, data) {
+        paperModel.insertPaper(name, description, qids, function (err, data) {
             if (!err) {
                 res.json({
                     success: true,
@@ -134,7 +151,7 @@ router.post('/commit', function (req, res) {
         });
     }else{
         logger.info("管理员修改试卷信息", id);
-        paperModel.updatePaper(id, name, desc, qids, function (err, result) {
+        paperModel.updatePaper(id, name, description, qids, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,
@@ -149,7 +166,6 @@ router.post('/commit', function (req, res) {
             }
         });
     }
-    
 });
 
 module.exports = router;

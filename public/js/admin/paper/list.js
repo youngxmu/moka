@@ -14,8 +14,13 @@
 		},
 		init : function() {
 			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
+			_this.tpl.dlgEditPaperTpl = juicer($('#dlg-edit-paper-tpl').html());
+			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
+			
+			
 			_this.initEvent();
 			_this.search();
+			P.admin.question.import.init();
 		},
 		initEvent : function(){
 			$('.nav').on('click', 'span', function(){
@@ -36,89 +41,27 @@
 			$('#btn_commit').on('click', _this.commit);
 			$('#btn_add').on('click', _this.onAdd);
 
-			$('body').on('click', '.btn-op.add', function(){
-				var $this = $(this);
-				if($this.hasClass('disabled')){
-					return;
-				}
-				var $dd = $(this).siblings('.option-panel');
-				var length = $dd.find('p').length;
-				var index = length + 1;
-				var word = util.getOption(index);
-				var html = '<p><em>' + word + '</em>:<input></p>';
-				$dd.append(html);
-				if(index > 2){
-					$(this).siblings('.del').removeClass('disabled');
-				}
-				if(index > 9){
-					$(this).addClass('disabled');
-				}
-			});
+			$('body').on('click', '.oper .edit', _this.onEdit);
 			
-			$('body').on('click', '.btn-op.del', function(){
-				var $this = $(this);
-				if($this.hasClass('disabled')){
-					return;
-				}
-				var $dd = $(this).siblings('.option-panel');
-				var length = $dd.find('p').length;
-				if(length > 2){
-					$dd.find('p').last().remove();
-				}
+			$('body').on('click', '.oper .del', _this.onDel);
 
-				if(length == 3){
-					$(this).addClass('disabled');
-				}
-				if(length == 9){
-					$(this).siblings('.add').removeClass('disabled');
-				}
-			});
-
-			$('body').on('change', '#paper_type', function(){
-				var $this = $(this);
-				console.log($this.val());
-				if($this.val() == 2){
-					$('.paper-option').show();
-				}else{
-					$('.paper-option').hide();
-				}
-			});
-
-			$('body').on('click', '.paper-oper .edit', _this.onEdit);
-			
-			$('body').on('click', '.paper-oper .del', _this.onDel);
-			
+			$('body').on('click', '.paper-questions .btn-edit-questions', _this.onEditQuestions);
 		},
 		onAdd : function(){
 			var d = dialog({
-			    title: '新建题目',
+			    title: '新建试卷',
 			    content: _this.tpl.dlgEditPaperTpl.render(),
 			    okValue : '确定',
 			    ok : function(){
-					var user = {};
-					var paperType = $('#paper_type').val();
-					var paperBody = $('#paper_body').val();
-					var paperRtanswer = $('#paper_rtanswer').val();
-
-					var answer = '';
-					if(paperType == 2){
-						var answerArr = [];
-						var $inputs = $('.paper-option').find('input');
-						$inputs.each(function(){
-							var $input = $(this);
-							answerArr.push($input.val());
-						});
-						answer = answerArr.join(',');
-					}
-					
-
-    				var paper = {
-    					qbody : paperBody,
-    					qtype : paperType,
-    					qanswer : answer,
-    					rtanswer : paperRtanswer 
-    				};
-
+					var paper = {};
+					paper.name = $('#paper_name').val();
+					paper.description = $('#paper_desc').val();
+					var $questions = $('#paper_questions').find('.question-list');
+					var qidArr = [];
+					$questions.each(function(){
+						qidArr.push($(this).attr('data-id'));
+					});
+					paper.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
 						url : '/admin/paper/save',
@@ -137,48 +80,41 @@
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			var paper = _this.data.paperMap[id];
+			if(!paper.questions){
+			 	$.ajax({
+					type : 'post',
+					async : false,
+					url : '/admin/paper/detail/' + id,
+					success : function(result){
+						if(!result.success){
+							return false;
+						}else{
+							paper = result.paper;
+							_this.data.paperMap[id] = paper;
+						}
+					}
+				});
+			}
+			paper.questionListTpl = $('#question-list-tpl').html();
+			paper.questionListData = {list: paper.questions};
 			var d = dialog({
-			    title: '编辑题目',
+			    title: '编辑试卷',
 			    content: _this.tpl.dlgEditPaperTpl.render(paper),
 		     	onshow: function(){
-		     		$('#paper_type').val(paper.qtype);
-		     		if(paper.qtype == 2){
-		     			var answerArr = paper.qanswer.split(',');
-						var html = '';
-
-						for(var i in answerArr){
-							var index = parseInt(i) + 1;
-							var word = util.getOption(index);
-							html += '<p><em>' + word + '</em>:<input value="' + answerArr[i] + '"></p>';
-						}
-						$('.option-panel').html(html);
-		     			$('.paper-option').show();
-		     		}
 		     		
 			    },
 			    okValue : '确定',
 			    ok : function(){
-					var paperType = $('#paper_type').val();
-					var paperBody = $('#paper_body').val();
-					var paperRtanswer = $('#paper_rtanswer').val();
-
-					var answer = '';
-					if(paperType == 2){
-						var answerArr = [];
-						var $inputs = $('.paper-option').find('input');
-						$inputs.each(function(){
-							var $input = $(this);
-							answerArr.push($input.val());
-						});
-						answer = answerArr.join(',');
-					}
-					
-
-					paper.qbody = paperBody;
-					paper.qtype = paperType;
-					paper.qanswer = answer;
-					paper.rtanswer = paperRtanswer;
-
+			    	var paper = {};
+			    	paper.id = id;
+					paper.name = $('#paper_name').val();
+					paper.description = $('#paper_desc').val();
+					var $questions = $('#paper_questions').find('.question-list');
+					var qidArr = [];
+					$questions.each(function(){
+						qidArr.push($(this).attr('data-id'));
+					});
+					paper.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
 						url : '/admin/paper/save',
@@ -197,7 +133,7 @@
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			var d = dialog({
-			    title: '删除题目',
+			    title: '删除试卷',
 			    content: '确认删除',
 			    okValue : '确定',
 			    ok : function(){
@@ -214,6 +150,19 @@
 			    cancel : function(){}
 			});
 			d.showModal();
+		},
+		onEditQuestions : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			var paper = _this.data.paperMap[id];
+			var options = {
+				paper : paper,
+				callback : function(qids, questions){
+					var html = _this.tpl.questionListTpl.render({list: questions});
+					$('#paper_questions').find('dd').html(html);
+				}
+			};
+			P.admin.question.import.show(options);
 		},
 		search : function(){
 			$.ajax({

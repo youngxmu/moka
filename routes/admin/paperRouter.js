@@ -4,6 +4,7 @@ var commonUtils = require("../../lib/utils.js");
 var logger = require("../../lib/log.js").logger("paperRouter");
 
 var paperModel = require('../../models/paperModel.js');
+var questionModel = require('../../models/questionModel.js');
 
 var router = express.Router();
 
@@ -51,6 +52,44 @@ router.post('/list', function (req, res, next) {
     });
 });
 
+router.post('/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.admin ? true : false;
+    if(id == null || id == undefined){
+        res.json({
+            success: false,
+            msg: "根据id查询试卷出错"
+        });
+    }else{
+        paperModel.getPaperById(id, function (err, result) {
+            if (!err && result) {
+                var paper = result;
+                questionModel.queryQuestionsByIds(paper.qids, function(err, result){
+                    if(err){
+                        res.json({
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }else{
+                        paper.questions = result;
+                        res.json({
+                            success: true,
+                            paper : paper
+                        });
+                    }
+                });
+            } else {
+                 res.json({
+                    success: false,
+                    msg: "根据id查询试卷出错"
+                });
+            }
+        });
+    }
+});
+
+
+
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
@@ -84,7 +123,7 @@ router.get('/detail/:id', function (req, res, next) {
 router.post('/save', function (req, res) {
     var id = req.body.id;
     var name = req.body.name;
-    var desc = req.body.desc;
+    var description = req.body.description;
     var qids = req.body.qids;//明文
     var admin = req.session.admin;
     if(!admin){
@@ -96,7 +135,7 @@ router.post('/save', function (req, res) {
     
     
     if(id == null || id == undefined){
-        paperModel.insertPaper(name, desc, qids, function (err, data) {
+        paperModel.insertPaper(name, description, qids, function (err, data) {
             if (!err) {
                 res.json({
                     success: true,
@@ -112,7 +151,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改试卷信息", id);
-        paperModel.updatePaper(id, name, desc, qids, function (err, result) {
+        paperModel.updatePaper(id, name, description, qids, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,
@@ -127,7 +166,41 @@ router.post('/save', function (req, res) {
             }
         });
     }
+});
+
+router.post('/del', function (req, res) {
+    var id = req.body.id;
+    var admin = req.session.admin;
+    if(!admin){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
     
+    
+    if(id == null || id == undefined){
+        res.json({
+            success: false,
+            msg: "删除失败"
+        });
+    }else{
+        logger.info("管理员删除试卷信息", id);
+        paperModel.delPaper(id, function (err, result) {
+            if (!err) {
+                res.json({
+                    success: true,
+                    msg: "删除试卷信息成功"
+                });
+            } else {
+                logger.error("删除试卷发生错误", err);
+                res.json({
+                    success: false,
+                    msg: "删除试卷失败"
+                });
+            }
+        });
+    }
 });
 
 module.exports = router;
