@@ -55,47 +55,11 @@ router.post('/list', function (req, res, next) {
     });
 });
 
-router.post('/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
-    if(id == null || id == undefined){
-        res.json({
-            success: false,
-            msg: "根据id查询专家出错"
-        });
-    }else{
-        expertModel.getExpertById(id, function (err, result) {
-            if (!err && result) {
-                var expert = result;
-                questionModel.queryQuestionsByIds(expert.qids, function(err, result){
-                    if(err){
-                        res.json({
-                            success: false,
-                            msg: "根据id查询专家出错"
-                        });
-                    }else{
-                        expert.questions = result;
-                        res.json({
-                            success: true,
-                            expert : expert
-                        });
-                    }
-                });
-            } else {
-                 res.json({
-                    success: false,
-                    msg: "根据id查询专家出错"
-                });
-            }
-        });
-    }
-});
-
 
 //根据专家id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
+    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -106,7 +70,7 @@ router.get('/detail/:id', function (req, res, next) {
             if (!err && result) {
                 var expert = result;
                 expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
-                res.render('admin/expert/detail', expert);
+                res.render('user/expert/detail', expert);
             } else {
                 res.render('error', {
                     success: false,
@@ -119,4 +83,3 @@ router.get('/detail/:id', function (req, res, next) {
 
 
 module.exports = router;
-

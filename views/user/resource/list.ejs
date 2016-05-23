@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>后台管理</title>
-    <%- include ../common/meta.ejs %>
+    <title>国防教育理论研究资源管理分系统</title>
+    <%- include ../../common/meta.ejs %>
     <link rel='stylesheet' href='/css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='/css/resource/list.css' >
     
   </head>
   <body>
-    <div class="banner">
-      <div class="t-logo">系统logo占位</div>
-      <!-- <div class="search-bar"></div> -->
-      <div class="search-box">
-         <div class="input-group clearfix">
-             <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
-             <div class="btn-submit">
-                 <button href="javascript:void(0);" type="submit" id="btn_search">
-                     <i class="icon icon-search icon-large"></i>
-                 </button>
-             </div>
-         </div>
-      </div>
-    </div>    
+    <%- include ../../common/header.ejs %>
+    <input id="search_title" value="<%= keyword %>" type="hidden" >
   	<div class="container">
       <div class="sidebar">
         <div class="tree-opr">
           <a href="javascript:void(0);" class="unfold">展开</a>
-          |<a href="javascript:void(0);" class="add">增加</a>
-          |<a href="javascript:void(0);" class="edit">编辑</a>
-          |<a href="javascript:void(0);" class="del">删除</a>
-          
         </div>
         <div style="overflow:auto;height:500px;" >
           <ul id="topic_tree" class="ztree"></ul>
@@ -37,18 +21,12 @@
         </div>
       </div>
       <div class="main">
-        <div class="resource-opr">
-          <a href="javascript:void(0);" class="add">增加</a>
-          |<a href="javascript:void(0);" class="edit">编辑</a>
-          |<a href="javascript:void(0);" class="del">删除</a>
-        </div>
         <div id="resource_list"></div>
         <div id="pagebar"></div>
       </div>
 	  </div>
 
-    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="/js/resource/list.js"></script>
+    
     <script type="text/template" id="resource-tpl">
     <div class="res-list">
       <span class="res-type">类型</span>
@@ -60,7 +38,7 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
-        <a href="/admin/article/detail/${resource.id}">${resource.title}</a>
+        <a href="/article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
@@ -74,11 +52,13 @@
     </div>
     </script>
 
+    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="/js/user/resource/list.js"></script>
     
     <script>
       $(document).ready(function() {
-            moka.resource.list.init();
-        });
+          moka.resource.list.init();
+      });
     </script>
   </body>
 </html>

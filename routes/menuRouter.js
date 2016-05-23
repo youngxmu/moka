@@ -27,6 +27,38 @@ router.post('/tree', function(req, res, next) {
     });
 });
 
+router.post('/tree/:pid', function(req, res, next) {
+    var pid = req.params.pid;
+    var menuMap = menuUtils.getMenuMap();
+    menu = menuMap[pid];
+    var mids = [];
+    mids.push(pid);
+    for(var index in menu.submenu){
+        var subId = menu.submenu[index];
+        mids.push(subId);
+        smenu = menuMap[subId];
+        mids = mids.concat(smenu.submenu);
+    }
+    mid = mids.join(',');
+    menuModel.queryAllMenuByIds(mid, function (err, result) {
+        if (err || !result || !commonUtils.isArray(result)) {
+            logger.error("", err);
+            res.json({
+                success: false,
+                msg: ""
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "",
+                data: {
+                    list: result
+                }
+            });
+        }
+    });
+});
+
 router.post('/add', function(req, res, next) {
     var name = req.body.name;
     var parent_id = req.body.parent_id;

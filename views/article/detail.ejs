@@ -6,8 +6,9 @@
     <link rel='stylesheet' href='/css/article/detail.css' />
   </head>
   <body>
+    <%- include ../common/header.ejs %>
   	<input type="hidden" id="article_id" value="<%= id %>">
-    <div class="container">
+    <div class="container detail-article">
       <% if(type == 1){%>
       <div class="article-title" >
         <%= title %>
@@ -50,7 +51,7 @@
         <label>资源链接</label>
         <span class="text">
           <i class="ico ico-<%= file_type %>"></i>
-          <a class="download" href="/article/download/<%= id %>" download="<%- org_name %>"><%- org_name %></a>
+          <a class="download" href="/article/download/<%= id %>" download="<%- title %>"><%- title %></a>
           <!-- <%= file_name %> -->
         </span>
       </div>

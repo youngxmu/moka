@@ -6,66 +6,6 @@ var logger = require("../lib/log.js").logger("articleRouter");
 var config = require("../config");
 var router = express.Router();
 
-
-var menu = {
-    m_1 : {
-        name : '中心介绍',
-        submenu : {
-
-        }
-    },
-    m_2 : {
-        name : '',
-        submenu : {
-
-        }
-    },
-    m_3 : {
-        name : '中心介绍',
-        submenu : {
-
-        }
-    },
-    m_4 : {
-        name : '数字资源',
-        submenu : {
-            m_4_1 : {
-                name : '国防理论'
-            },
-            m_4_2 : {
-                name : '国防知识'
-            },
-            m_4_3 : {
-                name : '国防历史'
-            },
-            m_4_4 : {
-                name : '国防法规'
-            },
-            m_4_5 : {
-                name : '国防形势'
-            },
-            m_4_6 : {
-                name : '国防技能'
-            },
-            m_4_7 : {
-                name : '外军知识'
-            },
-            m_4_8 : {
-                name : '武器装备'
-            },
-            m_4_9 : {
-                name : '图片视频'
-            }
-        }
-    },
-    m_5 : {
-        name : '中心介绍',
-        submenu : {
-
-        }
-    }
-};
-
 router.get('/list', function(req, res, next) {
     var id = req.params.id;
     res.render('article/list');
@@ -295,26 +235,44 @@ router.get('/edit', function(req, res, next) {
 
 //根据文章姓名模糊查询
 router.post('/queryArticleByTitle', function (req, res, next) {
-    var title = req.body.title;
-    articleModel.queryArticleByTitle(title, function (err, result) {
-        if (!err) {
-            for (var i in result) {
-                delete result[i].passwd;
-                result[i].create_time = new Date(result[i].create_time).getTime();
-            }
-            res.json({
-                success: true,
-                data: {
-                    list: result
+    var title = req.body.keyword;
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+    if(!title || title == 'undefined'){
+        title = '';
+    }
+    articleModel.queryArticleByTitleTotalCount(title, function (totalCount) {
+        logger.info("文章总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+
+        logger.info("查找文章:", start, pageSize);
+        articleModel.queryArticleByTitle(title, start, pageSize, function (err, result) {
+            if (!err) {
+                for (var i in result) {
+                    var date = new Date(result[i].create_time);
+                    result[i].create_time = commonUtils.formatDate(date);
                 }
-            });
-        } else {
-            res.json({
-                success: false,
-                msg: "根据标题查询文章出错"
-            });
-        }
-    })
+                res.json({
+                    success: true,
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            } else {
+                res.json({
+                    success: false,
+                    msg: "根据标题查询文章出错"
+                });
+            }
+        });
+    });
 });
 
 
@@ -325,22 +283,21 @@ router.post('/queryArticleByMenu', function (req, res, next) {
     var pageSize = parseInt(req.body.pageSize);
     var menuMap = menuUtils.getMenuMap();
     var menu = menuMap[mid];
-    if(!menu){
-        return res.json({
-            success: false,
-            msg: "查找文章出错"
-        });
+    if(menu){
+        var mids = [];
+        mids.push(mid);
+        for(var index in menu.submenu){
+            var subId = menu.submenu[index];
+            mids.push(subId);
+            smenu = menuMap[subId];
+            mids = mids.concat(smenu.submenu);
+        }
+        mid = mids.join(',');
+    }else{
+        mid = '';
     }
 
-    var mids = [];
-    mids.push(mid);
-    for(var index in menu.submenu){
-        var subId = menu.submenu[index];
-        mids.push(subId);
-        smenu = menuMap[subId];
-        mids = mids.concat(smenu.submenu);
-    }
-    mid = mids.join(',');
+    
     articleModel.getArticleByMenuTotalCount(mid, function (totalCount) {
         logger.info("文章总数:", totalCount);
         var totalPage = 0;
@@ -358,7 +315,7 @@ router.post('/queryArticleByMenu', function (req, res, next) {
                     msg: "查找文章出错"
                 });
             } else {
-                 for (var i in result) {
+                for (var i in result) {
                     var date = new Date(result[i].create_time);
                     result[i].create_time = commonUtils.formatDate(date);
                 }

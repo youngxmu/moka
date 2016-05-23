@@ -8,6 +8,12 @@ exports.queryAllMenu = function (callback) {
     db.query(sql, params, callback);
 };
 
+exports.queryAllMenuByIds = function (pid, callback) {
+    var sql = 'select * from menu where status = 1 and parent_id in ('+ pid +');';
+    var params = [];
+    db.query(sql, params, callback);
+};
+
 
 exports.addMenu = function (name, parent_id, mlevel, callback) {
     if (!parent_id) {

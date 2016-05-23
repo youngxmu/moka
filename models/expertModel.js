@@ -65,20 +65,20 @@ exports.updateExpert = function (id, name,gender,birthday,title,unit,address,tel
     var params = [];
     params.push(new Date());
     if(name){
-    	sql += ', name = ? ';
-    	params.push(name);
+        sql += ', name = ? ';
+        params.push(name);
     }
     if(gender){
-    	sql += ', gender = ? ';
-    	params.push(gender);
+        sql += ', gender = ? ';
+        params.push(gender);
     }
     if(birthday){
-    	sql += ', birthday = ? ';
-    	params.push(birthday);
+        sql += ', birthday = ? ';
+        params.push(birthday);
     }
     if(title){
-    	sql += ', title = ? ';
-    	params.push(title);
+        sql += ', title = ? ';
+        params.push(title);
     }
      if(unit){
         sql += ', unit = ? ';
@@ -102,8 +102,8 @@ exports.updateExpert = function (id, name,gender,birthday,title,unit,address,tel
         params.push(description);
     }
     if(topic){
-    	sql += ', topic = ? ';
-    	params.push(topic);
+        sql += ', topic = ? ';
+        params.push(topic);
     }
     if(video){
         sql += ', video = ? ';
@@ -149,5 +149,3 @@ exports.delExpert = function (id, callback) {
         }
     });
 };
-
-

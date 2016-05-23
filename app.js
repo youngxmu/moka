@@ -52,6 +52,7 @@ if(config.env!='dev'){//开发环境不需要过滤
             next();
         }else{
             if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
+                res.locals.islogin = true;
                 next();
             }else{
                 var url = req.url;

@@ -106,14 +106,14 @@ router.get('/detail/:id', function (req, res, next) {
 //创建专家
 router.post('/save', function (req, res) {
     var id = req.body.id;
-	var name = req.body.name;
-	var gender = req.body.gender;
-	var birthday = req.body.birthday;
-	var title = req.body.title;
-	var topic = req.body.topic;
-	var unit = req.body.unit;
-	var address = req.body.address;
-	var tel = req.body.tel;
+    var name = req.body.name;
+    var gender = req.body.gender;
+    var birthday = req.body.birthday;
+    var title = req.body.title;
+    var topic = req.body.topic;
+    var unit = req.body.unit;
+    var address = req.body.address;
+    var tel = req.body.tel;
     var admin = req.session.admin;
     if(!admin){
         return res.json({
@@ -193,4 +193,3 @@ router.post('/del', function (req, res) {
 });
 
 module.exports = router;
-

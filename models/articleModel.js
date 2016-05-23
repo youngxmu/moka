@@ -104,10 +104,37 @@ exports.queryArticleById = function (articleId, callback) {
 };
 
 
+
+//根据“是否虚拟”“创建来源”查找文章总数
+exports.queryArticleByTitleTotalCount = function (title, callback) {
+    var sql = 'select count(id) as count from article where status = 1 ';
+    if(title){
+        sql += 'and title like "%' + title + '%" ';
+    }
+    sql += ';';
+    var params = [];
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找文章总数出错", err);
+            callback(0);
+        }
+    });
+};
+
+
 //根据文章标题模糊查询文章
-exports.queryArticleByTitle = function (name, callback) {
-    db.query('select * from article where name like "%' + name + '%" order by create_time desc',
-        [], callback);
+exports.queryArticleByTitle = function (title, start, pageSize, callback) {
+    var sql = 'select count(id) as count from article where status = 1 ';
+    if(title){
+        sql += 'and title like "%' + title + '%" ';
+    }
+    sql += 'order by create_time desc limit ?,?;';
+    var params = [];
+    params.push(start);
+    params.push(pageSize);
+    db.query('select * from article where title like "%' + title + '%" ', [start, pageSize], callback);
 };
 
 
@@ -163,7 +190,9 @@ exports.getArticleByMenu = function (menu_id, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
     var params = [];
     sql += ' and status = 1 ';
-    sql += ' and menu_id in ('+ menu_id +') ';
+    if(menu_id){
+        sql += ' and menu_id in ('+ menu_id +') ';    
+    }
     sql += ' order by create_time desc limit ?,?;';
     params.push(start);
     params.push(pageSize);
@@ -174,7 +203,9 @@ exports.getArticleByMenuTotalCount = function (menu_id, callback) {
     var sql = 'select count(id) as count from article where 1=1 ';
     var params = [];
     sql += ' and status = 1 ';
-    sql += ' and menu_id in ('+ menu_id +') ;';
+    if(menu_id){
+        sql += ' and menu_id in ('+ menu_id +') ';    
+    }
    
     db.query(sql, params, function (err, result) {
         if (!err && result && result[0]) {

@@ -11,9 +11,11 @@ var moka = {
 		resource : {},
 		user : {},
 		paper : {},
+		paperhistory : {},
 		question : {},
 		article : {},
-		expert : {}
+		expert : {},
+		jsll : {}
 	},
 	model : {},
 	album : {},

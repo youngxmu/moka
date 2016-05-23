@@ -1,5 +1,5 @@
 .container{padding-top: 30px;}
-	
+    
 
 .expert-info{}
 .expert-info-left{width: 220px;margin-right: 20px;display: inline-block;vertical-align: top;}
@@ -16,7 +16,7 @@
 .expert-work{min-height: 500px}
 .tab-panel{height: 40px;line-height: 40px;border-bottom: 1px solid #CCCCCC;}
 .tab-panel span{
-	border: 1px solid #cccccc;
+    border: 1px solid #cccccc;
     cursor: pointer;
     display: inline-block;
     line-height: 40px;
@@ -24,4 +24,3 @@
     padding: 0 10px;
     border-bottom: 0;
 }
-

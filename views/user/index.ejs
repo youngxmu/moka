@@ -7,7 +7,7 @@
   </head>
   <body>
     <%- include ../common/header.ejs %>
-    <div class="nav">
+    <div class="nav-sub">
       <% for(var index in menuList){ %>
       <% var menu = menuList[index]; %>
         <a href="/article/list/<%= menu.id %>" ><%= menu.name %></a>

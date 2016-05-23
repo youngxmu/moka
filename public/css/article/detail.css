@@ -46,7 +46,7 @@
 .t-input .process-bar{margin-left: 100px;line-height: 20px;width: 200px;border: 1px solid #cccccc;display: none;}
 .t-input .process-bar span{width: 50%;height: 100%;background-color: blue;display: inline-block;}
 
-.t-btn{margin-top: 20px;height: 40px;}
+.detail-article .t-btn{margin-top: 20px;height: 40px;}
 
 .u-select-p{display: inline-block;}
 .u-select-p span{line-height: 32px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;display: inline-block;}
@@ -60,7 +60,9 @@
 
 
 
-.t-input .text{line-height: 40px; width: 838px;font-size: 20px;padding: 0 10px;display: inline-block;}
+.t-input .text{line-height: 40px; width: 838px;font-size: 20px;padding: 0 10px;display: inline-block;
+	vertical-align: top;
+}
 .t-input .download{line-height: 40px; width: 838px;font-size: 20px;padding: 0 10px;}
 
 .ico {

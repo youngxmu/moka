@@ -103,11 +103,6 @@ router.get('/detail/:id', function (req, res, next) {
         paperModel.getPaperById(id, function (err, result) {
             if (!err && result) {
                 var paper = result;
-                paper.isAdmin = isAdmin;
-                paper.update_time = commonUtils.formatDate(new Date(paper.update_time));
-                paper.file_name = config.imgHost + '/uploads/' + paper.file_name;
-                paper.menuList = menuUtils.getMenuPathList(paper.menu_id);
-                paper.file_type = commonUtils.getFileTypeName(paper.file_name);
                 res.render('user/paper/detail', paper);
             } else {
                 res.render('error', {
@@ -121,11 +116,11 @@ router.get('/detail/:id', function (req, res, next) {
 
 //创建试卷
 router.post('/commit', function (req, res) {
-    var id = req.body.id;
-    var name = req.body.name;
-    var description = req.body.description;
-    var qids = req.body.qids;//明文
+    var pid = req.body.id;
+    var answer = req.body.answer;
     var user = req.session.user;
+    console.log(user);
+    var uid = user.id;
     if(!user){
         return res.json({
             success: false,
@@ -134,38 +129,29 @@ router.post('/commit', function (req, res) {
     }
     
     
-    if(id == null || id == undefined){
-        paperModel.insertPaper(name, description, qids, function (err, data) {
+    if(pid == null || pid == undefined){
+        res.json({
+            success: false,
+            msg: "答题失败"
+        });
+    }else{
+        paperModel.insertPaperHistory(uid, pid, answer, function (err, data) {
             if (!err) {
                 res.json({
                     success: true,
-                    msg: "创建成功",
+                    msg: "提交成功",
                     data : data
                 });
             } else {
                 res.json({
                     success: false,
-                    msg: "创建失败"
+                    msg: "提交失败"
                 });
             }
         });
-    }else{
-        logger.info("管理员修改试卷信息", id);
-        paperModel.updatePaper(id, name, description, qids, function (err, result) {
-            if (!err) {
-                res.json({
-                    success: true,
-                    msg: "修改试卷信息成功"
-                });
-            } else {
-                logger.error("修改试卷个人信息发生错误", err);
-                res.json({
-                    success: false,
-                    msg: "修改试卷个人信息失败"
-                });
-            }
-        });
+        
     }
+
 });
 
 module.exports = router;

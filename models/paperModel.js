@@ -98,4 +98,53 @@ exports.delPaper = function (id, callback) {
     });
 };
 
+exports.insertPaperHistory = function (uid, pid, answer, callback) {
+    var sql = 'insert into paper_history ( ';
+    sql += 'uid, pid, answer, create_time) ';
+    sql += 'values(?,?,?,?);';
+    db.query(sql,
+        [uid, pid, answer, new Date()],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+exports.queryPaperHistorys = function (uid, start, pageSize, callback) {
+    var sql = 'select h.*,p.name,p.description from paper_history h left join paper p on h.pid = p.id where h.uid = ? order by create_time desc ';
+    var params = [];
+    sql += ' limit ?,?;';
+    params.push(uid);
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+//根据“是否虚拟”“创建来源”查找试卷总数
+exports.queryPaperHistoryTotalCount = function (uid, callback) {
+    var sql = 'select count(id) as count from paper_history where uid = ?;';
+    var params = [];
+    params.push(uid);
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找试卷总数出错", err);
+            callback(0);
+        }
+    });
+};
+
+
+//根据id获取试卷
+exports.getPaperHistoryById = function (id, callback) {
+    db.query("select h.*,p.name,p.description from paper_history h left join paper p on h.pid = p.id  where h.id = ?;", [id], function (err, result) {
+        if(!err && result && result[0]){
+            callback(err, result[0]);
+        }else{
+            callback(err);    
+        }
+    });
+};
+
 
