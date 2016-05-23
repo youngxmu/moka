@@ -19,18 +19,18 @@
 
   <div class="login_bg">
     <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
-      <form method="post" id="ajax_login_form" action="/auth/login">
+      <form method="post" id="ajax_login_form" action="/auth/admin/login">
         <input name="type" value="1" type="hidden"><!--普通用户登录-->
         <div class="login_con">
           <h1 style="color:#474747">管理平台</h1>
           <div class="login_list">
             <div class="login_line">
               <p>登录名</p>
-              <input type="text" placeholder="登录名" name="username" class="input_text" >
+              <input type="text" placeholder="登录名" id="username" name="username" class="input_text" >
             </div>
             <div class="login_line">
               <p>密码</p>
-              <input type="password" placeholder="密码" name="password" class="input_text">
+              <input type="password" placeholder="密码" id="password" name="password" class="input_text">
             </div>
             <div class="btn_wrap" id="login_submit">
               <a href="javascript:void(0)" class="btn_green37">登录</a>
@@ -44,13 +44,22 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('#login_submit').click(function(){
-        $('#ajax_login_form')[0].submit();
+        if(!$('#username').val() || !$('#password').val()){
+          alert('用户名/密码未填写');
+        }else{
+          $('#ajax_login_form')[0].submit();  
+        }
+        
       });
 
       $('body').on('keydown','#ajax_login_form',function(e){
         var event = window.event || e;
         if(event.keyCode == 13){
-          $('#ajax_login_form')[0].submit();
+          if(!$('#username').val() || !$('#password').val()){
+            alert('用户名/密码未填写');
+          }else{
+            $('#ajax_login_form')[0].submit();  
+          }
         }
       });
     });

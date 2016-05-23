@@ -1,0 +1,27 @@
+.container{padding-top: 30px;}
+	
+
+.expert-info{}
+.expert-info-left{width: 220px;margin-right: 20px;display: inline-block;vertical-align: top;}
+.expert-info-right{width: 700px;display: inline-block;}
+
+
+.expert-info-left .expert-avatar{width: 200px;height: 280px;vertical-align: top}
+
+.expert-info-right .expert-name{font-size: 20px;font-weight: 700;;margin: 0 0 20px 0;}
+.expert-info-right .expert-desc{width: 700px;height: 360px;overflow: auto;font-size: 16px;line-height: 2;}
+.expert-info-right .expert-contactinfo{width: 700px;}
+.expert-info-right .expert-contactinfo p{font-size: 14px;line-height: 2;}
+
+.expert-work{min-height: 500px}
+.tab-panel{height: 40px;line-height: 40px;border-bottom: 1px solid #CCCCCC;}
+.tab-panel span{
+	border: 1px solid #cccccc;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 40px;
+    margin-right: -1px;
+    padding: 0 10px;
+    border-bottom: 0;
+}
+

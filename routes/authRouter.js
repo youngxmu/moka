@@ -6,15 +6,15 @@ var commonUtils = require("../lib/utils.js");
 var logger = require("../lib/log.js").logger("authRouter");
 var router = express.Router();
 
-router.get('/login', function (req, res, next) {
-    res.render('login');
+router.get('/admin/login', function (req, res, next) {
+    res.render('admin/login');
 });
 
 router.get('/user/login', function (req, res, next) {
     res.render('user/login');
 });
 
-router.post('/login', function (req, res, next) {
+router.post('/admin/login', function (req, res, next) {
     var password = req.body.password.trim();
     var username = req.body.username.trim();
 

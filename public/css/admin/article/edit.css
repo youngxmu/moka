@@ -1,0 +1,26 @@
+*{box-sizing: content-box;}
+.header{height:100px;line-height: 100px;font-size: 36px;font-weight: 700;text-align: center;}
+.t-input{font-size: 0;line-height: 60px}
+.t-input input{line-height: 40px;border: 1px solid #cccccc; width: 838px;font-size: 20px;padding: 0 10px;}
+.t-input textarea{line-height: 40px;border: 1px solid #cccccc; width: 838px;font-size: 20px;padding: 0 10px;resize: vertical;}
+.t-input label{line-height: 40px;width: 90px;text-align: right;padding-right: 10px;display: inline-block;*display: inline;font-size: 20px;
+	vertical-align: top;
+}
+
+.t-input .filename{font-size: 16px;margin-left: 20px;display: none;}
+.t-input .process-bar{margin-left: 100px;line-height: 20px;width: 200px;border: 1px solid #cccccc;display: none;}
+.t-input .process-bar span{width: 50%;height: 100%;background-color: blue;display: inline-block;}
+
+.t-btn{margin-top: 20px;height: 40px;}
+
+.u-select-p{display: inline-block;}
+.u-select-p span{line-height: 32px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;display: inline-block;}
+.u-button{float: right;}
+
+
+.t-input .u-select-p{display: inline-block;}
+
+.t-input .u-select-p select{line-height: 40px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;margin-right: 5px;}
+.t-input .u-button{float: none;    vertical-align: 1px;}
+
+

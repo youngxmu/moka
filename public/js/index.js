@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.index = {
-		searchUrl : '/article/queryArticleByMenu',
+		searchUrl : '/index/queryArticleByMenu',
 		tpl : {
 			articleListTpl : null
 		},
@@ -18,6 +18,17 @@
 			_this.loadList();
 		},
 		initEvent : function(){
+			$('body').on('keydown','#keyword',function(e){
+		        var event = window.event || e;
+		        if(event.keyCode == 13){
+		          	var keyword = $('#keyword').val();
+					window.location.href = '/resource/list?keyword=' + keyword;
+		        }
+		    });
+			$('#btn_search').click(function(){
+				var keyword = $('#keyword').val();
+				window.location.href = '/resource/list?keyword=' + keyword;
+			});
 		},
 		loadList : function(){
 			var $thps = $('.thp');
@@ -37,7 +48,7 @@
 					success : function(result){
 						var data = result.data;
 					    $panel.html(_this.tpl.articleListTpl.render(data));
-						var totalCount = data.totalCount;
+						var totalCount = data.list.length;
 						if(totalCount == 0){
 							$panel.html(P.building);
 							return;

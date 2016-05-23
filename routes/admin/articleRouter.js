@@ -10,7 +10,7 @@ var router = express.Router();
 
 
 router.get('/list', function (req, res, next) {
-    res.render('article/list');
+    res.render('admin/article/list');
 });
 
 

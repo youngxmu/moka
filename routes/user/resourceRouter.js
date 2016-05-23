@@ -6,7 +6,13 @@ var articleModel = require("../../models/articleModel.js");
 var router = express.Router();
 
 router.get('/list', function (req, res, next) {
-    res.render('resource/list');
+    var keyword = req.query.keyword;
+    if(!keyword || keyword == 'undefined'){
+        keyword = '';
+    }
+    res.render('user/resource/list',{
+        keyword : keyword
+    });
 });
 
 router.get('/upload', function (req, res, next) {

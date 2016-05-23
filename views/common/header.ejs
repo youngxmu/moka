@@ -1,35 +1,85 @@
-<div class="banner">
-  <div class="t-logo">系统logo占位</div>
-  <div class="t-right">
-    <div id＝"sys_change" onclick="sysChange();" class="t-btn">系统切换</div>
-    <div class="t-btn">发布文章</div>
-    <div class="t-btn"><a href="/resource/upload">上传资源</a></div>
-    <div class="search-box">
-      <div class="input-group clearfix">
-        <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
-        <div class="btn-submit">
-             <button href="javascript:void(0);" type="submit" id="btn_search">
-                 <i class="icon icon-search icon-large"></i>
-             </button>
+<div class="page-header">
+    <div class="nav_menu">
+        <div class="nav">
+            <div class="list" id="navlist">
+                <ul id="navfouce">
+                    <li><a href="/index" style="width:100px;">首 页</a></li>
+                    <li><a href="/resource/list" class="navfoucea">国防教育资源</a></li>
+                    <li><a href="/paper/list" class="navfoucea">国防教育测评</a></li>
+                    <li><a href="/jsjn/list" class="navfoucea">军事理论教学</a></li>
+                    <li><a href="/jsll/list" class="navfoucea">军事技能教学</a></li>
+                    <li><a href="/jsll/list" class="navfoucea">军事理论考试</a></li>
+                    <li><a href="/paper/list" class="navfoucea">国防后备力量</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner">
+      <a href="/index" style="color:#333;"><div class="t-logo">火箭指挥学院</div></a>
+      <div class="t-right">
+        <% if(islogin){ %>
+          <div class="t-btn"><a href="/resource/upload">发布文章</a></div>
+          <div class="t-btn"><a href="/resource/upload">上传资源</a></div>
+          <div class="t-btn"><a href="/paperhistory/list">自测历史</a></div>
+        <% }else{ %>
+          <div class="t-btn" id="btn_login" ><a href="javascript:void(0);">登录</a></div>
+        <% } %>
+        <div class="search-box">
+          <div class="input-group clearfix">
+            <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
+            <div class="btn-submit">
+                 <button href="javascript:void(0);" type="submit" id="btn_search">
+                     <i class="icon icon-search icon-large"></i>
+                 </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
-<script type="text/template" id="dlg_sys_change_tpl">
-  <div class＝"sys-change" style="width:260px;text-align:center;">
-    <dl><a href="">系统1</a></dl>
-    <dl><a href="">系统2</a></dl>
-    <dl><a href="">系统3</a></dl>
-    <dl><a href="">系统4</a></dl>
+
+<script type="juicer/template" id="dlg-login-tpl">
+  <div class="login_bg">
+    <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
+      <form method="post" id="ajax_login_form" action="/auth/user/login">
+        <input name="type" value="1" type="hidden"><!--普通用户登录-->
+        <div class="login_con">
+          <div class="login_list">
+            <div class="login_line">
+              <p>邮箱</p>
+              <input type="text" id="email" placeholder="注册邮箱" name="email" class="input_text" >
+            </div>
+            <div class="login_line">
+              <p>密码</p>
+              <input type="password" id="password" placeholder="密码" name="password" class="input_text">
+            </div>
+            <div class="btn_wrap" id="login_submit">
+              <a href="javascript:void(0)" class="btn_green37">登录</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </script>
 <script>
-  var sysChange = function(){
-      var d = dialog({
-          title: '系统切换',
-          content: $('#dlg_sys_change_tpl').html()
+  $(document).ready(function() {
+    $('body').on('click', '#login_submit', function(){
+      var options = {
+          success: function (data) {
+              console.log(data);
+          }
+      };
+      // ajaxForm
+      $("#ajax_login_form")[0].submit();
+    });
+    $('#btn_login').click(function(){
+      var dd = dialog({
+          title: '登录',
+          content: $('#dlg-login-tpl').html()
       });
-      d.showModal(); 
-  };
+      dd.showModal();
+    });
+  });
 </script>

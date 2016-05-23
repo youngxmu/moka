@@ -39,8 +39,12 @@ module.exports = {
 	//不需要过滤是否登陆状态的白名单
 	"whitelist": [
 		"/",
+		"/index",
+		"/index/queryArticleByMenu",
+		
 		"/out/insertModelFromOut",
 		"/auth/login",
+		"/auth/admin/login",
 		"/auth/user/login",
 		"/version"
 	],
