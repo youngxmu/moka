@@ -14,7 +14,6 @@
 		},
 		init : function() {
 			_this.tpl.expertListTpl = juicer($('#expert-list-tpl').html());
-			_this.tpl.dlgEditExpertTpl = juicer($('#dlg-edit-expert-tpl').html());
 			_this.initEvent();
 			_this.search();
 		},
@@ -28,20 +27,12 @@
 
 				// _this.search();
 			});
-			$('#s_q_type').on('change', function(){
+			$('#btn_search').on('click', function(){
 				var $this = $(this);
-				_this.queryData.qtype = $this.val();
+				_this.queryData.name = $('#search_key').val();
+				console.log(name);
 				_this.search();
 			});
-
-			$('#btn_commit').on('click', _this.commit);
-			$('#btn_add').on('click', _this.onAdd);
-
-			$('body').on('click', '.oper .edit', _this.onEdit);
-			
-			$('body').on('click', '.oper .del', _this.onDel);
-
-			$('body').on('click', '.expert-questions .btn-edit-questions', _this.onEditQuestions);
 		},
 		search : function(){
 			$.ajax({

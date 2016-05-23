@@ -14,9 +14,12 @@ router.get('/list', function (req, res, next) {
 //根据”创建渠道“和”是否虚拟“查询专家
 router.post('/list', function (req, res, next) {
     var name = req.body.name;
+    if(!name){
+        name = '';
+    }
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
-
+    console.log(name);
     expertModel.queryExpertTotalCount(name, function (totalCount) {
         logger.info("专家总数:", totalCount);
         var totalPage = 0;
@@ -34,6 +37,9 @@ router.post('/list', function (req, res, next) {
                     msg: "查找专家出错"
                 });
             } else {
+                for(var index in result){
+                    result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                }
                 res.json({
                     success: true,
                     msg: "查找专家成功",
@@ -85,10 +91,11 @@ router.post('/detail/:id', function (req, res, next) {
     }
 });
 
+
 //根据专家id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
+    var isAdmin = req.session.admin ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -98,12 +105,8 @@ router.get('/detail/:id', function (req, res, next) {
         expertModel.getExpertById(id, function (err, result) {
             if (!err && result) {
                 var expert = result;
-                expert.isAdmin = isAdmin;
-                expert.update_time = commonUtils.formatDate(new Date(expert.update_time));
-                expert.file_name = config.imgHost + '/uploads/' + expert.file_name;
-                expert.menuList = menuUtils.getMenuPathList(expert.menu_id);
-                expert.file_type = commonUtils.getFileTypeName(expert.file_name);
-                res.render('user/expert/detail', expert);
+                expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
+                res.render('admin/expert/detail', expert);
             } else {
                 res.render('error', {
                     success: false,
@@ -113,6 +116,7 @@ router.get('/detail/:id', function (req, res, next) {
         });
     }
 });
+
 
 module.exports = router;
 

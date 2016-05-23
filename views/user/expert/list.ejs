@@ -11,16 +11,16 @@
       <div class="t-logo">系统logo占位</div>
       <!-- <div class="search-bar"></div> -->
     </div>    
-  	<div class="container">
+    <div class="container">
       <div class="main">
         <div class="top-bar">
-          <input id="search_name">
+          <input id="search_key" value="">
           <span id="btn_search" >查询</span>
         </div>
         <div id="expert_list"></div>
         <div id="pagebar"></div>
       </div>
-	  </div>
+    </div>
 
    
     <script type="juicer/template" id="expert-list-tpl">
@@ -35,11 +35,14 @@
     </div>
     {@each list as obj, index}
     <div class="expert-list">
+      <div class="name">${index|formatIndex}</div>
       <div class="name">${obj.name}</div>
+      <div class="name">${obj.birthday}</div>
+      <div class="name">${obj.title}</div>
+      <div class="name">${obj.topic}</div>
       <div class="desc">${obj.description}</div>
       <div class="oper">
-        <span data-id="${obj.id}" class="edit">编辑</span>
-        <span data-id="${obj.id}" class="del">删除</span>
+        <span data-id="${obj.id}" ><a href="/expert/detail/${obj.id}" target="_blank">查看</a></span>
       </div>
     </div>
     {@/each}

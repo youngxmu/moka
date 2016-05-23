@@ -6,8 +6,8 @@ var commonUtils = require("../lib/utils.js");
 exports.queryExperts = function (name, start, pageSize, callback) {
     var sql = 'select * from expert where status = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+    if (name && name != '') {
+        sql += ' and name like \'%' + name + '%\' ';
     }
 
     sql += ' limit ?,?;';
@@ -20,8 +20,8 @@ exports.queryExperts = function (name, start, pageSize, callback) {
 exports.queryExpertTotalCount = function (name, callback) {
     var sql = 'select count(id) as count from expert where status = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+     if (name && name != '') {
+        sql += ' and name like \'%' + name + '%\' ';
     }
 
     db.query(sql, params, function (err, result) {

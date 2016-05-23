@@ -34,6 +34,9 @@ router.post('/list', function (req, res, next) {
                     msg: "查找专家出错"
                 });
             } else {
+                for(var index in result){
+                    result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                }
                 res.json({
                     success: true,
                     msg: "查找专家成功",
@@ -61,19 +64,9 @@ router.post('/detail/:id', function (req, res, next) {
         expertModel.getExpertById(id, function (err, result) {
             if (!err && result) {
                 var expert = result;
-                questionModel.queryQuestionsByIds(expert.qids, function(err, result){
-                    if(err){
-                        res.json({
-                            success: false,
-                            msg: "根据id查询专家出错"
-                        });
-                    }else{
-                        expert.questions = result;
-                        res.json({
-                            success: true,
-                            expert : expert
-                        });
-                    }
+                res.json({
+                    success: true,
+                    expert : expert
                 });
             } else {
                  res.json({
@@ -98,11 +91,7 @@ router.get('/detail/:id', function (req, res, next) {
         expertModel.getExpertById(id, function (err, result) {
             if (!err && result) {
                 var expert = result;
-                expert.isAdmin = isAdmin;
-                expert.update_time = commonUtils.formatDate(new Date(expert.update_time));
-                expert.file_name = config.imgHost + '/uploads/' + expert.file_name;
-                expert.menuList = menuUtils.getMenuPathList(expert.menu_id);
-                expert.file_type = commonUtils.getFileTypeName(expert.file_name);
+                expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
                 res.render('admin/expert/detail', expert);
             } else {
                 res.render('error', {

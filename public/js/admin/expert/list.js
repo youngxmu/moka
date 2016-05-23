@@ -37,6 +37,7 @@
 			$('#btn_commit').on('click', _this.commit);
 			$('#btn_add').on('click', _this.onAdd);
 
+
 			$('body').on('click', '.oper .edit', _this.onEdit);
 			
 			$('body').on('click', '.oper .del', _this.onDel);
