@@ -93,8 +93,6 @@ router.get('/detail/:id', function (req, res, next) {
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 res.render('article/detail', article);
-
-                res.render('article/detail', article);
             } else {
                 res.render('error', {
                     success: false,

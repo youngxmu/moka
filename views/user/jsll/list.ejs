@@ -3,8 +3,8 @@
   <head>
     <title>国防教育理论研究资源管理分系统</title>
     <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/zTreeStyle/zTreeStyle.css' >
-    <link rel='stylesheet' href='/css/resource/list.css' >
+    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='css/resource/list.css' >
     
   </head>
   <body>
@@ -38,7 +38,7 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
-        <a href="/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
@@ -51,8 +51,8 @@
       <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
     </div>
     </script>
-    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="/js/user/jsll/list.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="js/user/jsll/list.js"></script>
     
     <script>
       $(document).ready(function() {

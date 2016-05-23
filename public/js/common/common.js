@@ -77,7 +77,7 @@ var util = {
 		return parseInt(index, 10) + 1;
 	},
 	loadingPanel : '<div id="loading_panel" style="height:28px;line-height:28px;padding:15px 0;text-align: center">'
-			+ '<span style="display:inline-block;font-size:15px;color:#999999;"><img src="/img/loading.gif" style="float:left;margin-right:15px;">正在加载...</span>'
+			+ '<span style="display:inline-block;font-size:15px;color:#999999;"><img src="img/loading.gif" style="float:left;margin-right:15px;">正在加载...</span>'
 			+ '</div>',
 	date : {
 		format : function(longTime){

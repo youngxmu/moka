@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.user.expert.list = {
-		searchUrl : '/expert/list',
+		searchUrl : 'expert/list',
 		tpl : {
 			expertListTpl : null
 		},

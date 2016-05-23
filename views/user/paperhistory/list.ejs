@@ -3,7 +3,7 @@
   <head>
     <title>试题库</title>
     <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/user/paperhistory/list.css' >
+    <link rel='stylesheet' href='css/user/paperhistory/list.css' >
     
   </head>
   <body>
@@ -30,7 +30,7 @@
       <div class="score">${obj.score}</div>
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="/paperhistory/detail/${obj.id}">详情</a>
+          <a href="paperhistory/detail/${obj.id}">详情</a>
         </span>
       </div>
     </div>
@@ -52,8 +52,8 @@
     {@/each}
     </script>
 
-    <script type="text/javascript" src="/js/common/question.js"></script>
-    <script type="text/javascript" src="/js/user/paperhistory/list.js"></script>
+    <script type="text/javascript" src="js/common/question.js"></script>
+    <script type="text/javascript" src="js/user/paperhistory/list.js"></script>
     
     <script>
       $(document).ready(function() {

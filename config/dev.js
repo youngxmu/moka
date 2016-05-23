@@ -1,23 +1,23 @@
 var path = require('path');
 
 module.exports = {
-	port: 8000,
+	port: 6000,
 	viewEngine: 'ejs',
 
 	views: path.resolve(__dirname, '..', 'views'),
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
-	imgHost: 'http://localhost:8200',
-	host: 'http://localhost:8200',
+	imgHost: 'http://xmdx.dev.cnhubei.com/moka',
+	host: 'http://xmdx.dev.cnhubei.com/moka',
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 
 	sessionSecret: 'session_secret_random_seed',
 
 	//mysql config
-	host: "115.28.47.35",
-	user: "kk_f",
-	password: "kkld_^#321",
+	host: "127.0.0.1",
+	user: "root",
+	password: "123a321",
 	database: "moka",
 	enableDBLog: false,
 

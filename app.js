@@ -36,7 +36,7 @@ app.use(expressSession({
 app.use(express.static(config.staticPath));
 
 console.log(config.env);
-if(config.env!='dev'){//开发环境不需要过滤
+if(config.env!='devvvv'){//开发环境不需要过滤
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         var requestPath = req.path;//请求的uri
@@ -60,9 +60,9 @@ if(config.env!='dev'){//开发环境不需要过滤
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
-                        res.redirect("/auth/admin/login");    
+                        res.redirect("/moka/auth/admin/login");    
                     }else{
-                        res.redirect("/auth/user/login");
+                        res.redirect("/moka/auth/user/login");
                     }    
                 }
             }

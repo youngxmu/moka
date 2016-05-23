@@ -33,7 +33,7 @@
 		},
 		initQuestions : function(){
 			$.ajax({
-				url : '/paperhistory/detail/' + _this.pid,
+				url : 'paperhistory/detail/' + _this.pid,
 				type : 'post',
 				success : function(data){
 					if(data.success){
@@ -65,7 +65,7 @@
     		}
 	    	console.log(answerArr);
 	    	$.ajax({
-				url : '/paper/commit',
+				url : 'paper/commit',
 				type : 'post',
 				data : {
 					id : _this.pid,

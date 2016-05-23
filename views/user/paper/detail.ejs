@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
 	    <title><%= name %></title>
 	    <%- include ../../common/meta.ejs %>
-	    <link href="/css/user/paper/detail.css" rel="stylesheet" type="text/css" media="all"/> 
+	    <link href="css/user/paper/detail.css" rel="stylesheet" type="text/css" media="all" />  
   	</head>
   	<body>
   		<%- include ../../common/header.ejs %>
@@ -15,10 +15,10 @@
   		<div class="container">
 	      <div class="main">
 	        <div class="title"><%= name %></div>
-	        <div id="question_panel" class="question-panel">
+	        <div id="question_panel" class="question-panel" style="font-size:14px;">
   				
   			</div>
-  			<div class="btn-wrapper">
+  			<div class="btn-wrapper" style="font-size:14px;">
 				<span id="btn_commit" class="btn-commit">答题</span>
 			</div>
 	      </div>
@@ -41,7 +41,7 @@
 	    </script>
   		
 	    
-		<script type="text/javascript"  src="/js/user/paper/detail.js"></script>
+		<script type="text/javascript"  src="js/user/paper/detail.js"></script>
      	<script type="text/javascript">
 		    $(document).ready(function(){
 		    	moka.user.paper.detail.init();

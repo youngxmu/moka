@@ -1,36 +1,27 @@
 (function(P){
 	var _this = null;
-	_this = P.user.paperhistory.list = {
-		searchUrl : 'paperhistory/list',
+	_this = P.article.list = {
+		searchUrl : '/article/list',
 		tpl : {
-			paperListTpl : null
+			articleListTpl : null
 		},
 		data : {
-			paperMap : {}
+			userMap : {}
 		},
 		queryData : {
 			pageNo : 1,
 			pageSize : 15
 		},
 		init : function() {
-			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
-			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
-			
+			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.initEvent();
 			_this.search();
 		},
 		initEvent : function(){
-			$('body').on('keydown','#keyword',function(e){
-		        var event = window.event || e;
-		        if(event.keyCode == 13){
-		          	_this.queryData.keyword = $('#keyword').val();
-					_this.search();
-		        }
-		    });
-			$('#btn_search').click(function(){
-				_this.queryData.keyword = $('#keyword').val();
-				_this.search();
-			});
+			$('#btn_commit').on('click', _this.commit);
+		},
+		loadList : function(){
+
 		},
 		search : function(){
 			$.ajax({
@@ -38,32 +29,23 @@
 				url : _this.searchUrl,
 				data : _this.queryData,
 				beforeSend : function(){
-					$('#paper_list').html(util.loadingPanel);
+					$('#article_list').html(util.loadingPanel);
 				},
 				success : _this.initPage
 			});
 		},
 		initPage : function(result) {
-			if(!result.success){
-				return;
-			}
 			var data = result.data;
-		    $('#paper_list').html(_this.tpl.paperListTpl.render(data));
+		    $('#article_list').html(_this.tpl.articleListTpl.render(data));
 
-			var paperList = data.list;
-			for(var index in paperList){
-				var user = paperList[index];
-				_this.data.paperMap[user.id] = user;
+			var userList = data.list;
+			for(var index in userList){
+				var user = userList[index];
+				_this.data.userMap[user.id] = user;
 			}
 		
 			var totalPage = data.totalPage;
 			var totalCount = data.totalCount;
-
-			if(totalCount == 0){
-				$('#paper_list').html(P.building);
-				return;
-			}
-
 		    if (totalPage <= 1) {
 		        $("#pagebar").html('');
 		    }
@@ -87,16 +69,16 @@
 		                        type: 'POST',
 		                        data: _this.queryData,
 		                        beforeSend : function(){
-									$('#paper_list').html(util.loadingPanel);
+									$('#article_list').html(util.loadingPanel);
 								},
 		                        success : function(result){
 		                        	if (result != null && result.success) {
 		                        		var data = result.data;
-		                		        $('#paper_list').html(_this.tpl.paperListTpl.render(data));
-										var paperList = data.list;
-										for(var index in paperList){
-											var user = paperList[index];
-											_this.data.paperMap[user.id] = user;
+		                		        $('#article_list').html(_this.tpl.articleListTpl.render(data));
+										var userList = data.list;
+										for(var index in userList){
+											var user = userList[index];
+											_this.data.userMap[user.id] = user;
 										}
 		                		    }
 		                		    else {
@@ -108,20 +90,6 @@
 		            });
 		        });
 		    }
-		},
-		formatAnswer : function(answerStr){
-			var answerArr = answerStr.split(',');
-			var html = '';
-
-			for(var i in answerArr){
-				var index = parseInt(i) + 1;
-				var word = util.getOption(index);
-				console.log(word + ' ' +answerArr[i]);
-				html += '<p>' + word + ':' + answerArr[i] + '</p>';
-			}
-			return html;
 		}
 	};
 }(moka));
-
-juicer.register('formatAnswer', moka.user.paperhistory.list.formatAnswer );

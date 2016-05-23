@@ -2,15 +2,13 @@
 <html>
   <head>
     <title>登录</title>
-    <link rel='stylesheet' href='/css/common.css' />
-    <link rel='stylesheet' href='/css/style.css' />
-    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <%- include ../common/meta.ejs %>
   </head>
   <body>
 
   <div class="login_bg">
     <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
-      <form method="post" id="ajax_login_form" action="/auth/user/login">
+      <form method="post" id="ajax_login_form" action="auth/user/login">
         <input name="type" value="1" type="hidden"><!--普通用户登录-->
         <div class="login_con">
           <h1 style="color:#474747">用户登录</h1>

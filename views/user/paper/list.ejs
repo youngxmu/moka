@@ -3,7 +3,7 @@
   <head>
     <title>试题库</title>
     <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/user/paper/list.css' >
+    <link rel='stylesheet' href='css/user/paper/list.css' >
     
   </head>
   <body>
@@ -14,7 +14,7 @@
           <input id="search_key" value="">
           <span id="btn_search" >查询</span>
         </div>
-        <div id="paper_list"></div>
+        <div id="paper_list" ></div>
         <div id="pagebar"></div>
       </div>
 	  </div>
@@ -32,7 +32,7 @@
       <div class="desc">${obj.description}</div>
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="/paper/detail/${obj.id}">查看</a>
+          <a href="paper/detail/${obj.id}">查看</a>
         </span>
       </div>
     </div>
@@ -54,8 +54,8 @@
     {@/each}
     </script>
 
-    <script type="text/javascript" src="/js/common/question.js"></script>
-    <script type="text/javascript" src="/js/user/paper/list.js"></script>
+    <script type="text/javascript" src="js/common/question.js"></script>
+    <script type="text/javascript" src="js/user/paper/list.js"></script>
     
     <script>
       $(document).ready(function() {

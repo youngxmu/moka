@@ -3,7 +3,7 @@
   <head>
     <title>师资力量</title>
     <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/user/expert/list.css' >
+    <link rel='stylesheet' href='css/user/expert/list.css' >
     
   </head>
   <body>
@@ -42,7 +42,7 @@
       <div class="name">${obj.topic}</div>
       <div class="desc">${obj.description}</div>
       <div class="oper">
-        <span data-id="${obj.id}" ><a href="/expert/detail/${obj.id}" target="_blank">查看</a></span>
+        <span data-id="${obj.id}" ><a href="expert/detail/${obj.id}" target="_blank">查看</a></span>
       </div>
     </div>
     {@/each}
@@ -86,7 +86,7 @@
     {@/each}
     </script>
 
-    <script type="text/javascript" src="/js/user/expert/list.js"></script>
+    <script type="text/javascript" src="js/user/expert/list.js"></script>
     
     <script>
       $(document).ready(function() {

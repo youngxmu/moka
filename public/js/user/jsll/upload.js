@@ -26,7 +26,7 @@
 			for(var type in P.fileType){
 				fileTypeFilters.push(type);
 			}
-			_this.initUploader('/upload/file', fileTypeFilters.join(','));
+			_this.initUploader('upload/file', fileTypeFilters.join(','));
 			
 		},
 		initEvent : function(){
@@ -38,7 +38,7 @@
 		initMenu : function(){
 			$.ajax({
 				type : 'get',
-				url : '/menu/map',
+				url : 'menu/map',
 				success : function(menuMap){
 					_this.menuMap = menuMap;
 					var menuList = [];
@@ -90,7 +90,7 @@
 				chunks : false,// 不分块上传
 				unique_names : true, // 上传的文件名是否唯一,只有在未进行分块上传时文件名唯一才有效
 				url : uploadSrc,
-				flash_swf_url : '/js/lib/plupload/plupload.flash.swf',// plupload.flash.swf文件所在路径
+				flash_swf_url : 'js/lib/plupload/plupload.flash.swf',// plupload.flash.swf文件所在路径
 				multi_selection : false,
 				filters: [
 				     {title: "允许文件类型", extensions: extensions}
@@ -155,7 +155,7 @@
 			var title = $('#title').val();
 			var author = $('#author').val();
 			var description = $('#description').val();
-			var url = '/resource/save';
+			var url = 'resource/save';
 			
 			var postData = {
 				title : title,
@@ -179,7 +179,7 @@
 							window.location.href = window.location.href;
 						},
 						function(){
-							window.location.href = '/article/detail/' + data.id;
+							window.location.href = 'article/detail/' + data.id;
 						},
 						'提交成功'
 					);

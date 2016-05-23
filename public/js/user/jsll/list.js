@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.user.jsll.list = {
 		pid : 14,//系统根目录编号
-		searchUrl : '/article/queryArticleByMenu',
+		searchUrl : 'article/queryArticleByMenu',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -42,35 +42,26 @@
 				zTree.expandAll(false);
 				$(this).removeClass('shrink').addClass('unfold').text('展开');
 			});
-
-			$('.tree-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.edit',function(){
-				var zTree = _this.getCurrTree();
-				_this.showEditMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.del',function(){
-				var zTree = _this.getCurrTree();
-				_this.showDelMenuDlg();
-			});
-
-			$('.resource-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddArticle();
+			$('body').on('keydown','#keyword',function(e){
+		        var event = window.event || e;
+		        if(event.keyCode == 13){
+		          	_this.data.searchData.keyword = $('#keyword').val();
+					_this.searchResource();
+		        }
+		    });
+			$('#btn_search').click(function(){
+				_this.data.searchData.keyword = $('#keyword').val();
+				_this.searchResource();
 			});
 		},
 		initTopic : function() {
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/tree/' + _this.pid,
+				url : 'menu/tree/' + _this.pid,
 				dataType : 'json',
 				beforeSend : function() {
-					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
+					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
 				},
 				success : _this.handleTopic 
 			});
@@ -87,17 +78,21 @@
 		},
 		searchResource : function() {
 			var data = _this.data.searchData;
-			if(_this.currNode == null){
-				_this.searchUrl = '/article/list';
+			if(_this.data.searchData.keyword){
+				_this.searchUrl = 'article/queryArticleByTitle';
 			}else{
-				_this.searchUrl = '/article/queryArticleByMenu';
+				_this.searchUrl = 'article/queryArticleByMenu';
+			}
+
+			if(!_this.data.searchData.mid){
+				_this.data.searchData.mid = _this.pid;
 			}
 			$.ajax({
 				type : "post",
 				url : _this.searchUrl,
 				data : data,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
 				success : _this.initPageResource
 			});
@@ -144,7 +139,7 @@
 								url : _this.searchUrl,
 								data : data,
 								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 								},
 								success : function(data){
 									if (!data.success) {
@@ -240,7 +235,7 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('/article/edit?menuPath=' + menuPath);
+			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

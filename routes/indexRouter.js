@@ -14,32 +14,32 @@ router.get('', function (req, res, next) {
         {
             id : 11,
             name : '教育资源',
-            url : '/resource/list'
+            url : 'resource/list'
         },
         {
             id : 12,
             name : '教育测评',
-            url : '/paper/list'
+            url : 'paper/list'
         },
         {
             id : 13,
             name : '理论教学',
-            url : '/jsll/list'
+            url : 'jsll/list'
         },
         {
             id : 14,
             name : '技能教学',
-            url : '/jsjn/list'
+            url : 'jsjn/list'
         },
         {
             id : 15,
             name : '理论试题',
-            url : '/exam/list'
+            url : 'exam/list'
         },
         {
             id : 16,
             name : '后备力量',
-            url : '/store/list'
+            url : 'store/list'
         }
     ];
 

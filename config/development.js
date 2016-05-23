@@ -1,15 +1,15 @@
 var path = require('path');
 
 module.exports = {
-	port: 8200,
+	port: 6000,
 	viewEngine: 'ejs',
 
 	views: path.resolve(__dirname, '..', 'views'),
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
-	imgHost: 'http://localhost:8200',
-	host: 'http://localhost:8200',
+	imgHost: 'http://xmdx.dev.cnhubei.com/moka',
+	host: 'http://xmdx.dev.cnhubei.com/moka',
 
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
@@ -19,7 +19,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "root",
+	password: "123a321",
 	database: "moka",
 	enableDBLog: false,
 

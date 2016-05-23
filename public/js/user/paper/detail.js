@@ -34,7 +34,7 @@
 		},
 		initQuestions : function(){
 			$.ajax({
-				url : '/paper/detail/' + _this.pid,
+				url : 'paper/detail/' + _this.pid,
 				type : 'post',
 				success : function(data){
 					if(data.success){
@@ -66,7 +66,7 @@
     		}
 	    	console.log(answerArr);
 	    	$.ajax({
-				url : '/paper/commit',
+				url : 'paper/commit',
 				type : 'post',
 				data : {
 					id : _this.pid,
