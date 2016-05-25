@@ -48,6 +48,9 @@ if(config.env!='devvvv'){//开发环境不需要过滤
             }
         }
 
+        // res.locals.islogin = true;
+        // next();
+
         if (inWhitelist) {//在白名单中，不需要过滤
             next();
         }else{
@@ -61,8 +64,10 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                 }else{
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/moka/auth/admin/login");    
+                        // res.redirect("/auth/admin/login");    
                     }else{
                         res.redirect("/moka/auth/user/login");
+                        // res.redirect("/auth/user/login");
                     }    
                 }
             }

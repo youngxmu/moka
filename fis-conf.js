@@ -82,7 +82,7 @@ fis.config.merge({
             },
             {
                 receiver : 'http://xmdx.dev.cnhubei.com/node/receiver',
-                include : ['/routes/*.js'],
+                include : ['/routes/**'],
                 from : '/routes',
                 to : '/young/node/moka/routes',
                 subOnly : true

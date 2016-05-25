@@ -68,6 +68,7 @@ router.get('/detail/:id', function (req, res, next) {
         articleModel.getArticleById(id, function (err, result) {
             if (!err && result) {
                 var article = result;
+                console.log(article);
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 article.file_name = config.imgHost + '/uploads/' + article.file_name;

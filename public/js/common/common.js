@@ -15,7 +15,8 @@ var moka = {
 		question : {},
 		article : {},
 		expert : {},
-		jsll : {}
+		jsll : {},
+		jsjn : {}
 	},
 	model : {},
 	album : {},
