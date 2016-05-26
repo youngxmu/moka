@@ -31,6 +31,8 @@
 			});
 
 			$('body').on('click', '#btn_commit', _this.commit);
+
+			$('body').on('click', '#btn_confirm', _this.confirm);
 		},
 		initQuestions : function(){
 			$.ajax({
@@ -39,6 +41,11 @@
 				success : function(data){
 					if(data.success){
 						_this.questions = data.paper.questions;
+						_this.questionsMap = {};
+						for(var index in _this.questions){
+							var question = _this.questions[index];
+							_this.questionsMap[question.id] = question;
+						}
 						$('#question_panel').html(_this.questionListTpl.render({list:data.paper.questions}));
 					}else{
 						alert(data.msg);
@@ -46,6 +53,33 @@
 				}
 			});
 		},
+		confirm : function(){
+	    	var answerArr = [];
+	    	var $li = $('#question_panel').find('.question-list.active');
+	    	var qid = $li.attr('data-id');
+	    	var question = _this.questionsMap[qid];
+	    	var answers = $li.find('.qanswer.selected');
+	    	var answer = '';
+    		answers.each(function(){
+    			answer += $li.attr('data-answer');
+    		});
+    		if(answer == ''){
+    			alert('还未选择答案');
+    			return;
+    		}
+    		// if(answer == question.rtanswer){
+    		// 	alert('答对啦');
+    		// }else{
+    		// 	alert('答错了');
+    		// }
+    		var $next = $li.next('.question-list');
+
+    		if($next.length == 1){
+    			$next.addClass('active').siblings('.question-list').removeClass('active');
+    		}else{
+    			_this.commit();
+    		}
+	    },
 	    commit : function(){
 	    	var answerArr = [];
 	    	var $lis = $('#question_panel').find('.question-list');
@@ -77,7 +111,7 @@
 						var rtCount = 0;
 						var wrCount = 0;
 						for(var index in answerArr){
-							if(answer[index] == _this.questions[index].rtanswer){
+							if(answerArr[index] == _this.questions[index].rtanswer){
 								rtCount++;
 							}else{
 								wrCount++;

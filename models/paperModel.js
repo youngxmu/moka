@@ -127,6 +127,7 @@ exports.queryPaperHistoryTotalCount = function (uid, callback) {
     params.push(uid);
     db.query(sql, params, function (err, result) {
         if (!err && result && result[0]) {
+            console.log(result[0]);
             callback(result[0].count);
         } else {
             logger.error("查找试卷总数出错", err);

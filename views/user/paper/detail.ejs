@@ -19,7 +19,8 @@
   				
   			</div>
   			<div class="btn-wrapper" style="font-size:14px;">
-				<span id="btn_commit" class="btn-commit">答题</span>
+				<!-- <span id="btn_commit" class="btn-commit">答题</span> -->
+				<span id="btn_confirm" class="btn-commit">确认</span>
 			</div>
 	      </div>
 		  </div>
@@ -27,7 +28,7 @@
 	   
 	    <script type="juicer/template" id="question-list-tpl">
 	    {@each list as obj, index}
-	    <div class="question-list">
+	    <div data-id="${obj.id}" class="question-list {@if index == 0}active{@/if}" >
 	        <div class="qbody">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
 				（多选）
 				{@/if}</div>

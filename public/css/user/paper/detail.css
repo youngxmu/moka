@@ -1,5 +1,8 @@
-.question-list{border-bottom: 1px dashed #cccccc;padding: 10px;}
-.question-list:last-child{border: none;}
+.question-list{padding: 10px;
+	display: none;
+	border-bottom: 1px dashed #cccccc;
+}
+.question-list.active{display: block;}
 .question-list .qbody{}
 .question-list .qanswer-panel{line-height: 1.5;}
 .question-list .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
