@@ -44,7 +44,7 @@ router.post('/insertModelFromOut', middleware, function (req, res, next) {
 
     var currMokaId = '';
     password = commonUtils.md5(password, "-weimo");//模拟生成手机端提交的密码
-    password = commonUtils.md5(password, config.md5Salt);//加盐生成真实入库密码
+    password = commonUtils.md5(password);//加盐生成真实入库密码
 
 
        async.waterfall([

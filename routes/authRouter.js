@@ -33,7 +33,7 @@ router.post('/admin/login', function (req, res, next) {
         });
     }
 
-    password = commonUtils.md5(password, config.md5Salt);
+    password = commonUtils.md5(password);
     console.log(password);
     adminModel.query(username, password, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
@@ -51,7 +51,6 @@ router.post('/admin/login', function (req, res, next) {
         }
     });
 });
-
 
 router.post('/user/login', function (req, res, next) {
     var password = req.body.password.trim();
@@ -72,7 +71,7 @@ router.post('/user/login', function (req, res, next) {
         });
     }
 
-    password = commonUtils.md5(password, config.md5Salt);
+    password = commonUtils.md5(password);
     userModel.queryUserByEmail(email, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var user = result[0];

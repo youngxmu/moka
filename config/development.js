@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	port: 6000,
+	port: 8200,
 	viewEngine: 'ejs',
 
 	views: path.resolve(__dirname, '..', 'views'),
@@ -17,9 +17,9 @@ module.exports = {
 	sessionSecret: 'session_secret_random_seed',
 
 	//mysql config
-	host: "10.99.113.69",
+	host: "127.0.0.1",
 	user: "root",
-	password: "123a321",
+	password: "",
 	database: "moka",
 	enableDBLog: false,
 

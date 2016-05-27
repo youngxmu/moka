@@ -104,6 +104,7 @@
 						return false;
 					}
 					_this.currNode = treeNode;
+					console.log(_this.currNode.content);
 					$('#content').html(_this.currNode.content);
 					return true;
 				}

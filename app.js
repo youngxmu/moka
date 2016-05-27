@@ -7,6 +7,8 @@ var expressSession = require('express-session');
 var multiparty = require('multiparty');
 var log4js = require('log4js');
 
+var redisUtils = require('./lib/redisUtils.js')
+
 
 var logger =  require('./lib/log.js').logger('app');
 logger.setLevel('ERROR');
@@ -56,6 +58,13 @@ if(config.env!='devvvv'){//开发环境不需要过滤
         }else{
             if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
                 res.locals.islogin = true;
+                res.locals.sid = req.session.id;
+                var sid = req.session.id;
+                var uid = req.session.user.id;
+                console.log('--------------'+req.session.id);
+                console.log('--------------'+ uid);
+                redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
+                });
                 next();
             }else{
                 var url = req.url;

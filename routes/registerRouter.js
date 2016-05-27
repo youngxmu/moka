@@ -39,7 +39,7 @@ router.get('/register/valid/:code', function (req, res, next) {
 router.post('/register', function (req, res, next) {
 	var email = req.body.email;
 	var password = req.body.password;
-	password = commonUtils.md5(password, config.md5Salt);
+	password = commonUtils.md5(password);
 
 	var host = 'http://localhost:8200/user/register/valid/';
 	var str = commonUtils.randomString(12);

@@ -173,7 +173,7 @@ router.post('/create', function (req, res) {
     var profile = req.body.profile;//头像
 
     password = commonUtils.md5(password, "-weimo");//模拟生成手机端提交的密码
-    password = commonUtils.md5(password, config.md5Salt);//加盐生成真实入库密码
+    password = commonUtils.md5(password);//加盐生成真实入库密码
     userModel.insertUser(tel,nickname,password,inviteId,beanCount,isVirtual,profile, function (err, data) {
         if (!err) {
             res.json({
@@ -218,7 +218,7 @@ router.post('/modify', function (req, res) {
     logger.info("管理员修改宅男个人信息", userId, tel, nickname, password,  beanCount, isVirtual, profile);
 
     password = commonUtils.md5(password, "-weimo");//模拟生成手机端提交的密码
-    password = commonUtils.md5(password, config.md5Salt);//加盐生成真实入库密码
+    password = commonUtils.md5(password);//加盐生成真实入库密码
     userModel.updateUser(userId,tel,nickname,password,beanCount,isVirtual,profile, function (err, result) {
         if (!err) {
             res.json({

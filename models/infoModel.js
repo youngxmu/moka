@@ -8,3 +8,10 @@ exports.queryInfos = function (callback) {
     var params = [];
     db.query(sql, params, callback);
 };
+
+
+exports.queryInfoById = function (id, callback) {
+    var sql = 'select * from info where id = ?; ';
+    var params = [id];
+    db.query(sql, params, callback);
+};

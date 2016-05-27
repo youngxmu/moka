@@ -21,26 +21,26 @@ router.post('/list', function (req, res, next) {
     // }else{
         infoModel.queryInfos(function (err, result) {
             if (!err && result) {
-                 for(var index in result){
-                    // console.log(result[index].content.length);
+                //  for(var index in result){
+                //     // console.log(result[index].content.length);
                     
-                    if(!result[index].content){
-                        continue;
-                    }
+                //     if(!result[index].content){
+                //         continue;
+                //     }
 
-                    var length = result[index].content.length;
-                    console.log(length);
-                    var buf = new Buffer(length);
-                    for(var i = 0; i < length; i++) {
-                        buf[i] = result[index].content[i];
-                    }
-                    // // var buffer = new Buffer( result[index].content, 'binary' );
-                    var bufferBase64 = buf.toString('base64');
-                    result[index].content = bufferBase64;
-                    if(index == 0){
-                        console.log(bufferBase64);
-                    }
-                }
+                //     var length = result[index].content.length;
+                //     console.log(length);
+                //     var buf = new Buffer(length);
+                //     for(var i = 0; i < length; i++) {
+                //         buf[i] = result[index].content[i];
+                //     }
+                //     // // var buffer = new Buffer( result[index].content, 'binary' );
+                //     var bufferBase64 = buf.toString('base64');
+                //     result[index].content = bufferBase64;
+                //     if(index == 0){
+                //         console.log(bufferBase64);
+                //     }
+                // }
                 res.json({
                     success: false,
                     data: {
@@ -59,6 +59,36 @@ router.post('/list', function (req, res, next) {
     // }
 });
 
+router.get('/info', function (req, res, next) {
+    var id = req.query.id;
+     infoModel.queryInfoById(id, function (err, result) {
+        if (!err && result) {
+            var index = 0;
+            var length = result[index].content.length;
+            console.log(length);
+            console.log(result);
+            // var buf = new Buffer(length);
+            // for(var i = 0; i < length; i++) {
+            //     buf[i] = result[index].content[i];
+            // }
+            var buf = new Buffer( result[index].content, 'binary' );
+            var bufferBase64 = buf.toString('utf-8');
+            result[index].content = bufferBase64;
+            console.log(bufferBase64);
+            res.json({
+                success: false,
+                info : result[0]
+            });
+        } else {
+
+
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        }
+    });
+});
 
 module.exports = router;
 

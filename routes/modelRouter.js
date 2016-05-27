@@ -149,7 +149,7 @@ router.post('/create', function (req, res) {
     var profile = req.body.profile;//头像
 
     password = commonUtils.md5(password, "-weimo");//模拟生成手机端提交的密码
-    password = commonUtils.md5(password, config.md5Salt);//加盐生成真实入库密码
+    password = commonUtils.md5(password);//加盐生成真实入库密码
     modelModel.insertModel(tel, name, password, birthday, bwh, cup, height, inviteId, jifen, isVirtual, profile, function (err, data) {
         if (!err) {
             res.json({
