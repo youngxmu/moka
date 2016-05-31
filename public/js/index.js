@@ -16,7 +16,7 @@
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.tpl.paperListTpl = juicer($('#paper_list_tpl').html());
 			_this.initEvent();
-			_this.loadList();
+			//_this.loadList();
 		},
 		initEvent : function(){
 			$('body').on('keydown','#keyword',function(e){
@@ -65,10 +65,36 @@
 				});
 			});
 		},
+		loadList : function(){
+			var tpl = _this.tpl.articleListTpl;
+			if(id == 12 || id == 15){
+				_this.searchUrl = 'paper/list';
+				tpl = _this.tpl.paperListTpl
+			}else{
+				_this.searchUrl = 'index/queryArticleByMenu';
+			}
+			$.ajax({
+				type : 'post',
+				url : _this.searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
+					}
+				}
+			});
+		},
 		getMD : function(dateStr){
 			var sa1 = dateStr.split(' ')[0];
 			var sa2 = sa1.split('-');
-			return sa2[1] + '-' + sa2[2];
+			return sa1;
 		},
 		getMDH : function(dateStr){
 			var sa1 = dateStr.split('T')[0];

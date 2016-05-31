@@ -59,13 +59,13 @@ router.post('/register', function (req, res, next) {
 	var status = 0;
 	userModel.insertUser(email, tel, name, password, score, status, function(err, result){
 		if(err){
-			res.json({
+			res.render('error',{
 				success : false,
-				msg : '注册失败请重试'
+				msg : '邮箱已经使用啦'
 			});
 		}else{
 			// emailUtils.sendMail(options, function(){
-				res.json({
+				res.render('user/login',{
 					success : true,
 					msg : '注册成功，请验证邮箱'
 				});

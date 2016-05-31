@@ -59,6 +59,7 @@ router.post('/list', function (req, res, next) {
     // }
 });
 
+var textract = require('textract');
 router.get('/info', function (req, res, next) {
     var id = req.query.id;
      infoModel.queryInfoById(id, function (err, result) {
@@ -67,18 +68,28 @@ router.get('/info', function (req, res, next) {
             var length = result[index].content.length;
             console.log(length);
             console.log(result);
-            // var buf = new Buffer(length);
-            // for(var i = 0; i < length; i++) {
-            //     buf[i] = result[index].content[i];
-            // }
-            var buf = new Buffer( result[index].content, 'binary' );
-            var bufferBase64 = buf.toString('utf-8');
-            result[index].content = bufferBase64;
-            console.log(bufferBase64);
-            res.json({
-                success: false,
-                info : result[0]
+
+
+             textract.fromBufferWithMime('RTF', result[index].content, function( error, text ) {
+                console.log(error);
+                res.json({
+                    success: false,
+                    info : text
+                });
             });
+
+            // // var buf = new Buffer(length);
+            // // for(var i = 0; i < length; i++) {
+            // //     buf[i] = result[index].content[i];
+            // // }
+            // var buf = new Buffer( result[index].content, 'binary' );
+            // var bufferBase64 = buf.toString('utf-8');
+            // result[index].content = bufferBase64;
+            // console.log(bufferBase64);
+            // res.json({
+            //     success: false,
+            //     info : result[0]
+            // });
         } else {
 
 

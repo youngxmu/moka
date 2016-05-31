@@ -19,7 +19,10 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
+	password: "root",
+	// host: "10.99.113.69",
+	// user: "root",
+	// password: "123456",
 	database: "moka",
 	enableDBLog: false,
 
@@ -46,6 +49,7 @@ module.exports = {
 		"/auth/login",
 		"/auth/admin/login",
 		"/auth/user/login",
+		"/user/register",
 		"/version"
 	],
 

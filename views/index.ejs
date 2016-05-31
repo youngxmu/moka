@@ -1,29 +1,171 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>首页</title>
     <%- include common/meta.ejs %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>火箭军指挥学院、 </title>
+    <link type="text/css" href="css/css.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript" src="js/MyCxcPlug.js"></script>
   </head>
+  <style>
+.l_scorll {
+  float: left;
+  width: 320px;
+}
+.Warp {
+  width: 319px;
+  height: 240px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.num {
+  height: 20px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  list-style-type: none;
+}
+.num li {
+  background: #1F0601;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  float: left;
+  line-height: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+.num li:hover {
+  color: #fff;
+  background: #CB0610;
+}
+.num .active {
+  color: #fff;
+  background: #CB0610;
+}
+.s_b_p {
+  float: left;
+  height: 25px;
+  background: #696;
+  width: 321px;
+  line-height: 25px;
+  text-align: center;
+}
+.s_b_p i {
+  width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+}
+.search {
+  float: right;
+  position: relative;
+  width: 287px;
+  height: 26px;
+  line-height: 26px;
+  margin-top: -27px;
+  margin-right: 20px;
+}
+.s_txt {
+  margin-left: 10px;
+  width: 210px;
+  height: 22px;
+  line-height: 22px;
+  background: #FFF;
+  margin-top: -3px;
+}
+</style>
   <body>
-    <%- include common/header.ejs %>
-  	<div class="container">
-      <div class="main">
-        <% for(var index in menuList){ %>
-          <% var menu = menuList[index]; %>
-          <div id="module_<%= menu.id %>" data-id="<%= menu.id %>" class="thp">
-            <div class="thp-banner">
-              <%= menu.name %>
-              <div class="more-link">
-                <a href="<%= menu.url %>" target="_blank">更多</a>
-              </div>
-            </div>
-            <ul class="thp-list"></ul>
-          </div>
-        <% } %>
-      </div>
-	  </div>
+    <div class="header">
+      <h1 class="logo"><a href="index.html"></a></h1>
+    </div>
+    <!--header/-->
+    <div class="nav">
+      <ul>
+        <li class="aHover"><a href="index">首页</a></li>
+        <li><a href="resource/list" >国防教育资源</a></li>
+        <li><a href="paper/list" >国防教育测评</a></li>
+        <li><a href="jsll/list" >军事理论教学</a></li>
+        <li><a href="jsjn/list" >军事技能教学</a></li>
+        <li><a href="paper/list" >军事理论考试</a></li>
+        <li><a href="javascript:void(0);">国防后备力量</a></li>
+        <div class="clears"></div>
+      </ul>
+    </div>
+    <!--nav/-->
+    <div class="cont">
+      <div class="time"> 
+        <span>2014年4月22日14:06:40</span> 
+        <% if(islogin){ %>
+        <div >
+          <span class="t-btn"><a href="resource/upload">发布文章</a></span>
+          <span class="t-btn"><a href="resource/upload">上传资源</a></span>
+          <span class="t-btn"><a href="paperhistory/list">自测历史</a></span>
 
-    <script type="text/template" id="article_list_tpl">
+          <span class="t-btn"><a href="http://localhost:8888/signin?sid=<%=sid%>">进入论坛</a></span>
+        </div>
+        <% }else{ %>
+        <span class="login">您还未登陆，请<b><a href="javascript:;" id="btn_login">【登录】</a></b></span>
+        <% } %>
+        <span class="t-btn"><a href="http://localhost:8888">进入论坛</a></span>
+        <div class="search" style="margin-top:2px;">
+          <input class="s_txt" type="text" id="keyword" placeholder="请输入搜索关键词">
+          <a  style=" background:url(images/searchbtn.jpg) no-repeat; width:70px; height:30px; display:inline-block; position:relative; top:-27px; left:240px;" id="btn_search"></a> 
+        </div>
+      </div>
+    	<div class="new1Box">
+        <div class="l_scorll">
+          <div class="Warp" id="Warp">
+            <ul id="pic">
+              <li><a target="_blank" href=""><img src="images/金刚-~3.jpg" width="319" height="240"></a></li>
+              <li><a target="_blank" href=""><img src="images/美国战斧精确打击.jpg" width="319" height="240"></a></li>
+              <li><a target="_blank" href=""><img src="images/以色列G-550预警机.jpg" width="319" height="240"></a></li>
+              <li><a target="_blank" href=""><img src="images/以色列预警机.jpg" width="319" height="240"></a></li>
+              <li><a target="_blank" href=""><img src="images/5.jpg" width="319" height="240"></a></li>
+            </ul>
+          </div>
+          <p class="s_b_p"><i>这是图片图片图片</i>
+            <script type="text/javascript">
+            $(document).ready(function(){
+              CxcFocus({
+                Id:"Warp",//主ID
+                Time:3000//每个几秒执行
+              });
+            });
+          </script> 
+        </div>
+        <div class="new1Mid">
+          <ul class="new1Title2">
+            <h1 class="new1Title2"><span>国防教育资源</span></h1>
+            <a style="position:relative;top:-30px; left:450px; font-size:12px; color:#696;">>>更多</a>
+            <div class="clears"></div>
+          </ul>
+          <!--new1Title/-->
+          <div class="new1New">
+            <table id="gfjy" class="newBox">
+            </table>
+            <!--newBox/--> 
+          </div>
+        </div>
+        <!--new1Mid/-->
+        <div class="new1Right">
+          <h1 class="new1Title2"><span>国防教育测评</span></h1>
+          <a style="position:relative;top:-22px; left:280px; font-size:12px; color:#696">>>更多</a>
+          <ul id="gfjycp">
+            
+          </ul>
+        </div>
+        <!--new1Right/-->
+        <div class="clears"></div>
+      </div>
+    </div>
+    <script type="text/template" id="article_list_tpl_b">
     {@each list as resource}
     <li>
       <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
@@ -32,7 +174,39 @@
     {@/each}
     </script>
 
+    <script type="text/template" id="article_list_tpl">
+    {@each list as resource}
+    <tr class="newTitle">
+      <td>
+        <div>
+          <a href="article/detail/${resource.id}"  target="_blank">${resource.title}</a>
+          <span>${resource.create_time|getMD}</span>
+        </div>
+      </td>
+    </tr>
+    <tr class="newList">
+      <td>${resource.desc}</td>
+    </tr>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="article_list_tpl2">
+    {@each list as resource}
+    <li>
+      <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
+    </li>
+    {@/each}
+    </script>
+
     <script type="text/template" id="paper_list_tpl">
+    {@each list as resource}
+    <li>
+      <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
+    </li>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="paper_list_tpl_2">
     {@each list as resource}
     <li>
       <a href="paper/detail/${resource.id}" target="_blank">${resource.name}</a>
@@ -40,12 +214,54 @@
     </li>
     {@/each}
     </script>
-
+    <script type="juicer/template" id="dlg-login-tpl">
+      <div class="login_bg">
+        <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
+          <form method="post" id="ajax_login_form" action="auth/user/login">
+            <input name="type" value="1" type="hidden"><!--普通用户登录-->
+            <div class="login_con">
+              <div class="login_list">
+                <div class="login_line">
+                  <p>邮箱</p>
+                  <input type="text" id="email" placeholder="注册邮箱" name="email" class="input_text" >
+                </div>
+                <div class="login_line">
+                  <p>密码</p>
+                  <input type="password" id="password" placeholder="密码" name="password" class="input_text">
+                </div>
+                <div class="btn_wrap" id="login_submit">
+                  <a href="javascript:void(0)" class="btn_green37">登录</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </script>
     <script type="text/javascript" src="js/index.js"></script>
     <script>
       $(document).ready(function() {
+        $('body').on('click', '#login_submit', function(){
+          var options = {
+              success: function (data) {
+                  console.log(data);
+              }
+          };
+          // ajaxForm
+          $("#ajax_login_form")[0].submit();
+        });
+        $('#btn_login').click(function(){
+          var dd = dialog({
+              title: '登录',
+              content: $('#dlg-login-tpl').html()
+          });
+          dd.showModal();
+        });
+      });
+      $(document).ready(function() {
         moka.index.init({});
       });
+
     </script>
   </body>
 </html>

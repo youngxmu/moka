@@ -11,7 +11,7 @@ exports.queryInfos = function (callback) {
 
 
 exports.queryInfoById = function (id, callback) {
-    var sql = 'select * from info where id = ?; ';
+    var sql = 'select WordContent as content from info3 where PosID = ?; ';
     var params = [id];
     db.query(sql, params, callback);
 };
