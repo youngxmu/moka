@@ -91,7 +91,7 @@ router.post('/user/login', function (req, res, next) {
             delete user.password;
             req.session.user = user;
             //登录成功
-            res.redirect('/moka/index');
+            res.redirect('/index');
         } else {
             res.render('error', {
                 success: false,

@@ -59,26 +59,62 @@ router.post('/list', function (req, res, next) {
     // }
 });
 
+var textract = require('textract');
+var unrtf = require('unrtf');
 router.get('/info', function (req, res, next) {
     var id = req.query.id;
      infoModel.queryInfoById(id, function (err, result) {
         if (!err && result) {
             var index = 0;
-            var length = result[index].content.length;
-            console.log(length);
-            console.log(result);
-            // var buf = new Buffer(length);
-            // for(var i = 0; i < length; i++) {
-            //     buf[i] = result[index].content[i];
-            // }
-            var buf = new Buffer( result[index].content, 'binary' );
-            var bufferBase64 = buf.toString('utf-8');
-            result[index].content = bufferBase64;
-            console.log(bufferBase64);
-            res.json({
-                success: false,
-                info : result[0]
+            var file = result[index].content;  
+               // var reader = new FileReader();  
+               // reader.onload = function()  
+               // {  
+               //     document.getElementById("filecontent").innerHTML = this.result;  
+               // };  
+               // reader.readAsText(file);  
+
+
+            // var length = result[index].content.length;
+            // console.log(result[index]);
+            // console.log(length)
+            textract.fromBufferWithMime('RTF', result[index].content, function( error, text ) {
+                console.log(error);
+                res.json({
+                    success: false,
+                    info : text
+                });
             });
+
+
+
+            
+            unrtf(
+              file,
+              function(error, result) {
+                console.log(error);
+              }
+            );
+
+
+            // console.log(result);
+            // console.log(length);
+            // console.log(encodeURIComponent_GBK(result[index].content));
+            // // var buf = new Buffer(length);
+            // // for(var i = 0; i < length; i++) {
+            // //     buf[i] = result[index].content[i];
+            // // }
+            // // var buf = new Buffer( result[index].content, 'binary' );
+            // // var bufferBase64 = buf.toString('utf-8');
+            // // result[index].content = bufferBase64;
+            // // console.log(bufferBase64);
+            // var str = result[index].content.toString('base64',0 , length);
+            // console.log(str);
+            // result[index].content = str;
+            // res.json({
+            //     success: false,
+            //     info : result[0]
+            // });
         } else {
 
 

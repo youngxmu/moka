@@ -38,7 +38,7 @@ app.use(expressSession({
 app.use(express.static(config.staticPath));
 
 console.log(config.env);
-if(config.env!='devvvv'){//开发环境不需要过滤
+if(config.env!='devvv'){//开发环境不需要过滤
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         var requestPath = req.path;//请求的uri
@@ -52,13 +52,15 @@ if(config.env!='devvvv'){//开发环境不需要过滤
 
         // res.locals.islogin = true;
         // next();
+        if(req.session){//如果存在session则继续
+            res.locals.sid = req.session.id;
+        }
 
         if (inWhitelist) {//在白名单中，不需要过滤
             next();
         }else{
             if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
                 res.locals.islogin = true;
-                res.locals.sid = req.session.id;
                 var sid = req.session.id;
                 var uid = req.session.user.id;
                 console.log('--------------'+req.session.id);
@@ -72,11 +74,11 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
-                        res.redirect("/moka/auth/admin/login");    
-                        // res.redirect("/auth/admin/login");    
+                        // res.redirect("/moka/auth/admin/login");    
+                        res.redirect("/auth/admin/login");    
                     }else{
-                        res.redirect("/moka/auth/user/login");
-                        // res.redirect("/auth/user/login");
+                        // res.redirect("/moka/auth/user/login");
+                        res.redirect("/auth/user/login");
                     }    
                 }
             }

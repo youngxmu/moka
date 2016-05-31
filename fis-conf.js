@@ -53,7 +53,7 @@ fis.config.merge({
                 to : '/young/node/moka/views',
                 subOnly : true,
                 replace : {
-                    from : 'http://10.99.13.32:6000',
+                    from : 'http://10.99.13.32:8200',
                     to : 'http://xmdx.dev.cnhubei.com/moka'
                 }
             }
@@ -101,7 +101,7 @@ fis.config.merge({
                 to : '/young/node/moka/views',
                 subOnly : true,
                 replace : {
-                    from : 'http://10.99.13.32:6000',
+                    from : 'http://10.99.13.32:8200',
                     to : 'http://xmdx.dev.cnhubei.com/moka'
                 }
             },

@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	port: 6000,
+	port: 8200,
 	viewEngine: 'ejs',
 
 	views: path.resolve(__dirname, '..', 'views'),
