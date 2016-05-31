@@ -15,8 +15,15 @@
 		init : function() {
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.tpl.paperListTpl = juicer($('#paper_list_tpl').html());
+			_this.tpl.paperListTpl3 = juicer($('#paper_list_tpl3').html());
+			_this.tpl.paperListTpl4 = juicer($('#paper_list_tpl4').html());
+			_this.tpl.paperListTpl5 = juicer($('#paper_list_tpl5').html());
+
 			_this.initEvent();
-			_this.loadList();
+			_this.loadList1();
+			_this.loadList3();
+			_this.loadList4();
+			_this.loadList5();
 		},
 		initEvent : function(){
 			$('body').on('keydown','#keyword',function(e){
@@ -65,15 +72,111 @@
 				});
 			});
 		},
+		loadList1 : function(){
+			var $panel = $('#gfjy');
+			var sendData = _this.queryData;
+				sendData.mid = 11;
+			var tpl = _this.tpl.articleListTpl;
+			var searchUrl = 'index/queryArticleByMenu';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
+					}
+				}
+			});
+		},
+		loadList3 : function(){
+			var $panel = $('#jsll');
+			var sendData = _this.queryData;
+				sendData.mid = 13;
+			var tpl = _this.tpl.paperListTpl3;
+			var searchUrl = 'jsll/indexlist';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
+					}
+				}
+			});
+		},
+		loadList4 : function(){
+			var $panel = $('#jsjn');
+			var sendData = _this.queryData;
+				sendData.mid = 14;
+			var tpl = _this.tpl.paperListTpl4;
+			var searchUrl = 'index/queryArticleByMenu';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
+					}
+				}
+			});
+		},
+		loadList5 : function(){
+			var $panel = $('#paper');
+			var sendData = _this.queryData;
+				sendData.mid = 15;
+			var tpl = _this.tpl.paperListTpl5;
+			var searchUrl = 'paper/list';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
+					}
+				}
+			});
+		},
 		getMD : function(dateStr){
 			var sa1 = dateStr.split(' ')[0];
 			var sa2 = sa1.split('-');
-			return sa2[1] + '-' + sa2[2];
+			return sa1;
 		},
 		getMDH : function(dateStr){
 			var sa1 = dateStr.split('T')[0];
 			var sa2 = sa1.split('-');
-			return sa2[1] + '-' + sa2[2];
+			return sa1;
 		}
 	};
 }(moka));

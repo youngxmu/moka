@@ -1,44 +1,42 @@
-<div class="page-header">
-    <div class="nav_menu">
-        <div class="nav">
-            <div class="list" id="navlist">
-                <ul id="navfouce">
-                    <li><a href="index" style="width:100px;">首 页</a></li>
-                    <li><a href="resource/list" class="navfoucea">国防教育资源</a></li>
-                    <li><a href="paper/list" class="navfoucea">国防教育测评</a></li>
-                    <li><a href="jsll/list" class="navfoucea">军事理论教学</a></li>
-                    <li><a href="jsjn/list" class="navfoucea">军事技能教学</a></li>
-                    <li><a href="paper/list" class="navfoucea">军事理论考试</a></li>
-                    <li><a href="javascript:void(0)" style="color:#999999;" class="navfoucea">国防后备力量</a></li>
-                </ul>
-            </div>
-        </div>
+<div class="header">
+      <h1 class="logo"><a href="index.html"></a></h1>
+    </div>
+    <!--header/-->
+    <div class="nav">
+      <ul>
+        <li class="aHover"><a href="index">首页</a></li>
+        <li><a href="resource/list" >国防教育资源</a></li>
+        <li><a href="paper/list" >国防教育测评</a></li>
+        <li><a href="jsll/list" >军事理论教学</a></li>
+        <li><a href="jsjn/list" >军事技能教学</a></li>
+        <li><a href="paper/list" >军事理论考试</a></li>
+        <li><a href="javascript:void(0);">国防后备力量</a></li>
+        <div class="clears"></div>
+      </ul>
     </div>
 
-    <div class="banner">
-      <a href="index" style="color:#333;"><div class="t-logo">火箭指挥学院</div></a>
-      <div class="t-right">
+
+     <div class="cont">
+      <div class="time"> 
+        <span>2014年4月22日14:06:40</span> 
         <% if(islogin){ %>
-          <div class="t-btn"><a href="resource/upload">发布文章</a></div>
-          <div class="t-btn"><a href="resource/upload">上传资源</a></div>
-          <div class="t-btn"><a href="paperhistory/list">自测历史</a></div>
+        <div style="display:inline-block;margin-left:10px;color:#61a2d8">
+          <span class="t-btn"><a href="resource/upload">发布文章</a></span>
+          <span class="t-btn"><a href="resource/upload">上传资源</a></span>
+          <span class="t-btn"><a href="paperhistory/list">自测历史</a></span>
+
+          <span class="t-btn"><a href="http://localhost:8888/signin?sid=<%=sid%>">进入论坛</a></span>
+        </div>
         <% }else{ %>
-          <div class="t-btn" id="btn_login" ><a href="javascript:void(0);">登录</a></div>
+        <span class="login">您还未登陆，请<b><a href="javascript:;" id="btn_login">【登录】</a></b></span>
         <% } %>
-        <div class="search-box">
-          <div class="input-group clearfix">
-            <input type="text" value="" placeholder="请输入搜索关键词" name="keyword" autocomplete="off" id="keyword">
-            <div class="btn-submit">
-                 <button href="javascript:void(0);" type="submit" id="btn_search">
-                     <i class="icon icon-search icon-large"></i>
-                 </button>
-            </div>
-          </div>
+        <span class="t-btn"><a href="http://localhost:8888">进入论坛</a></span>
+        <div class="search" style="margin-top:2px;">
+          <input class="s_txt" type="text" id="keyword" placeholder="请输入搜索关键词">
+          <a  style=" background:url(images/searchbtn.jpg) no-repeat center; width:70px; height:30px; display:inline-block; position:relative; top:-27px; left:240px;" id="btn_search"></a> 
         </div>
       </div>
     </div>
-</div>
-
 <script type="juicer/template" id="dlg-login-tpl">
   <div class="login_bg">
     <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>

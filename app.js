@@ -38,9 +38,15 @@ app.use(expressSession({
 app.use(express.static(config.staticPath));
 
 console.log(config.env);
-if(config.env!='devvv'){//开发环境不需要过滤
+if(config.env!='devv'){//开发环境不需要过滤
+
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
+        console.log(123);
+        res.locals.sid = '';
+        res.locals.islogin = true;
+        return next();
+        
         var requestPath = req.path;//请求的uri
         var inWhitelist = false;
         for (var i in whitelist) {
@@ -61,13 +67,17 @@ if(config.env!='devvv'){//开发环境不需要过滤
         }else{
             if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
                 res.locals.islogin = true;
-                var sid = req.session.id;
-                var uid = req.session.user.id;
-                console.log('--------------'+req.session.id);
-                console.log('--------------'+ uid);
-                redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
-                });
-                next();
+                if(req.session.user){
+                    var sid = req.session.id;
+                    var uid = req.session.user.id;
+                    console.log('--------------'+ sid);
+                    console.log('--------------'+ uid);
+                    redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
+                    });
+                    next();
+                }else{
+                    next();
+                }
             }else{
                 var url = req.url;
                 if(url.indexOf('login') != -1){

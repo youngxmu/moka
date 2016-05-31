@@ -8,7 +8,7 @@ a {color: #00B7FF;text-decoration:none;}
 em{font-style: normal;}
 li{list-style-type: none;}
 /** main  */
-.container{width:960px;padding: 0 20px;margin:auto;background: #ffffff;min-height: 480px;}
+.container{width:1160px;padding: 0 20px;margin:auto;background: #ffffff;min-height: 480px;}
 .title{font-size: 16px;height: 30px;line-height:30px;padding-bottom:10px;margin-bottom:10px;border-bottom: 1px solid #DDDDDD;font-weight: bold;
 padding-top: 10px;}
 .footer{margin-top:20px;height:100px;line-height: 100px;font-size: 24px;font-weight: 700;text-align: center;}
