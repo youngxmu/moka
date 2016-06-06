@@ -34,7 +34,7 @@ router.post('/list', function (req, res, next) {
 
 
 
-    paperModel.queryPaperHistoryTotalCount(uid, title, function (totalCount) {
+    paperModel.queryPaperHistoryTotalCount(uid, function (totalCount) {
         logger.info("试卷总数:", totalCount);
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
@@ -43,7 +43,7 @@ router.post('/list', function (req, res, next) {
         var start = pageSize * (pageNo - 1);
 
         logger.info("查找试卷:", start, pageSize);
-        paperModel.queryPaperHistorys(uid, title, start, pageSize, function (err, result) {
+        paperModel.queryPaperHistorys(uid, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找试卷出错", err);
                 res.json({
@@ -67,14 +67,7 @@ router.post('/list', function (req, res, next) {
 });
 
 router.post('/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
-    if(id == null || id == undefined){
-        res.json({
-            success: false,
-            msg: "根据id查询试卷出错"
-        });
-    }else{
+     var id = req.params.id;
       paperModel.getPaperHistoryById(id, function (err, result) {
           if (!err && result) {
               var history = result;
@@ -118,7 +111,6 @@ router.post('/detail/:id', function (req, res, next) {
       });
 
         
-    }
 });
 
 
@@ -126,13 +118,7 @@ router.post('/detail/:id', function (req, res, next) {
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
-    if(id == null || id == undefined){
-        res.render('error', {
-            success: false,
-            msg: "根据id查询试卷出错"
-        });
-    }else{
+
         console.log(id);
         paperModel.getPaperHistoryById(id, function (err, result) {
             if (!err && result) {
@@ -145,7 +131,6 @@ router.get('/detail/:id', function (req, res, next) {
                 });
             }
         });
-    }
 });
 
 module.exports = router;

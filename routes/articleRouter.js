@@ -87,12 +87,13 @@ router.get('/detail/:id', function (req, res, next) {
         articleModel.queryArticleById(id, function (err, result) {
             if (!err && result) {
                 var article = result;
+                console.log(article);
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 article.file_name = config.imgHost + '/uploads/' + article.file_name;
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
-                res.render('article/detail', article);
+                res.render('user/resource/detail', article);
             } else {
                 res.render('error', {
                     success: false,

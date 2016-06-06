@@ -1,6 +1,8 @@
 .question-list{padding: 10px;
 	display: none;
 	border-bottom: 1px dashed #cccccc;
+	display: block;
+	color :#000000;
 }
 .question-list.active{display: block;}
 .question-list .qbody{}
