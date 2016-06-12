@@ -16,7 +16,8 @@ var moka = {
 		article : {},
 		expert : {},
 		jsll : {},
-		jsjn : {}
+		jsjn : {},
+		hbll : {}
 	},
 	model : {},
 	album : {},

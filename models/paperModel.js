@@ -6,7 +6,7 @@ var commonUtils = require("../lib/utils.js");
 exports.queryPapers = function (name, start, pageSize, callback) {
     var sql = 'select * from paper where status = 1 ';
     var params = [];
-    if (name || name == 0) {
+    if (name && name != '') {
         sql += ' and name like %' + name + '% ';
     }
 
@@ -20,7 +20,7 @@ exports.queryPapers = function (name, start, pageSize, callback) {
 exports.queryPaperTotalCount = function (name, callback) {
     var sql = 'select count(id) as count from paper where status = 1 ';
     var params = [];
-    if (name || name == 0) {
+    if (name && name != '') {
         sql += ' and name like %' + name + '% ';
     }
 

@@ -8,8 +8,8 @@ module.exports = {
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
-	imgHost: 'http://localhost:8200',
-	host: 'http://localhost:8200',
+	imgHost: 'http://10.99.13.32:8200',
+	host: 'http://10.99.13.32:8200',
 
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
@@ -19,7 +19,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "root",
+	password: "",
 	// host: "10.99.113.69",
 	// user: "root",
 	// password: "123456",
@@ -43,7 +43,10 @@ module.exports = {
 	"whitelist": [
 		"/",
 		"/index",
-		"/index/queryArticleByMenu",
+		"/index/gfjy",
+		"/index/jsll",
+		"/index/jsjn",
+		"/index/llks",
 		
 		"/out/insertModelFromOut",
 		"/auth/login",

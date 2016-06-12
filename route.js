@@ -18,6 +18,8 @@ var userIndexRouter = require('./routes/user/indexRouter.js');
 var userExpertRouter = require('./routes/user/expertRouter.js');
 var userJSLLSupportRouter = require('./routes/user/jsllSupportRouter.js');
 var userJSJNSupportRouter = require('./routes/user/jsjnSupportRouter.js');
+var userHBLLSupportRouter = require('./routes/user/hbllRouter.js');
+
 
 /**admin*/
 var adminIndexRouter = require('./routes/admin/indexRouter.js');
@@ -45,6 +47,7 @@ module.exports = function (app) {
     
     app.use('/jsll', userJSLLSupportRouter);//主页
     app.use('/jsjn', userJSJNSupportRouter);//主页
+    app.use('/hbll', userHBLLSupportRouter);//主页
     
 
 
