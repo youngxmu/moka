@@ -5,11 +5,13 @@ var moka = {
 		paper : {},
 		question : {},
 		article : {},
-		expert : {}
+		expert : {},
+		vote : {}
 	},
 	user : {
 		resource : {},
 		user : {},
+		vote : {},
 		paper : {},
 		paperhistory : {},
 		question : {},

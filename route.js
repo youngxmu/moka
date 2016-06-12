@@ -14,6 +14,8 @@ var indexRouter = require('./routes/indexRouter.js');
 var userPaperRouter = require('./routes/user/paperRouter.js');
 var userPaperHistoryRouter = require('./routes/user/paperHistoryRouter.js');
 
+var userVoteRouter = require('./routes/user/voteRouter.js');
+
 var userIndexRouter = require('./routes/user/indexRouter.js');
 var userExpertRouter = require('./routes/user/expertRouter.js');
 var userJSLLSupportRouter = require('./routes/user/jsllSupportRouter.js');
@@ -27,6 +29,8 @@ var adminQuestionRouter = require('./routes/admin/questionRouter.js');
 var adminPaperRouter = require('./routes/admin/paperRouter.js');
 var adminUserRouter = require('./routes/admin/userRouter.js');
 var adminExpertRouter = require('./routes/admin/expertRouter.js');
+
+var adminVoteRouter = require('./routes/admin/voteRouter.js');
 
 
 
@@ -45,7 +49,9 @@ module.exports = function (app) {
     
     app.use('/jsll', userJSLLSupportRouter);//主页
     app.use('/jsjn', userJSJNSupportRouter);//主页
-    
+
+
+    app.use('/vote', userVoteRouter);//主页
 
 
     app.use('/admin', adminIndexRouter);//主页
@@ -55,7 +61,9 @@ module.exports = function (app) {
     app.use('/admin/question', adminQuestionRouter);//主页
     app.use('/admin/paper', adminPaperRouter);//主页
     app.use('/admin/expert', adminExpertRouter);//主页
+    app.use('/admin/vote', adminVoteRouter);//主页
     
+
     app.use('/upload', uploadRouter);//通用文件上传
     app.get("/", function (req, res, next) {
         res.redirect("/index")
