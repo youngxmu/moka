@@ -5,13 +5,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var multiparty = require('multiparty');
-var log4js = require('log4js');
-
 var redisUtils = require('./lib/redisUtils.js')
 
-
+var log4js = require('log4js');
 var logger =  require('./lib/log.js').logger('app');
 logger.setLevel('ERROR');
+
 var route = require('./route.js');
 var config = require('./config');
 
@@ -21,9 +20,9 @@ app.set('env', config.env);
 app.set('port', config.port);
 app.set('views', config.views);
 app.set('view engine', config.viewEngine);
-app.use(log4js.connectLogger(logger, {
-    level: "auto"
-}));
+// app.use(log4js.connectLogger(logger, {
+//     level: "auto"
+// }));
 
 app.use(bodyParser());
 app.use(methodOverride());
@@ -48,6 +47,7 @@ if(config.env!='devvvv'){//开发环境不需要过滤
         // return next();
         
         var requestPath = req.path;//请求的uri
+        console.log(req.path);
         var inWhitelist = false;
         for (var i in whitelist) {
             if (requestPath == whitelist[i]) {

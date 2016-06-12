@@ -77,7 +77,7 @@
 			var sendData = _this.queryData;
 				sendData.mid = 11;
 			var tpl = _this.tpl.articleListTpl;
-			var searchUrl = 'index/queryArticleByMenu';
+			var searchUrl = 'index/gfjy';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
@@ -101,7 +101,7 @@
 			var sendData = _this.queryData;
 				sendData.mid = 13;
 			var tpl = _this.tpl.paperListTpl3;
-			var searchUrl = 'jsll/indexlist';
+			var searchUrl = 'index/jsll';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
@@ -125,7 +125,7 @@
 			var sendData = _this.queryData;
 				sendData.mid = 14;
 			var tpl = _this.tpl.paperListTpl4;
-			var searchUrl = 'index/queryArticleByMenu';
+			var searchUrl = 'index/jsjn';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
@@ -149,7 +149,7 @@
 			var sendData = _this.queryData;
 				sendData.mid = 15;
 			var tpl = _this.tpl.paperListTpl5;
-			var searchUrl = 'paper/list';
+			var searchUrl = 'index/llks';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
@@ -169,11 +169,18 @@
 			});
 		},
 		getMD : function(dateStr){
+			console.log(dateStr);
+			if(!dateStr){
+				return '';
+			}
 			var sa1 = dateStr.split(' ')[0];
 			var sa2 = sa1.split('-');
 			return sa1;
 		},
 		getMDH : function(dateStr){
+			if(!dateStr){
+				return '';
+			}
 			var sa1 = dateStr.split('T')[0];
 			var sa2 = sa1.split('-');
 			return sa1;

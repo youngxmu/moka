@@ -11,11 +11,7 @@
 </style>
   <body>
     <%- include common/header.ejs %>
-    <!--nav/-->
-   
-
     <div class="cont">
-      
     	<div class="new1Box">
         <div class="l_scorll">
           <div class="Warp" id="Warp">
@@ -37,28 +33,24 @@
             });
           </script> 
         </div>
-        <div class="new1Mid">
+        <div class="new1Mid" style="width:845px;">
           <ul class="new1Title2">
             <h1 class="new1Title2"><span>国防教育资源</span></h1>
             <a href="resource/list" style="position:relative;top:-30px; left:450px; font-size:12px; color:#696;">>>更多</a>
             <div class="clears"></div>
           </ul>
-          <!--new1Title/-->
           <div class="new1New">
-            <table id="gfjy" class="newBox">
-            </table>
-            <!--newBox/--> 
+            <table id="gfjy" class="newBox"></table>
           </div>
         </div>
-        <!--new1Mid/-->
+        <!--new1Mid/
         <div class="new1Right">
           <h1 class="new1Title2"><span>国防教育测评</span></h1>
           <a style="position:relative;top:-22px; left:280px; font-size:12px; color:#696">>>更多</a>
-          <ul id="gfjycp">
-            
-          </ul>
+          <ul id="gfjycp"></ul>
         </div>
-        <!--new1Right/-->
+
+        -->
         <div class="clears"></div>
       </div>
 
@@ -66,9 +58,7 @@
         <div class="new3Mid">
           <h1 class="new1Title2"><span>军事理论教学</span></h1>
           <a href="jsll/list" style="position:relative;top:-22px; left:385px; font-size:12px; color:#696">>>更多</a>
-          <ul id="jsll">
-            
-          </ul>
+          <ul id="jsll"></ul>
         </div>
         <div class="new3Left">
           <h1 class="new1Title2"><span>军事技能教学</span></h1>
@@ -77,7 +67,7 @@
             <dl>
               <dt><a href="newinfo.html"><img src="images/new3leftiimg.jpg" width="158" height="97" /></a></dt>
               <dd class="new3ddTitle">有图片的放一个示例在这里</dd>
-              <dd>这里是该图片对应的部分详细内容这里是该图片对应的部分详细内容这里是该图片对应的部分详细内容这里是该图片对应的部分详细内容这里是该图片对应的部分详细内容</dd>
+              <dd>这里是该图片对应的部分部分详细内容这里是该图片对应的部分详细内容</dd>
             </dl>
             <img src="images/fenge.jpg" width="3" height="193" style="float:left;margin-top:18px;" />
             <ul id="jsjn" class="new3LeftNew">
@@ -149,7 +139,8 @@
     <script type="text/template" id="paper_list_tpl3">
     {@each list as resource}
     <li>
-      <a href="jsll/list" target="_blank">${resource.name}</a>
+      <a href="jsll/list" target="_blank">${resource.title}</a>
+      <span class="date">${resource.create_time|getMD}</span>
     </li>
     {@/each}
     </script>
@@ -157,7 +148,7 @@
     <script type="text/template" id="paper_list_tpl4">
     {@each list as resource}
     <li>
-      <a href="paper/detail/${resource.id}" target="_blank">${resource.title}</a>
+      <a href="paper/detail/${resource.id}" target="_blank">${resource.name}</a>
       <span class="date">${resource.create_time|getMD}</span>
     </li>
     {@/each}
@@ -181,7 +172,7 @@
 
     <script type="text/javascript" src="js/index.js"></script>
     <script>
-      
+      $('#nav_index').addClass('aHover');
       $(document).ready(function() {
         moka.index.init({});
       });

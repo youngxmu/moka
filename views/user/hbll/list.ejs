@@ -5,7 +5,6 @@
     <%- include ../../common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='css/resource/list.css' >
-    
   </head>
   <body>
     <%- include ../../common/header.ejs %>
@@ -26,12 +25,12 @@
 
 
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="js/user/jsll/jsll.js"></script>
-    <script type="text/javascript" src="js/user/jsll/list.js"></script>
+    <script type="text/javascript" src="js/user/hbll/list.js"></script>
     
     <script>
+      $('#nav_hbll').addClass('aHover');
       $(document).ready(function() {
-          moka.user.jsll.list.init();
+          moka.user.hbll.list.init();
       });
     </script>
   </body>

@@ -6,13 +6,15 @@ body{font-size:14px;color:#333; font-family:"宋体"; background:#F1F1F1;}
 img,a{border:0; text-decoration:none;}
 ol, ul {list-style: none; }
 .clears{ clear:both;}
-a{color:#333;}
-a:hover{color:#F00;}
+/*a{color:#333;}
+a:hover{color:#F00;}*/
 
 /*header*/
 .header{width:100%;}
-.logo{text-align:center;height:140px; background:#696 url(../images/top.jpg) top center no-repeat;}
-.logo a{ display:block;height:160px;width:100%;}
+/*.logo{text-align:center;height:140px; background:#696 url(../images/top.jpg) top center no-repeat;}*/
+/*.logo{text-align:center;height:140px; background:#696 url(../img/logo_title.jpg) top center no-repeat;}
+.logo .logo-msg{text-align:center;height:140px; background:#696 url(../img/logo_msg.jpg) top left no-repeat;}*/
+
 
 /*nav*/
 .nav{width:100%;height:50px; background:url(../images/navback.jpg) left top repeat-x;}
@@ -27,6 +29,8 @@ a:hover{color:#F00;}
 
 /*cont*/
 .cont{width:1180px;padding:10px;margin:0 auto; background:#fff;}
+.cont a{color:#333;}
+.cont a:hover{color:#F00;}
 .time{height:32px;border:#C6CACD 1px solid;line-height:32px;padding:0 10px;background:#F8F8F8; position:relative;}
 .login{ margin-left:40px;}
 #search{ position:absolute;right:0;top:0;height:33px;width:404px;}
@@ -194,3 +198,38 @@ width:95%}
   margin-top: -3px;
   border: 1px solid #cccccc;
 }
+
+
+/** new header */
+.header{background-color: #679966;}
+.logo{width: 1180px;margin: 0 auto;
+  background-image: url("../img/logo.png");
+  background-position: center left;
+  background-size: 120px 120px;
+  background-repeat: no-repeat;
+}
+
+.logo-title{
+  width: 570px;
+  background-image: url("../img/logo_title.png");
+  background-position: center left;
+  background-size: 800px auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 100%;
+  margin-left: 140px;
+}
+
+.logo-msg{
+  width: 150px;
+  background-image: url("../img/logo_msg.png");
+  background-position: bottom left;
+  background-size: 420px auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 140px;
+  vertical-align: top;
+}
+
+.logo a{ display:block;height:160px;width:100%;}
+.nav {background-color: #679966;background-image: none;}
