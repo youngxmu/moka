@@ -32,7 +32,7 @@
       <div class="desc">${obj.description}</div>
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="paper/detail/${obj.id}">查看</a>
+          <a href="vote/detail/${obj.id}">查看</a>
         </span>
       </div>
     </div>
@@ -58,9 +58,10 @@
     <script type="text/javascript" src="js/user/vote/list.js"></script>
     
     <script>
+      $('#nav_jjcp').addClass('aHover');
       $(document).ready(function() {
-            moka.user.vote.list.init();
-        });
+          moka.user.vote.list.init();
+      });
     </script>
   </body>
 </html>

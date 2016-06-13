@@ -41,6 +41,7 @@ exports.getVoteById = function (voteId, callback) {
         if(!err && result && result[0]){
             callback(err, result[0]);
         }else{
+            console.log(err);
             callback(err);    
         }
     });

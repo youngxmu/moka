@@ -40,13 +40,13 @@
 				type : 'post',
 				success : function(data){
 					if(data.success){
-						_this.questions = data.paper.questions;
+						_this.questions = data.vote.questions;
 						_this.questionsMap = {};
 						for(var index in _this.questions){
 							var question = _this.questions[index];
 							_this.questionsMap[question.id] = question;
 						}
-						$('#question_panel').html(_this.questionListTpl.render({list:data.paper.questions}));
+						$('#question_panel').html(_this.questionListTpl.render({list:data.vote.questions}));
 					}else{
 						alert(data.msg);
 					}

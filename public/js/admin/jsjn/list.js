@@ -1,6 +1,6 @@
 (function(P){
 	var _this = null;
-	_this = P.user.jsjn.list = {
+	_this = P.admin.jsjn.list = {
 		pid : 14,//系统根目录编号
 		searchUrl : 'article/queryArticleByMenu',
 		topicTree : null,

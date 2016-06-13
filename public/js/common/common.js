@@ -6,7 +6,10 @@ var moka = {
 		question : {},
 		article : {},
 		expert : {},
-		vote : {}
+		vote : {},
+		jsll : {},
+		jsjn : {},
+		hbll : {}
 	},
 	user : {
 		resource : {},

@@ -34,6 +34,10 @@ var adminExpertRouter = require('./routes/admin/expertRouter.js');
 
 var adminVoteRouter = require('./routes/admin/voteRouter.js');
 
+var adminJSLLRouter = require('./routes/admin/jsllRouter.js');
+var adminJSJNRouter = require('./routes/admin/jsjnRouter.js');
+var adminHBLLRouter = require('./routes/admin/hbllRouter.js');
+
 
 
 module.exports = function (app) {
@@ -63,6 +67,10 @@ module.exports = function (app) {
     app.use('/admin/paper', adminPaperRouter);//主页
     app.use('/admin/expert', adminExpertRouter);//主页
     app.use('/admin/vote', adminVoteRouter);//主页
+
+    app.use('/admin/jsll', adminJSLLRouter);//主页
+    app.use('/admin/jsjn', adminJSJNRouter);//主页
+    app.use('/admin/hbll', adminHBLLRouter);//主页
     
 
     app.use('/upload', uploadRouter);//通用文件上传

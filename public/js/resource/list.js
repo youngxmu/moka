@@ -131,7 +131,7 @@
 						totalpage : totalPage,
 						totalcount : totalcount,
 						pagebarCssName : 'pagination2',
-						currentPage : data.pageNo,
+						currentPage : data.currentPage,
 						onClickPage : function(pageNo) {
 							$.fn.setCurrentPage(this, pageNo);
 							_this.data.searchData.pageNo = pageNo;

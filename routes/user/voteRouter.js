@@ -1,6 +1,7 @@
 var express = require('express');
 var config = require("../../config");
 var commonUtils = require("../../lib/utils.js");
+var menuUtils = require("../../lib/menuUtils.js");
 var logger = require("../../lib/log.js").logger("voteRouter");
 
 var voteModel = require('../../models/voteModel.js');

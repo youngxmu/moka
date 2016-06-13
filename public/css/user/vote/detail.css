@@ -5,7 +5,7 @@
 	color :#000000;
 }
 .question-list.active{display: block;}
-.question-list .qbody{}
+.question-list .qbody{line-height: 1.5;}
 .question-list .qanswer-panel{line-height: 1.5;}
 .question-list .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
 .question-list .qanswer.selected{background: blue;color: #ffffff}
