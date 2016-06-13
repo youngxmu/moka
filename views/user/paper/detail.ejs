@@ -19,6 +19,10 @@
 	  			</div>
 	  			<div id="answer_panel" class="answer-panel" style="font-size:14px;">
 	  			</div>
+
+	  			<div class="btn-wrapper" style="font-size:14px;">
+					<span id="btn_commit" class="btn-commit">提交</span>
+				</div>
 	      	</div>
 	  	</div>
 
@@ -41,15 +45,15 @@
 	    <script type="juicer/template" id="question-tpl">
 	        <div class="qbody">${index}.${qbody}{@if qtype == 3}（多选）{@/if}
 			</div>
-	        {@if obj.qtype == 2 || obj.qtype == 3}
-          	<div class="qanswer-panel" data-type="${obj.qtype}">
-	          	$${obj.qanswer|formatAnswer}
+	        {@if qtype == 2 || qtype == 3}
+          	<div class="qanswer-panel" data-type="${qtype}">
+	          	$${qanswer|formatAnswer}
           	</div>
 	        {@/if}
 	    </script>
 
 	    <script type="juicer/template" id="selection-tpl">
-	        $${qanswer|formatSelection}
+	        $${qanswer,answer|formatSelection}
 	    </script>
 
 	    <script type="juicer/template" id="answer-tpl">
