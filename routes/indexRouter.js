@@ -8,6 +8,7 @@ var menuUtils = require("../lib/menuUtils.js");
 var articleModel = require('../models/articleModel.js');
 var infoModel = require('../models/infoModel.js');
 var paperModel = require('../models/paperModel.js');
+var newsModel = require('../models/newsModel.js');
 
 var router = express.Router();
 
@@ -62,6 +63,21 @@ router.get('', function (req, res, next) {
     });
 });
 
+
+router.post('/news', function (req, res, next) {
+    newsModel.queryNewsList(function(err, results){
+        if(err){
+            return res.json({
+                success : false
+            });
+        }else{
+            return res.json({
+                success : true,
+                list : results
+            });
+        }
+    });
+});
 
 //国防教育
 router.post('/gfjy', function (req, res, next) {

@@ -1,6 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.article.list = {
+		pid : 11,//系统根目录编号
 		searchUrl : '/article/queryArticleByMenu',
 		topicTree : null,
 		topicNodes : null,
@@ -66,7 +67,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/tree',
+				url : 'menu/tree/' + _this.pid,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -85,16 +86,19 @@
 			_this.initTree();
 		},
 		searchResource : function() {
-			var data = _this.data.searchData;
-			if(_this.currNode == null){
-				_this.searchUrl = '/article/list';
-			}else{
-				_this.searchUrl = '/article/queryArticleByMenu';
+			// if(_this.currNode == null){
+			// 	_this.searchUrl = '/article/list';
+			// }else{
+			// 	_this.searchUrl = '/article/queryArticleByMenu';
+			// }
+
+			if(!_this.data.searchData.mid){
+				_this.data.searchData.mid = _this.pid;
 			}
 			$.ajax({
 				type : "post",
 				url : _this.searchUrl,
-				data : data,
+				data : _this.data.searchData,
 				beforeSend : function() {
 					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},

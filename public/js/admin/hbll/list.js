@@ -1,6 +1,6 @@
 (function(P){
 	var _this = null;
-	_this = P.user.hbll.list = {
+	_this = P.admin.hbll.list = {
 		pid : 16,//系统根目录编号
 		topicTree : null,
 		topicNodes : null,
@@ -31,6 +31,21 @@
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(false);
 				$(this).removeClass('shrink').addClass('unfold').text('展开');
+			});
+
+			$('.tree-opr').on('click', '.add',function(){
+				var zTree = _this.getCurrTree();
+				_this.showAddMenuDlg();
+			});
+
+			$('.tree-opr').on('click', '.edit',function(){
+				var zTree = _this.getCurrTree();
+				_this.showEditMenuDlg();
+			});
+
+			$('.tree-opr').on('click', '.del',function(){
+				var zTree = _this.getCurrTree();
+				_this.showDelMenuDlg();
 			});
 			$('body').on('keydown','#keyword',function(e){
 		        var event = window.event || e;
@@ -117,6 +132,118 @@
 		getCurrTree : function(){
 			return _this.topicTree;
 		},
+		showAddMenuDlg : function(){
+			var data = {name : ''};
+			util.dialog.confirmDialog(
+				_this.data.editMenuDlgTpl.render(data),
+				_this.addMenu,
+				function(){},
+				'确认添加菜单'
+			);
+		},
+		showEditMenuDlg : function(){
+			var pmenu = _this.currNode;
+			console.log(pmenu);
+			var data = {name : pmenu.name};
+			util.dialog.confirmDialog(
+				_this.data.editMenuDlgTpl.render(data),
+				_this.updateMenu,
+				function(){},
+				'确认修改菜单'
+			);
+		},
+		showDelMenuDlg : function(){
+			util.dialog.confirmDialog(
+				'确认删除',
+				_this.delMenu,
+				function(){},
+				'确认删除菜单'
+			);
+		},
+		addMenu : function(){
+			var pmenu = _this.currNode;
+			var parent_id = 0;
+			var mlevel = 1;
+			if(pmenu){
+				mlevel = pmenu.mlevel + 1;
+				parent_id = pmenu.id;
+			}
+
+			var name = $('#menu_name').val();
+			
+			if(!name){
+				return false;
+			}
+
+			var node = {
+				mlevel : mlevel,
+				parent_id : parent_id,
+				name : name
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : '/menu/add',
+				data : node,
+				success : function(result){
+					if(result.success){
+						node.id = result.data.insertId;
+					}
+					console.log(_this.currNode);
+					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+				}
+			});
+		},
+		updateMenu : function(){
+			var pmenu = _this.currNode;
+
+			var name = $('#menu_name').val();
+			
+			if(!name){
+				return false;
+			}
+
+			var node = {
+				id : pmenu.id,
+				mlevel : pmenu.mlevel,
+				parent_id : pmenu.parent_id,
+				name : name
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : '/menu/update',
+				data : node,
+				success : function(result){
+					if(result.success){
+						pmenu.name = name;
+						_this.getCurrTree().updateNode(pmenu);
+					}
+					
+				}
+			});
+		},
+		delMenu : function(){
+			var pmenu = _this.currNode;
+			var node = {
+				id : pmenu.id
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : '/menu/del',
+				data : node,
+				success : function(result){
+					if(result.success){
+						_this.getCurrTree().removeNode(pmenu);
+					}
+					
+				}
+			});
+		},
 		getMenuPath : function(node){
 			var menuArr = [];
 			var level = 0;
@@ -130,6 +257,10 @@
 				node = node.getParentNode();
 			}
 			return menuArr.join(',');
+		},
+		showAddArticle : function(){
+			var menuPath = _this.getMenuPath(_this.currNode);
+			window.open('/article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

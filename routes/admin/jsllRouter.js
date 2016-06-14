@@ -11,13 +11,13 @@ router.get('/list', function (req, res, next) {
     if(!keyword || keyword == 'undefined'){
         keyword = '';
     }
-    res.render('admin/jsjn/list',{
+    res.render('admin/jsll/list',{
         keyword : keyword
     });
 });
 
 router.get('/upload', function (req, res, next) {
-    res.render('admin/jsjn/upload');
+    res.render('admin/jsll/upload');
 });
 
 router.get('/detail/:id', function (req, res, next) {
@@ -36,12 +36,12 @@ router.get('/detail/:id', function (req, res, next) {
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
 
-                var view = 'admin/jsjn/detail';
+                var view = 'admin/jsll/detail';
                 if(article.file_type == 'pic'){
-                    view = 'admin/jsjn/detail-pic';
+                    view = 'admin/jsll/detail-pic';
                 }
                 if(article.file_type == 'video'){
-                    view = 'admin/jsjn/detail-video';
+                    view = 'admin/jsll/detail-video';
                 }
                 res.render(view, article);
             } else {

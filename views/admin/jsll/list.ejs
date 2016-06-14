@@ -13,6 +13,9 @@
       <div class="sidebar">
         <div class="tree-opr">
           <a href="javascript:void(0);" class="unfold">展开</a>
+          |<a href="javascript:void(0);" class="add">增加</a>
+          |<a href="javascript:void(0);" class="edit">编辑</a>
+          |<a href="javascript:void(0);" class="del">删除</a>
         </div>
         <div style="overflow:auto;min-height:500px;" >
           <ul id="topic_tree" class="ztree"></ul>
@@ -24,7 +27,7 @@
       </div>
     </div>
 
-
+    <%- include ../common/menu-tpl.ejs %>
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/user/jsll/jsll.js"></script>
     <script type="text/javascript" src="js/user/jsll/list.js"></script>

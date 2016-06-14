@@ -20,6 +20,7 @@
 			_this.tpl.paperListTpl5 = juicer($('#paper_list_tpl5').html());
 
 			_this.initEvent();
+			_this.loadNews();
 			_this.loadList1();
 			_this.loadList3();
 			_this.loadList4();
@@ -36,6 +37,29 @@
 			$('#btn_search').click(function(){
 				var keyword = $('#keyword').val();
 				window.location.href = 'resource/list?keyword=' + keyword;
+			});
+		},
+		loadNews : function(){
+			var $panel = $('#pic');
+			$.ajax({
+				type : 'post',
+				url : 'index/news',
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(data){
+					if(data.success){
+						var list = data.list;
+						var length = list.length;
+						var tpl = juicer('{@each list as news}<li><a href="${news.link}" title="${news.title}" target="_blank" ><img src="${news.pic_url}" width="319" height="240"></a></li>{@/each}');
+						$panel.html(tpl.render(data));
+
+							CxcFocus({
+			                Id:"Warp",//主ID
+			                Time:3000//每个几秒执行
+			              });
+					}
+				}
 			});
 		},
 		loadList : function(){

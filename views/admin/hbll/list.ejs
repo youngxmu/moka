@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>军事理论研究分系统</title>
-    <%- include ../../common/meta.ejs %>
+    <title>后备力量建设分系统</title>
+    <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='css/resource/list.css' >
   </head>
   <body>
-    <%- include ../../common/header.ejs %>
+    <%- include ../common/header.ejs %>
     <div class="container">
       <div class="sidebar">
         <div class="tree-opr">
-          <a href="javascript:void(0);" class="unfold">展开</a>
+           <a href="javascript:void(0);" class="unfold">展开</a>
+          |<a href="javascript:void(0);" class="add">增加</a>
+          |<a href="javascript:void(0);" class="edit">编辑</a>
+          |<a href="javascript:void(0);" class="del">删除</a>
         </div>
         <div style="overflow:auto;min-height:500px;" >
           <ul id="topic_tree" class="ztree"></ul>
@@ -25,12 +28,12 @@
 
 
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="js/user/hbll/list.js"></script>
+    <script type="text/javascript" src="js/admin/hbll/list.js"></script>
     
     <script>
       $('#nav_hbll').addClass('aHover');
       $(document).ready(function() {
-          moka.user.hbll.list.init();
+          moka.admin.hbll.list.init();
       });
     </script>
   </body>

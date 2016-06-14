@@ -1,35 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>管理</title>
+    <title>首页管理</title>
     <%- include common/meta.ejs %>
+    <style type="text/css">
+    .container{padding-bottom: 50px;}
+    .news-edit{
+      border-bottom: 1px solid #cccccc;
+      padding: 10px 0;
+    }
+
+    .news-edit:last-child{
+      border:0;
+    }
+
+    .news-edit dl {
+        line-height: 30px;
+        margin: 0 0 10px 0;
+    }
+
+    .news-edit dl input{
+        width: 800px;
+        line-height: 30px;
+        border: 1px solid #cccccc;
+        padding: 0 10px;
+    }
+
+    .btn-wrapper{margin: 10px;}
+    .btn-commit{display: inline-block;line-height: 30px;padding: 0 20px;border: 1px solid #cccccc;
+      cursor: pointer;
+    }
+
+    </style>
   </head>
   <body>
     <%- include common/header.ejs %>
   	<div class="container">
-    	<div class="nav">
-    		<!-- dl>
-    			<a href="/admin/article/uneval" >文章审核</a>
-    		</dl>
-    		<dl>
-    			<a href="/admin/resource/list" >资源管理</a>
-    		</dl>
+    	<div id="news_panel"></div>
+      <div class="btn-wrapper" style="font-size:14px;">
+        <span id="btn_commit" class="btn-commit">提交</span>
+      </div>
+	  </div>
+
+    <script type="text/template" id="news-tpl">
+    {@each list as news, index}
+    <div class="news-edit">
         <dl>
-          <a href="/admin//evalution/list" >测评</a>
+          <label>首页图文序号${news.index}</label>
         </dl>
         <dl>
-          <a href="/admin/expert/list" >教师资源</a>
-        </dl>
-    		<dl>
-    			<a href="/admin/user/list" >用户管理</a>
-    		</dl>
-        <dl>
-          <a href="/admin/paper/list" >考试管理</a>
+          <label>标题：</label><input class="newstitle" name="title" value="${news.title}">
         </dl>
         <dl>
-          <a href="/admin/question/list" >题库管理</a>
-        </dl> -->
-    	</div>
-	 </div>
+          <label>链接：</label><input class="link" name="link" value="${news.link}">
+        </dl>
+        <dl>
+          <label>图片：</label><input class="pic_url" name="pic_url" value="${news.pic_url}">
+        </dl>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="text/javascript" src="js/admin/index.js"></script>
+    <script>
+      $(document).ready(function() {
+          moka.admin.index.init();
+      });
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 var express = require('express');
 var config = require("../../config");
-var logger = require("../../lib/log.js").logger("jsjnRouter");
+var logger = require("../../lib/log.js").logger("hbllRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
 var articleModel = require("../../models/articleModel.js");
@@ -12,13 +12,13 @@ router.get('/list', function (req, res, next) {
     if(!keyword || keyword == 'undefined'){
         keyword = '';
     }
-    res.render('admin/jsjn/list',{
+    res.render('admin/hbll/list',{
         keyword : keyword
     });
 });
 
 router.get('/upload', function (req, res, next) {
-    res.render('admin/jsjn/upload');
+    res.render('admin/hbll/upload');
 });
 
 router.get('/detail/:id', function (req, res, next) {
@@ -37,12 +37,12 @@ router.get('/detail/:id', function (req, res, next) {
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
 
-                var view = 'admin/jsjn/detail';
+                var view = 'admin/hbll/detail';
                 if(article.file_type == 'pic'){
-                    view = 'admin/jsjn/detail-pic';
+                    view = 'admin/hbll/detail-pic';
                 }
                 if(article.file_type == 'video'){
-                    view = 'admin/jsjn/detail-video';
+                    view = 'admin/hbll/detail-video';
                 }
                 res.render(view, article);
             } else {
