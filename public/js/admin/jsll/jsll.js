@@ -1,6 +1,6 @@
 (function(P){
 	var _this = null;
-	_this = P.user.jsll = {
+	_this = P.admin.jsll = {
 		init : function(){
 			$('#nav_jsll').addClass('aHover');
 		},
@@ -9,4 +9,4 @@
 	};
 })(moka);
 
-moka.user.jsll.init();
+moka.admin.jsll.init();

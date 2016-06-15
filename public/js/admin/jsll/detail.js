@@ -1,6 +1,6 @@
 (function(P){
 	var _this = null;
-	_this = P.user.resource.detail = {
+	_this = P.admin.resource.detail = {
 		init : function(){
 			_this.articleId = $('#article_id').val();;
 			_this.initEvent();

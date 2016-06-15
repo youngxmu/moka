@@ -16,6 +16,29 @@ router.get('/list', function (req, res, next) {
     });
 });
 
+
+
+router.post('/reource/list', function (req, res, next) {
+    infoModel.queryInfos(function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: false,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+
+
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        }
+    });
+});
+
+
 router.get('/upload', function (req, res, next) {
     res.render('admin/jsll/upload');
 });

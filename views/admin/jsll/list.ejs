@@ -2,13 +2,13 @@
 <html>
   <head>
     <title>军事理论研究分系统</title>
-    <%- include ../../common/meta.ejs %>
+    <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='css/resource/list.css' >
     
   </head>
   <body>
-    <%- include ../../common/header.ejs %>
+    <%- include ../common/header.ejs %>
     <div class="container">
       <div class="sidebar">
         <div class="tree-opr">
@@ -29,12 +29,12 @@
 
     <%- include ../common/menu-tpl.ejs %>
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="js/user/jsll/jsll.js"></script>
-    <script type="text/javascript" src="js/user/jsll/list.js"></script>
+    <script type="text/javascript" src="js/admin/jsll/jsll.js"></script>
+    <script type="text/javascript" src="js/admin/jsll/list.js"></script>
     
     <script>
       $(document).ready(function() {
-          moka.user.jsll.list.init();
+          moka.admin.jsll.list.init();
       });
     </script>
   </body>

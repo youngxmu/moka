@@ -1,8 +1,8 @@
 (function(P){
 	var _this = null;
-	_this = P.user.jsll.list = {
-		pid : 14,//系统根目录编号
-		searchUrl : 'jsll/list',
+	_this = P.admin.jsll.list = {
+		pid : 13,//系统根目录编号
+		searchUrl : 'admin/jsll/resource/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -69,7 +69,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'jsll/list',
+				url : 'menu/tree/' + _this.pid,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');

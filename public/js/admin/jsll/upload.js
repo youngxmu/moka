@@ -1,6 +1,6 @@
 (function(P){
 	var _this = null;
-	_this = P.user.resource.upload = {
+	_this = P.admin.resource.upload = {
 		articleId : null,
 		editor : null,
 		tpl : {
