@@ -1,8 +1,8 @@
 (function(P){
 	var _this = null;
-	_this = P.admin.jsjn.list = {
-		pid : 1302,//系统根目录编号
-		searchUrl : 'article/queryArticleByMenu',
+	_this = P.admin.jsll.list = {
+		pid : 1303,//系统根目录编号
+		searchUrl : 'admin/jsll/resource/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -18,19 +18,11 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
-			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
 			_this.initTopic();
-			_this.searchResource();
 		},
 		initEvent : function(){
-			$('#resource_list').on('click','.view',function(){
-				var id = $(this).attr('data-id');
-				var data = _this.data.resourceList[id];
-				var options = {isPreview : false, resourceType : 2};
-			});
-			
 			$('.tree-opr').on('click', '.unfold',function(){
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(true);
@@ -78,7 +70,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/tree/' + _this.pid,
+				url : _this.searchUrl,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -95,97 +87,6 @@
 				_this.topicNodes.push(menu);
 			}
 			_this.initTree();
-		},
-		searchResource : function() {
-			var data = _this.data.searchData;
-			if(_this.data.searchData.keyword){
-				_this.searchUrl = 'article/queryArticleByTitle';
-			}else{
-				_this.searchUrl = 'article/queryArticleByMenu';
-			}
-
-			if(!_this.data.searchData.mid){
-				_this.data.searchData.mid = _this.pid;
-			}
-			$.ajax({
-				type : "post",
-				url : _this.searchUrl,
-				data : data,
-				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-				},
-				success : _this.initPageResource
-			});
-		},
-		initPageResource : function(data) {
-			if (!data.success) {
-				util.dialog.infoDialog('查询出错');
-				return;
-			}
-	
-			_this.data.resourceList = {};
-			for ( var index in data.list) {
-				var resource = data.list[index];
-				_this.data.resourceList[resource.id] = resource;
-			}
-			data = data.data;
-			var totalPage = data.totalPage;
-			var totalcount = data.totalCount;
-			var html = _this.data.resourceTpl.render(data);
-			if(totalcount == 0){
-				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
-			}
-			$('#resource_list').html(html);
-			
-			if (totalPage <= 1) {
-				$("#pagebar").html('');
-			}
-			if (totalPage >= 2) {
-				$(function() {
-					$.fn.jpagebar({
-						renderTo : $("#pagebar"),
-						totalpage : totalPage,
-						totalcount : totalcount,
-						pagebarCssName : 'pagination2',
-						currentPage : data.currentPage,
-						onClickPage : function(pageNo) {
-							$.fn.setCurrentPage(this, pageNo);
-							_this.data.searchData.pageNo = pageNo;
-							if (_this.instance_resource == null)
-								_this.instance_resource = this;
-							var data = _this.data.searchData;
-							$.ajax({
-								type : "post",
-								url : _this.searchUrl,
-								data : data,
-								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-								},
-								success : function(data){
-									if (!data.success) {
-										util.dialog.infoDialog('查询出错');
-										return;
-									}
-							
-									_this.data.resourceList = {};
-									for ( var index in data.list) {
-										var resource = data.list[index];
-										_this.data.resourceList[resource.id] = resource;
-									}
-									data = data.data;
-									var totalPage = data.totalPage;
-									var totalcount = data.totalCount;
-									var html = _this.data.resourceTpl.render(data);
-									if(totalcount == 0){
-										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
-									}
-									$('#resource_list').html(html);
-								}
-							});
-						}
-					});
-				});
-			}
 		},
 		setting : {
 			view : {
@@ -224,9 +125,25 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					_this.data.searchData.mid = treeNode.id;
-					_this.data.searchData.pageNo = 1;
-					_this.searchResource();
+					if(_this.currNode.content){
+						$('#content').html(_this.currNode.content);		
+					}else{
+						$.ajax({
+							url : 'admin/jsll/info/' + _this.currNode.id,
+							type : 'get',
+							async : false,
+							success : function(data){
+								if(data.success){
+									$('#content').html(data.data.content);		
+									_this.currNode.content = data.data.content;
+
+								}else{
+									$('#content').html('');			
+								}
+							}
+						});
+					}
+					
 					return true;
 				}
 			}
@@ -241,23 +158,32 @@
 		},
 		showAddMenuDlg : function(){
 			var data = {name : ''};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.addMenu,
-				function(){},
-				'确认添加菜单'
-			);
+			var d = dialog({
+			    title: '添加',
+			    content: _this.data.editMenuDlgTpl.render(data),
+			    okValue : '确认',
+     	        ok : _this.addMenu,
+     	        cancelValue : '取消',
+     	        cancel : function(){}
+			});
+			d.showModal();	
 		},
 		showEditMenuDlg : function(){
 			var pmenu = _this.currNode;
 			console.log(pmenu);
-			var data = {name : pmenu.name};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.updateMenu,
-				function(){},
-				'确认修改菜单'
-			);
+			var data = {name : pmenu.name,
+				content : pmenu.content
+			};
+
+			var d = dialog({
+			    title: '确认修改',
+			    content: _this.data.editMenuDlgTpl.render(data),
+			    okValue : '确认',
+     	        ok : _this.updateMenu,
+     	        cancelValue : '取消',
+     	        cancel : function(){}
+			});
+			d.showModal();	
 		},
 		showDelMenuDlg : function(){
 			util.dialog.confirmDialog(
@@ -269,15 +195,15 @@
 		},
 		addMenu : function(){
 			var pmenu = _this.currNode;
-			var parent_id = 0;
+			var parent_id = 10;
 			var mlevel = 1;
 			if(pmenu){
 				mlevel = pmenu.mlevel + 1;
 				parent_id = pmenu.id;
 			}
 
-			var name = $('#menu_name').val();
-			
+			var name = $('#info_name').val();
+			var content = $('#info_content').val();
 			if(!name){
 				return false;
 			}
@@ -285,27 +211,30 @@
 			var node = {
 				mlevel : mlevel,
 				parent_id : parent_id,
-				name : name
+				name : name,
+				content : content
 			};
 
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/add',
+				url : 'admin/jsll/addinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						node.id = result.data.insertId;
 					}
-					console.log(_this.currNode);
-					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+					// _this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+
+					_this.initTopic();
 				}
 			});
 		},
 		updateMenu : function(){
 			var pmenu = _this.currNode;
 
-			var name = $('#menu_name').val();
+			var name = $('#info_name').val();
+			var content = $('#info_content').val();
 			
 			if(!name){
 				return false;
@@ -315,18 +244,20 @@
 				id : pmenu.id,
 				mlevel : pmenu.mlevel,
 				parent_id : pmenu.parent_id,
-				name : name
+				name : name,
+				content : content
 			};
 
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/update',
+				url : 'admin/jsll/updateinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						pmenu.name = name;
 						_this.getCurrTree().updateNode(pmenu);
+						_this.initTopic();
 					}
 					
 				}
@@ -341,11 +272,12 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/del',
+				url : '/admin/jsll/delinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						_this.getCurrTree().removeNode(pmenu);
+						_this.initTopic();
 					}
 					
 				}

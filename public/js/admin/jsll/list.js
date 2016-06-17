@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.jsll.list = {
-		pid : 13,//系统根目录编号
+		pid : 1301,//系统根目录编号
 		searchUrl : 'admin/jsll/resource/list',
 		topicTree : null,
 		topicNodes : null,
@@ -18,6 +18,7 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
+			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
 			_this.initTopic();
 		},

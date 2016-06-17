@@ -10,9 +10,9 @@
   <body>
     <%- include ../common/header.ejs %>
     <div class="submenu">
-      <a href="admin/jsll/list" class="active">训练计划</a>
+      <a href="admin/jsll/list">训练计划</a>
       <a href="admin/jsll/list2">训练实施</a>
-      <a href="admin/jsll/list3">辅助资料</a>
+      <a href="admin/jsll/list3" class="active">辅助资料</a>
     </div>
     <div class="container">
       <div class="sidebar">
@@ -32,10 +32,15 @@
       </div>
     </div>
 
-    <%- include ../common/menu-tpl.ejs %>
+    <script type="text/template" id="edit_menu_dlg">
+    <div class="">
+      <p><input id="info_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;"></p>
+      <p><textarea id="info_content" placeholder="输入内容" style="width:600px;height:400px;">${content}</textarea></p>
+    </div>
+    </script>
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/admin/jsll/jsll.js"></script>
-    <script type="text/javascript" src="js/admin/jsll/list.js"></script>
+    <script type="text/javascript" src="js/admin/jsll/list3.js"></script>
     
     <script>
       $(document).ready(function() {
