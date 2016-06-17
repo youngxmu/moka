@@ -3,6 +3,7 @@ var config = require("../../config");
 var logger = require("../../lib/log.js").logger("jsllRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
+var infoModel = require("../../models/infoModel.js");
 var articleModel = require("../../models/articleModel.js");
 var router = express.Router();
 
@@ -16,9 +17,29 @@ router.get('/list', function (req, res, next) {
     });
 });
 
+router.get('/list2', function (req, res, next) {
+    var keyword = req.query.keyword;
+    if(!keyword || keyword == 'undefined'){
+        keyword = '';
+    }
+    res.render('admin/jsll/list2',{
+        keyword : keyword
+    });
+});
+
+router.get('/list3', function (req, res, next) {
+    var keyword = req.query.keyword;
+    if(!keyword || keyword == 'undefined'){
+        keyword = '';
+    }
+    res.render('admin/jsll/list3',{
+        keyword : keyword
+    });
+});
 
 
-router.post('/reource/list', function (req, res, next) {
+
+router.post('/resource/list', function (req, res, next) {
     infoModel.queryInfos(function (err, result) {
         if (!err && result) {
             res.json({
@@ -130,6 +151,86 @@ router.post('/save', function (req, res) {
         });
     }
     
+});
+
+router.get('/info/:id', function (req, res, next) {
+    var id = req.params.id;
+    infoModel.queryInfoById(id, function (err, result) {
+        if (err || result.length == 0) {
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        } else {
+           res.json({
+                success: true,
+                data: result[0]
+            });
+        }
+    });
+});
+
+
+router.post('/addinfo', function(req, res, next) {
+    var name = req.body.name;
+    var content = req.body.content;
+    var parent_id = req.body.parent_id;
+    var mlevel = req.body.mlevel;
+    
+    
+    logger.info("增加:admin-id-->", name, mlevel, parent_id);
+    infoModel.addInfo(name, content, parent_id, mlevel, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                msg: "添加失败"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "添加成功",
+                data : result
+            });
+        }
+    });
+});
+
+router.post('/updateinfo', function(req, res, next) {
+    var name = req.body.name;
+    var id = req.body.id;
+    
+    infoModel.updateInfo(id, name, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                msg: "添加失败"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "添加成功"
+            });
+        }
+    });
+});
+
+router.post('/delinfo', function(req, res, next) {
+    var id = req.body.id;
+    
+    infoModel.delInfo(id, function (err, result) {
+        if (err) {
+            logger.error("删除出错", err);
+            res.json({
+                success: false,
+                msg: "删除出错"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "删除成功"
+            });
+        }
+    });
 });
 
 module.exports = router;

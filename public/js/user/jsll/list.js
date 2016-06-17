@@ -1,8 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.user.jsll.list = {
-		pid : 14,//系统根目录编号
-		searchUrl : 'jsll/list',
+		pid : 1301,//系统根目录编号
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -49,7 +48,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'jsll/list',
+				url : 'menu/tree/' + _this.pid,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -104,8 +103,24 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode.content);
-					$('#content').html(_this.currNode.content);
+					if(_this.currNode.content){
+						$('#content').html(_this.currNode.content);		
+					}else{
+						$.ajax({
+							url : 'admin/jsll/info/' + _this.currNode.id,
+							type : 'get',
+							async : false,
+							success : function(data){
+								if(data.success){
+									$('#content').html(data.data.content);		
+									_this.currNode.content = data.data.content;
+
+								}else{
+									$('#content').html('');			
+								}
+							}
+						});
+					}
 					return true;
 				}
 			}
