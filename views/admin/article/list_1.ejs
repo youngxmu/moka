@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>数字资源</title>
-    <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/admin/article/list.css' />
+    <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='css/admin/article/list.css' />
   </head>
   <body>
     <input type="hidden" id="mid" value="<%= mid %>">
@@ -29,7 +29,7 @@
     <div class="container">
       <div id="main_list" class="main-atlist">
         <!-- <div class="crumb">
-          <a href="/index">首页</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="/article/list">数字资源</a>
+          <a href="index">首页</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="article/list">数字资源</a>
         </div> -->
         
       </div>
@@ -62,13 +62,13 @@
     <script type="text/template" id="article_list_tpl">
     {@each list as resource}
     <li>
-      <a href="/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+      <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       <span class="date">${resource.create_time}</span>
     </li>
     {@/each}
     </script>
 
-    <script type="text/javascript" src="/js/admin/article/list.js"></script>
+    <script type="text/javascript" src="js/admin/article/list.js"></script>
     <script>
       $(document).ready(function() {
             moka.admin.article.list.init({});

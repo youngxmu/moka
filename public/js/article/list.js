@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.article.list = {
-		searchUrl : '/article/queryArticleByMenu',
+		searchUrl : 'article/queryArticleByMenu',
 		tpl : {
 			articleListTpl : null
 		},
@@ -52,7 +52,7 @@
 			}
 			$.ajax({
 				type : 'get',
-				url : '/menu/map',
+				url : 'menu/map',
 				success : function(menuMap){
 					_this.menuMap = menuMap;
 					var fmid = $nav.find('span').first().attr('data-id');

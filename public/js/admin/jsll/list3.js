@@ -272,7 +272,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/admin/jsll/delinfo',
+				url : 'admin/jsll/delinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -299,7 +299,7 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('/article/edit?menuPath=' + menuPath);
+			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.article.uneval = {
-		searchUrl : '/article/uneval',
+		searchUrl : 'article/uneval',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -61,10 +61,10 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/tree',
+				url : 'menu/tree',
 				dataType : 'json',
 				beforeSend : function() {
-					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
+					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
 				},
 				success : _this.handleTopic 
 			});
@@ -86,7 +86,7 @@
 				url : _this.searchUrl,
 				data : data,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;font-size:12px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					$('#resource_list').html('<div style="text-align:center;margin-top:20px;font-size:12px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
 				success : _this.initPageResource 
 			});
@@ -233,7 +233,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/add',
+				url : 'menu/add',
 				data : node,
 				success : function(result){
 					console.log('reload');
@@ -263,7 +263,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/update',
+				url : 'menu/update',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -284,7 +284,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/del',
+				url : 'menu/del',
 				data : node,
 				success : function(result){
 					if(result.success){

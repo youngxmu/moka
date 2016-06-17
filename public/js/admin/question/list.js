@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.question.list = {
-		searchUrl : '/admin/question/list',
+		searchUrl : 'admin/question/list',
 		tpl : {
 			questionListTpl : null
 		},
@@ -122,7 +122,7 @@
 
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/save',
+						url : 'admin/question/save',
 						data : question,
 						success : function(result){
 							_this.search();
@@ -182,7 +182,7 @@
 
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/save',
+						url : 'admin/question/save',
 						data : question,
 						success : function(result){
 							_this.search();
@@ -204,7 +204,7 @@
 			    ok : function(){
                     $.ajax({
 						type : 'post',
-						url : '/admin/question/del',
+						url : 'admin/question/del',
 						data : {id : id},
 						success : function(result){
 							_this.search();

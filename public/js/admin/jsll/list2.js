@@ -191,7 +191,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/add',
+				url : 'menu/add',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -221,7 +221,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/update',
+				url : 'menu/update',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -241,7 +241,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/del',
+				url : 'menu/del',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -267,7 +267,7 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('/article/edit?menuPath=' + menuPath);
+			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

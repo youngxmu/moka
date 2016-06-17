@@ -34,14 +34,13 @@ router.post('/admin/login', function (req, res, next) {
     }
 
     password = commonUtils.md5(password);
-    console.log(password);
     adminModel.query(username, password, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var admin = result[0];
             delete admin.password;
             req.session.admin = admin;
             //登录成功
-            res.redirect('/admin/index');
+            res.redirect('/moka/admin/index');
             // res.send(admin);
         } else {
             res.render('error', {
@@ -91,7 +90,7 @@ router.post('/user/login', function (req, res, next) {
             delete user.password;
             req.session.user = user;
             //登录成功
-            res.redirect('/index');
+            res.redirect('/moka/index');
         } else {
             res.render('error', {
                 success: false,

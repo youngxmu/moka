@@ -3,8 +3,8 @@
   <head>
     <title>后台管理</title>
     <%- include ../common/meta.ejs %>
-    <link rel='stylesheet' href='/css/zTreeStyle/zTreeStyle.css' >
-    <link rel='stylesheet' href='/css/admin/article/list.css' >
+    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='css/admin/article/list.css' >
     
   </head>
   <body>
@@ -45,12 +45,12 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
-        <a href="/admin/article/detail/${resource.id}">${resource.title}</a>
+        <a href="admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
       <span class="oper">
-        <a href="javascript:void(0);" data-id="${resource.id}" class="edit">编辑</a>
+        <a href="admin/article/detail/${resource.id}" target="_blank" data-id="${resource.id}" class="edit">编辑</a>
         <a href="javascript:void(0);" data-id="${resource.id}" class="del">删除</a>
       </span>
     </div>
@@ -59,8 +59,8 @@
 
     <%- include ../common/menu-tpl.ejs %>
 
-    <script type="text/javascript" src="/js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="/js/admin/article/list.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="js/admin/article/list.js"></script>
     <script>
       $(document).ready(function() {
             moka.admin.article.list.init();

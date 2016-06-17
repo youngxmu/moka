@@ -15,7 +15,7 @@
 		},
 		initEvent : function(){
 			$('#btn_edit').on('click', function(){
-				window.location.href = '/admin/article/edit?id=' + _this.articleId;
+				window.location.href = 'admin/article/edit?id=' + _this.articleId;
 			});
 
 			$('#btn_check').on('click', _this.oncheck);
@@ -39,7 +39,7 @@
 		},
 		pass : function(){
 			$.ajax({
-				url : '/admin/check/article',
+				url : 'admin/check/article',
 				type : 'post',
 				data : {
 					articleId : _this.articleId,
@@ -58,7 +58,7 @@
 				return false;
 			}
 			$.ajax({
-				url : '/admin/check/article',
+				url : 'admin/check/article',
 				type : 'post',
 				data : {
 					articleId : _this.articleId,

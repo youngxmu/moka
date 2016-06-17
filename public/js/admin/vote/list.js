@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.vote.list = {
-		searchUrl : '/admin/vote/list',
+		searchUrl : 'admin/vote/list',
 		tpl : {
 			paperListTpl : null
 		},
@@ -64,7 +64,7 @@
 					paper.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
-						url : '/admin/vote/save',
+						url : 'admin/vote/save',
 						data : paper,
 						success : function(result){
 							_this.search();
@@ -84,7 +84,7 @@
 			 	$.ajax({
 					type : 'post',
 					async : false,
-					url : '/admin/vote/detail/' + id,
+					url : 'admin/vote/detail/' + id,
 					success : function(result){
 						if(!result.success){
 							return false;
@@ -117,7 +117,7 @@
 					paper.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
-						url : '/admin/vote/save',
+						url : 'admin/vote/save',
 						data : paper,
 						success : function(result){
 							_this.search();
@@ -139,7 +139,7 @@
 			    ok : function(){
                     $.ajax({
 						type : 'post',
-						url : '/admin/vote/del',
+						url : 'admin/vote/del',
 						data : {id : id},
 						success : function(result){
 							_this.search();
