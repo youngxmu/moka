@@ -26,7 +26,7 @@
 			for(var type in P.fileType){
 				fileTypeFilters.push(type);
 			}
-			_this.initUploader('upload/file', fileTypeFilters.join(','));
+			_this.initUploader('/moka/upload/file', fileTypeFilters.join(','));
 			
 		},
 		initEvent : function(){

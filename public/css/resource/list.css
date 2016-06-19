@@ -45,4 +45,15 @@
 	font-size: 12px;vertical-align: top;
 }
 
+.submenu{
+	background: #ffffff none repeat scroll 0 0;
+    margin: auto;
+    line-height: 40px;
+    padding: 0 20px;
+    width: 960px;
+    font-size: 16px;
+    border-bottom: 1px solid #cccccc;
+}
 
+.submenu a{width: 100px;padding: 0 10px;}
+.submenu a.active{color:#333;}

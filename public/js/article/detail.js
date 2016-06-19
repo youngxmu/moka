@@ -12,7 +12,7 @@
 		},
 		initEvent : function(){
 			$('#btn_edit').on('click', function(){
-				window.location.href = '/article/edit?id=' + _this.articleId;
+				window.location.href = 'article/edit?id=' + _this.articleId;
 			});
 		}
 	};

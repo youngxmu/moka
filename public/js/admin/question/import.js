@@ -4,7 +4,7 @@
 		callback : function(){
 
 		},
-		searchUrl : '/admin/question/list',
+		searchUrl : 'admin/question/list',
 		tpl : {
 			dlgTpl : '<div id="im_question_dlg" class="im-question-dlg"><div class="result-panel"><ul id="selected_list" class="selected-list"><li></li></ul></div><div class="list-panel"><div id="question_list" class="import-question-list"></div><div id="question_pagebar"></div></div></div>',
 			questionListTpl : '{@each list as obj, index}<div class="question-list"><div class="qtype">${index|formatIndex}.&nbsp;${obj.qtype|getQType}<div class="question-oper"><span data-id="${obj.id}" class="check">选择</span></div></div><div class="qbody">${obj.qbody}</div>{@if obj.qtype == 2}<div class="qanswer">$${obj.qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${obj.rtanswer}</div></div>{@/each}',

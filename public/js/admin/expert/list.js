@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.expert.list = {
-		searchUrl : '/admin/expert/list',
+		searchUrl : 'admin/expert/list',
 		tpl : {
 			expertListTpl : null
 		},
@@ -61,7 +61,7 @@
 					expert.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
-						url : '/admin/expert/save',
+						url : 'admin/expert/save',
 						data : expert,
 						success : function(result){
 							_this.search();
@@ -81,7 +81,7 @@
 			 	$.ajax({
 					type : 'post',
 					async : false,
-					url : '/admin/expert/detail/' + id,
+					url : 'admin/expert/detail/' + id,
 					success : function(result){
 						if(!result.success){
 							return false;
@@ -114,7 +114,7 @@
 					expert.qids = qidArr.join(',');
                     $.ajax({
 						type : 'post',
-						url : '/admin/expert/save',
+						url : 'admin/expert/save',
 						data : expert,
 						success : function(result){
 							_this.search();
@@ -136,7 +136,7 @@
 			    ok : function(){
                     $.ajax({
 						type : 'post',
-						url : '/admin/expert/del',
+						url : 'admin/expert/del',
 						data : {id : id},
 						success : function(result){
 							_this.search();

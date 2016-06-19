@@ -76,7 +76,14 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                     });
                     next();
                 }else{
-                    next();
+                    var url = req.url;
+                    if(!req.session.admin && url.indexOf('/admin/') != -1){
+                        res.redirect("/moka/auth/admin/login");    
+                        // res.redirect("/auth/admin/login");   
+                    }else{
+                        next();    
+                    }
+                    
                 }
             }else{
                 var url = req.url;
@@ -84,11 +91,11 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
-                        // res.redirect("/moka/auth/admin/login");    
-                        res.redirect("/auth/admin/login");    
+                        res.redirect("/moka/auth/admin/login");    
+                        // res.redirect("/auth/admin/login");    
                     }else{
-                        // res.redirect("/moka/auth/user/login");
-                        res.redirect("/auth/user/login");
+                        res.redirect("/moka/auth/user/login");
+                        // res.redirect("/auth/user/login");
                     }    
                 }
             }
@@ -120,6 +127,7 @@ app.use(function(req, res, next) {//判断是否是上传图片的中间件
                 next();
             });
         }catch(e){
+            console.log(e);
             logger.error("上传过程出错",e);
             return res.render("error",{
                 msg: "上传文件生成form解析过程出错"

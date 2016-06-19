@@ -169,7 +169,7 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('/article/edit?menuPath=' + menuPath);
+			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

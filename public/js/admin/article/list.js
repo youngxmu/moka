@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.admin.article.list = {
 		pid : 11,//系统根目录编号
-		searchUrl : '/article/queryArticleByMenu',
+		searchUrl : 'article/queryArticleByMenu',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -70,7 +70,7 @@
 				url : 'menu/tree/' + _this.pid,
 				dataType : 'json',
 				beforeSend : function() {
-					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
+					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
 				},
 				success : _this.handleTopic 
 			});
@@ -87,9 +87,9 @@
 		},
 		searchResource : function() {
 			// if(_this.currNode == null){
-			// 	_this.searchUrl = '/article/list';
+			// 	_this.searchUrl = 'article/list';
 			// }else{
-			// 	_this.searchUrl = '/article/queryArticleByMenu';
+			// 	_this.searchUrl = 'article/queryArticleByMenu';
 			// }
 
 			if(!_this.data.searchData.mid){
@@ -100,7 +100,7 @@
 				url : _this.searchUrl,
 				data : _this.data.searchData,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
 				success : _this.initPageResource
 			});
@@ -147,7 +147,7 @@
 								url : _this.searchUrl,
 								data : data,
 								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="/img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 								},
 								success : function(data){
 									if (!data.success) {
@@ -279,7 +279,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/add',
+				url : 'menu/add',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -309,7 +309,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/update',
+				url : 'menu/update',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -329,7 +329,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : '/menu/del',
+				url : 'menu/del',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -340,7 +340,7 @@
 			});
 		},
 		getMenuPath : function(node){
-			var menuArr = [];
+			var menuArr = [_this.pid];
 			var level = 0;
 			if(node == null){
 				return '';
@@ -355,7 +355,7 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('/article/edit?menuPath=' + menuPath);
+			window.open('admin/article/upload?menuPath=' + menuPath);
 		}
 	};
 }(moka));

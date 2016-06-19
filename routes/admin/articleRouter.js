@@ -87,6 +87,10 @@ router.get('/detail/:id', function (req, res, next) {
 
 
 
+router.get('/upload', function (req, res, next) {
+    res.render('admin/article/upload');
+});
+
 //创建文章
 router.post('/save', function (req, res) {
     var id = req.body.id;
@@ -145,6 +149,51 @@ router.post('/save', function (req, res) {
     
 });
 
+// router.get('/edit', function(req, res, next) {
+//     var id = req.query.id;
+//     var menuPath = req.query.menuPath;
+//     var isAdmin = true;
+//     if(!req.session.admin){
+//         isAdmin = false;
+//     }
+
+//     var menuList = [];
+//     if(menuPath != null && menuPath != ''){
+//         var menuMap = menuUtils.getMenuMap();
+//         var menuArr = menuPath.split(',');
+//         var lastIndex = menuArr.length - 1;
+//         console.log(menuArr);
+//         for(var i=lastIndex;i>=0;i--){
+//             var menu = menuMap[menuArr[i]];
+//             menuList.push(menu);
+//         }
+//     }
+//     if(id == null || id == undefined){
+//         res.render('admin/article/edit', {
+//             menuList: menuList,
+//             isAdmin : isAdmin
+//         });
+//     }else{
+//         articleModel.getArticleById(id, function (err, result) {
+//             if (!err) {
+//                 var article = result;
+//                 article.isAdmin = isAdmin;
+//                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
+//                 article.menuList = menuList;
+//                 res.render('admin/article/edit', 
+//                     article
+//                 );
+//             } else {
+//                 res.render('error', {
+//                     success: false,
+//                     msg: "根据id查询文章出错"
+//                 });
+//             }
+//         });
+//     }
+// });
+
+
 router.get('/edit', function(req, res, next) {
     var id = req.query.id;
     var menuPath = req.query.menuPath;
@@ -165,7 +214,7 @@ router.get('/edit', function(req, res, next) {
         }
     }
     if(id == null || id == undefined){
-        res.render('admin/article/edit', {
+        res.render('admin/article/editres', {
             menuList: menuList,
             isAdmin : isAdmin
         });
@@ -175,8 +224,12 @@ router.get('/edit', function(req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
+                
                 article.menuList = menuList;
-                res.render('admin/article/edit', 
+                res.render('admin/article/editres', 
                     article
                 );
             } else {

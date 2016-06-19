@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.user.list = {
-		searchUrl : '/admin/user/queryList',
+		searchUrl : 'admin/user/queryList',
 		tpl : {
 			userListTpl : null//模特列表模板
 		},
@@ -27,18 +27,18 @@
 
 				if($('#user_id').val()){
 					_this.queryData.userId = $('#user_id').val();
-					_this.searchUrl = '/admin/user/queryUserById';
+					_this.searchUrl = 'admin/user/queryUserById';
 				}else if($('#user_name').val()){
 					_this.queryData.name = $('#user_name').val();
-					_this.searchUrl = '/admin/user/queryUserByName';
+					_this.searchUrl = 'admin/user/queryUserByName';
 				}else if($('#user_tel').val()){
 					_this.queryData.tel = $('#user_tel').val();
-					_this.searchUrl = '/admin/user/queryUserByTel';
+					_this.searchUrl = 'admin/user/queryUserByTel';
 				}else if($('#user_email').val()){
 					_this.queryData.email = $('#user_email').val();
-					_this.searchUrl = '/admin/user/queryUserByEmail';
+					_this.searchUrl = 'admin/user/queryUserByEmail';
 				}else{
-					_this.searchUrl = '/admin/user/queryList';
+					_this.searchUrl = 'admin/user/queryList';
 				}
 				_this.search();
 			});

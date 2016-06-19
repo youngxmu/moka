@@ -19,7 +19,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "root",
+	password: "123a321",
 	// host: "10.99.113.69",
 	// user: "root",
 	// password: "123456",

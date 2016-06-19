@@ -54,7 +54,50 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
+router.get('/edit', function(req, res, next) {
+    var id = req.query.id;
+    var menuPath = req.query.menuPath;
+    var isAdmin = true;
+    if(!req.session.admin){
+        isAdmin = false;
+    }
 
+    var menuList = [];
+    if(menuPath != null && menuPath != ''){
+        var menuMap = menuUtils.getMenuMap();
+        var menuArr = menuPath.split(',');
+        var lastIndex = menuArr.length - 1;
+        console.log(menuArr);
+        for(var i=lastIndex;i>=0;i--){
+            var menu = menuMap[menuArr[i]];
+            menuList.push(menu);
+        }
+    }
+    console.log(menuList);
+    if(id == null || id == undefined){
+        res.render('user/resource/edit', {
+            menuList: menuList,
+            isAdmin : isAdmin
+        });
+    }else{
+        articleModel.getArticleById(id, function (err, result) {
+            if (!err) {
+                var article = result;
+                article.isAdmin = isAdmin;
+                article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                article.menuList = menuList;
+                res.render('user/resource/edit', 
+                    article
+                );
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询文章出错"
+                });
+            }
+        });
+    }
+});
 //创建文章
 router.post('/save', function (req, res) {
     var id = req.body.id;

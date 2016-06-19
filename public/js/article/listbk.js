@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.article.list = {
-		searchUrl : '/article/list',
+		searchUrl : 'article/list',
 		tpl : {
 			articleListTpl : null
 		},
