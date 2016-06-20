@@ -125,8 +125,24 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode.content);
-					$('#content').html(_this.currNode.content);
+					if(_this.currNode.content){
+						$('#content').html(_this.currNode.content);		
+					}else{
+						$.ajax({
+							url : 'admin/jsll/info/' + _this.currNode.id,
+							type : 'get',
+							async : false,
+							success : function(data){
+								if(data.success){
+									$('#content').html(data.data.content);		
+									_this.currNode.content = data.data.content;
+
+								}else{
+									$('#content').html('');			
+								}
+							}
+						});
+					}
 					return true;
 				}
 			}
@@ -141,23 +157,32 @@
 		},
 		showAddMenuDlg : function(){
 			var data = {name : ''};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.addMenu,
-				function(){},
-				'确认添加菜单'
-			);
+			var d = dialog({
+			    title: '添加',
+			    content: _this.data.editMenuDlgTpl.render(data),
+			    okValue : '确认',
+     	        ok : _this.addMenu,
+     	        cancelValue : '取消',
+     	        cancel : function(){}
+			});
+			d.showModal();	
 		},
 		showEditMenuDlg : function(){
 			var pmenu = _this.currNode;
 			console.log(pmenu);
-			var data = {name : pmenu.name};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.updateMenu,
-				function(){},
-				'确认修改菜单'
-			);
+			var data = {name : pmenu.name,
+				content : pmenu.content
+			};
+
+			var d = dialog({
+			    title: '确认修改',
+			    content: _this.data.editMenuDlgTpl.render(data),
+			    okValue : '确认',
+     	        ok : _this.updateMenu,
+     	        cancelValue : '取消',
+     	        cancel : function(){}
+			});
+			d.showModal();	
 		},
 		showDelMenuDlg : function(){
 			util.dialog.confirmDialog(
@@ -169,15 +194,15 @@
 		},
 		addMenu : function(){
 			var pmenu = _this.currNode;
-			var parent_id = 0;
+			var parent_id = 10;
 			var mlevel = 1;
 			if(pmenu){
 				mlevel = pmenu.mlevel + 1;
 				parent_id = pmenu.id;
 			}
 
-			var name = $('#menu_name').val();
-			
+			var name = $('#info_name').val();
+			var content = $('#info_content').val();
 			if(!name){
 				return false;
 			}
@@ -185,27 +210,30 @@
 			var node = {
 				mlevel : mlevel,
 				parent_id : parent_id,
-				name : name
+				name : name,
+				content : content
 			};
 
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/add',
+				url : 'admin/jsll/addinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						node.id = result.data.insertId;
 					}
-					console.log(_this.currNode);
-					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+					// _this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+
+					_this.initTopic();
 				}
 			});
 		},
 		updateMenu : function(){
 			var pmenu = _this.currNode;
 
-			var name = $('#menu_name').val();
+			var name = $('#info_name').val();
+			var content = $('#info_content').val();
 			
 			if(!name){
 				return false;
@@ -215,18 +243,20 @@
 				id : pmenu.id,
 				mlevel : pmenu.mlevel,
 				parent_id : pmenu.parent_id,
-				name : name
+				name : name,
+				content : content
 			};
 
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/update',
+				url : 'admin/jsll/updateinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						pmenu.name = name;
 						_this.getCurrTree().updateNode(pmenu);
+						_this.initTopic();
 					}
 					
 				}
@@ -241,11 +271,12 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/del',
+				url : 'admin/jsll/delinfo',
 				data : node,
 				success : function(result){
 					if(result.success){
 						_this.getCurrTree().removeNode(pmenu);
+						_this.initTopic();
 					}
 					
 				}

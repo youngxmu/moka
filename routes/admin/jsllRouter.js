@@ -4,6 +4,8 @@ var logger = require("../../lib/log.js").logger("jsllRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
 var infoModel = require("../../models/infoModel.js");
+var info2Model = require("../../models/info2Model.js");
+var info3Model = require("../../models/info3Model.js");
 var articleModel = require("../../models/articleModel.js");
 var router = express.Router();
 

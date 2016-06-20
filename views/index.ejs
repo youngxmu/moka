@@ -131,7 +131,7 @@
     <script type="text/template" id="paper_list_tpl3">
     {@each list as resource}
     <li>
-      <a href="jsll/list" target="_blank">${resource.title}</a>
+      <a href="jsll/list" target="_blank">${resource.name}</a>
       <span class="date">${resource.create_time|getMD}</span>
     </li>
     {@/each}
@@ -140,7 +140,7 @@
     <script type="text/template" id="paper_list_tpl4">
     {@each list as resource}
     <li>
-      <a href="paper/detail/${resource.id}" target="_blank">${resource.name}</a>
+      <a href="paper/detail/${resource.id}" target="_blank">${resource.title}</a>
       <span class="date">${resource.create_time|getMD}</span>
     </li>
     {@/each}

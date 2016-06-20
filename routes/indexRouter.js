@@ -124,6 +124,28 @@ router.post('/gfjy', function (req, res, next) {
 
 //
 router.post('/jsll', function (req, res, next) {
+    infoModel.queryIndexInfos(function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: false,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+
+
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        }
+    });
+    
+});
+
+//
+router.post('/jsjn', function (req, res, next) {
     var mid = 14;
     var pageNo = 1;
     var pageSize = 5;
@@ -160,27 +182,6 @@ router.post('/jsll', function (req, res, next) {
                 data: {
                     list: result
                 }
-            });
-        }
-    });
-});
-
-//
-router.post('/jsjn', function (req, res, next) {
-    infoModel.queryIndexInfos(function (err, result) {
-        if (!err && result) {
-            res.json({
-                success: false,
-                data: {
-                    list : result
-                }
-            });
-        } else {
-
-
-            res.json({
-                success: false,
-                msg: "根据id查询文章出错"
             });
         }
     });

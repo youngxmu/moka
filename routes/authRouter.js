@@ -40,7 +40,8 @@ router.post('/admin/login', function (req, res, next) {
             delete admin.password;
             req.session.admin = admin;
             //登录成功
-            res.redirect('/moka/admin/index');
+            // res.redirect('/moka/admin/index');
+            res.redirect('/admin/index');
             // res.send(admin);
         } else {
             res.render('error', {
@@ -90,7 +91,8 @@ router.post('/user/login', function (req, res, next) {
             delete user.password;
             req.session.user = user;
             //登录成功
-            res.redirect('/moka/index');
+            // res.redirect('/moka/index');
+            res.redirect('/index');
         } else {
             res.render('error', {
                 success: false,
@@ -98,6 +100,16 @@ router.post('/user/login', function (req, res, next) {
             });
         }
     });
+});
+
+router.get('/admin/logout', function (req, res, next) {
+    delete req.session.admin;
+    res.redirect('/auth/admin/login');
+});
+
+router.get('/user/logout', function (req, res, next) {
+    delete req.session.user;
+    res.redirect('/index');
 });
 
 module.exports = router;

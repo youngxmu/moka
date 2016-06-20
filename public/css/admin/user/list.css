@@ -1,9 +1,6 @@
 
 
 /** 导航页面 */
-.nav{width:200px;margin:auto;margin-top:100px;}
-.nav dl{display:block;line-height:40px;font-size:24px;}
-.nav dl a{}
 
 /** 查询区域 */
 .search-panel{line-height: 30px;}

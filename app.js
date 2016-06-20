@@ -91,11 +91,11 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
-                        res.redirect("/moka/auth/admin/login");    
-                        // res.redirect("/auth/admin/login");    
+                        // res.redirect("/moka/auth/admin/login");    
+                        res.redirect("/auth/admin/login");    
                     }else{
-                        res.redirect("/moka/auth/user/login");
-                        // res.redirect("/auth/user/login");
+                        // res.redirect("/moka/auth/user/login");
+                        res.redirect("/auth/user/login");
                     }    
                 }
             }
