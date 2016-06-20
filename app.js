@@ -144,11 +144,17 @@ route(app); //加载routes
 //404错，即无匹配请求地址
 app.use(function(req, res, next) {
     if (!req.xhr) {
-        logger.error('common 404');
-        res.status(404);
-        res.render('error', {
-            msg: "404 未找到"
-        });
+        console.log(req.path);
+        if(req.path != 'js/lib/jquery.min.map'){
+            logger.error('common 404');
+            res.status(404);
+            res.render('error', {
+                msg: "404 未找到"
+            });
+        }else{
+                
+        }
+        
     } else { //这里遇到xhr的404错误,在返回数据中指明
         logger.error('xhr 404');
         res.status(404);

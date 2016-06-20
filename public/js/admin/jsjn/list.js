@@ -73,6 +73,7 @@
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
 			});
+			$('body').on('click', '.oper .del',_this.showDelArticle);
 		},
 		initTopic : function() {
 			$.ajax({
@@ -250,7 +251,6 @@
 		},
 		showEditMenuDlg : function(){
 			var pmenu = _this.currNode;
-			console.log(pmenu);
 			var data = {name : pmenu.name};
 			util.dialog.confirmDialog(
 				_this.data.editMenuDlgTpl.render(data),
@@ -269,7 +269,7 @@
 		},
 		addMenu : function(){
 			var pmenu = _this.currNode;
-			var parent_id = 0;
+			var parent_id = _this.pid;
 			var mlevel = 1;
 			if(pmenu){
 				mlevel = pmenu.mlevel + 1;
@@ -297,7 +297,6 @@
 					if(result.success){
 						node.id = result.data.insertId;
 					}
-					console.log(_this.currNode);
 					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
 				}
 			});
@@ -352,7 +351,7 @@
 			});
 		},
 		getMenuPath : function(node){
-			var menuArr = [];
+			var menuArr = [_this.pid];
 			var level = 0;
 			if(node == null){
 				return '';
@@ -367,7 +366,31 @@
 		},
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('article/edit?menuPath=' + menuPath);
+			window.open('admin/article/upload?menuPath=' + menuPath);
+		},
+		showDelArticle : function(){
+			var id = $(this).attr('data-id');
+			util.dialog.confirmDialog(
+				'确认删除',
+				function(){
+					$.ajax({
+						type : "post",
+						cache : false,
+						url : 'admin/article/del',
+						data : {id:id},
+						success : function(result){
+							if(result.success){
+								_this.searchResource();
+							}else{
+								alert(result.msg);
+							}
+							
+						}
+					});
+				},
+				function(){},
+				'确认删除'
+			);
 		}
 	};
 }(moka));

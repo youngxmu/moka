@@ -170,5 +170,43 @@ router.post('/del', function (req, res) {
         });
     }
 });
+
+
+
+router.post('/random', function (req, res, next) {
+    questionModel.queryRandQuestions(4, 0, 4, function (err, result) {
+        if (err || !result || !commonUtils.isArray(result)) {
+            logger.error("查找题目出错", err);
+            res.json({
+                success: false,
+                msg: "查找题目出错"
+            });
+        } else {
+            var  list = [];
+            list = result;
+            questionModel.queryRandQuestions(2, 0, 6, function (err, result2) {
+                if (err || !result || !commonUtils.isArray(result2)) {
+                    logger.error("查找题目出错", err);
+                    res.json({
+                        success: false,
+                        msg: "查找题目出错"
+                    });
+                } else {
+                    for(var index in result2){
+                        list.push(result2[index]);
+                    }
+                    res.json({
+                        success: true,
+                        msg: "查找题目成功",
+                        data: {
+                            list: list
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;
 

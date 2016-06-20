@@ -62,6 +62,8 @@
 				var zTree = _this.getCurrTree();
 				_this.showAddArticle();
 			});
+			$('body').on('click', '.oper .del',_this.showDelArticle);
+
 		},
 		initTopic : function(subjectId) {
 			$.ajax({
@@ -257,7 +259,7 @@
 		},
 		addMenu : function(){
 			var pmenu = _this.currNode;
-			var parent_id = 0;
+			var parent_id = _this.pid;
 			var mlevel = 1;
 			if(pmenu){
 				mlevel = pmenu.mlevel + 1;
@@ -356,6 +358,31 @@
 		showAddArticle : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
 			window.open('admin/article/upload?menuPath=' + menuPath);
+		},
+		showDelArticle : function(){
+			var id = $(this).attr('data-id');
+			console.log(id);
+			util.dialog.confirmDialog(
+				'确认删除',
+				function(){
+					$.ajax({
+						type : "post",
+						cache : false,
+						url : 'admin/article/del',
+						data : {id:id},
+						success : function(result){
+							if(result.success){
+								_this.searchResource();
+							}else{
+								alert(result.msg);
+							}
+							
+						}
+					});
+				},
+				function(){},
+				'确认删除'
+			);
 		}
 	};
 }(moka));

@@ -31,10 +31,7 @@ router.post('/news', function (req, res, next) {
 
 router.post('/setnews', function (req, res, next) {
 	var newsStr = req.body.newsStr;
-	console.log(newsStr);
 	var newslist = JSON.parse(newsStr);
-	console.log(newslist);
-
 	newsModel.delAllNews(function(err, results){
     	if(err){
     		return res.json({

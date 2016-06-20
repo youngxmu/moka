@@ -97,7 +97,7 @@
 			var content = _this.editor.getValue();
 			var title = $('#title').val();
 			var author = $('#author').val();
-			var url = 'article/save';
+			var url = 'admin/article/save';
 			
 			var postData = {
 				title : title,
@@ -120,7 +120,7 @@
 
 						},
 						function(){
-							window.location.href = 'article/detail/' + data.id;
+							window.location.href = 'admin/article/detail/' + data.id;
 						},
 						'提交成功'
 					);

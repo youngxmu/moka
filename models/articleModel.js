@@ -138,12 +138,12 @@ exports.queryArticleByTitle = function (title, start, pageSize, callback) {
 };
 
 
-exports.insertArticle = function (title, author, content, menu_id, author_id, file_name, type, description, callback) {
+exports.insertArticle = function (title, author, content, status, menu_id, author_id, file_name, type, description, callback) {
     var sql = 'insert into article ( ';
         sql += 'title, author, content, status, create_time, update_time, menu_id, author_id, file_name, type, description) ';
         sql += 'values(?,?,?,?,?,?,?,?,?,?,?);';
     db.query(sql,
-        [title, author, content, 0 , new Date(), new Date(), menu_id, author_id, file_name, type,description],
+        [title, author, content, status , new Date(), new Date(), menu_id, author_id, file_name, type,description],
         function (err, result) {
             callback(err, result);
         }
@@ -151,6 +151,7 @@ exports.insertArticle = function (title, author, content, menu_id, author_id, fi
 };
 
 //编辑、修改文章个人信息
+
 exports.updateArticle = function (id, title, author, content, status, menu_id, file_name, type, description, callback) {
     var sql = 'update article set title=?,author=?,content=?';
     var params = [];
@@ -180,6 +181,23 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, f
             callback(result[0].count);
         } else {
             logger.error("修改文章出错", err);
+            callback(err);
+        }
+    });
+};
+
+exports.delArticle = function (id, callback) {
+    var sql = 'update article set status = 0 ';
+    var params = [];
+    sql += ' where id = ?;';
+    params.push(id);
+
+
+    db.query(sql, params, function (err, result) {
+        if (!err) {
+            callback(null);
+        } else {
+            logger.error("删除文章出错", err);
             callback(err);
         }
     });

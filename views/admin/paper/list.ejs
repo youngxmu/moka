@@ -13,6 +13,7 @@
       <div class="main">
         <div class="top-bar">
           <span id="btn_add" >添加试卷</span>
+          <span id="btn_random" >随机试卷</span>
         </div>
         <div id="paper_list"></div>
         <div id="pagebar"></div>
@@ -49,7 +50,7 @@
       <dl>
         <dt>试卷描述</dt>
         <dd>
-          <input id="paper_desc" value="${desc}">
+          <input id="paper_desc" value="${description}">
         </dd>
       </dl>
       <dl id="paper_questions" class="paper-questions">
@@ -68,7 +69,7 @@
           ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
         </div>
         <div class="qbody">${obj.qbody}</div>
-        {@if obj.qtype == 2}
+        {@if obj.qtype == 2 || obj.qtype == 3 || obj.qtype == 4}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
         <div class="rtanswer">正确答案：${obj.rtanswer}</div>

@@ -40,6 +40,9 @@
 
 			$('#btn_commit').on('click', _this.commit);
 			$('#btn_add').on('click', _this.onAdd);
+			$('#btn_random').on('click', _this.onRandom);
+
+			
 
 			$('body').on('click', '.oper .edit', _this.onEdit);
 			
@@ -54,6 +57,54 @@
 			    okValue : '确定',
 			    ok : function(){
 					var paper = {};
+					paper.name = $('#paper_name').val();
+					paper.description = $('#paper_desc').val();
+					var $questions = $('#paper_questions').find('.question-list');
+					var qidArr = [];
+					$questions.each(function(){
+						qidArr.push($(this).attr('data-id'));
+					});
+					paper.qids = qidArr.join(',');
+                    $.ajax({
+						type : 'post',
+						url : 'admin/paper/save',
+						data : paper,
+						success : function(result){
+							_this.search();
+						}
+					});
+			    },
+			    cancelValue : '取消',
+			    cancel : function(){}
+			});
+			d.showModal();
+		},
+		onRandom : function(){
+			var $this = $(this);
+			var paper = {};
+		 	$.ajax({
+				type : 'post',
+				async : false,
+				url : 'admin/question/random',
+				success : function(result){
+					if(!result.success){
+						return false;
+					}else{
+						paper.questions = result.data.list;
+					}
+				}
+			});
+			paper.questionListTpl = $('#question-list-tpl').html();
+			paper.questionListData = {list: paper.questions};
+			var d = dialog({
+			    title: '新建随机试卷',
+			    content: _this.tpl.dlgEditPaperTpl.render(paper),
+		     	onshow: function(){
+		     		
+			    },
+			    okValue : '确定',
+			    ok : function(){
+			    	var paper = {};
 					paper.name = $('#paper_name').val();
 					paper.description = $('#paper_desc').val();
 					var $questions = $('#paper_questions').find('.question-list');

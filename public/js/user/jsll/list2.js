@@ -2,6 +2,7 @@
 	var _this = null;
 	_this = P.user.jsll.list = {
 		pid : 1302,//系统根目录编号
+		searchUrl : 'jsll/list3',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -68,7 +69,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/tree/' + _this.pid,
+				url : _this.searchUrl,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -127,7 +128,7 @@
 						$('#content').html(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'admin/jsll/info/' + _this.currNode.id,
+							url : 'admin/jsll/info3/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -166,10 +167,6 @@
 				node = node.getParentNode();
 			}
 			return menuArr.join(',');
-		},
-		showAddArticle : function(){
-			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

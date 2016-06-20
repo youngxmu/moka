@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.admin.jsll.list = {
 		pid : 1301,//系统根目录编号
-		searchUrl : 'admin/jsll/resource/list',
+		searchUrl : 'admin/jsll/list2',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -130,7 +130,7 @@
 						$('#content').html(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'admin/jsll/info/' + _this.currNode.id,
+							url : 'admin/jsll/info2/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -218,7 +218,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/addinfo',
+				url : 'admin/jsll/addinfo2',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -251,7 +251,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/updateinfo',
+				url : 'admin/jsll/updateinfo2',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -272,7 +272,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/delinfo',
+				url : 'admin/jsll/delinfo2',
 				data : node,
 				success : function(result){
 					if(result.success){

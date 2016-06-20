@@ -24,6 +24,23 @@ exports.queryQuestions = function (qtype, start, pageSize, callback) {
     db.query(sql, params, callback);
 };
 
+
+exports.queryRandQuestions = function (qtype, start, pageSize, callback) {
+    var sql = 'select * from question where status = 1 ';
+    var params = [];
+    if (qtype || qtype == 0) {
+        sql += ' and qtype = ? ';
+        params.push(qtype);
+    }
+
+    sql += ' ORDER BY RAND() limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+
+
 //根据“是否虚拟”“创建来源”查找题目总数
 exports.queryQuestionTotalCount = function (qtype, callback) {
     var sql = 'select count(id) as count from question where status = 1 ';

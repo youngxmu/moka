@@ -2,7 +2,8 @@ var question = {
 	type : {
 		1 : '填空题',
 		2 : '选择题',
-		2 : '多项选择题'
+		3 : '多项选择题',
+		4 : '判断题'
 	},
 	getQType : function(qtype){
 		var typeName = question.type[qtype];

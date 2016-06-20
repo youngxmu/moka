@@ -75,9 +75,8 @@ router.post('/save', function (req, res) {
     }
     
     if(id == null || id == undefined){
-        articleModel.insertArticle(title, author, '', mid, user.id, fileName, type, description,function (err, data) {
+        articleModel.insertArticle(title, author, content, 1, mid, user.id, fileName, type, description,function (err, data) {
             if (!err) {
-                console.log(data);
                 res.json({
                     success: true,
                     msg: "创建成功",
@@ -92,7 +91,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改文章信息", id);
-        articleModel.updateArticle(id, title, author, '', -1, mid,  user.id, fileName, type,description, function (err, result) {
+        articleModel.updateArticle(id, title, author, content, 1, mid,  user.id, fileName, type,description, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,

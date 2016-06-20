@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.admin.jsll.list = {
 		pid : 1302,//系统根目录编号
-		searchUrl : 'admin/jsll/resource/list',
+		searchUrl : 'admin/jsll/list3',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -70,7 +70,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/tree/' + _this.pid,
+				url : _this.searchUrl,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -129,7 +129,7 @@
 						$('#content').html(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'admin/jsll/info/' + _this.currNode.id,
+							url : 'admin/jsll/info3/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -217,7 +217,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/addinfo',
+				url : 'admin/jsll/addinfo3',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -250,7 +250,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/updateinfo',
+				url : 'admin/jsll/updateinfo3',
 				data : node,
 				success : function(result){
 					if(result.success){
@@ -271,7 +271,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'admin/jsll/delinfo',
+				url : 'admin/jsll/delinfo3',
 				data : node,
 				success : function(result){
 					if(result.success){

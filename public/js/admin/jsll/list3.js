@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.admin.jsll.list = {
 		pid : 1303,//系统根目录编号
-		searchUrl : 'admin/jsll/resource/list',
+		searchUrl : 'admin/jsll/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
