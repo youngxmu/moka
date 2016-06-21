@@ -57,7 +57,7 @@ router.get('', function (req, res, next) {
     if(req.session.user && req.session.user){
         islogin = true;
     }
-    res.render('index', {
+    res.render('index/index', {
         islogin : islogin,
     	menuList : menuList
     });

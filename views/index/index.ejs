@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include common/meta.ejs %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>国防教育管理系统</title>
+    <link rel="stylesheet" type="text/css" href="css/index/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index/slick-theme.css"/>
+    <script type="text/javascript" src="js/lib/slick.min.js"></script>
+  </head>
+  <body>
+    <%- include common/header.ejs %>
+    <div class="main">
+      <div class="row">
+        <div class="rl">
+          <div class="box-title">快速通道</div>
+          <ul class="sys-list info-panel">
+            <li><a href="resource/index" >国防教育资源</a></li>
+            <li><a href="jsll/index" >军事理论教学</a></li>
+            <li><a href="jsjn/index" >军事技能教学</a></li>
+            <li><a href="paper/index" >军事理论考试</a></li>
+            <li><a href="hbll/index">国防后备力量</a></li>
+            <li><a href="vote/index" >国防教育测评</a></li>
+          </ul>
+        </div>
+        <div class="rm">
+          <div id="pic" class="pic-panel"></div>
+          <div class="slick-dots"></div>
+        </div>
+        <div class="ry">
+          <div class="box-title">国防教育信息</div>
+          <ul id="gfjy" class="info-panel">
+            <li><a href="">国防教育信息管理</a></li>
+            <li><a href="">国防教育理论</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="">
+          <div class="box-title">军事理论教学</div>
+          <ul id="jsll" class="info-panel">
+            <li><a href="">国防教育信息管理</a></li>
+            <li><a href="">国防教育理论</a></li>
+          </ul>
+        </div>
+        <div class="">
+          <div class="box-title">军事技能教学</div>
+          <ul id="jsjn" class="info-panel">
+            <li><a href="">国防教育信息管理</a></li>
+            <li><a href="">国防教育理论</a></li>
+          </ul>
+        </div>
+        <div class="">
+          <div class="box-title">军事理论考试</div>
+          <ul id="paper" class="info-panel">
+            <li><a href="">国防教育信息管理</a></li>
+            <li><a href="">国防教育理论</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <%- include common/footer.ejs %>
+    <script type="text/template" id="news_list_tpl">
+    {@each list as news}
+    <div style="position:relative;">
+      <a href="${news.link}" title="${news.title}" target="_blank" >
+        <img src="${news.pic_url}" width="319" height="240">
+      </a>
+      <span class="news-title" >${news.title}</span>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="article_list_tpl">
+    {@each list as resource}
+    <li>
+      <a href="article/detail/${resource.id}" target="_blank">${resource.title}${resource.name}</a>
+    </li>
+    {@/each}
+    </script>
+
+    <script type="text/javascript" src="js/index/index.js"></script>
+    <script>
+      $('#nav_index').addClass('active');
+      $(document).ready(function() {
+        
+        moka.index.init({});
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!--header/-->
+
+<div class="header">
+  <div class="top-bar">
+      <div class="pull-left"><span id="date-time" data-markup="time">2016年6月21日 星期二</span></div>
+      <div class="pull-right">
+        <span data-markup="time">关于我们</span>
+      </div>
+  </div>
+  <h1 class="logo">
+    <a href="index">
+      <div class="logo-title"></div>
+      <div class="logo-msg"></div>
+    </a>
+    <div class="header-info">
+      <span class="about">关于</span>
+    </div>
+  </h1>
+</div>
+
+<div class="nav">
+  <ul class="nav-ul">
+    <li id="nav_index"><a href="index">首页</a></li>
+    <li id="nav_about" >
+      <a href="about" >中心介绍</a>
+      <ul class="sub-nav">
+        <li><a href="about" >中心简介</a></li>
+        <li><a href="about" >研究队伍</a></li>
+        <li><a href="about" >共建单位</a></li>
+      </ul>
+    </li>
+    <li id="nav_units" ><a href="units" >管理机构</a></li>
+    <li id="nav_people" >
+      <a href="people" >英模人物</a>
+      <ul class="sub-nav">
+        <li><a href="about" >中国古代名将</a></li>
+        <li><a href="about" >近代民族英雄</a></li>
+        <li><a href="about" >共和国将帅</a></li>
+        <li><a href="about" >现代国防英雄</a></li>
+      </ul>
+    </li>
+    <li id="nav_res" >
+      <a href="res" >数字资源</a>
+      <ul class="sub-nav">
+        <li><a href="javascript:void(0);" >国防理论</a></li>
+        <li><a href="javascript:void(0);" >国防知识</a></li>
+        <li><a href="javascript:void(0);" >国防历史</a></li>
+        <li><a href="javascript:void(0);" >国防法规</a></li>
+        <li><a href="javascript:void(0);" >国防形势</a></li>
+        <li><a href="javascript:void(0);" >国防技能</a></li>
+        <li><a href="javascript:void(0);" >外军知识</a></li>
+        <li><a href="javascript:void(0);" >武器装备</a></li>
+        <li><a href="javascript:void(0);" >图片视频</a></li>
+      </ul>
+    </li>
+    <div class="clears"></div>
+  </ul>
+</div>
+
+<script type="juicer/template" id="dlg-login-tpl">
+  <div class="login_bg">
+    <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
+      <form method="post" id="ajax_login_form" action="auth/user/login">
+        <input name="type" value="1" type="hidden"><!--普通用户登录-->
+        <div class="login_con">
+          <div class="login_list">
+            <div class="login_line">
+              <p>邮箱</p>
+              <input type="text" id="email" placeholder="注册邮箱" name="email" class="input_text" >
+            </div>
+            <div class="login_line">
+              <p>密码</p>
+              <input type="password" id="password" placeholder="密码" name="password" class="input_text">
+            </div>
+            <div class="btn_wrap" id="login_submit" style="height:48px;">
+              <a href="javascript:void(0)" class="btn_green37">登录</a>
+            </div>
+            <div style="margin:20px 0;height:48px;" class="btn_wrap">
+              <a class="btn_green37" href="user/register">注册</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>
+<script>
+  $(document).ready(function() {
+    $('body').on('click', '#login_submit', function(){
+      var options = {
+          success: function (data) {
+              console.log(data);
+          }
+      };
+      // ajaxForm
+      $("#ajax_login_form")[0].submit();
+    });
+    $('#btn_login').click(function(){
+      var dd = dialog({
+          title: '登录',
+          content: $('#dlg-login-tpl').html()
+      });
+      dd.showModal();
+    });
+  });
+</script>

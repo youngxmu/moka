@@ -8,6 +8,10 @@ var info3Model = require("../../models/info3Model.js");
 var Buffer = require('buffer').Buffer;
 var router = express.Router();
 
+router.get('', function (req, res, next) {
+    res.render('user/jsll/index');
+});
+
 router.get('/list', function (req, res, next) {
     res.render('user/jsll/list');
 });
