@@ -7,23 +7,14 @@
   </head>
   <body>
     <%- include ../common/header.ejs %>
-    <div class="nav">
-      <ul class="nav-ul">
-        <li data-type="政策" class="active">
-          <a href="javascript:void(0);" >军训规定</a>
-        </li>
-        <li data-type="理论">
-          <a href="javascript:void(0);" >军训理论</a>
-        </li>
-        <li data-type="系统帮助">
-          <a href="javascript:void(0);" >系统帮助</a>
-        </li>
-      </ul>
-    </div>
     <div class="container">
       <div class="sidebar">
-        <ul id="menu_panel">
-        </ul>
+        <div class="tree-opr">
+          <a href="javascript:void(0);" class="unfold">展开</a>
+        </div>
+        <div style="overflow:auto;min-height:500px;" >
+          <ul id="topic_tree" class="ztree"></ul>
+        </div>
       </div>
       <div class="main" style="padding-top:30px;font-size:14px;color:#333;">
         <div id="content" class="info-content" ></div>
@@ -31,13 +22,7 @@
     </div>
     <%- include ../common/footer.ejs %>
 
-     <script type="text/template" id="menu_tpl">
-    {@each list as resource}
-    <li data-id="${resource.id}">
-      <a href="javascript:void(0);">${resource.title}</a>
-    </li>
-    {@/each}
-    </script>
+    <script type="text/javascript" src="js/user/jsll/jsll.js"></script>
     <script type="text/javascript" src="js/user/jsll/list.js"></script>
     
     <script>

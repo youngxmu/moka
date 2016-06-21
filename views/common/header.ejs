@@ -1,7 +1,7 @@
 <!--header/-->
 
 <div class="header">
-  <h1 class="logo">
+  <h1 class="logo" style="position:relative;">
     <a href="index">
       <div class="logo-title"></div>
       <div class="logo-msg"></div>
@@ -89,6 +89,16 @@
       var dd = dialog({
           title: '登录',
           content: $('#dlg-login-tpl').html()
+      });
+      dd.showModal();
+    });
+
+    $('body').on('click', '.about', function(){
+      var dd = dialog({
+          title: '关于',
+          width: 800,
+          height:400,
+          content: '国防教育信息管理系统'
       });
       dd.showModal();
     });

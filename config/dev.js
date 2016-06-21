@@ -7,8 +7,9 @@ module.exports = {
 	views: path.resolve(__dirname, '..', 'views'),
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
-	imgHost: 'http://xmdx.dev.cnhubei.com/moka',
-	host: 'http://xmdx.dev.cnhubei.com/moka',
+	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
+	imgHost: 'http://localhost:8200',
+	host: 'http://localhost:8200',
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 
@@ -17,7 +18,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "123a321",
+	password: "root",
 	database: "moka",
 	enableDBLog: false,
 

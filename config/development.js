@@ -10,7 +10,6 @@ module.exports = {
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
 	imgHost: 'http://localhost:8200',
 	host: 'http://localhost:8200',
-
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 
@@ -19,10 +18,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
-	// host: "10.99.113.69",
-	// user: "root",
-	// password: "123456",
+	password: "root",
 	database: "moka",
 	//enableDBLog: false,
 

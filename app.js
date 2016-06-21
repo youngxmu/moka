@@ -70,16 +70,14 @@ if(config.env!='devvvv'){//开发环境不需要过滤
                 if(req.session.user){
                     var sid = req.session.id;
                     var uid = req.session.user.id;
-                    console.log('--------------'+ sid);
-                    console.log('--------------'+ uid);
                     redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
                     });
                     next();
                 }else{
                     var url = req.url;
                     if(!req.session.admin && url.indexOf('/admin/') != -1){
-                        res.redirect("/moka/auth/admin/login");    
-                        // res.redirect("/auth/admin/login");   
+                        // res.redirect("/moka/auth/admin/login");    
+                        res.redirect("/auth/admin/login");   
                     }else{
                         next();    
                     }
