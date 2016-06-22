@@ -139,4 +139,21 @@ display: block;white-space: nowrap;}
 	width: 100%;
 }
 
+.main .row .sys-list li{line-height: 34px;height: 34px; border-bottom: 1px solid #cccccc;padding: 0 10px;color: #333;cursor: pointer;
+  padding-left: 50px;position: relative;
 
+}
+.main .row .sys-list li .ico{
+  background-image: url("../../img/logo.png");
+  background-position: center;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  left: 10px;
+  top: 0;
+}
+.main .row .sys-list li a{color: #333;width: 100%;text-align: left;}
+.main .row .sys-list li:hover{opacity: 0.7;}
+.main .row .sys-list li:last-child{border-bottom: 0;}

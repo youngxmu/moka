@@ -13,6 +13,10 @@ router.get('', function (req, res, next) {
     res.render('user/jsll/index');
 });
 
+router.get('/index', function (req, res, next) {
+    res.render('user/jsll/index');
+});
+
 router.get('/list', function (req, res, next) {
     res.render('user/jsll/list');
 });

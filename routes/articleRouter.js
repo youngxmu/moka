@@ -254,6 +254,11 @@ router.post('/queryArticleByTitle', function (req, res, next) {
                 for (var i in result) {
                     var date = new Date(result[i].create_time);
                     result[i].create_time = commonUtils.formatDate(date);
+                    var article = result[i];
+                    article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                    article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                    article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                    article.file_type = commonUtils.getFileTypeName(article.file_name);
                 }
                 res.json({
                     success: true,
@@ -317,6 +322,11 @@ router.post('/queryArticleByMenu', function (req, res, next) {
                 for (var i in result) {
                     var date = new Date(result[i].create_time);
                     result[i].create_time = commonUtils.formatDate(date);
+                    var article = result[i];
+                    article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                    article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                    article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                    article.file_type = commonUtils.getFileTypeName(article.file_name);
                 }
                 res.json({
                     success: true,

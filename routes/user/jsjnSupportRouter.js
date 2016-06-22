@@ -4,10 +4,62 @@ var logger = require("../../lib/log.js").logger("resourceRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
 var articleModel = require("../../models/articleModel.js");
+var infoModel = require("../../models/jsjnModel.js");
 var router = express.Router();
+
+
+router.get('', function (req, res, next) {
+    res.render('user/jsjn/index');
+});
+
+router.get('/index', function (req, res, next) {
+    res.render('user/jsjn/index');
+});
+
 
 router.get('/list', function (req, res, next) {
     res.render('user/jsjn/list');
+});
+
+router.get('/res', function (req, res, next) {
+    res.render('user/jsjn/res');
+});
+
+
+
+router.post('/list', function (req, res, next) {
+    infoModel.queryInfos(function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: true,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        }
+    });
+});
+
+router.get('/info/:id', function (req, res, next) {
+    var id = req.params.id;
+    infoModel.queryInfoById(id, function (err, result) {
+        if (err || result.length == 0) {
+            res.json({
+                success: false,
+                msg: "根据id查询文章出错"
+            });
+        } else {
+           res.json({
+                success: true,
+                data: result[0]
+            });
+        }
+    });
 });
 
 router.get('/detail/:id', function (req, res, next) {

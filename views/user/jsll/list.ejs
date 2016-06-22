@@ -3,6 +3,8 @@
   <head>
     <title>军事理论研究分系统</title>
     <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='css/user/jsll/jsll.css' >
     <link rel='stylesheet' href='css/user/jsll/list.css' >
   </head>
   <body>
@@ -15,6 +17,9 @@
         <li data-type="理论">
           <a href="javascript:void(0);" >军训理论</a>
         </li>
+        <li data-type="资料">
+          <a href="javascript:void(0);" >辅助资料</a>
+        </li>
         <li data-type="系统帮助">
           <a href="javascript:void(0);" >系统帮助</a>
         </li>
@@ -22,10 +27,10 @@
     </div>
     <div class="container">
       <div class="sidebar">
-        <ul id="menu_panel">
-        </ul>
+        <ul id="menu_panel" class="memu-panel"></ul>
+        <ul id="topic_tree" class="ztree" style="display:none;"></ul>
       </div>
-      <div class="main" style="padding-top:30px;font-size:14px;color:#333;">
+      <div class="main">
         <div id="content" class="info-content" ></div>
       </div>
     </div>
@@ -34,10 +39,12 @@
      <script type="text/template" id="menu_tpl">
     {@each list as resource}
     <li data-id="${resource.id}">
-      <a href="javascript:void(0);">${resource.title}</a>
+      <a href="javascript:void(0);" class="btn btn-info btn-lg active" role="button">${resource.title}</a>
     </li>
     {@/each}
     </script>
+
+    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/user/jsll/list.js"></script>
     
     <script>
