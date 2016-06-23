@@ -1,0 +1,21 @@
+.container{font-size: 0;width: 1000px;}
+.logo-title{
+  width: 570px;
+  background-image: url("../../../img/resource-title.png");
+  background-position: center left;
+  background-size: auto 70px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 100%;
+  margin-left: 110px;
+}
+
+
+
+.index-wrapper{
+	margin-top:270px;
+	text-align: center;
+	width: 100%;
+}
+
+.index-wrapper a{width: 150px}

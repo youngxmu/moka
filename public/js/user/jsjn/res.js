@@ -189,7 +189,7 @@
 					_this.currNode = treeNode;
 					if(_this.type == 1){
 						if(_this.currNode.content){
-							$('#content').html(_this.currNode.content);		
+							$('#content').html('<pre>' + _this.currNode.content + '</pre>');		
 						}else{
 							$.ajax({
 								url : 'jsjn/info/' + _this.currNode.id,
@@ -197,7 +197,7 @@
 								async : false,
 								success : function(data){
 									if(data.success){
-										$('#content').html(data.data.content);		
+										$('#content').html('<pre>' + data.data.content + '</pre>');		
 										_this.currNode.content = data.data.content;
 
 									}else{

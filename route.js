@@ -2,10 +2,7 @@ var logger = require("./lib/log.js").logger("route");
 var config = require("./config");
 var authRouter = require('./routes/authRouter.js');
 var uploadRouter = require('./routes/uploadRouter.js');
-var articleRouter = require('./routes/articleRouter.js');
-var resourceRouter = require('./routes/user/resourceRouter.js');
 var registerRouter = require('./routes/registerRouter.js');
-
 var menuRouter = require('./routes/menuRouter.js');
 var indexRouter = require('./routes/indexRouter.js');
 
@@ -14,8 +11,10 @@ var indexRouter = require('./routes/indexRouter.js');
 var userPaperRouter = require('./routes/user/paperRouter.js');
 var userPaperHistoryRouter = require('./routes/user/paperHistoryRouter.js');
 
-var userVoteRouter = require('./routes/user/voteRouter.js');
+var userArticleRouter = require('./routes/user/articleRouter.js');
+var userResourceRouter = require('./routes/user/resourceRouter.js');
 
+var userVoteRouter = require('./routes/user/voteRouter.js');
 var userIndexRouter = require('./routes/user/indexRouter.js');
 var userExpertRouter = require('./routes/user/expertRouter.js');
 var userJSLLSupportRouter = require('./routes/user/jsllSupportRouter.js');
@@ -43,11 +42,13 @@ var adminHBLLRouter = require('./routes/admin/hbllRouter.js');
 module.exports = function (app) {
     app.use('/auth', authRouter);//登录
     app.use('/index', indexRouter);//主页
-
-    app.use('/article', articleRouter);//通用文件上传
-    app.use('/resource', resourceRouter);//通用文件上传
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
+
+
+
+    app.use('/article', userArticleRouter);//通用文件上传
+    app.use('/resource', userResourceRouter);//通用文件上传
     app.use('/expert', userExpertRouter);//通用文件上传
     
     app.use('/paper', userPaperRouter);//主页
