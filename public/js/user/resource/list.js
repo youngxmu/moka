@@ -39,12 +39,6 @@
 		},
 		searchResource : function() {
 			var data = _this.data.searchData;
-			// if(_this.currNode == null){
-			if(_this.data.searchData.keyword){
-				_this.searchUrl = 'article/queryArticleByTitle';
-			}else{
-				_this.searchUrl = 'article/queryArticleByMenu';
-			}
 			$.ajax({
 				type : "post",
 				url : _this.searchUrl,

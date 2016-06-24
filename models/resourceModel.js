@@ -45,7 +45,7 @@ exports.queryResourceById = function (resourceId, callback) {
 };
 
 exports.queryResourceByTitle = function (title, start, pageSize, callback) {
-    var sql = 'select count(id) as count from resource where status = 1 ';
+    var sql = 'select * from resource where 1 = 1 ';
     if(title){
         sql += 'and title like "%' + title + '%" ';
     }
@@ -57,7 +57,7 @@ exports.queryResourceByTitle = function (title, start, pageSize, callback) {
 };
 
 exports.queryResourceByTitleTotalCount = function (title, callback) {
-    var sql = 'select count(id) as count from resource where status = 1 ';
+    var sql = 'select count(id) as count from resource where 1 = 1 ';
     if(title){
         sql += 'and title like "%' + title + '%" ';
     }
