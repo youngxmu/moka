@@ -86,8 +86,8 @@ display: block;white-space: nowrap;}
 .nav ul.sub-nav li{background:#07B; float:none; font-size: 12px;line-height: 20px;padding:4px 0;border-bottom:1px solid #006EAD;text-align: left;
 	min-width: 120px;
 	width: auto;
-	height: 24px;
-	line-height: 24px;
+	height: 30px;
+    line-height: 30px;
 }
 .nav ul.sub-nav li:hover{color:#FFF;background:#38C}
 .nav ul.sub-nav li a{height: 24px;

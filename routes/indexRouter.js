@@ -225,5 +225,46 @@ router.post('/llks', function (req, res, next) {
     });
 });
 
+var infoData = {
+    about : {
+        link : 'index/info/about',
+        title : '中心介绍',
+        subtitle : '中心简介',
+        sublink : 'index/info/about',
+        content : '中心性质、发展规划、建设计划、中心设置及职能、'
+    },
+    yjdw : {
+        link : 'index/info/about',
+        title : '中心介绍',
+        subtitle : '研究队伍',
+        sublink : 'index/info/yjdw',
+        content : '队伍编成、个人简介、研究方向'
+    },
+    gjdw : {
+        link : 'index/info/about',
+        title : '中心介绍',
+        subtitle : '共建单位',
+        sublink : 'index/info/gjdw',
+        content : '国家国防教育办公室、全军国防教育办公室、个省国防教育办公室'
+    }
+}
+
+
+router.get('/info/:msg', function (req, res, next) {
+    var msg = req.params.msg;
+    var data = infoData[msg];
+    if(!data){
+        data = {
+            title : '',
+            link : '',
+            subtitle : '',
+            sublink : '',
+            content : ''
+        }
+    }
+    res.render('index/info', data);
+    
+});
+
 module.exports = router;
 

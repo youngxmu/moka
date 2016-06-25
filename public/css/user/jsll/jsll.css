@@ -18,7 +18,9 @@
 	width: 100%;
 }
 
-.index-wrapper a{height: 50px; line-height: 50px;width: 150px}
+.index-wrapper a{
+  /*height: 50px; line-height: 50px;*/
+  width: 150px}
 ::-webkit-scrollbar{width:12px;height:12px}
 ::-webkit-scrollbar-button:vertical{display:none}
 ::-webkit-scrollbar-track:vertical{background-color:black}

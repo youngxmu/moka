@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include common/meta.ejs %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>国防教育管理系统</title>
+    <link rel='stylesheet' href='css/bootstrap.min.css' />
+    <link rel="stylesheet" type="text/css" href="css/index/info.css"/>
+  </head>
+  <body>
+    <%- include common/header.ejs %>
+    <div class="container" style="padding:0 ;">
+      <ol class="breadcrumb" style="border-radius:0;">
+        <li>
+          <a href="index">首页</a>
+        </li>
+        <li>
+          <a href="<%= link%>"><%= title%></a>
+        </li>
+        <li class="active">
+          <%= subtitle%>
+        </li>
+      </ol>
+     <!--  <div class="bread">
+        <a href="index">首页</a>
+        &gt;&gt;
+        <a href="<%= link%>"><%= title%></a>
+        &gt;&gt;
+        <a href="<%= sublink%>"><%= subtitle%></a>
+      </div> -->
+
+      <div class="" style="padding: 0 15px;" ><%= content%></div>
+    </div>
+    <%- include common/footer.ejs %>
+    <script>
+      $('#nav_index').addClass('active');
+      $(document).ready(function() {
+      });
+    </script>
+  </body>
+</html>
