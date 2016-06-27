@@ -5,12 +5,70 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/resource/resource.css' />
   </head>
+  <style type="text/css">
+    .login-panel{
+      color: #f6f6f6;
+      padding-top: 80px;
+    }
+    .sys-info{
+      width: 700px;
+      display: inline-block;
+      height: 500px;
+      margin-right: 30px;
+    }
+    .login-bg{
+      background: url("img/login_bg_white.png") center center repeat;
+      width: 270px;
+      height: auto;
+      overflow: hidden;
+      top: 34px;
+      right: 50px;
+      position: absolute;
+      border-radius: 5px;
+      padding: 22px 30px;  
+    }
+    .login-bg input{
+      margin-bottom: 20px;
+    }
+    .login-btn-wrapper .btn{
+      width: 95px;
+    }
+    .login-btn-wrapper .btn:first-child{
+      margin-right: 20px;
+    }
+  </style>
   <body>
-  	<%- include ../common/header.ejs %>
+  	
     <div class="container">
       <div class="main">
-        <div class="index-wrapper">
+
+
+        <!-- <div class="index-wrapper">
           <a href="resource/list" class="btn btn-primary btn-lg active" role="button">进入系统</a>
+        </div> -->
+
+        <div class="login-panel">
+          <div class="sys-info">
+            <div class="sys-info-txt"></div>
+            <div class="sys-info-img">
+              <div class=""></div>
+              <div class=""></div>
+              <div class=""></div>  
+            </div>
+          </div>
+          
+          <div class="login-bg">
+            <form action="auth/user/login">
+              <h3>登录</h3>
+              <input class="form-control" type="text" placeholder="用户名/邮箱">
+              <input class="form-control" type="password" placeholder="密码">
+              <div class="login-btn-wrapper">
+                <button type="submit" class="btn btn-primary">登录</button>
+                <a href="user/register" class="btn btn-primary" role="button">注册</a>
+              </div>
+            </form>
+          </div>
+          
         </div>
       </div>
     </div>
