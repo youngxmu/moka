@@ -20,7 +20,7 @@ module.exports = {
 	user: "root",
 	password: "root",
 	database: "moka",
-	//enableDBLog: false,
+	enableDBLog: true,
 
 	winston:{
 		exceptionFile:path.resolve(__dirname, '..', 'logs/exceptions.log'),

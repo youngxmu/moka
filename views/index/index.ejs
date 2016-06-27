@@ -11,7 +11,7 @@
   <body>
     <%- include common/header.ejs %>
     <div class="main">
-      <div class="row">
+      <div class="index-row">
         <div class="rl">
           <div class="box-title">快速通道</div>
           <ul class="sys-list">
@@ -21,6 +21,7 @@
             <li><i class="ico"></i><a href="paper/index" >军事理论考试</a></li>
             <li><i class="ico"></i><a href="hbll/index">国防后备力量</a></li>
             <li><i class="ico"></i><a href="vote/index" >国防教育测评</a></li>
+            <li><i class="ico"></i><a href="expert/list" >国防师资力量</a></li>
           </ul>
         </div>
         <div class="rm">
@@ -29,33 +30,37 @@
         </div>
         <div class="ry">
           <div class="box-title">国防教育信息</div>
-          <ul id="gfjy" class="info-panel">
-            <li><a href="">国防教育信息管理</a></li>
-            <li><a href="">国防教育理论</a></li>
-          </ul>
+          <ul id="gfjy" class="info-panel">、</ul>
         </div>
       </div>
-      <div class="row">
-        <div class="">
-          <div class="box-title">军事理论教学</div>
-          <ul id="jsll" class="info-panel">
-            <li><a href="">国防教育信息管理</a></li>
-            <li><a href="">国防教育理论</a></li>
-          </ul>
+
+      <div class="index-row">
+        <div class="rl">
+          <div class="box-title">国防历史</div>
+          <ul id="info1" class="info-panel"></ul>
         </div>
-        <div class="">
-          <div class="box-title">军事技能教学</div>
-          <ul id="jsjn" class="info-panel">
-            <li><a href="">国防教育信息管理</a></li>
-            <li><a href="">国防教育理论</a></li>
-          </ul>
+        <div class="rm">
+          <div class="box-title">国防法规</div>
+          <ul id="info2" class="info-panel"></ul>
         </div>
-        <div class="">
-          <div class="box-title">军事理论考试</div>
-          <ul id="paper" class="info-panel">
-            <li><a href="">国防教育信息管理</a></li>
-            <li><a href="">国防教育理论</a></li>
-          </ul>
+        <div class="ry">
+          <div class="box-title">外国军事</div>
+          <ul id="info3" class="info-panel"></ul>
+        </div>
+      </div>
+
+      <div class="index-row">
+        <div class="rl">
+          <div class="box-title">武器装备</div>
+          <ul id="info4" class="info-panel"></ul>
+        </div>
+        <div class="rm">
+          <div class="box-title">国防形势</div>
+          <ul id="info5" class="info-panel"></ul>
+        </div>
+        <div class="ry">
+          <div class="box-title">学术成果</div>
+          <ul id="info6" class="info-panel"></ul>
         </div>
       </div>
     </div>
@@ -72,9 +77,9 @@
     </script>
 
     <script type="text/template" id="article_list_tpl">
-    {@each list as resource}
+    {@each list as res}
     <li>
-      <a href="article/detail/${resource.id}" target="_blank">${resource.title}${resource.name}</a>
+      <a href="resource/detail/${res.id}" target="_blank">${res.title}</a>
     </li>
     {@/each}
     </script>
@@ -83,10 +88,8 @@
     <script>
       $('#nav_index').addClass('active');
       $(document).ready(function() {
-        
         moka.index.init({});
       });
-
     </script>
   </body>
 </html>

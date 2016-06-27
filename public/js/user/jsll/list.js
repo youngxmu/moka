@@ -56,6 +56,7 @@
 							var item = result.data.list[index];
 							_this.listMap[item.id] = item;
 							if(index == 0){
+								$('#content_title').html(item.title);
 								$('#content').html(item.content);
 							}
 						}
@@ -71,7 +72,8 @@
 			var id = $this.attr('data-id');
 			
 			var item = _this.listMap[id];
-			console.log(item.content);
+
+			$('#content_title').html(item.title);
 			$('#content').html(item.content);
 		},
 
@@ -139,6 +141,8 @@
 						return false;
 					}
 					_this.currNode = treeNode;
+					console.log(_this.currNode);
+					$('#content_title').html(_this.currNode.name);
 					if(_this.currNode.content){
 						$('#content').html(_this.currNode.content);		
 					}else{
@@ -148,7 +152,8 @@
 							async : false,
 							success : function(data){
 								if(data.success){
-									$('#content').html(data.data.content);		
+
+									$('#content').html(data.data.content);
 									_this.currNode.content = data.data.content;
 
 								}else{

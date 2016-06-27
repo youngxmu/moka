@@ -1,6 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.index = {
+		infoSearchUrl : 'resource/list',
 		tpl : {
 			articleListTpl : null
 		},
@@ -16,6 +17,7 @@
 
 			_this.initEvent();
 			_this.loadNews();
+			_this.loadInfos();
 			_this.loadList1();
 			_this.loadList3();
 			_this.loadList4();
@@ -58,38 +60,46 @@
 				}
 			});
 		},
-		loadList : function(){
-			var $thps = $('.thp');
-			$thps.each(function(){
-				var $this = $(this);
-				var id = $this.attr('data-id');
-				var $panel = $this.find('.thp-list');
-				var sendData = _this.queryData;
-				sendData.mid = id;
-				var tpl = _this.tpl.articleListTpl;
-				if(id == 12 || id == 15){
-					_this.searchUrl = 'paper/list';
-					tpl = _this.tpl.paperListTpl
-				}else{
-					_this.searchUrl = 'index/queryArticleByMenu';
-				}
-				$.ajax({
-					type : 'post',
-					url : _this.searchUrl,
-					data : sendData,
-					beforeSend : function(){
-						$panel.html(util.loadingPanel);
-					},
-					success : function(result){
-						var data = result.data;
-					    $panel.html(tpl.render(data));
-						var totalCount = data.list.length;
-						if(totalCount == 0){
-							$panel.html(P.building);
-							return;
-						}
+		loadInfos : function(){
+			var infoDict = {
+				info1 : '历史',
+				info2 : '法规',
+				info3 : '外国',
+				info4 : '武器 装备',
+				info5 : '形势',
+				info6 : '学术 成果'
+			};
+
+			
+			for(var key in infoDict){
+				var keyValue = infoDict[key];
+				_this.loadInfo(key, keyValue);
+			}
+		},
+		loadInfo : function(key, keyValue){
+			var tpl = _this.tpl.articleListTpl;
+			var $panel = $('#' + key);
+			var sendData = {
+				keyword : keyValue,
+				pageSize : 7,
+				pageNo : 1
+			}
+			$.ajax({
+				type : 'post',
+				url : _this.infoSearchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+					var totalCount = data.list.length;
+					if(totalCount == 0){
+						$panel.html(P.building);
+						return;
 					}
-				});
+				}
 			});
 		},
 		loadList1 : function(){
@@ -192,7 +202,6 @@
 			});
 		},
 		getMD : function(dateStr){
-			console.log(dateStr);
 			if(!dateStr){
 				return '';
 			}

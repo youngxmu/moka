@@ -19,7 +19,7 @@
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
-			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
+			
 			_this.initEvent();
 			_this.initTopic();
 			_this.searchResource();

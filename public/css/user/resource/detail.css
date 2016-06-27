@@ -1,5 +1,6 @@
 .container{font-size: 0;width: 1000px;
   min-height: 500px;
+  padding-top: 20px;
 }
 .article-title{
     font-family: Arial;
@@ -75,5 +76,19 @@
 }
 
 
+.t-input  a.download{
+  background-image: url("../../../img/download.png");
+  background-position: left center;
+  padding-left: 30px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.t-preview img{width: 80%;height: auto;}
+.t-preview video{width: 80%;height: auto;}
 
 

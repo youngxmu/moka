@@ -45,6 +45,6 @@
 .submenu a.active{color:#333;}
 
 .info-content{
-	text-indent: 28px;
+	<span class="text"><a href="<%= file_name %>" download class="download"><%- title %></a></span>
 	line-height: 1.5;
 }

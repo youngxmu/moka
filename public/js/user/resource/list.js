@@ -20,6 +20,26 @@
 			_this.searchResource();
 		},
 		initEvent : function(){
+			$('body').on('click','.type-panel li',function(){
+				var $this = $(this)
+				var type = $this.attr('data-type');
+				if(type == 1){
+					_this.data.searchData.type = '1,6';
+				}
+				if(type == 2){
+					_this.data.searchData.type = '3';	
+				}
+				if(type == 3){
+					_this.data.searchData.type = '4';
+				}
+				if(type == 4){
+					_this.data.searchData.type = '0';
+				}
+
+				$this.addClass('active').siblings().removeClass('active');
+				_this.searchResource();
+			});
+
 			$('#resource_list').on('click','.view',function(){
 				var id = $(this).attr('data-id');
 				var data = _this.data.resourceList[id];
@@ -118,6 +138,11 @@
 					});
 				});
 			}
+		},
+		getTypeName : function(type){
+			var typeName = moka.fileTypeName[type];
+			return typeName;
 		}
 	};
+	juicer.register('getTypeName',_this.getTypeName);
 }(moka));

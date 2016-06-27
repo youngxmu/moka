@@ -129,9 +129,6 @@
 					async : false,
 					url : searchUrl,
 					data : data,
-					// beforeSend : function() {
-					// 	$('#content').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-					// },
 					success : function(result){
 						if(result.success){
 							var list = result.data.list;
@@ -187,6 +184,7 @@
 						return false;
 					}
 					_this.currNode = treeNode;
+					$('#content_title').html(_this.currNode.name);
 					if(_this.type == 1){
 						if(_this.currNode.content){
 							$('#content').html('<pre>' + _this.currNode.content + '</pre>');		

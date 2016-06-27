@@ -4,7 +4,6 @@
     <title>国防教育资源库</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/resource/list.css' >
-    
   </head>
   <body>
     <%- include ../common/header.ejs %>
@@ -17,15 +16,15 @@
             <p>文字</p>
           </li>
           <li data-type="2">
-            <i class="type-ico res-txt"></i>
+            <i class="type-ico res-pic"></i>
             <p>图片</p>
           </li>
           <li data-type="3">
-            <i class="type-ico res-txt"></i>
+            <i class="type-ico res-video"></i>
             <p>视频</p>
           </li>
           <li data-type="4">
-            <i class="type-ico res-txt"></i>
+            <i class="type-ico res-ppt"></i>
             <p>课件</p>
           </li>
         </ul>
@@ -35,7 +34,7 @@
         <div id="pagebar"></div>
       </div>
 	  </div>
-
+    <%- include ../common/footer.ejs %>
     
     <script type="text/template" id="resource-tpl">
     <div class="res-list">
@@ -45,7 +44,7 @@
     </div>
     {@each list as resource}
     <div class="res-list">
-      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
+      <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
       <span class="res-title">
         <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>

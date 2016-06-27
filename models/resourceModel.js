@@ -44,25 +44,62 @@ exports.queryResourceById = function (resourceId, callback) {
     });
 };
 
-exports.queryResourceByTitle = function (title, start, pageSize, callback) {
+exports.queryResourceByTitle = function (title, type, start, pageSize, callback) {
+    var params = [];
     var sql = 'select * from resource where 1 = 1 ';
     if(title){
-        sql += 'and title like "%' + title + '%" ';
+        var keyArr = title.split(' ');
+        if(keyArr.length > 1){
+            sql += ' and ( ';
+            for(var index in keyArr){
+                var key  = keyArr[index];
+                if(index == 0){
+                    sql += ' title like "%' + key + '%" ';        
+                }else{
+                    sql += ' or title like "%' + key + '%" ';    
+                }
+            }
+            sql += ' ) ';
+        }else{
+            sql += ' and title like "%' + title + '%" ';    
+        }
+    }
+    if(type){
+        sql += ' and content_type in (?) ';
+        params.push(type);
     }
     sql += 'order by create_time desc limit ?,?;';
-    var params = [];
+    console.log(sql);
     params.push(start);
     params.push(pageSize);
-    db.query(sql, [start, pageSize], callback);
+    db.query(sql, params, callback);
 };
 
-exports.queryResourceByTitleTotalCount = function (title, callback) {
+exports.queryResourceByTitleTotalCount = function (title, type, callback) {
+    var params = [];
     var sql = 'select count(id) as count from resource where 1 = 1 ';
     if(title){
-        sql += 'and title like "%' + title + '%" ';
+        var keyArr = title.split(' ');
+        if(keyArr.length > 1){
+            sql += ' and ( ';
+            for(var index in keyArr){
+                var key  = keyArr[index];
+                if(index == 0){
+                    sql += ' title like "%' + key + '%" ';        
+                }else{
+                    sql += ' or title like "%' + key + '%" ';    
+                }
+            }
+            sql += ' ) ';
+        }else{
+            sql += ' and title like "%' + title + '%" ';    
+        }
+    }
+    if(type){
+        sql += ' and content_type in (?) ';
+        params.push(type);
     }
     sql += ';';
-    var params = [];
     db.query(sql, params, function (err, result) {
         if (!err && result && result[0]) {
             callback(result[0].count);

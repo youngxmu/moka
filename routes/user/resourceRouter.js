@@ -32,8 +32,15 @@ router.get('/list', function (req, res, next) {
 router.post('/list', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
-    var title = req.body.title;
-    resourceModel.queryResourceByTitleTotalCount(title, function (totalCount) {
+    var type = req.body.type;
+    if(!type || type == 'undefined'){
+        type = '';
+    }
+    var title = req.body.keyword;
+    if(!title || title == 'undefined'){
+        title = '';
+    }
+    resourceModel.queryResourceByTitleTotalCount(title, type, function (totalCount) {
         logger.info("文章总数:", totalCount);
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
@@ -41,8 +48,7 @@ router.post('/list', function (req, res, next) {
         totalPage = parseInt(totalPage, 10);
         var start = pageSize * (pageNo - 1);
 
-        logger.info("查找文章:", start, pageSize);
-        resourceModel.queryResourceByTitle(title, start, pageSize, function (err, result) {
+        resourceModel.queryResourceByTitle(title, type, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找文章出错", err);
                 res.json({

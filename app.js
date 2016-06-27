@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var multiparty = require('multiparty');
 var redisUtils = require('./lib/redisUtils.js')
+var utils = require('./lib/utils.js')
 
 var log4js = require('log4js');
 var logger =  require('./lib/log.js').logger('app');
@@ -37,10 +38,12 @@ app.use(expressSession({
 app.use(express.static(config.staticPath));
 
 console.log(config.env);
-if(config.env!='dev'){//开发环境不需要过滤
-
+if(config.env!='devvvv'){//开发环境不需要过滤
+    
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
+        res.locals.currDate = utils.indexDate(new Date());
+        return next();
         // console.log(123);
         // res.locals.sid = '';
         // res.locals.islogin = true;
