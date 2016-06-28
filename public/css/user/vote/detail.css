@@ -1,17 +1,54 @@
+.container{font-size: 0;width: 1000px;
+	background-image: url("../../../img/bg-clouds.png");
+	background-color: #4DA5E4;
+	padding: 0;
+}
+.main{
+	width: 600px;
+	margin: 30px;
+}
+
+.panel{
+	background-color: transparent;
+}
+
 .question-list{padding: 10px;
 	display: none;
-	border-bottom: 1px dashed #cccccc;
 	display: block;
 	color :#000000;
+	
+	
+	
+	display: none;
 }
 .question-list.active{display: block;}
-.question-list .qbody{line-height: 1.5;}
-.question-list .qanswer-panel{line-height: 1.5;}
-.question-list .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
-.question-list .qanswer.selected{background: blue;color: #ffffff}
+.question-list .qbody{
+	line-height: 2;
+    display: block;
+    font-size: 16px;
+    text-align: left;
+}
+.question-list .qanswer-panel{line-height: 2;}
 
-.btn-wrapper{margin: 10px;}
-.btn-commit{display: inline-block;line-height: 30px;padding: 0 20px;border: 1px solid #cccccc;
-	cursor: pointer;
+.question-list .qanswer{cursor: pointer;
+	margin-top: 20px;
+
 }
 
+.question-panel{
+	background: url("../../../img/login_bg_white.png") center center repeat;
+	width: 540px;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 5px;
+	padding: 22px 30px;  
+}
+
+.label{
+	    white-space: normal;
+}
+.btn {
+	white-space: normal;
+	text-align: left;
+}

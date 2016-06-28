@@ -1,0 +1,7 @@
+.container{font-size: 0;width: 1000px;padding:0;}
+.container{
+	background-image: url("../../../img/data.jpg");
+}
+.jumbotron{
+	background-color:rgba(0,0,0,0.4);
+}

@@ -170,7 +170,7 @@ pre{white-space: pre-wrap;font-size: 14px;}
       margin-right: 30px;
     }
     .login-bg{
-      background: url("img/login_bg_white.png") center center repeat;
+      background: url("../../img/login_bg_white.png") center center repeat;
       width: 250px;
       height: auto;
       overflow: hidden;

@@ -99,16 +99,30 @@ exports.delVote = function (id, callback) {
     });
 };
 
-exports.insertVoteHistory = function (uid, pid, aid, answer, callback) {
+exports.insertVoteHistory = function (pid, uid , qid, answer, rtanswer, callback) {
     var sql = 'insert into vote_history ( ';
-    sql += 'uid, pid, aid, answer, create_time) ';
-    sql += 'values(?,?,?,?,?);';
+    sql += 'pid, uid , qid, answer, rtanswer, create_time) ';
+    sql += 'values(?,?,?,?,?,?);';
     db.query(sql,
-        [uid, pid, aid, answer, new Date()],
+        [pid, uid , qid, answer, rtanswer, new Date()],
         function (err, result) {
             callback(err, result);
         }
     );
+};
+
+exports.queryVoteHistoryByPid = function (pid, callback) {
+    var sql = 'select qid,answer,count(id) as count,rtanswer from vote_history where pid = ? group by pid,qid,answer order by id,answer;';
+    var params = [];
+    params.push(pid);
+    db.query(sql, params, callback);
+};
+
+exports.queryVoteHistoryByQid = function (qid, callback) {
+    var sql = 'select * from vote_history where qid = ?';
+    var params = [];
+    params.push(qid);
+    db.query(sql, params, callback);
 };
 
 exports.queryVoteHistorys = function (uid, start, pageSize, callback) {

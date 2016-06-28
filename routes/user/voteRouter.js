@@ -127,27 +127,67 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
-//创建试卷
+// router.post('/commit', function (req, res) {
+//     var pid = req.body.id;
+//     var answer = req.body.answer;
+//     var user = req.session.user;
+//     var uid = user.id;
+//     if(!user){
+//         return res.json({
+//             success: false,
+//             msg: "请登录"
+//         });
+//     }
+    
+    
+//     if(pid == null || pid == undefined){
+//         res.json({
+//             success: false,
+//             msg: "答题失败"
+//         });
+//     }else{
+//         voteModel.insertVoteHistory(uid, pid, answer, function (err, data) {
+//             if (!err) {
+//                 res.json({
+//                     success: true,
+//                     msg: "提交成功",
+//                     data : data
+//                 });
+//             } else {
+//                 res.json({
+//                     success: false,
+//                     msg: "提交失败"
+//                 });
+//             }
+//         });
+        
+//     }
+
+// });
+
 router.post('/commit', function (req, res) {
-    var pid = req.body.id;
+    var pid = req.body.pid;
+    var qid = req.body.id;
     var answer = req.body.answer;
+    var rtanswer = req.body.rtanswer;
     var user = req.session.user;
-    var uid = user.id;
-    if(!user){
-        return res.json({
-            success: false,
-            msg: "请登录"
-        });
-    }
+    var uid = '0';
+    // var uid = user.id;
+    // if(!user){
+    //     return res.json({
+    //         success: false,
+    //         msg: "请登录"
+    //     });
+    // }
     
     
-    if(pid == null || pid == undefined){
+    if(qid == null || qid == undefined){
         res.json({
             success: false,
             msg: "答题失败"
         });
     }else{
-        voteModel.insertVoteHistory(uid, pid, answer, function (err, data) {
+        voteModel.insertVoteHistory(pid, uid, qid, answer, rtanswer, function (err, data) {
             if (!err) {
                 res.json({
                     success: true,
@@ -165,6 +205,45 @@ router.post('/commit', function (req, res) {
     }
 
 });
+
+router.post('/history/:id', function (req, res, next) {
+    var id = req.params.id;
+    voteModel.queryVoteHistoryByPid(id, function (err, historys) {
+        if (!err && historys.length > 0) {
+            var qidMap = {};
+            for(var index in historys){
+                qidMap[historys[index].qid] = historys[index].qid;
+            }
+            var qids = [];
+            for(var key in qidMap){
+                qids.push(key);
+            }
+            questionModel.queryQuestionsByIds(qids.join(','), function(err, result){
+                if(err){
+                    res.json({
+                        success: false,
+                        msg: "根据id查询试卷出错"
+                    });
+                }else{
+                    var vote = {
+                        historys : historys,
+                        questions : result
+                    }
+                    res.json({
+                        success: true,
+                        vote : vote
+                    });
+                }
+            });
+        } else {
+             res.json({
+                success: false,
+                msg: "根据id查询试卷出错"
+            });
+        }
+    });
+});
+
 
 module.exports = router;
 
