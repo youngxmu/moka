@@ -2,15 +2,12 @@
 <html>
   <head>
     <title><%= name %></title>
-    <%- include ../../common/meta.ejs %>
-    <link rel='stylesheet' href='css/views/expert/detail.css' />
+    <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='css/user/expert/detail.css' />
   </head>
   <body>
     <input type="hidden" id="expert_id" value="<%= id %>">
-    <div class="banner">
-      <div class="t-logo">系统logo占位</div>
-      <!-- <div class="search-bar"></div> -->
-    </div>  
+    <%- include ../common/header.ejs %>
     <div class="container">
       <div class="expert-info" >
         <div class="expert-info-left" >

@@ -2,22 +2,19 @@
 <html>
   <head>
     <title>师资力量</title>
-    <%- include ../../common/meta.ejs %>
+    <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/expert/list.css' >
     
   </head>
   <body>
-    <div class="banner">
-      <div class="t-logo">系统logo占位</div>
-      <!-- <div class="search-bar"></div> -->
-    </div>    
+    <%- include ../common/header.ejs %>   
     <div class="container">
       <div class="main">
-        <div class="top-bar">
-          <input id="search_key" value="">
-          <span id="btn_search" >查询</span>
+        <div class="search-bar">
+          <input id="search_key" type="text" class="form-control" placeholder="输入姓名" style="display:inline-block;width:180px;">
+          <button id="btn_search" type="button" class="btn btn-primary">查询</button>
         </div>
-        <div id="expert_list"></div>
+        <div id="expert_list" ></div>
         <div id="pagebar"></div>
       </div>
     </div>

@@ -9,6 +9,13 @@ var questionModel = require('../../models/questionModel.js');
 
 var router = express.Router();
 
+router.get('', function (req, res, next) {
+    res.render('user/vote/index');
+});
+
+router.get('/index', function (req, res, next) {
+    res.render('user/vote/index');
+});
 
 router.get('/list', function (req, res, next) {
     res.render('user/vote/list');

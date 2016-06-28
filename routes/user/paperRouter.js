@@ -8,6 +8,13 @@ var questionModel = require('../../models/questionModel.js');
 
 var router = express.Router();
 
+router.get('', function (req, res, next) {
+    res.render('user/paper/index');
+});
+
+router.get('/index', function (req, res, next) {
+    res.render('user/paper/index');
+});
 
 router.get('/list', function (req, res, next) {
     res.render('user/paper/list');

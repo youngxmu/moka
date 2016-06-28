@@ -5,6 +5,16 @@ var commonUtils = require("../../lib/utils.js");
 var articleModel = require("../../models/articleModel.js");
 var router = express.Router();
 
+
+router.get('', function (req, res, next) {
+    res.render('user/hbll/index');
+});
+
+router.get('/index', function (req, res, next) {
+    res.render('user/hbll/index');
+});
+
+
 router.get('/list', function (req, res, next) {
     res.render('user/hbll/list');
 });

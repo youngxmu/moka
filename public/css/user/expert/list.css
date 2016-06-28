@@ -1,17 +1,18 @@
-** 主页面 */
-.main{font-size: 0;}
-.top-bar{font-size: 14px;padding: 10px 0 ;}
-.top-bar input{border: 1px solid #cccccc;
+/** 主页面 */
+.container{font-size: 0;width: 1000px;}
+.main{font-size: 0;color: #ffffff;}
+.search-bar{font-size: 14px;padding: 10px 0 ;}
+.search-bar input{border: 1px solid #cccccc;
   line-height: 30px;padding: 0 10px;
   height: 30px;
   cursor: pointer;
 }
-.top-bar select{border: 1px solid #cccccc;
+.search-bar select{border: 1px solid #cccccc;
   line-height: 30px;padding: 0 10px;
   height: 30px;
   cursor: pointer;
 }
-.top-bar span{border: 1px solid #cccccc;
+.search-bar span{border: 1px solid #cccccc;
   line-height: 30px;padding: 0 10px;
   cursor: pointer;
   margin-right: 10px;
