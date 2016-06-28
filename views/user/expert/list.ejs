@@ -7,18 +7,20 @@
     
   </head>
   <body>
-    <%- include ../common/header.ejs %>   
+    <%- include ../common/header.ejs %>
     <div class="container">
       <div class="main">
-        <div class="search-bar">
-          <input id="search_key" type="text" class="form-control" placeholder="输入姓名" style="display:inline-block;width:180px;">
-          <button id="btn_search" type="button" class="btn btn-primary">查询</button>
+        <div id="list_panel" >
+          <div class="search-bar">
+            <input id="search_key" type="text" class="form-control" placeholder="输入姓名" style="display:inline-block;width:180px;height:34px;line-height:34px;">
+            <button id="btn_search" type="button" class="btn btn-primary">查询</button>
+          </div>
         </div>
         <div id="expert_list" ></div>
-        <div id="pagebar"></div>
+        <div id="pagebar"></div>  
       </div>
     </div>
-
+    <%- include ../common/footer.ejs %>
    
     <script type="juicer/template" id="expert-list-tpl">
     <div class="expert-list-title" style="display:none;">
@@ -39,7 +41,7 @@
       <div class="name">${obj.topic}</div>
       <div class="desc">${obj.description}</div>
       <div class="oper">
-        <span data-id="${obj.id}" ><a href="expert/detail/${obj.id}" target="_blank">查看</a></span>
+        <span data-id="${obj.id}" ><a class="btn btn-info" href="expert/detail/${obj.id}" target="_blank">查看</a></span>
       </div>
     </div>
     {@/each}

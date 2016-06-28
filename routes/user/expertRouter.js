@@ -81,5 +81,78 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
+//根据专家id查询
+router.post('/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.user ? true : false;
+    if(id == null || id == undefined){
+        res.render('error', {
+            success: false,
+            msg: "没有登录"
+        });
+    }else{
+        expertModel.getExpertById(id, function (err, result) {
+            if (!err && result) {
+                var expert = result;
+                expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
+                res.render('user/expert/detail', expert);
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询专家出错"
+                });
+            }
+        });
+    }
+});
+
+//根据专家id查询
+router.post('/result', function (req, res, next) {
+    var id = req.body.id;
+    var type = req.body.type;
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+
+    // var isAdmin = req.session.user ? true : false;
+    // if(id == null || id == undefined){
+    //     res.render('error', {
+    //         success: false,
+    //          msg: "没有登录"
+    //     });
+    // }else{
+        expertModel.queryExpertResultTotalCount(id, type, function (totalCount) {
+            var totalPage = 0;
+            if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+            else totalPage = totalCount / pageSize + 1;
+            totalPage = parseInt(totalPage, 10);
+            var start = pageSize * (pageNo - 1);
+            expertModel.queryExpertResults(id, type, start, pageSize, function (err, result) {
+                if (err || !result || !commonUtils.isArray(result)) {
+                    logger.error("查找出错", err);
+                    res.json({
+                        success: false,
+                        msg: "查找出错"
+                    });
+                } else {
+                    for(var index in result){
+                        result[index].create_time =  commonUtils.formatShortDate(result[index].create_time);
+                    }
+                    res.json({
+                        success: true,
+                        msg: "查找成功",
+                        data: {
+                            totalCount: totalCount,
+                            totalPage: totalPage,
+                            currentPage: pageNo,
+                            list: result
+                        }
+                    });
+                }
+            });
+        });
+    // }
+});
+
+
 
 module.exports = router;

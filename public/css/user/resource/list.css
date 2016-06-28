@@ -56,7 +56,7 @@
 }
 
 
-.info-content{<span class="text"><a href="<%= file_name %>" download class="download"><%- title %></a></span>}
+.info-content{}
 .main .res-list{border-bottom: 1px dashed #cccccc;font-size: 0;line-height: 40px;color: #f6f6f6;}
 .main .res-list:last-child{border-bottom: 0;}
 .main .res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
