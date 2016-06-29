@@ -3,10 +3,12 @@
   <head>
     <title><%= name %></title>
     <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='css/user/expert/expert.css' >
     <link rel='stylesheet' href='css/user/expert/detail.css' />
   </head>
   <body>
     <input type="hidden" id="expert_id" value="<%= id %>">
+    <%- include ../common/header.ejs %>
     <div class="container">
       <ul class="nav nav-tabs">
         <li role="presentation" target="info_panel" class="active"><a href="javascript:void(0);">基本情况</a></li>
@@ -65,7 +67,7 @@
         <div id="jx_pagebar" ></div>
       </div>
     </div>
-
+    <%- include ../common/footer.ejs %>
     
     <script type="text/template" id="result-list-tpl">
     <div class="res-list">
@@ -77,7 +79,7 @@
     <div class="res-list">
       <span class="res-type">${index|formatIndex}</span>
       <span class="res-title">
-        <a href="resource/detail/${resource.article_id}" target="_blank">${resource.title}</a>
+        <a href="article/detail/${resource.article_id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.create_time}</span>
     </div>

@@ -41,7 +41,7 @@
     {@each list as resource}
     <div class="res-list">
       <span class="res-title">
-        <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
+        <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
@@ -53,7 +53,7 @@
     {@each list as resource}
     <div class="res-list">
       <span class="res-title">
-        <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
+        <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
@@ -64,7 +64,7 @@
     <script type="text/javascript" src="js/index/list.js"></script>
     
     <script>
-      $('#nav_hbll').addClass('aHover');
+      $('#nav_people').addClass('active');
       $(document).ready(function() {
           moka.index.list.init();
       });

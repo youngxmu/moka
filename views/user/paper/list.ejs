@@ -3,17 +3,48 @@
   <head>
     <title>军事理论考试</title>
     <%- include ../common/meta.ejs %>
-    <link rel='stylesheet' href='css/user/paper/list.css' >
+    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
+    <link rel='stylesheet' href='css/user/paper/paper.css' >
+    <link rel='stylesheet' href='css/user/jsll/list.css' >
   </head>
   <body>
     <%- include ../common/header.ejs %>
+    <div class="nav">
+      <ul class="nav-ul">
+        <li data-type="理论" class="active">
+          <a href="javascript:void(0);" >理论知识</a>
+        </li>
+        <li data-type="资料">
+          <a href="javascript:void(0);" >学习资料</a>
+        </li>
+        <li data-type="">
+          <a href="paper/detail" target="_blank" >自测练习</a>
+        </li>
+        <li data-type="">
+          <a href="paper/history/list" target="_blank" >练习纪录</a>
+        </li>
+      </ul>
+    </div>
   	<div class="container">
+      <div class="sidebar">
+        <ul id="menu_panel" class="memu-panel"></ul>
+        <ul id="topic_tree" class="ztree" style="display:none;"></ul>
+      </div>
       <div class="main">
-        <div id="paper_list" ></div>
-        <div id="pagebar"></div>
+        <div class="info-content" >
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 id="content_title" class="panel-title"></h3>
+            </div>
+            <div class="panel-body detail-article">
+              <pre id="content" >
+              </pre>
+            </div>
+          </div>
+        </div>
       </div>
 	  </div>
-
+    <%- include ../common/footer.ejs %>
    
     <script type="juicer/template" id="paper-list-tpl">
     <div class="paper-list-title" style="display:none;">
@@ -49,6 +80,33 @@
     {@/each}
     </script>
 
+    <script type="text/template" id="resource-tpl">
+    <div class="res-list">
+      <span class="res-type">类型</span>
+      <span class="res-title">标题</span>
+      <span>作者</span>
+      <span>时间</span>
+    </div>
+    {@each list as resource}
+    <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
+      <span class="res-title">
+        <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+    </div>
+    {@/each}
+    </script>
+    <script type="text/template" id="menu_tpl">
+    {@each list as resource}
+    <li data-id="${resource.id}">
+      <a href="javascript:void(0);" class="btn btn-info btn-lg active" role="button">${resource.title}</a>
+    </li>
+    {@/each}
+    </script>
+
+    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/common/question.js"></script>
     <script type="text/javascript" src="js/user/paper/paper.js"></script>
     <script type="text/javascript" src="js/user/paper/list.js"></script>

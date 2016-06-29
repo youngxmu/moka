@@ -94,7 +94,30 @@ router.get('/detail/:id', function (req, res, next) {
                 if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
-                res.render('user/resource/detail', article);
+
+                var view = 'user/resource/detail-word';
+                if(article.type == 0){
+                    view = 'user/resource/detail-ppt';
+                }
+                if(article.type == 1){
+                    view = 'user/resource/detail-word';
+                }
+                if(article.type == 3){
+                    view = 'user/resource/detail-pic';
+                }
+                if(article.type == 4){
+                    view = 'user/resource/detail-video';
+                }
+                if(article.type == 6){
+                    view = 'user/resource/detail-txt';
+                }
+                // if(article.file_type == 'pic'){
+                //     view = 'user/resource/detail-pic';
+                // }
+                // if(article.file_type == 'video'){
+                //     view = 'user/resource/detail-video';
+                // }
+                res.render(view, article);
             } else {
                 res.render('error', {
                     success: false,

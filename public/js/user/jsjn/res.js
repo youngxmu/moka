@@ -187,6 +187,9 @@
 					$('#content_title').html(_this.currNode.name);
 					if(_this.type == 1){
 						if(_this.currNode.content){
+							if(_this.currNode.content == 'null'){
+								_this.currNode.content == '';
+							}
 							$('#content').html('<pre>' + _this.currNode.content + '</pre>');		
 						}else{
 							$.ajax({
@@ -195,6 +198,9 @@
 								async : false,
 								success : function(data){
 									if(data.success){
+										if(data.data.content == 'null'){
+											data.data.content == '';
+										}
 										$('#content').html('<pre>' + data.data.content + '</pre>');		
 										_this.currNode.content = data.data.content;
 

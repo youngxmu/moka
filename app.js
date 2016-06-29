@@ -44,11 +44,8 @@ if(config.env!='devv'){//开发环境不需要过滤
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         res.locals.currDate = utils.indexDate(new Date());
-        // res.locals.islogin = true;
-        return next();
         
         var requestPath = req.path;//请求的uri
-        console.log(req.path);
         var inWhitelist = false;
         for (var i in whitelist) {
             if (requestPath == whitelist[i]) {
@@ -60,12 +57,28 @@ if(config.env!='devv'){//开发环境不需要过滤
         if(req.session){//如果存在session则继续
             res.locals.sid = req.session.id;
         }
+        if(req.session &&  req.session.user){//如果存在session则继续
+            res.locals.islogin = true;
+            var name = req.session.user.name;
+            if(!name){
+                name = req.session.user.email;
+            }
+            res.locals.username = name;
+        }
 
         if (inWhitelist || (url.indexOf('/index') != -1 && url.indexOf('/admin') == -1)) {//在白名单中，不需要过滤
+            console.log(url);
             next();
         }else{
+            console.log(url);
             if(req.session &&  req.session.user){//如果存在session则继续
                 res.locals.islogin = true;
+                var name = req.session.user.name;
+                if(!name){
+                    name = req.session.user.email;
+                }
+                console.log(name);
+                res.locals.username = name;
                 var sid = req.session.id;
                 var uid = req.session.user.id;
                 redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
@@ -75,12 +88,36 @@ if(config.env!='devv'){//开发环境不需要过滤
                 res.locals.islogin = true;
                 next();
             }else{
+                    
+
                 if(url.indexOf('login') != -1){
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/auth/admin/login");    
                     }else{
+                        if(url.indexOf('/resource/') != -1){
+                            return res.redirect("/resource/index");
+                        }
+                        if(url.indexOf('/jsll/') != -1){
+                            return res.redirect("/jsll/index");
+                        }
+                        if(url.indexOf('/jsjn/') != -1){
+                            return res.redirect("/jsjn/index");
+                        }
+                        if(url.indexOf('/paper/') != -1){
+                            return res.redirect("/paper/index");
+                        }
+                        if(url.indexOf('/hbll/') != -1){
+                            return res.redirect("/hbll/index");
+                        }
+                        if(url.indexOf('/vote/') != -1){
+                            return res.redirect("/vote/index");
+                        }
+                        if(url.indexOf('/expert/') != -1){
+                            return res.redirect("/expert/index");
+                        }
+
                         res.redirect("/auth/user/login");
                     }    
                 }

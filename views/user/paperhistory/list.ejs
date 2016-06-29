@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>试题库</title>
-    <%- include ../../common/meta.ejs %>
+    <title>练习纪录</title>
+    <%- include ../common/meta.ejs %>
+    <link rel='stylesheet' href='css/user/paper/paper.css' >
     <link rel='stylesheet' href='css/user/paperhistory/list.css' >
     
   </head>
   <body>
-    <%- include ../../common/header.ejs %>
+    <%- include ../common/header.ejs %>
   	<div class="container">
       <div class="main">
-        <div id="paper_list"></div>
-        <div id="pagebar"></div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 id="content_title" class="panel-title">练习纪录</h3>
+          </div>
+          <div class="panel-body detail-article">
+            <div id="paper_list"></div>
+            <div id="pagebar"></div>
+          </div>
+        </div>
+        
       </div>
 	  </div>
-
+    <%- include ../common/footer.ejs %>
    
     <script type="juicer/template" id="paper-list-tpl">
     <div class="paper-list-title">
         <div class="name">试卷名称</div>
         <div class="desc">试卷描述</div>
-        <div class="desc">答对数/题目数</div>
+        
         <div class="oper">操作</div>
     </div>
     {@each list as obj, index}
     <div class="paper-list">
       <div class="name">${obj.name}</div>
       <div class="desc">${obj.description}</div>
-      <div class="score">${obj.score}</div>
+      
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="paperhistory/detail/${obj.id}">详情</a>
+          <a href="paper/history/detail/${obj.id}" target＝"_blank">详情</a>
         </span>
       </div>
     </div>

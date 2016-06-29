@@ -18,7 +18,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "",
+	password: "root",
 	database: "moka",
 	enableDBLog: true,
 
@@ -44,6 +44,8 @@ module.exports = {
 		"/index/jsll",
 		"/index/jsjn",
 		"/index/llks",
+
+		"/resource/list",
 		
 		"/out/insertModelFromOut",
 		"/auth/login",

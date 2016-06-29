@@ -1,0 +1,50 @@
+.container{width: 1000px;}
+.sys-info{
+  width: 600px;
+  height: 302px;
+}
+.jumbotron{
+  background-color:rgba(0,0,0,0.4);
+}
+
+.logo-title{
+  width: 570px;
+  background-image: url("../../../img/expert_title.png");
+  background-position: center left;
+  background-size: auto 70px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 100%;
+  margin-left: 110px;
+}
+
+.index-wrapper{
+	margin-top:270px;
+	text-align: center;
+	width: 100%;
+}
+
+.index-wrapper a{
+  width: 150px
+}
+
+.container{
+   background:url(../../../img/cloud.png) 0 bottom repeat-x  #049ec4;
+   -webkit-animation: animate-cloud 20s linear infinite;
+   -moz-animation: animate-cloud 20s linear infinite;
+   -ms-animation: animate-cloud 20s linear infinite;
+   -o-animation: animate-cloud 20s linear infinite;
+   animation: animate-cloud 20s linear infinite;
+}
+.main{ position:relative;}
+.main .slide-content{width:100%;min-width:980px;height:100%; min-height:640px;position: relative;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;}
+.main .slide-content .cloud{ position:absolute; width:200px;height:100px; background:url(../../../img/object.png);left:0px;top:0px;}
+.main .slide-content .cloud-0{background-position: -580px -240px;}
+.main .slide-content .cloud-1{background-position: -550px 0px;height:140px;width:260px;}
+.main .slide-content .cloud-2{background-position: -580px -140px;}
+.main .slide-content .cloud-3{background-position: -350px -140px;}
+.main .slide-content .cloud-4{background-position: -350px 0px;height:140px;}
+
+.clear{
+    clear:both;
+}

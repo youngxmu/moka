@@ -173,6 +173,6 @@
 		},
 		getCurrTree : function(){
 			return _this.topicTree;
-		},
+		}
 	};
 }(moka));
