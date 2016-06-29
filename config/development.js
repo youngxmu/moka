@@ -50,6 +50,8 @@ module.exports = {
 		"/auth/admin/login",
 		"/auth/user/login",
 		"/user/register",
+
+		"/article/queryArticleByMenu",
 		"/version"
 	],
 

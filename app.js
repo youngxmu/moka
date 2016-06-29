@@ -7,6 +7,8 @@ var expressSession = require('express-session');
 var multiparty = require('multiparty');
 var redisUtils = require('./lib/redisUtils.js')
 var utils = require('./lib/utils.js')
+var menuUtils = require('./lib/menuUtils.js')
+
 
 var log4js = require('log4js');
 var logger =  require('./lib/log.js').logger('app');
@@ -37,17 +39,13 @@ app.use(expressSession({
 //app.use(csrf());
 app.use(express.static(config.staticPath));
 
-console.log(config.env);
-if(config.env!='devvvv'){//开发环境不需要过滤
+if(config.env!='devv'){//开发环境不需要过滤
     
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         res.locals.currDate = utils.indexDate(new Date());
-        return next();
-        // console.log(123);
-        // res.locals.sid = '';
         // res.locals.islogin = true;
-        // return next();
+        return next();
         
         var requestPath = req.path;//请求的uri
         console.log(req.path);
@@ -59,42 +57,30 @@ if(config.env!='devvvv'){//开发环境不需要过滤
             }
         }
         var url = req.url;
-        // res.locals.islogin = true;
-        // next();
         if(req.session){//如果存在session则继续
             res.locals.sid = req.session.id;
         }
 
-        if (inWhitelist || url.indexOf('/index') != -1) {//在白名单中，不需要过滤
+        if (inWhitelist || (url.indexOf('/index') != -1 && url.indexOf('/admin') == -1)) {//在白名单中，不需要过滤
             next();
         }else{
-            if(req.session && (req.session.admin || req.session.user)){//如果存在session则继续
+            if(req.session &&  req.session.user){//如果存在session则继续
                 res.locals.islogin = true;
-                if(req.session.user){
-                    var sid = req.session.id;
-                    var uid = req.session.user.id;
-                    redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
-                    });
-                    next();
-                }else{
-                    
-                    if(!req.session.admin && url.indexOf('/admin/') != -1){
-                        // res.redirect("/moka/auth/admin/login");    
-                        res.redirect("/auth/admin/login");   
-                    }else{
-                        next();    
-                    }
-                    
-                }
+                var sid = req.session.id;
+                var uid = req.session.user.id;
+                redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
+                });
+                next();
+            }else if(req.session && req.session.admin){//如果存在session则继续
+                res.locals.islogin = true;
+                next();
             }else{
                 if(url.indexOf('login') != -1){
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
-                        // res.redirect("/moka/auth/admin/login");    
                         res.redirect("/auth/admin/login");    
                     }else{
-                        // res.redirect("/moka/auth/user/login");
                         res.redirect("/auth/user/login");
                     }    
                 }
@@ -208,5 +194,4 @@ process.on('uncaughtException', function(err) {
 });
 
 
-var menuUtils = require("./lib/menuUtils.js");
-console.log(menuUtils.getMenuList());
+menuUtils.refreshMenu();

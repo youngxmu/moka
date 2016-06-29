@@ -15,12 +15,13 @@ router.get('/img', function(req, res) {
 router.post('/img', function(req, res, next) {
 	var files = req.files.upload_file;
 	var file = files[0];//?req.files.file[0]:req.files.profile[0];
-	var file_path = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
+	var filePath = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
 	var index = filePath.lastIndexOf('/');
 	var fileName = filePath.substr(index + 1);
 	res.json({
 		success: true,
 		fileName : fileName,
+		file_path: filePath,
 		filePath: filePath
 	});
 });

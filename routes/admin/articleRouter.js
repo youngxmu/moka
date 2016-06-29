@@ -70,7 +70,7 @@ router.get('/detail/:id', function (req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 res.render('admin/article/detail', article);
@@ -115,7 +115,7 @@ router.get('/upload', function (req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 
@@ -151,7 +151,7 @@ router.post('/save', function (req, res) {
     var mid = req.body.mid;//明文
     var fileName = req.body.fileName;//明文
     var description = req.body.description;//明文
-    var type = 2;//resource
+    var type = commonUtils.getFileType(fileName);
     var admin = req.session.admin;
     if(!admin){
         return res.json({
@@ -195,51 +195,54 @@ router.post('/save', function (req, res) {
     
 });
 
-// router.get('/edit', function(req, res, next) {
-//     var id = req.query.id;
-//     var menuPath = req.query.menuPath;
-//     var isAdmin = true;
-//     if(!req.session.admin){
-//         isAdmin = false;
-//     }
-
-//     var menuList = [];
-//     if(menuPath != null && menuPath != ''){
-//         var menuMap = menuUtils.getMenuMap();
-//         var menuArr = menuPath.split(',');
-//         var lastIndex = menuArr.length - 1;
-//         console.log(menuArr);
-//         for(var i=lastIndex;i>=0;i--){
-//             var menu = menuMap[menuArr[i]];
-//             menuList.push(menu);
-//         }
-//     }
-//     if(id == null || id == undefined){
-//         res.render('admin/article/edit', {
-//             menuList: menuList,
-//             isAdmin : isAdmin
-//         });
-//     }else{
-//         articleModel.getArticleById(id, function (err, result) {
-//             if (!err) {
-//                 var article = result;
-//                 article.isAdmin = isAdmin;
-//                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-//                 article.menuList = menuList;
-//                 res.render('admin/article/edit', 
-//                     article
-//                 );
-//             } else {
-//                 res.render('error', {
-//                     success: false,
-//                     msg: "根据id查询文章出错"
-//                 });
-//             }
-//         });
-//     }
-// });
-
 router.get('/edit/:id', function(req, res, next) {
+    var id = req.params.id;
+    var menuPath = req.query.menuPath;
+    var isAdmin = true;
+    if(!req.session.admin){
+        isAdmin = false;
+    }
+
+    var menuList = [];
+    if(menuPath != null && menuPath != ''){
+        var menuMap = menuUtils.getMenuMap();
+        var menuArr = menuPath.split(',');
+        var lastIndex = menuArr.length - 1;
+        for(var i=lastIndex;i>=0;i--){
+            var menu = menuMap[menuArr[i]];
+            menuList.push(menu);
+        }
+    }
+    if(id == null || id == undefined){
+        res.render('admin/article/edit', {
+            menuList: menuList,
+            isAdmin : isAdmin
+        });
+    }else{
+        articleModel.getArticleById(id, function (err, result) {
+            if (!err) {
+                var article = result;
+                article.isAdmin = isAdmin;
+                article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
+                article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
+                
+                article.menuList = menuList;
+                res.render('admin/article/edit', 
+                    article
+                );
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询文章出错"
+                });
+            }
+        });
+    }
+});
+
+router.get('/editres/:id', function(req, res, next) {
     var id = req.params.id;
     var menuPath = req.query.menuPath;
     var isAdmin = true;
@@ -268,7 +271,7 @@ router.get('/edit/:id', function(req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 
@@ -305,6 +308,54 @@ router.get('/edit', function(req, res, next) {
         }
     }
     if(id == null || id == undefined){
+        res.render('admin/article/edit', {
+            menuList: menuList,
+            isAdmin : isAdmin
+        });
+    }else{
+        articleModel.getArticleById(id, function (err, result) {
+            if (!err) {
+                var article = result;
+                article.isAdmin = isAdmin;
+                article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
+                article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                article.file_type = commonUtils.getFileTypeName(article.file_name);
+                
+                article.menuList = menuList;
+                res.render('admin/article/edit', 
+                    article
+                );
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询文章出错"
+                });
+            }
+        });
+    }
+});
+
+
+router.get('/editres', function(req, res, next) {
+    var id = req.query.id;
+    var menuPath = req.query.menuPath;
+    var isAdmin = true;
+    if(!req.session.admin){
+        isAdmin = false;
+    }
+
+    var menuList = [];
+    if(menuPath != null && menuPath != ''){
+        var menuMap = menuUtils.getMenuMap();
+        var menuArr = menuPath.split(',');
+        var lastIndex = menuArr.length - 1;
+        for(var i=lastIndex;i>=0;i--){
+            var menu = menuMap[menuArr[i]];
+            menuList.push(menu);
+        }
+    }
+    if(id == null || id == undefined){
         res.render('admin/article/editres', {
             menuList: menuList,
             isAdmin : isAdmin
@@ -315,7 +366,7 @@ router.get('/edit', function(req, res, next) {
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 

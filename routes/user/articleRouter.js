@@ -91,7 +91,7 @@ router.get('/detail/:id', function (req, res, next) {
                 console.log(article);
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
                 res.render('user/resource/detail', article);
@@ -245,7 +245,7 @@ router.post('/queryArticleByTitle', function (req, res, next) {
                     result[i].create_time = commonUtils.formatDate(date);
                     var article = result[i];
                     article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                    article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                    if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                     article.menuList = menuUtils.getMenuPathList(article.menu_id);
                     article.file_type = commonUtils.getFileTypeName(article.file_name);
                 }
@@ -313,7 +313,7 @@ router.post('/queryArticleByMenu', function (req, res, next) {
                     result[i].create_time = commonUtils.formatDate(date);
                     var article = result[i];
                     article.update_time = commonUtils.formatDate(new Date(article.update_time));
-                    article.file_name = config.imgHost + '/uploads/' + article.file_name;
+                    if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                     article.menuList = menuUtils.getMenuPathList(article.menu_id);
                     article.file_type = commonUtils.getFileTypeName(article.file_name);
                 }

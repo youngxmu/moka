@@ -21,6 +21,52 @@ router.get('/list', function (req, res, next) {
 });
 
 
+router.get('/detail', function (req, res, next) {
+    var name = 'young的自测试卷';
+    var description = 'young的自测试卷';
+    
+    questionModel.queryRandQuestions(4, 0, 4, function (err, result) {
+        if (err || !result || !commonUtils.isArray(result)) {
+            logger.error("查找题目出错", err);
+            res.render('error', {msg: '出错啦'});
+        } else {
+            var  list = [];
+            list = result;
+            questionModel.queryRandQuestions(2, 0, 6, function (err, result2) {
+                if (err || !result || !commonUtils.isArray(result2)) {
+                    logger.error("查找题目出错", err);
+                    res.render('error', {msg: '出错啦'});
+                } else {
+                    for(var index in result2){
+                        list.push(result2[index]);
+                    }
+                    var qidArr = [];
+                    for(var key in list){
+                        qidArr.push(list[key].id);
+                    }
+
+                    var qids = qidArr.join(',');//明文
+                   
+                    paperModel.insertPaper(name, description, qids, function (err, result) {
+                        if (!err) {
+                            res.render('user/paper/detail',{
+                                id : result.insertId,
+                                name : name,
+                                description : description
+                            });
+                        } else {
+                            res.render('error', {msg: '出错啦'});
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+
 //根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/list', function (req, res, next) {
     var name = req.body.name;

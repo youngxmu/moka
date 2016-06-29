@@ -22,6 +22,18 @@ ul{
 .header button{float:left;border:none;margin:0 0 0 1px;background:#49D;color:#FFF;height:32px;padding:8px 12px}
 form {margin-right: 1em;}
 
+
+.nav {background-color: #11487e;background-image: none;}
+.nav{width:1000px;height:40px;position:relative;margin:0 auto; z-index:99;}
+.nav .nav-ul > li{float:left;width:120px;height:40px;text-align: center;}
+.nav .nav-ul > li:hover,.nav .nav-ul > li a:hover{color:#FFF;background:#38C}
+.nav .nav-ul > li a{
+  text-align:center;font:normal 16px microsoft yahei; text-decoration:none;
+  color: #f6f6f6;
+  height: 40px;line-height: 40px;
+display: block;white-space: nowrap;}
+
+
 .logo{
     background-image: url("../../img/logo.png");
     background-position: center left;
@@ -60,7 +72,7 @@ form {margin-right: 1em;}
 .header-info span{cursor: pointer;}
 .header-info span:hover{opacity: 0.7;}
 
-.container{width: 1000px;}
+.container{width: 1000px;font-size: 0;}
 .main{width: 1000px;}
 
 

@@ -1,6 +1,6 @@
 /** 主页面 */
-.container{font-size: 0;width: 1000px;}
-.main{font-size: 0;color: #ffffff;}
+.container{width: 1000px;}
+.main{color: #ffffff;}
 
 .nav{margin-bottom: 15px;}
 .nav li  a{

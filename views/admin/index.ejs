@@ -3,6 +3,9 @@
   <head>
     <title>首页管理</title>
     <%- include common/meta.ejs %>
+    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
+    <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
+    <link rel='stylesheet' href='css/admin/article/list.css' >
     <style type="text/css">
     .container{padding-bottom: 50px;}
     .news-edit{
@@ -36,10 +39,37 @@
   <body>
     <%- include common/header.ejs %>
   	<div class="container">
-    	<div id="news_panel"></div>
-      <div class="btn-wrapper" style="font-size:14px;">
-        <span id="btn_commit" class="btn-commit">提交</span>
+      <div id="list_panel">
+        <div class="sidebar">
+          <div class="tree-opr">
+            <a href="javascript:void(0);" class="unfold">展开</a>
+          </div>
+          <div style="overflow:auto;min-height:500px;" >
+            <ul id="topic_tree" class="ztree"></ul>
+          </div>
+        </div>
+        <div id="list_box" class="main">
+          <div class="resource-opr">
+            <a href="javascript:void(0);" class="add">增加</a>
+          </div>
+          <div id="resource_list"></div>
+          <div id="pagebar"></div>
+        </div>
+        <div id="editor_box" class="main" style="display:none;">
+          <textarea id="editor" placeholder="输入文章正文" autofocus><% if(typeof content != 'undefined'){%><%- content %><% } %> </textarea>
+          <div class="btn-wrapper" style="font-size:14px;">
+            <span id="btn_modify" class="btn-commit">提交</span>
+          </div>
+        </div>
+        
       </div>
+      <div id="pic_panel" style="display:none;">
+        <div id="news_panel"></div>
+        <div class="btn-wrapper" style="font-size:14px;">
+          <span id="btn_commit" class="btn-commit">提交</span>
+        </div>  
+      </div>
+    	
 	  </div>
 
     <script type="text/template" id="news-tpl">
@@ -61,6 +91,35 @@
     {@/each}
     </script>
 
+    <script type="text/template" id="resource-tpl">
+    <div class="res-list">
+      <span class="res-type">类型</span>
+      <span class="res-title">标题</span>
+      <span>作者</span>
+      <span>时间</span>
+      <span>操作</span>
+    </div>
+    {@each list as resource}
+    <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
+      <span class="res-title">
+        <a href="admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+      <span class="oper">
+        <a href="javascript:void(0);" target="_blank" data-id="${resource.id}" class="edit">编辑</a>
+        <a href="javascript:void(0);" data-id="${resource.id}" class="del">删除</a>
+      </span>
+    </div>
+    {@/each}
+    </script>
+
+    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="simditor/scripts/simditor.js"></script>
     <script type="text/javascript" src="js/admin/index.js"></script>
     <script>
       $(document).ready(function() {

@@ -56,3 +56,10 @@
    -o-animation: animate-cloud 20s linear infinite;
    animation: animate-cloud 20s linear infinite;
 }
+
+.desc-panel{
+  margin: 15px;
+  background-color: rgba(255,255,255,0.5);
+  padding: 15px;
+  line-height: 1.5;
+}

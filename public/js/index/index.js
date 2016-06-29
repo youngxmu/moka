@@ -19,9 +19,6 @@
 			_this.loadNews();
 			_this.loadInfos();
 			_this.loadList1();
-			_this.loadList3();
-			_this.loadList4();
-			_this.loadList5();
 		},
 		initEvent : function(){
 			$('body').on('keydown','#keyword',function(e){
@@ -105,7 +102,7 @@
 		loadList1 : function(){
 			var $panel = $('#gfjy');
 			var sendData = _this.queryData;
-				sendData.mid = 11;
+				sendData.mid = 9;
 			var tpl = _this.tpl.articleListTpl;
 			var searchUrl = 'index/gfjy';
 			$.ajax({
@@ -118,86 +115,6 @@
 				success : function(result){
 					var data = result.data;
 				    $panel.html(tpl.render(data));
-					var totalCount = data.list.length;
-					if(totalCount == 0){
-						$panel.html(P.building);
-						return;
-					}
-				}
-			});
-		},
-		loadList3 : function(){
-			var $panel = $('#jsll');
-			var sendData = _this.queryData;
-				sendData.mid = 13;
-			// var tpl = _this.tpl.paperListTpl3;
-			var tpl = _this.tpl.articleListTpl;
-			var searchUrl = 'index/jsll';
-			$.ajax({
-				type : 'post',
-				url : searchUrl,
-				data : sendData,
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(result){
-					var data = result.data;
-				    $panel.html(tpl.render(data));
-					var totalCount = data.list.length;
-					if(totalCount == 0){
-						$panel.html(P.building);
-						return;
-					}
-				}
-			});
-		},
-		loadList4 : function(){
-			var $panel = $('#jsjn');
-			var sendData = _this.queryData;
-				sendData.mid = 14;
-			// var tpl = _this.tpl.paperListTpl4;
-			var tpl = _this.tpl.articleListTpl;
-			var searchUrl = 'index/jsjn';
-			$.ajax({
-				type : 'post',
-				url : searchUrl,
-				data : sendData,
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(result){
-					var data = result.data;
-				    $panel.html(tpl.render(data));
-					var totalCount = data.list.length;
-					if(totalCount == 0){
-						$panel.html(P.building);
-						return;
-					}
-				}
-			});
-		},
-		loadList5 : function(){
-			var $panel = $('#paper');
-			var sendData = _this.queryData;
-				sendData.mid = 15;
-			// var tpl = _this.tpl.paperListTpl5;
-			var tpl = _this.tpl.articleListTpl;
-			var searchUrl = 'index/llks';
-			$.ajax({
-				type : 'post',
-				url : searchUrl,
-				data : sendData,
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(result){
-					var data = result.data;
-				    $panel.html(tpl.render(data));
-					var totalCount = data.list.length;
-					if(totalCount == 0){
-						$panel.html(P.building);
-						return;
-					}
 				}
 			});
 		},

@@ -1,0 +1,32 @@
+.container{width: 1000px;padding:0;}
+.container{
+	background-image: url("../../../img/data.jpg");
+}
+
+.logo-title{
+  width: 570px;
+  background-image: url("../../../img/paper_title.png");
+  background-position: center left;
+  background-size: auto 70px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 100%;
+  margin-left: 110px;
+}
+
+
+.jumbotron{
+	background-color:rgba(0,0,0,0.4);
+}
+
+.sys-info{
+	width: 640px;
+    display: inline-block;
+    height: 270px;
+    background-color: rgba(0,0,0,0.5);
+    margin-top: -30px;
+    padding: 0 20px;
+        border-radius: 5px;
+}
+.sys-info-img div{height: 180px;width: 600px;}
+

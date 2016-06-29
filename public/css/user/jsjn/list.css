@@ -1,4 +1,4 @@
-.container{font-size: 0;width: 1000px;}
+.container{width: 1000px;}
 .sidebar {width: 209px;
 	padding: 10px 20px 10px 0;
 	display: inline-block;
@@ -28,7 +28,7 @@
 	min-height: 500px;
 }
 
-.main .res-list{border-bottom: 1px dashed #cccccc;font-size: 0;line-height: 40px;}
+.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;}
 .main .res-list:last-child{border-bottom: 0;}
 .main .res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
 .main .res-list-title span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;text-align: center;}
@@ -47,7 +47,7 @@
 }
 
 .main .resource-opr{
-	line-height: 24px;font-size: 0;
+	line-height: 24px;
 	border-bottom: 1px solid #cccccc;
 	text-align: right;
 }

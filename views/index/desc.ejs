@@ -17,11 +17,13 @@
         <li>
           <a href="<%= link%>"><%= title%></a>
         </li>
+        <% if(typeof subtitle != 'undefined'){%>
         <li class="active">
           <%= subtitle%>
         </li>
+        <% } %>
       </ol>
-      <div class="" style="padding: 0 15px;" ><%= content%></div>
+      <div class="desc-panel" ><%- content %></div>
     </div>
     <%- include common/footer.ejs %>
     <script>

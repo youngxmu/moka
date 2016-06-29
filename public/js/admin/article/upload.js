@@ -173,22 +173,27 @@
 				url : url,
 				type : 'post',
 				data : postData,
-				success : function(data){
+				success : function(result){
+					if(!result.success){
+						util.dialog.errorDialog('提交失败请重试');
+						return;
+					}
+
+					var id = result.data.insertId;
+					if(!id){
+						id = _this.articleId;
+					}
 					util.dialog.confirmDialog('继续提交',
 						function(){
-							window.location.href = window.location.href;
+							// window.location.href = window.location.href;
 						},
 						function(){
-							var id = data.id;
-							if(!id){
-								id = _this.articleId;
-							}
+
 							if(id){
 								window.location.href = 'admin/article/detail/' + id;	
 							}else{
-								window.location.href = window.location.href;
+								// window.location.href = window.location.href;
 							}
-							
 						},
 						'提交成功'
 					);

@@ -29,8 +29,11 @@ router.post('/tree', function(req, res, next) {
 
 router.post('/tree/:pid', function(req, res, next) {
     var pid = req.params.pid;
+    
     var menuMap = menuUtils.getMenuMap();
+    
     menu = menuMap[pid];
+    // console.log(menuMap);
     var mids = [];
     mids.push(pid);
     for(var index in menu.submenu){

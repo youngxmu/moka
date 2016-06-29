@@ -15,7 +15,7 @@ var userArticleRouter = require('./routes/user/articleRouter.js');
 var userResourceRouter = require('./routes/user/resourceRouter.js');
 
 var userVoteRouter = require('./routes/user/voteRouter.js');
-var userIndexRouter = require('./routes/user/indexRouter.js');
+// var userIndexRouter = require('./routes/user/indexRouter.js');
 var userExpertRouter = require('./routes/user/expertRouter.js');
 var userJSLLSupportRouter = require('./routes/user/jsllSupportRouter.js');
 var userJSJNSupportRouter = require('./routes/user/jsjnSupportRouter.js');

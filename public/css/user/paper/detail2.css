@@ -1,7 +1,8 @@
+.main{padding: 20px;}
 .question-panel{
 	padding: 10px;
 	display: none;
-	border-bottom: 1px dashed #cccccc;
+	/*border-bottom: 1px dashed #cccccc;*/
 	display: block;
 	color :#000000;
 }
@@ -11,7 +12,9 @@
 .question-panel .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
 .question-panel .qanswer.selected{background: blue;color: #ffffff}
 
-.selection-panel{padding: 20px 0; border-bottom: 1px solid #cccccc;}
+.selection-panel{padding: 20px 0; 
+	/*border-bottom: 1px solid #cccccc;*/
+}
 
 .selection-panel span{height: 30px;
 	line-height: 30px;
