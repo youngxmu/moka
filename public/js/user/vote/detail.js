@@ -74,26 +74,69 @@
 						var questions = data.vote.questions;
 						var historys = data.vote.historys;
 						
-						var ctx = document.getElementById("myChart").getContext("2d");
-						console.log(ctx);
-						console.log(Chart);
+						var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        var randomScalingFactor = function() {
+            return 1;
+        };
+        var randomColorFactor = function() {
+            return Math.round(Math.random() * 255);
+        };
+        var randomColor = function() {
+            return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+        };
+						var ctx = document.getElementById("canvas").getContext("2d");
 						var data = {
-							labels : ["January"],
-							datasets : [
-								{
-									// fillColor : "rgba(220,220,220,0.5)",
-									// strokeColor : "rgba(220,220,220,1)",
-									data : [65]
-								},
-								{
-									// fillColor : "rgba(220,220,220,0.5)",
-									// strokeColor : "rgba(220,220,220,1)",
-									data : [65]
-								}
-							]
-						};
+            labels: ["A", "B", "C", "D"],
+            datasets: [{
+                label: 'a',
+                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
+                data: [3,2,3,3,0]
+            }
+            ]
+
+        };
+
+
+        
 						var options = {};
-						new Chart(ctx).Bar(data,options);
+						var myBar = new Chart(ctx, {
+			                type: 'bar',
+			                data: data,
+			                width : '400px',
+			                options: {
+			                    // Elements options apply to all of the options unless overridden in a dataset
+			                    // In this case, we are setting the border of each bar to be 2px wide and green
+			                    barPercentage : 0.2,
+			                    elements: {
+			                    	 barPercentage : 0.2,
+			                        rectangle: {
+			                            borderWidth: 2,
+			                            borderColor: 'rgb(0, 255, 0)',
+			                            borderSkipped: 'bottom'
+			                        }
+			                    },
+			                    responsive: true,
+			                    legend: {
+			                        position: 'top',
+			                    },
+			                    title: {
+			                        display: false,
+			                        text: 'Chart.js Bar Chart'
+			                    }
+			                }
+			            });
+
+setTimeout(function(){
+	myBar.data.datasets = [{
+                label: 'b',
+                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
+                data: [1,2,3,4,0]
+            }
+          ];
+          console.log(123);
+          myBar.update();
+}, 2000);
 					}else{
 						alert(data.msg);
 					}
