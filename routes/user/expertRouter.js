@@ -6,6 +6,14 @@ var expertModel = require('../../models/expertModel.js');
 var router = express.Router();
 
 
+router.get('', function (req, res, next) {
+    res.render('user/expert/index');
+});
+
+router.get('/index', function (req, res, next) {
+    res.render('user/expert/index');
+});
+
 router.get('/list', function (req, res, next) {
     res.render('user/expert/list');
 });

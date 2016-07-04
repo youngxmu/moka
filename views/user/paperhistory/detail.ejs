@@ -3,25 +3,32 @@
   	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
 	    <title><%= name %></title>
-	    <%- include ../../common/meta.ejs %>
+	    <%- include ../common/meta.ejs %>
+	    <link href="css/user/paper/paper.css" rel="stylesheet" type="text/css" media="all" />  
 	    <link href="css/user/paper/detail.css" rel="stylesheet" type="text/css" media="all" />  
   	</head>
   	<body>
-  		<%- include ../../common/header.ejs %>
+  		<%- include ../common/header.ejs %>
 
   		<input id="pid" value="<%= id %>" type="hidden">
 
 
   		<div class="container">
 	      <div class="main">
-	        <div class="title"><%= name %></div>
-	        <div id="question_panel" class="question-panel" style="font-size:14px;">
-  				
-  			</div>
+	      	<div class="panel panel-primary">
+	          <div class="panel-heading">
+	            <h3 id="content_title" class="panel-title"><%= name %></h3>
+	          </div>
+	          <div class="panel-body detail-article">
+	            <div id="question_panel" class="question-panel" style="font-size:14px;"></div>
+	          </div>
+	        </div>
+	        
+	        
 	      </div>
 		  </div>
 
-	   
+	   	<%- include ../common/footer.ejs %>
 	    <script type="juicer/template" id="question-list-tpl">
 	    {@each list as obj, index}
 	    <div class="question-list" style="font-size:14px;">

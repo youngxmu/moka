@@ -39,7 +39,13 @@
         <ul id="topic_tree" class="ztree" style="display:none;"></ul>
       </div>
       <div class="main">
-        <div id="content" class="info-content" ></div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 id="content_title" class="panel-title"></h3>
+            </div>
+            <div id="content" class="panel-body detail-article">
+            </div>
+          </div>
         <div id="resource_panel" style="display:none;">
           <div id="resource_list"></div>
           <div id="pagebar"></div>
@@ -68,10 +74,12 @@
     {@/each}
     </script>
 
-    <script type="text/template" id="edit_menu_dlg">
-    <div class="">
-      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
-    </div>
+    <script type="text/template" id="menu_tpl">
+    {@each list as resource}
+    <li data-id="${resource.id}">
+      <a href="javascript:void(0);" class="btn btn-info btn-lg active" role="button">${resource.name}</a>
+    </li>
+    {@/each}
     </script>
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/user/jsjn/jsjn.js"></script>

@@ -1,12 +1,13 @@
 (function(P){
 	var _this = null;
 	_this = P.user.jsjn.list = {
-		pid : 14,//系统根目录编号
+		pid : 1301,//系统根目录编号
 		searchUrl : 'article/queryArticleByMenu',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
 		currNode : null,
+		tpl : {},
 		data : {
 			image : 'jpg,png,gif,jpeg,bmp',
 			initData : null,
@@ -18,13 +19,18 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
+			_this.tpl.menuTpl = juicer($('#menu_tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			
 			_this.initEvent();
 			_this.initTopic();
+			_this.search();
 			_this.searchResource();
 		},
 		initEvent : function(){
+			$('.nav-ul').on('click', 'li', _this.changeType);
+			$('#menu_panel').on('click', 'li', _this.showContent);
+
 			$('#resource_list').on('click','.view',function(){
 				var id = $(this).attr('data-id');
 				var data = _this.data.resourceList[id];
@@ -52,6 +58,59 @@
 			$('#btn_search').click(function(){
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
+			});
+		},
+		changeType : function(){
+			var $this = $(this);
+			$this.addClass('active').siblings().removeClass('active');
+			_this.data.type = $this.attr('data-type');
+			if(_this.data.type == '资料'){
+				_this.initTopic();
+			}else{
+				$('#menu_panel').show();
+				$('#topic_tree').hide();
+				_this.search();
+			}
+		},
+		showContent : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			$.ajax({
+				url : 'index/info/view/' + id,
+				type : 'post',
+				success : function(result){
+					if(result.success){
+						$('#content_title').html($this.text());
+						$('#content').html(result.data.content);
+					}else{
+						$('#menu_panel').html('');
+						$('#content').html('');			
+					}
+				}
+			});
+		},
+		search : function(){
+			$.ajax({
+				url : 'menu/tree/' + _this.pid,
+				type : 'post',
+				success : function(result){
+					if(result.success){
+						var html = _this.tpl.menuTpl.render(result.data);
+						$('#menu_panel').html(html);
+						_this.listMap = {};
+						for(var index in result.data.list){
+							var item = result.data.list[index];
+							_this.listMap[item.id] = item;
+							if(index == 0){
+								$('#content_title').html(item.title);
+								$('#content').html(item.content);
+							}
+						}
+					}else{
+						$('#menu_panel').html('');
+						$('#content').html('');			
+					}
+				}
 			});
 		},
 		initTopic : function() {

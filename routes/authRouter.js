@@ -53,21 +53,23 @@ router.post('/admin/login', function (req, res, next) {
 });
 
 router.post('/user/login', function (req, res, next) {
+    var sysType = req.body.sysType;
+    if(!sysType){
+        sysType = 'resource';
+    }else{
+        sysType = sysType.trim();
+    }
+    
     var password = req.body.password.trim();
     var email = req.body.email.trim();
 
     logger.info("用户尝试登陆", email, password);
 
-    if (!email) {
-        return res.render('error', {
-            success: false,
-            msg: "登录邮箱不能为空"
-        });
-    }
-    if (!password) {
-        return res.render('error', {
-            success: false,
-            msg: "密码不能为空"
+    var view = sysType + '/list';
+    var errView = 'user/' + sysType + '/index';
+    if (!email || !password) {
+        return res.render(errView, {
+            errmsg: "邮箱/密码不能为空"
         });
     }
 
@@ -76,27 +78,28 @@ router.post('/user/login', function (req, res, next) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var user = result[0];
             if(user.password != password){
-                return res.render('error', {
+                return res.render(errView, {
                     success: false,
-                    msg: "用户名或密码错误"
+                    errmsg: "用户名或密码错误"
                 });
             }
 
             if(user.status != 1){
-                return res.render('error', {
+                return res.render(errView, {
                     success: false,
-                    msg: "账户未激活"
+                    errmsg: "账户未激活"
                 });
             }
             delete user.password;
             req.session.user = user;
+            res.locals.username = user.name;
             //登录成功
             // res.redirect('/moka/index');
-            res.redirect('/index');
+            res.redirect('/'+view);
         } else {
-            res.render('error', {
+            return res.render(errView, {
                 success: false,
-                msg: "用户名或密码错误"
+                errmsg: "用户名或密码错误"
             });
         }
     });

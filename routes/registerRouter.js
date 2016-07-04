@@ -56,7 +56,7 @@ router.post('/register', function (req, res, next) {
 	var tel = req.body.tel ? req.body.tel : 0;
 	var name = req.body.name ? req.body.name : '';
 	var score = 0;
-	var status = 0;
+	var status = 1;
 	userModel.insertUser(email, tel, name, password, score, status, function(err, result){
 		if(err){
 			res.render('error',{
@@ -65,10 +65,11 @@ router.post('/register', function (req, res, next) {
 			});
 		}else{
 			// emailUtils.sendMail(options, function(){
-				res.render('user/login',{
-					success : true,
-					msg : '注册成功，请验证邮箱'
-				});
+				// res.render('user/login',{
+				// 	success : true,
+				// 	msg : '注册成功，请验证邮箱'
+				// });
+				res.redirect('/index')
 			// });
 		}
 	});

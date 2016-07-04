@@ -9,6 +9,7 @@
   </head>
   <body>
     <%- include common/header.ejs %>
+    <input type="hidden" id="title" value="<%= title %>">
     <div class="container" style="padding:0 ;">
       <ol class="breadcrumb" style="border-radius:0;">
         <li>
@@ -33,7 +34,19 @@
     </div>
     <%- include common/footer.ejs %>
     <script>
-      $('#nav_index').addClass('active');
+    
+      if($('#title').val() == '中心介绍' ){
+        $('#nav_desc').addClass('active');  
+      }
+
+      if($('#title').val() == '管理机构' ){
+        $('#nav_units').addClass('active');  
+      }
+
+      if($('#title').val() == '关于我们' ){
+        $('#nav_about').addClass('active');  
+      }
+      
       $(document).ready(function() {
       });
     </script>
