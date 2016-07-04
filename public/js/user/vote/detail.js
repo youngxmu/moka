@@ -5,8 +5,8 @@
 			_this.initData();
 			_this.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
-			_this.showChart();
-			// _this.initQuestions();
+			// _this.showChart();
+			_this.initQuestions();
 		},
 		initData : function(){
 			_this.pid = $('#pid').val();
@@ -65,44 +65,45 @@
 				}
 			});
 		},
-	 	showChart : function(){
-	 		$.ajax({
-				url : 'vote/history/' + _this.pid,
-				type : 'post',
-				success : function(data){
-					if(data.success){
-						var questions = data.vote.questions;
-						var historys = data.vote.historys;
+	 	// showChart : function(){
+	 	// 	$.ajax({
+			// 	url : 'vote/history/' + _this.pid,
+			// 	type : 'post',
+			// 	success : function(data){
+			// 		if(data.success){
+			// 			var questions = data.vote.questions;
+			// 			var historys = data.vote.historys;
 						
-						var ctx = document.getElementById("myChart").getContext("2d");
-						console.log(ctx);
-						console.log(Chart);
-						var data = {
-							labels : ["January"],
-							datasets : [
-								{
-									// fillColor : "rgba(220,220,220,0.5)",
-									// strokeColor : "rgba(220,220,220,1)",
-									data : [65]
-								},
-								{
-									// fillColor : "rgba(220,220,220,0.5)",
-									// strokeColor : "rgba(220,220,220,1)",
-									data : [65]
-								}
-							]
-						};
-						var options = {};
-						new Chart(ctx).Bar(data,options);
-					}else{
-						alert(data.msg);
-					}
-				}
-			});
-	 	},
+			// 			var ctx = document.getElementById("myChart").getContext("2d");
+			// 			console.log(ctx);
+			// 			console.log(Chart);
+			// 			var data = {
+			// 				labels : ["January"],
+			// 				datasets : [
+			// 					{
+			// 						// fillColor : "rgba(220,220,220,0.5)",
+			// 						// strokeColor : "rgba(220,220,220,1)",
+			// 						data : [65]
+			// 					},
+			// 					{
+			// 						// fillColor : "rgba(220,220,220,0.5)",
+			// 						// strokeColor : "rgba(220,220,220,1)",
+			// 						data : [65]
+			// 					}
+			// 				]
+			// 			};
+			// 			var options = {};
+			// 			new Chart(ctx).Bar(data,options);
+			// 		}else{
+			// 			alert(data.msg);
+			// 		}
+			// 	}
+			// });
+	 	// },
 
-	 	showChart_ : function(){
-	 		
+	 	showChart : function(){
+	 		$('#main_panel').hide();
+	 		$('#chart').show();
 			//var colors = ['#AF0202', '#EC7A00', '#FCD200', '#81C714'];
 			var myChart = new JSChart('chart', 'bar');
 			myChart.setTitleColor('#8E8E8E');

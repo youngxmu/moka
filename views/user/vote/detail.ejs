@@ -9,12 +9,13 @@
   	</head>
   	<body>
   		<input id="pid" value="<%= id %>" type="hidden">
+  		<%- include ../common/header.ejs %>
   		<div class="container">
 
-  			<div id =  "chart" >
+  			<div id =  "chart" style="display:none;">
   				<canvas id="myChart" width="400" height="400"></canvas>
   			</div>
-	      	<div class="main" style="display:none;">
+	      	<div id="main_panel"class="main" >
 	      	 	<div class="panel panel-primary">
 		            <div class="panel-heading">
 		              <h3 id="content_title" class="panel-title"><%= name %></h3>
@@ -27,7 +28,7 @@
 	          	</div>
 	      	</div>
 	  	</div>
-
+	  	<%- include ../common/footer.ejs %>
 	   <script type="juicer/template" id="question-list-tpl">
 	    {@each list as obj, index}
 	    <div data-id="${obj.id}" class="question-list {@if index == 0}active{@/if}" >

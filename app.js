@@ -96,8 +96,11 @@ if(config.env!='devv'){//开发环境不需要过滤
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/auth/admin/login");    
                     }else{
+                        if(url.indexOf('/vote/') != -1 || url.indexOf('/article/') != -1){
+                            return next();
+                        }
                         if(url.indexOf('/resource/') != -1){
-                            return res.redirect("/resource/index");
+                            return next();//res.redirect("/resource/index");
                         }
                         if(url.indexOf('/jsll/') != -1){
                             return res.redirect("/jsll/index");

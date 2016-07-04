@@ -34,7 +34,15 @@
             <span class="text"><a href="<%= file_name %>" download class="download"><%- title %></a></span>
           </div>
           <div class="t-preview">
-            <video src="<%= file_name %>"></video>
+            
+            <video id="example_video_1" class="video-js vjs-default-skin"
+              controls preload="auto" width="640" height="264" style="width:600px;height:450px;"
+              poster="http://video-js.zencoder.com/oceans-clip.png"
+              data-setup='{"example_option":true}'>
+             <source src="<%= file_name %>" type='video/mp4' />
+             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+            </video>
+            
           </div>
           <div class="t-input">
             <label>所属栏目</label>
