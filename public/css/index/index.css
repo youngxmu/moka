@@ -82,7 +82,8 @@ display: block;white-space: nowrap;}
 .nav ul li:hover{color:#FFA304;}
 .nav li:hover ul.sub-nav{display:block;}
 .nav ul.sub-nav{display:none; background:#07b;position:absolute;z-index:20;border-radius: 0 0 5px 5px;box-shadow: 0 3px 5px rgba(0,0,0,0.5);height:auto;}
-.nav ul.sub-nav li{background:#07B; float:none; font-size: 12px;line-height: 20px;padding:4px 0;border-bottom:1px solid #006EAD;text-align: left;
+.nav ul.sub-nav li{background:#07B; float:none; font-size: 12px;line-height: 20px;padding:4px 0;border-bottom:1px solid #006EAD;
+  text-align: center;
 	min-width: 120px;
 	width: auto;
 	height: 30px;

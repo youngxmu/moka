@@ -105,14 +105,55 @@ exports.queryArticleById = function (articleId, callback) {
 
 
 
-//根据“是否虚拟”“创建来源”查找文章总数
-exports.queryArticleByTitleTotalCount = function (title, callback) {
-    var sql = 'select count(id) as count from article where status = 1 ';
+
+
+exports.queryArticleByTitle = function (title, start, pageSize, callback) {
+    var params = [];
+    var sql = 'select * from resource where 1 = 1 ';
     if(title){
-        sql += 'and title like "%' + title + '%" ';
+        var keyArr = title.split(' ');
+        if(keyArr.length > 1){
+            sql += ' and ( ';
+            for(var index in keyArr){
+                var key  = keyArr[index];
+                if(index == 0){
+                    sql += ' title like "%' + key + '%" ';        
+                }else{
+                    sql += ' or title like "%' + key + '%" ';    
+                }
+            }
+            sql += ' ) ';
+        }else{
+            sql += ' and title like "%' + title + '%" ';    
+        }
+    }
+    sql += 'order by create_time desc limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+exports.queryArticleByTitleTotalCount = function (title, callback) {
+    var params = [];
+    var sql = 'select count(id) as count from resource where 1 = 1 ';
+    if(title){
+        var keyArr = title.split(' ');
+        if(keyArr.length > 1){
+            sql += ' and ( ';
+            for(var index in keyArr){
+                var key  = keyArr[index];
+                if(index == 0){
+                    sql += ' title like "%' + key + '%" ';        
+                }else{
+                    sql += ' or title like "%' + key + '%" ';    
+                }
+            }
+            sql += ' ) ';
+        }else{
+            sql += ' and title like "%' + title + '%" ';    
+        }
     }
     sql += ';';
-    var params = [];
     db.query(sql, params, function (err, result) {
         if (!err && result && result[0]) {
             callback(result[0].count);
@@ -123,19 +164,6 @@ exports.queryArticleByTitleTotalCount = function (title, callback) {
     });
 };
 
-
-//根据文章标题模糊查询文章
-exports.queryArticleByTitle = function (title, start, pageSize, callback) {
-    var sql = 'select count(id) as count from article where status = 1 ';
-    if(title){
-        sql += 'and title like "%' + title + '%" ';
-    }
-    sql += 'order by create_time desc limit ?,?;';
-    var params = [];
-    params.push(start);
-    params.push(pageSize);
-    db.query('select * from article where title like "%' + title + '%" ', [start, pageSize], callback);
-};
 
 
 exports.insertArticle = function (title, author, content, status, menu_id, author_id, file_name, type, description, callback) {

@@ -138,10 +138,27 @@
 			_this.initTree();
 		},
 		searchResource : function() {
-			var data = _this.data.searchData;
+			
 			if(!_this.data.searchData.mid){
 				_this.data.searchData.mid = _this.pid;
 			}
+
+			var infoDict = {
+				'100401' : '历史',
+				'100402' : '法规',
+				'100403' : '外国',
+				'100404' : '武器 装备',
+				'100405' : '形势',
+				'100406' : '历史'
+			};
+			if(infoDict[_this.data.searchData.mid]){
+				_this.data.searchData.keyword = infoDict[_this.data.searchData.mid];
+				_this.searchUrl = 'article/queryArticleByTitle';
+			}else{
+				_this.searchUrl = 'article/queryArticleByMenu';
+				_this.data.searchData.keyword = '';
+			}
+			var data = _this.data.searchData;
 			$.ajax({
 				type : "post",
 				url : _this.searchUrl,

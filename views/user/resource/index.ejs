@@ -6,13 +6,10 @@
     <link rel='stylesheet' href='css/user/resource/resource.css' />
   </head>
   <body>
-  	<%- include ../common/header.ejs %>
+  	
     <div class="container">
+      <%- include ../common/header.ejs %>
       <div class="main">
-        <!-- <div class="index-wrapper">
-          <a href="resource/list" class="btn btn-primary btn-lg active" role="button">进入系统</a>
-        </div> -->
-
         <div class="login-panel">
           <div class="sys-info">
             <div class="sys-info-txt">
@@ -54,7 +51,7 @@
     <script type="text/javascript" src='js/user/resource/resource.js'></script>
   	<script type="text/javascript">
   		$(document).ready(function(){
-  			moka.user.resource.detail.init();
+  			moka.user.resource.init();
   		});
   	</script>
   </body>

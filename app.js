@@ -67,10 +67,8 @@ if(config.env!='devv'){//开发环境不需要过滤
         }
 
         if (inWhitelist || (url.indexOf('/index') != -1 && url.indexOf('/admin') == -1)) {//在白名单中，不需要过滤
-            console.log(url);
             next();
         }else{
-            console.log(url);
             if(req.session &&  req.session.user){//如果存在session则继续
                 res.locals.islogin = true;
                 var name = req.session.user.name;
@@ -88,29 +86,29 @@ if(config.env!='devv'){//开发环境不需要过滤
                 res.locals.islogin = true;
                 next();
             }else{
-                    
-
                 if(url.indexOf('login') != -1){
                     next();
                 }else{
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/auth/admin/login");    
                     }else{
-                        if(url.indexOf('/vote/') != -1 || url.indexOf('/article/') != -1){
-                            return next();
-                        }
                         if(url.indexOf('/resource/') != -1){
                             return next();//res.redirect("/resource/index");
                         }
+                        if(url.indexOf('/vote/') != -1 || url.indexOf('/article/') != -1){
+                            return next();
+                        }
+                        if(url.indexOf('/paper/') != -1){
+                            return res.redirect("/paper/index");
+                        }
+                        
                         if(url.indexOf('/jsll/') != -1){
                             return res.redirect("/jsll/index");
                         }
                         if(url.indexOf('/jsjn/') != -1){
                             return res.redirect("/jsjn/index");
                         }
-                        if(url.indexOf('/paper/') != -1){
-                            return res.redirect("/paper/index");
-                        }
+                        
                         if(url.indexOf('/hbll/') != -1){
                             return res.redirect("/hbll/index");
                         }

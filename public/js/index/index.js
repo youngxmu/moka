@@ -18,7 +18,8 @@
 			_this.initEvent();
 			_this.loadNews();
 			_this.loadInfos();
-			_this.loadList1();
+			_this.loadMsg();
+			_this.loadPeople();
 		},
 		initEvent : function(){
 			$('body').on('keydown','#keyword',function(e){
@@ -63,11 +64,8 @@
 				info2 : '法规',
 				info3 : '外国',
 				info4 : '武器 装备',
-				info5 : '形势',
-				info6 : '学术 成果'
+				info5 : '形势'
 			};
-
-			
 			for(var key in infoDict){
 				var keyValue = infoDict[key];
 				_this.loadInfo(key, keyValue);
@@ -99,12 +97,31 @@
 				}
 			});
 		},
-		loadList1 : function(){
+		loadMsg : function(){
 			var $panel = $('#gfjy');
 			var sendData = _this.queryData;
 				sendData.mid = 9;
 			var tpl = _this.tpl.articleListTpl;
 			var searchUrl = 'index/gfjy';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+				}
+			});
+		},
+		loadPeople : function(){
+			var $panel = $('#info6');
+			var sendData = _this.queryData;
+				sendData.mid = 1003;
+			var tpl = _this.tpl.articleListTpl;
+			var searchUrl = 'article/queryArticleByMenu';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
