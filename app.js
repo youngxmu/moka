@@ -96,6 +96,10 @@ if(config.env!='devv'){//开发环境不需要过滤
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/auth/admin/login");    
                     }else{
+                        if(url.indexOf('/paper/') != -1){
+                            return res.redirect("/paper/index");
+                        }
+                        return next();
                         if(url.indexOf('/resource/') != -1){
                             return res.redirect("/resource/index");
                         }
@@ -105,9 +109,7 @@ if(config.env!='devv'){//开发环境不需要过滤
                         if(url.indexOf('/jsjn/') != -1){
                             return res.redirect("/jsjn/index");
                         }
-                        if(url.indexOf('/paper/') != -1){
-                            return res.redirect("/paper/index");
-                        }
+                        
                         if(url.indexOf('/hbll/') != -1){
                             return res.redirect("/hbll/index");
                         }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>英模人物</title>
+    <title><%= title %></title>
     <%- include common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='css/index/list.css' >
@@ -9,7 +9,7 @@
   <body>
     <%- include common/header.ejs %>
     <input id="pid" value="<%= mid %>" type="hidden" >
-
+    <input type="hidden" id="title" value="<%= title %>">
     <div class="container">
       <ol class="breadcrumb" style="border-radius:0;">
         <li>
@@ -64,7 +64,15 @@
     <script type="text/javascript" src="js/index/list.js"></script>
     
     <script>
-      $('#nav_people').addClass('active');
+      if($('#title').val() == '数字资源' ){
+        $('#nav_res').addClass('active');  
+      }else{
+        $('#nav_people').addClass('active');  
+      }
+      // if($('#title').val() == '数字资源' ){
+      //   $('#nav_people').addClass('active');
+      // }
+      
       $(document).ready(function() {
           moka.index.list.init();
       });

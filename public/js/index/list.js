@@ -13,7 +13,7 @@
 			}
 		},
 		init : function() {
-			 _this.pid = $('#pid').val();
+			 _this.pid = 1003;//$('#pid').val();
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
 			_this.searchResource();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>数字资源</title>
+    <title><%= title %></title>
     <%- include common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel='stylesheet' href='css/index/list.css' >
@@ -10,7 +10,7 @@
     <%- include common/header.ejs %>
     <input id="pid" value="<%= mid %>" type="hidden" >
     <input id="keyword" value="<%= keyword %>" type="hidden" >
-
+    <input type="hidden" id="title" value="<%= title %>">
     <div class="container">
       <ol class="breadcrumb" style="border-radius:0;">
         <li>
@@ -70,7 +70,12 @@
     <script type="text/javascript" src="js/index/list-data.js"></script>
     
     <script>
-      $('#nav_res').addClass('active');
+      if($('#title').val() == '学术成果' ){
+        $('#nav_science').addClass('active');  
+        
+      }else{
+        $('#nav_res').addClass('active');  
+      }
       $(document).ready(function() {
           moka.index.listdata.init();
       });

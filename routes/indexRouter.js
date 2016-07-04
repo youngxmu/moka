@@ -53,25 +53,15 @@ router.post('/gfjy', function (req, res, next) {
 var infoData = {
     desc : {
         link : 'index/info/desc',
-        title : '中心介绍',
-        subtitle : '中心简介',
-        sublink : 'index/info/desc',
+        title : '中心简介',
         mid : 100101
     },
     org : {
-        link : 'index/info/desc',
-        title : '中心介绍',
-        subtitle : '研究队伍',
-        sublink : 'index/info/org',
+        link : 'index/info/org',
+        title : '研究队伍',
         mid : 100102
     },
-    unit : {
-        link : 'index/info/desc',
-        title : '中心介绍',
-        subtitle : '共建单位',
-        sublink : 'index/info/unit',
-        mid : 100103
-    },
+    
     manage : {
         link : 'index/info/manage',
         title : '管理机构',
@@ -145,6 +135,12 @@ router.post('/info/save', function (req, res, next) {
     });
 });
 var listData = {
+    people : {
+        link : 'index/list/people',
+        title : '数字资源',
+        subtitle : '英模人物',
+        mid : 1003
+    },
     gdmj : {
         link : 'index/list/gdmj',
         title : '英模人物',
@@ -210,7 +206,7 @@ var listData = {
         title : '数字资源',
         subtitle : '学术成果',
         keyword : '学术 成果',
-        mid : 1003406
+        mid : 100406
     }
 };
 
