@@ -138,11 +138,9 @@
 			_this.initTree();
 		},
 		searchResource : function() {
-			
 			if(!_this.data.searchData.mid){
 				_this.data.searchData.mid = _this.pid;
 			}
-
 			var infoDict = {
 				'100401' : '历史',
 				'100402' : '法规',
