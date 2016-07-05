@@ -4,11 +4,11 @@
     <title>后台管理</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
-    <link rel='stylesheet' href='css/admin/article/list.css' >
+    <link rel='stylesheet' href='css/resource/list.css' >
     
   </head>
   <body>
-    <%- include ../common/header.ejs %>
+    <%- include ../common/header.ejs %>   
   	<div class="container">
       <div class="sidebar">
         <div class="tree-opr">
@@ -24,63 +24,47 @@
         </div>
       </div>
       <div class="main">
-        <div class="resource-opr">
-          <a href="javascript:void(0);" class="add">增加</a>
-        </div>
         <div id="resource_list"></div>
         <div id="pagebar"></div>
       </div>
 	  </div>
 
-    
-    <script type="text/template" id="article-tpl">
+   
+    <script type="text/template" id="resource-tpl">
     <div class="res-list">
       <span class="res-type">类型</span>
       <span class="res-title">标题</span>
       <span>作者</span>
       <span>时间</span>
-      <span>操作</span>
     </div>
     {@each list as resource}
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
+        {@if resource.type == 1}
         <a href="admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
+        {@if resource.type == 2}
+        <a href="admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        {@/if}
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
-      <span class="oper">
-        <a href="admin/article/edit/${resource.id}" target="_blank" data-id="${resource.id}" class="edit">编辑</a>
-        <a href="javascript:void(0);" data-id="${resource.id}" class="del">删除</a>
-      </span>
     </div>
     {@/each}
     </script>
 
-    <script type="text/template" id="resource-tpl">
-    <div class="res-list">
-      <span class="res-type">类型</span>
-      <span class="res-title">标题</span>
-      <span>时间</span>
+    <script type="text/template" id="edit_menu_dlg">
+    <div class="">
+      <input id="menu_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;">
     </div>
-    {@each list as resource}
-    <div class="res-list">
-      <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
-      <span class="res-title">
-        <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
-      </span>
-      <span>${resource.create_time}</span>
-    </div>
-    {@/each}
     </script>
-
-    <%- include ../common/menu-tpl.ejs %>
-
-    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="js/admin/article/list.js"></script>
+     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="js/admin/article/uneval.js"></script>
+    
     <script>
       $(document).ready(function() {
-            moka.admin.article.list.init();
+            moka.article.uneval.init();
         });
     </script>
   </body>

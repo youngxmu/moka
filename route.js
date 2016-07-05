@@ -24,6 +24,7 @@ var userHBLLSupportRouter = require('./routes/user/hbllRouter.js');
 
 /**admin*/
 var adminIndexRouter = require('./routes/admin/indexRouter.js');
+var adminResourceRouter = require('./routes/admin/resourceRouter.js');
 var adminArticleRouter = require('./routes/admin/articleRouter.js');
 var adminCheckRouter = require('./routes/admin/checkRouter.js');
 var adminQuestionRouter = require('./routes/admin/questionRouter.js');
@@ -62,6 +63,8 @@ module.exports = function (app) {
 
     app.use('/admin', adminIndexRouter);//主页
     app.use('/admin/article', adminArticleRouter);//主页
+    app.use('/admin/resource', adminResourceRouter);//主页
+    
     app.use('/admin/check', adminCheckRouter);//主页
     app.use('/admin/user', adminUserRouter);//主页
     app.use('/admin/question', adminQuestionRouter);//主页

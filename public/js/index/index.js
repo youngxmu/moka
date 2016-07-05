@@ -60,7 +60,7 @@
 		},
 		loadInfos : function(){
 			var infoDict = {
-				info1 : '历史',
+				info1 : '战争 日本',
 				info2 : '法规',
 				info3 : '外国',
 				info4 : '武器 装备',

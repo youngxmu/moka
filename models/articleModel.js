@@ -109,7 +109,7 @@ exports.queryArticleById = function (articleId, callback) {
 
 exports.queryArticleByTitle = function (title, start, pageSize, callback) {
     var params = [];
-    var sql = 'select * from resource where 1 = 1 ';
+    var sql = 'select * from article where 1 = 1 ';
     if(title){
         var keyArr = title.split(' ');
         if(keyArr.length > 1){
@@ -135,7 +135,7 @@ exports.queryArticleByTitle = function (title, start, pageSize, callback) {
 
 exports.queryArticleByTitleTotalCount = function (title, callback) {
     var params = [];
-    var sql = 'select count(id) as count from resource where 1 = 1 ';
+    var sql = 'select count(id) as count from article where 1 = 1 ';
     if(title){
         var keyArr = title.split(' ');
         if(keyArr.length > 1){

@@ -221,6 +221,7 @@ router.get('/edit/:id', function(req, res, next) {
     }else{
         articleModel.getArticleById(id, function (err, result) {
             if (!err) {
+                console.log(result);
                 var article = result;
                 article.isAdmin = isAdmin;
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));

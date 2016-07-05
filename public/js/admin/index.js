@@ -4,7 +4,8 @@
 		searchUrl : 'article/queryArticleByMenu',
 		pid : 10,//系统根目录编号
 		tpl : {
-			articleListTpl : null
+			articleListTpl : null,
+			resourceListTpl : null
 		},
 		data : {
 			userMap : {},
@@ -19,7 +20,8 @@
 		},
 		init : function() {
 			_this.tpl.newsTpl = juicer($('#news-tpl').html());
-			_this.data.resourceTpl = juicer($('#resource-tpl').html());
+			_this.tpl.articleListTpl  = juicer($('#article-tpl').html());
+			_this.tpl.resourceListTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
 			_this.initEditor();
 			_this.loadNews();
@@ -49,6 +51,28 @@
 			$('.resource-opr').on('click', '.add', _this.showAddArticle);
 			$('#resource_list').on('click', '.edit', _this.showEditArticle);
 			$('body').on('click', '.oper .del',_this.showDelArticle);
+
+			$('body').on('click', '.nav-tabs li', _this.changeType);
+		},
+		changeType : function(){
+			//$.ajax();
+			var type = $(this).attr('data-id');
+			$('#editor_panel').hide();
+			$('#list_panel').hide();
+			$('#pic_panel').hide();
+			if(type == 1 || type == 2 || type == 3 || type == 6){
+				$('#editor_panel').show();
+			}
+			if(type == 4){
+				$('#list_panel').show();	
+			}
+			if(type == 5){
+				$('#list_panel').show();
+			}
+			if(type == 7){
+				$('#pic_panel').show();
+			}
+
 		},
 		loadNews : function(){
 			var $panel = $('#news_panel');
@@ -88,12 +112,9 @@
 					pic_url : $this.find('.pic_url').val(),
 					index : index
 				}
-				console.log(news);
-				console.log((news.title && news.link && news.pic_url) );
 				if(news.title && news.link && news.pic_url ){
 					newsList.push(news);	
 				}
-				
 			});
 			var $btn = $('#btn_commit');
 			$.ajax({
@@ -150,8 +171,8 @@
 				'100406' : '历史'
 			};
 			if(infoDict[_this.data.searchData.mid]){
-				_this.data.searchData.keyword = infoDict[_this.data.searchData.mid];
-				_this.searchUrl = 'article/queryArticleByTitle';
+				_this.data.searchData.title = infoDict[_this.data.searchData.mid];
+				_this.searchUrl = 'admin/resource/list';
 			}else{
 				_this.searchUrl = 'article/queryArticleByMenu';
 				_this.data.searchData.keyword = '';
@@ -350,7 +371,6 @@
 			  	}
 			});
 		},
-		
 		midMap : {
 			'1001'   : {type:1,smid:100101},
 			'100101' : {type:1},

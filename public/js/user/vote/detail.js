@@ -5,8 +5,8 @@
 			_this.initData();
 			_this.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
-			_this.showChart();
-			// _this.initQuestions();
+			// _this.showChart();
+			_this.initQuestions();
 		},
 		initData : function(){
 			_this.pid = $('#pid').val();
@@ -74,30 +74,27 @@
 						var questions = data.vote.questions;
 						var historys = data.vote.historys;
 						
+
 						var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-        var randomScalingFactor = function() {
-            return 1;
-        };
-        var randomColorFactor = function() {
-            return Math.round(Math.random() * 255);
-        };
-        var randomColor = function() {
-            return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
-        };
+				        var randomScalingFactor = function() {
+				            return 1;
+				        };
+				        var randomColorFactor = function() {
+				            return Math.round(Math.random() * 255);
+				        };
+				        var randomColor = function() {
+				            return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+				        };
 						var ctx = document.getElementById("canvas").getContext("2d");
 						var data = {
-            labels: ["A", "B", "C", "D"],
-            datasets: [{
-                label: 'a',
-                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
-                data: [3,2,3,3,0]
-            }
-            ]
-
-        };
-
-
+				            labels: ["A", "B", "C", "D"],
+				            datasets: [{
+				                label: 'a',
+				                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
+				                data: [3,2,3,3,0]
+				            }]
+				        };
         
 						var options = {};
 						var myBar = new Chart(ctx, {
@@ -127,81 +124,16 @@
 			                }
 			            });
 
-setTimeout(function(){
-	myBar.data.datasets = [{
-                label: 'b',
-                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
-                data: [1,2,3,4,0]
-            }
-          ];
-          console.log(123);
-          myBar.update();
-}, 2000);
-					}else{
-						alert(data.msg);
-					}
-				}
-			});
-	 	},
-
-	 	showChart_ : function(){
-	 		
-			//var colors = ['#AF0202', '#EC7A00', '#FCD200', '#81C714'];
-			var myChart = new JSChart('chart', 'bar');
-			myChart.setTitleColor('#8E8E8E');
-			myChart.setAxisNameX('');
-			
-			myChart.setAxisColor('#C4C4C4');
-			myChart.setAxisNameFontSize(16);
-			myChart.setAxisNameColor('#999');
-			myChart.setAxisValuesColor('#7E7E7E');
-			myChart.setBarValuesColor('#7E7E7E');
-			myChart.setAxisPaddingTop(60);
-			myChart.setAxisPaddingRight(140);
-			myChart.setAxisPaddingLeft(150);
-			myChart.setAxisPaddingBottom(40);
-			myChart.setTextPaddingLeft(105);
-			myChart.setTitleFontSize(11);
-			myChart.setBarBorderWidth(1);
-			myChart.setBarBorderColor('#C4C4C4');
-			myChart.setBarSpacingRatio(50);
-			myChart.setGrid(false);
-			myChart.setSize(616, 321);
-	 		$.ajax({
-				url : 'vote/history/' + _this.pid,
-				type : 'post',
-				success : function(data){
-					if(data.success){
-						var questions = data.vote.questions;
-						var historys = data.vote.historys;
-						var myData = [];
-							var question = questions[0];
-							var allanswer = question.qanswer;
-							var allanswerArr = allanswer.split(',');
-							for(var index in allanswerArr){
-								var data = [];
-								var word = util.getOption(parseInt(index)+1);
-								data.push(word);
-								var count = 0;
-								for(var hindex in historys){
-									var history = historys[hindex];
-									
-									if(history.qid == question.id){
-										console.log(history.answer+' ' + word);
-										if(history.answer == word){
-											count = history.count;
-										}
-										
-									}
-								}
-								data.push(count);
-								myData.push(data);		
-							}
-							
-						myChart.setAxisNameY('%');
-						myChart.setTitle('Year-to-year growth in home broadband penetration in U.S.');
-						myChart.setDataArray(myData);
-						myChart.draw();
+						setTimeout(function(){
+							myBar.data.datasets = [{
+						                label: 'b',
+						                backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor(),randomColor()],
+						                data: [1,2,3,4,0]
+						            }
+						          ];
+						          console.log(123);
+						          myBar.update();
+						}, 2000);	
 					}else{
 						alert(data.msg);
 					}
