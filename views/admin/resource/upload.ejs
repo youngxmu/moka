@@ -1,43 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <% if(typeof id != 'undefined'){%>编辑<% }else{ %>新增<% } %>资源</title>
+    <title>创建资源</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/admin/article/edit.css' />
   </head>
   <body>
-    <% if(typeof id != 'undefined'){%>
-      <input type="hidden" id="article_id" value="<%= id %>">
-    <% } %> 
     <%- include ../common/header.ejs %>   
   	<div class="container">
-  		<div class="res-title"><% if(typeof id != 'undefined'){%>编辑<% }else{ %>新增<% } %>文章</div>
+  		<div class="res-title">创建资源</div>
   		<div class="main">
   			<div class="t-input">
-  				<label>资源标题</label>
-          <input id="title" placeholder="输入文章标题" <% if(typeof title != 'undefined'){%>value="<%= title %>"<% } %> >
+  				<label>资源标题</label><input id="title" placeholder="输入文章标题">
   			</div>
   			<div class="t-input">
-  				<label>作者名称</label>
-          <input id="author" placeholder="输入作者名称" <% if(typeof author != 'undefined'){%>value="<%= author %>"<% } %> >
+  				<label>作者名称</label><input id="author" placeholder="输入作者名称">
   			</div>
         <div class="t-input">
-          <label>资源描述</label>
-          <textarea id="description" placeholder="输入资源描述">
-            <% if(typeof content != 'undefined'){%><%- content %><% } %>
-          </textarea>
+          <label>资源描述</label><textarea id="description" placeholder="输入资源描述"></textarea>
         </div>
   			<div class="t-input">
           <label>上传资源</label>
-          <% if(typeof id != 'undefined'){%>
-            <span id="btn_upload" class="u-button blue">修改文件</span>
-            <span id="filename" class="filename"><%- org_name %></span>
-          <% }else{ %>
-            <span id="btn_upload" class="u-button blue">选择文件</span>
-            <span id="filename" class="filename">文件名称</span>
-          <% } %>
-          
-          
+          <span id="btn_upload" class="u-button blue">选择文件</span>
+          <span id="filename" class="filename">文件名称</span>
           <p id="process_bar" class="process-bar" ><span id="process_rate">0%</span></p>
         </div>
         <div class="t-input">

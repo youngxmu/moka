@@ -11,8 +11,6 @@ router.get('/index', function (req, res, next) {
     res.render('admin/index');
 });
 
-
-
 router.post('/news', function (req, res, next) {
     newsModel.queryNewsList(function(err, results){
     	if(err){
@@ -27,7 +25,6 @@ router.post('/news', function (req, res, next) {
     	}
     });
 });
-
 
 router.post('/setnews', function (req, res, next) {
 	var newsStr = req.body.newsStr;
