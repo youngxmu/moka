@@ -10,6 +10,8 @@
 			
 		},
 		init : function() {
+			_this.articleId = $('#article_id').val();
+			_this.fileName = $('#file_name').val();
 			_this.tpl.menuListTpl = juicer($('#menu_list_tpl').html());
 			var $span = $('.u-select-p').find('span');
 			if($span.length == 0){
@@ -157,6 +159,10 @@
 			var description = $('#description').val();
 			var url = 'admin/article/save';
 			
+			var fileName = _this.fileName;
+			if(fileName.indexOf('/uploads/') != -1){
+				fileName = fileName.split('/uploads/')[1];
+			}
 			var postData = {
 				title : title,
 				author : author,
@@ -179,7 +185,11 @@
 						return;
 					}
 
-					var id = result.data.insertId;
+					var id = '';
+					if(result.data && result.data.insertId){
+						id = result.data.insertId;	
+					}
+					
 					if(!id){
 						id = _this.articleId;
 					}

@@ -23,9 +23,8 @@
 			_this.tpl.articleTpl  = juicer($('#article-tpl').html());
 			_this.tpl.topListTpl = juicer($('#top-resource-tpl').html());
 			_this.tpl.resourceTpl = juicer($('#resource-tpl').html());
-			_this.initEvent();
 			_this.initEditor();
-			
+			_this.initEvent();
 			_this.showEditor(100101);
 		},
 		initEvent : function(){
@@ -49,13 +48,19 @@
 				_this.loadRes();
 				$('#tree_panel').show();
 			});
+
+			$('body').on('click', '.btnup', _this.up);
+			$('body').on('click', '.btndown', _this.down);
 		},
 		changeType : function(){
-			var type = $(this).attr('data-type');
-			var mid = $(this).attr('data-mid');
+			var $this = $(this);
+			$this.addClass('active').siblings('li').removeClass('active');
+			var type = $this.attr('data-type');
+			var mid = $this.attr('data-mid');
 			_this.data.searchData.mid = mid;
 			$('#editor_panel').hide();
 			$('#list_panel').hide();
+			$('#tree_panel').hide();
 			$('#pic_panel').hide();
 			if(type == 1 || type == 2 || type == 3 || type == 6){
 				_this.showEditor(mid);
@@ -104,7 +109,6 @@
 								index : length
 							});
 						}
-						console.log(data);
 						$panel.html(_this.tpl.newsTpl.render(data));	
 					}
 				}
@@ -150,12 +154,18 @@
 			$.ajax({
 				type : 'post',
 				url : 'index/list/up',
+				async : false,
 				data : {mid:_this.data.searchData.mid},
 				beforeSend : function(){
 					_this.$topPanel.html(util.loadingPanel);
 				},
 				success : function(result){
 					var data = result.data;
+					_this.topMap = {};
+					for(var index in data.list){
+						var top = data.list[index];
+						_this.topMap[top.id] = top;
+					}
 				    _this.$topPanel.html(_this.tpl.topListTpl.render(data));
 				}
 			});
@@ -176,16 +186,18 @@
 				util.dialog.infoDialog('查询出错');
 				return;
 			}
-	
-			_this.data.resourceList = {};
+			data = data.data;
+			var list = [];
 			for ( var index in data.list) {
 				var resource = data.list[index];
-				_this.data.resourceList[resource.id] = resource;
+				if(!_this.topMap[resource.id]){
+					list.push(resource);
+				}
 			}
-			data = data.data;
+			
 			var totalPage = data.totalPage;
 			var totalcount = data.totalCount;
-			var html = _this.tpl.resourceTpl.render(data);
+			var html = _this.tpl.resourceTpl.render({list:list});
 			if(totalcount == 0){
 				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 			}
@@ -220,16 +232,18 @@
 										util.dialog.infoDialog('查询出错');
 										return;
 									}
-							
-									_this.data.resourceList = {};
+									data = data.data;
+								
+									var list = [];
 									for ( var index in data.list) {
 										var resource = data.list[index];
-										_this.data.resourceList[resource.id] = resource;
+										if(!_this.topMap[resource.id]){
+											list.push(resource);
+										}
 									}
-									data = data.data;
 									var totalPage = data.totalPage;
 									var totalcount = data.totalCount;
-									var html = _this.tpl.resourceTpl.render(data);
+									var html = _this.tpl.resourceTpl.render({list:list});
 									if(totalcount == 0){
 										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 									}
@@ -311,8 +325,7 @@
 			}
 		},
 		commitInfo : function() {
-			var node = _this.currNode;
-			var mid = node.id;
+			var mid = _this.data.searchData.mid;
 			var data = _this.midMap[mid];
 			
 			if(data.type == 1 && data.smid){
@@ -333,6 +346,50 @@
 				},
 				error : function(){
 					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
+		},
+		up : function(){
+			var $this = $(this);
+			var mid = _this.data.searchData.mid;
+			var res_id = $this.attr('data-id');
+			$.ajax({
+				type : "post",
+				url : 'index/setup',
+				data : {
+					mid : mid,
+					res_id : res_id
+				},
+				success : function(data){
+					if(data.success){
+						alert('置顶成功');
+						_this.loadTop();
+						_this.loadRes();
+					}else{
+						alert(data.msg);
+					}
+				}
+			});
+		},
+		down : function(){
+			var $this = $(this);
+			var mid = _this.data.searchData.mid;
+			var res_id = $this.attr('data-id');
+			$.ajax({
+				type : "post",
+				url : 'index/setdown',
+				data : {
+					mid : mid,
+					res_id : res_id
+				},
+				success : function(data){
+					if(data.success){
+						alert('取消成功');
+						_this.loadTop();
+						_this.loadRes();
+					}else{
+						alert(data.msg);
+					}
 				}
 			});
 		}

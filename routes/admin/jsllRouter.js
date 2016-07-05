@@ -161,8 +161,7 @@ router.post('/save', function (req, res) {
                     }
                     return res.json({
                         success: true,
-                        msg: "修改文章成功",
-                        data : data
+                        msg: "修改文章成功"
                     });
                 });
             } else {

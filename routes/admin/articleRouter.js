@@ -55,34 +55,61 @@ router.post('/list', function (req, res, next) {
     });
 });
 
-//根据文章id查询
+
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
             msg: "根据id查询文章出错"
         });
     }else{
-        articleModel.getArticleById(id, function (err, result) {
-            if (!err && result) {
-                var article = result;
-                article.isAdmin = isAdmin;
+        articleModel.getArticleById(id, function (err, article) {
+            if(!err){
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
-                res.render('admin/article/detail', article);
-            } else {
-                res.render('error', {
-                    success: false,
-                    msg: "根据id查询文章出错"
-                });
+
+                var view = 'admin/article/editres';
+                if(article.type == 6){
+                    view = 'admin/article/edit';
+                }
+                data = article;
             }
+            res.render(view,data);
         });
     }
 });
+
+// //根据文章id查询
+// router.get('/detail/:id', function (req, res, next) {
+//     var id = req.params.id;
+//     var isAdmin = req.session.admin ? true : false;
+//     if(id == null || id == undefined){
+//         res.render('error', {
+//             success: false,
+//             msg: "根据id查询文章出错"
+//         });
+//     }else{
+//         articleModel.getArticleById(id, function (err, result) {
+//             if (!err && result) {
+//                 var article = result;
+//                 article.isAdmin = isAdmin;
+//                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
+//                 if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
+//                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
+//                 article.file_type = commonUtils.getFileTypeName(article.file_name);
+//                 res.render('admin/article/detail', article);
+//             } else {
+//                 res.render('error', {
+//                     success: false,
+//                     msg: "根据id查询文章出错"
+//                 });
+//             }
+//         });
+//     }
+// });
 
 
 
@@ -162,12 +189,14 @@ router.post('/save', function (req, res) {
     
     if(id == null || id == undefined){
         articleModel.insertArticle(title, author, content, 1, mid, admin.id, fileName, type, description,function (err, data) {
+            console.log(data);
             if (!err && data.length > 0) {
                 var res_id = data[0].insertId;
                 var sys_type = 'article';
                 content_type = type;
                 articleModel.insertResource(res_id,sys_type,title,content_type, function(err){
                     if(err){
+                        logger.error(err);
                         return res.json({
                             success: false,
                             msg: "创建失败"
@@ -179,8 +208,8 @@ router.post('/save', function (req, res) {
                         data : data
                     });
                 });
-               
             } else {
+                logger.error(err);
                 res.json({
                     success: false,
                     msg: "创建失败"
@@ -203,8 +232,7 @@ router.post('/save', function (req, res) {
                     }
                     return res.json({
                         success: true,
-                        msg: "修改文章成功",
-                        data : data
+                        msg: "修改文章成功"
                     });
                 });
             } else {

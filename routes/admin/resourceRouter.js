@@ -62,7 +62,6 @@ var getViewAndData = function(resource, callback){
     var id = resource.res_id;
     var type = resource.sys_type;
     var contentType = resource.content_type;
-    console.log(contentType);
 
     if(type == 'article'){
         articleModel.getArticleById(id, function (err, article) {
@@ -72,28 +71,10 @@ var getViewAndData = function(resource, callback){
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
 
-                var view = 'user/resource/detail-word';
-                if(resource.content_type == 0){
-                    view = 'user/resource/detail-ppt';
-                }
-                if(resource.content_type == 1){
-                    view = 'user/resource/detail-word';
-                }
-                if(resource.content_type == 3){
-                    view = 'user/resource/detail-pic';
-                }
-                if(resource.content_type == 4){
-                    view = 'user/resource/detail-video';
-                }
+                var view = 'admin/article/editres';
                 if(resource.content_type == 6){
-                    view = 'user/resource/detail-txt';
+                    view = 'admin/article/edit';
                 }
-                // if(article.file_type == 'pic'){
-                //     view = 'user/resource/detail-pic';
-                // }
-                // if(article.file_type == 'video'){
-                //     view = 'user/resource/detail-video';
-                // }
                 data = article;
             }
             callback(view,data);
@@ -104,12 +85,9 @@ var getViewAndData = function(resource, callback){
     if(type == 'jsjnxx'){
         jsjnModel.queryInfoById(id, function (err, article) {
             if(!err){
-                var view = 'user/resource/detail-txt';
-                if(resource.content_type == 2){
-                    view = 'user/resource/detail-pic';
-                }
-                if(resource.content_type == 3){
-                    view = 'user/resource/detail-video';
+                var view = 'admin/article/edit';
+                if(resource.content_type == 2 || resource.content_type == 3){
+                    view = 'admin/article/editres';
                 }
                 data = article[0];
             }

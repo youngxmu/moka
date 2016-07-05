@@ -8,6 +8,7 @@
   <body>
     <% if(typeof id != 'undefined'){%>
       <input type="hidden" id="article_id" value="<%= id %>">
+      <input type="hidden" id="file_name" value="<%= file_name %>">
     <% } %> 
     <%- include ../common/header.ejs %>   
   	<div class="container">
@@ -31,7 +32,7 @@
           <label>上传资源</label>
           <% if(typeof id != 'undefined'){%>
             <span id="btn_upload" class="u-button blue">修改文件</span>
-            <span id="filename" class="filename"><%- org_name %></span>
+            <span class="text"><a href="<%= file_name %>" download="<%- title %>"><%- title %></a></span>
           <% }else{ %>
             <span id="btn_upload" class="u-button blue">选择文件</span>
             <span id="filename" class="filename">文件名称</span>
@@ -52,8 +53,6 @@
           </div>
         </div>
   			<div class="t-btn">
-         
-
           <div id="btn_commit" class="u-button">提交</div>
   			</div>
   			

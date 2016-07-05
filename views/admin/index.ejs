@@ -52,7 +52,7 @@
           </ul>
         </div>
         <div id="list_box" class="main">
-          <div class="resource-opr">
+          <div class="resource-opr" style="display:none;">
             <a href="javascript:void(0);" class="add">增加</a>
           </div>
           <div id="top_list" style="border-bottom: 1px dashed #cccccc;"></div>
@@ -96,12 +96,12 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
       <span class="res-title">
-        <a href="admin/article/detail/${resource.id}" target="_blank">${resource.title}</a>
+        <a href="admin/resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
       <span class="oper">
-        <a href="admin/article/edit/${resource.id}" target="_blank" data-id="${resource.id}" class="edit">编辑</a>
+        <a href="admin/resource/detail/${resource.id}" target="_blank" data-id="${resource.id}" class="edit">编辑</a>
         <a href="javascript:void(0);" data-id="${resource.id}" class="del">删除</a>
       </span>
     </div>
@@ -113,11 +113,11 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
       <span class="res-title">
-        <a href="admin/article/detail/${resource.res_id}" target="_blank">${resource.title}</a>
+        <a href="admin/resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
-      <span><em class="btndown btn btn-danger">取消</em></span>
+      <span><em data-id="${resource.id}" class="btndown btn btn-danger">取消</em></span>
     </div>
     {@/each}
     </script>
@@ -127,11 +127,11 @@
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
       <span class="res-title">
-        <a href="admin/article/detail/${resource.res_id}" target="_blank">${resource.title}</a>
+        <a href="admin/resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
       <span>${resource.author}</span>
       <span>${resource.create_time}</span>
-      <span><em class="btnup btn btn-primary">置顶</em></span>
+      <span><em data-id="${resource.id}" class="btnup btn btn-primary">置顶</em></span>
     </div>
     {@/each}
     </script>
