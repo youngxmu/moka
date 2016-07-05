@@ -138,11 +138,7 @@
 					});
 				});
 			}
-		},
-		getTypeName : function(type){
-			var typeName = moka.fileTypeName[type];
-			return typeName;
 		}
 	};
-	juicer.register('getTypeName',_this.getTypeName);
+	
 }(moka));

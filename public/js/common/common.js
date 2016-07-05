@@ -225,9 +225,14 @@ var util = {
 			index = index - 1;
 		}
 		return util._word[index];
+	},
+	getTypeName : function(type){
+		var typeName = moka.fileTypeName[type];
+		return typeName;
 	}
 };
 
 juicer.register('dateFormat', util.date.format);
 juicer.register('formatIndex', util.formatIndex);
 juicer.register('getFileType', util.getFileType);
+juicer.register('getTypeName', util.getTypeName);

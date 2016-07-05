@@ -40,11 +40,18 @@ app.use(expressSession({
 app.use(express.static(config.staticPath));
 
 if(config.env!='devv'){//开发环境不需要过滤
-    
+
+
+
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         res.locals.currDate = utils.indexDate(new Date());
         
+
+    res.locals.islogin = true;
+
+    return next();
+
         var requestPath = req.path;//请求的uri
         var inWhitelist = false;
         for (var i in whitelist) {
@@ -53,6 +60,10 @@ if(config.env!='devv'){//开发环境不需要过滤
                 break;
             }
         }
+
+
+
+
         var url = req.url;
         if(req.session){//如果存在session则继续
             res.locals.sid = req.session.id;

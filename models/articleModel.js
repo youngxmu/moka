@@ -263,3 +263,50 @@ exports.getArticleByMenuTotalCount = function (menu_id, callback) {
     });
 };
 
+
+
+exports.insertResource = function (res_id,sys_type,title,content_type, callback) {
+    var sql = 'insert into resource (res_id,sys_type,title,content_type, create_time) ';
+        sql += 'values(?,?,?,?,?);';
+    db.query(sql, [res_id,sys_type,title,content_type, new Date()],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+//编辑、修改文章个人信息
+
+exports.updateResource = function (res_id, sys_type, title, content_type , callback) {
+    var sql = 'update resource set sys_type=?, title=?, content_type=?, create_time = ? ';
+    var params = [];
+    params.push(sys_type);
+    params.push(title);
+    params.push(content_type);
+    params.push(new Date());
+    sql += ' where res_id = ?;';
+    params.push(res_id);
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("修改文章出错", err);
+            callback(err);
+        }
+    });
+};
+
+exports.delResource = function (id, callback) {
+    var sql = 'delete from resource ';
+    var params = [];
+    sql += ' where id = ?;';
+    params.push(id);
+    db.query(sql, params, function (err, result) {
+        if (!err) {
+            callback(null);
+        } else {
+            logger.error("删除文章出错", err);
+            callback(err);
+        }
+    });
+};

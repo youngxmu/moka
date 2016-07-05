@@ -3,7 +3,6 @@
   <head>
     <title>首页管理</title>
     <%- include common/meta.ejs %>
-    <link rel='stylesheet' href='css/zTreeStyle/zTreeStyle.css' >
     <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
     <link rel='stylesheet' href='css/admin/index/index.css' >
   </head>
@@ -11,15 +10,15 @@
     <%- include common/header.ejs %>
   	<div class="container">
       <ul class="nav nav-tabs">
-        <li role="presentation" data-id="1" class="active">
+        <li role="presentation" data-type="1" data-mid="100101" class="active">
           <a href="javascript:void(0);">中心简介</a>
         </li>
-        <li role="presentation" data-id="2" ><a href="javascript:void(0);">研究队伍</a></li>
-        <li role="presentation" data-id="3" ><a href="javascript:void(0);">管理机构</a></li>
-        <li role="presentation" data-id="4" ><a href="javascript:void(0);">学术成果</a></li>
-        <li role="presentation" data-id="5" ><a href="javascript:void(0);">数字资源</a></li>
-        <li role="presentation" data-id="6" ><a href="javascript:void(0);">关于我们</a></li>
-        <li role="presentation" data-id="7" ><a href="javascript:void(0);">图片新闻</a></li>
+        <li role="presentation" data-type="2" data-mid="100102"><a href="javascript:void(0);">研究队伍</a></li>
+        <li role="presentation" data-type="3" data-mid="1002"><a href="javascript:void(0);">管理机构</a></li>
+        <li role="presentation" data-type="4" data-mid="100406"><a href="javascript:void(0);">学术成果</a></li>
+        <li role="presentation" data-type="5" data-mid="100401"><a href="javascript:void(0);">数字资源</a></li>
+        <li role="presentation" data-type="6" data-mid="1005"><a href="javascript:void(0);">关于我们</a></li>
+        <li role="presentation" data-type="7" data-mid=""><a href="javascript:void(0);">图片新闻</a></li>
       </ul>
 
       <div id="editor_panel" class="editor-panel" >
@@ -28,30 +27,42 @@
           <span id="btn_modify" class="btn-commit">提交</span>
         </div>
       </div>
+
       <div id="list_panel" style="display:none;">
+        <div class="res-list">
+          <span class="res-type">类型</span>
+          <span class="res-title">标题</span>
+          <span>作者</span>
+          <span>时间</span>
+          <span>操作</span>
+        </div>
+        <div id="s_top_list" style="border-bottom: 1px dashed #cccccc;"></div>
         <div id="s_resource_list"></div>
         <div id="s_pagebar"></div>
       </div>
       <div id="tree_panel" style="display:none;">
         <div class="sidebar">
-          <div class="tree-opr">
-            <a href="javascript:void(0);" class="unfold">展开</a>
-          </div>
-          <div style="overflow:auto;min-height:500px;" >
-            <ul id="topic_tree" class="ztree"></ul>
-          </div>
+          <ul class="res-menu" >
+              <li><button type="button" class="btn btn-primary active" data-id="100401">国防历史</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="100402">国防法规</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="100403">外国军事</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="100404">武器装备</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="100405">国防形势</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="1003">英模人物</button></li>
+          </ul>
         </div>
         <div id="list_box" class="main">
           <div class="resource-opr">
             <a href="javascript:void(0);" class="add">增加</a>
           </div>
+          <div id="top_list" style="border-bottom: 1px dashed #cccccc;"></div>
           <div id="resource_list"></div>
           <div id="pagebar"></div>
         </div>
       </div>
 
 
-      <div id="pic_panel" style="display:none;">
+      <div id="pic_panel" style="display:none;font-size:13px;">
         <div id="news_panel"></div>
         <div class="btn-wrapper" style="font-size:14px;">
           <span id="btn_commit" class="btn-commit">提交</span>
@@ -80,13 +91,7 @@
     </script>
 
     <script type="text/template" id="article-tpl">
-    <div class="res-list">
-      <span class="res-type">类型</span>
-      <span class="res-title">标题</span>
-      <span>作者</span>
-      <span>时间</span>
-      <span>操作</span>
-    </div>
+    
     {@each list as resource}
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.file_name|getFileType}"></i></span>
@@ -103,24 +108,34 @@
     {@/each}
     </script>
 
-    <script type="text/template" id="resource-tpl">
-    <div class="res-list">
-      <span class="res-type">类型</span>
-      <span class="res-title">标题</span>
-      <span>时间</span>
-    </div>
+    <script type="text/template" id="top-resource-tpl">
     {@each list as resource}
     <div class="res-list">
       <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
       <span class="res-title">
-        <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
+        <a href="admin/article/detail/${resource.res_id}" target="_blank">${resource.title}</a>
       </span>
+      <span>${resource.author}</span>
       <span>${resource.create_time}</span>
+      <span><em class="btndown btn btn-danger">取消</em></span>
     </div>
     {@/each}
     </script>
 
-    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    <script type="text/template" id="resource-tpl">
+    {@each list as resource}
+    <div class="res-list">
+      <span class="res-type"><i class="ico ico-${resource.content_type|getTypeName}"></i></span>
+      <span class="res-title">
+        <a href="admin/article/detail/${resource.res_id}" target="_blank">${resource.title}</a>
+      </span>
+      <span>${resource.author}</span>
+      <span>${resource.create_time}</span>
+      <span><em class="btnup btn btn-primary">置顶</em></span>
+    </div>
+    {@/each}
+    </script>
+
     <script type="text/javascript" src="simditor/scripts/module.js"></script>
     <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
     <script type="text/javascript" src="simditor/scripts/uploader.js"></script>

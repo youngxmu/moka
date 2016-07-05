@@ -24,6 +24,16 @@ exports.queryUpById = function (mid, callback) {
     db.query(sql, params, callback);
 };
 
+exports.getUp = function (mid, callback) {
+    db.query("select * from index_data where mid = ?;",
+        [mid],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+
 exports.updateUp = function (mid, aid, callback) {
     db.query("update index_data set aid = ? where index_mid = ?;",
         [content, mid],

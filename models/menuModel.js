@@ -1,6 +1,17 @@
 var db = require('../lib/db.js');
 var logger = require("../lib/log.js").logger("menuModel");
 
+exports.queryMenuById = function (id, callback) {
+    var sql = 'select * from menu where id = ?;';
+    var params = [id];
+    db.query(sql, params, callback);
+};
+
+exports.updateMenuById = function (id, keyword, callback) {
+    var sql = 'update menu set keyword = ? where id = ?;';
+    var params = [keyword, id];
+    db.query(sql, params, callback);
+};
 
 exports.queryAllMenu = function (callback) {
     var sql = 'select * from menu where status = 1;';

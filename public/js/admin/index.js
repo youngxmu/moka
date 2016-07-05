@@ -1,11 +1,11 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.index = {
-		searchUrl : 'article/queryArticleByMenu',
+		searchUrl : 'index/list/res',
 		pid : 10,//系统根目录编号
 		tpl : {
-			articleListTpl : null,
-			resourceListTpl : null
+			articleTpl : null,
+			resourceTpl : null
 		},
 		data : {
 			userMap : {},
@@ -20,56 +20,65 @@
 		},
 		init : function() {
 			_this.tpl.newsTpl = juicer($('#news-tpl').html());
-			_this.tpl.articleListTpl  = juicer($('#article-tpl').html());
-			_this.tpl.resourceListTpl = juicer($('#resource-tpl').html());
+			_this.tpl.articleTpl  = juicer($('#article-tpl').html());
+			_this.tpl.topListTpl = juicer($('#top-resource-tpl').html());
+			_this.tpl.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
 			_this.initEditor();
-			_this.loadNews();
-			_this.initTopic();
+			
+			_this.showEditor(100101);
 		},
 		initEvent : function(){
 			$('#btn_commit').click(_this.commit);
 			$('#btn_modify').click(_this.commitInfo);
-			$('#resource_list').on('click','.view',function(){
-				var id = $(this).attr('data-id');
-				var data = _this.data.resourceList[id];
-				var options = {isPreview : false, resourceType : 2};
-			});
-			
-			$('.tree-opr').on('click', '.unfold',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(true);
-				$(this).removeClass('unfold').addClass('shrink').text('收缩');
-			});
-				
-			$('.tree-opr').on('click', '.shrink',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(false);
-				$(this).removeClass('shrink').addClass('unfold').text('展开');
-			});
 
-			$('.resource-opr').on('click', '.add', _this.showAddArticle);
-			$('#resource_list').on('click', '.edit', _this.showEditArticle);
-			$('body').on('click', '.oper .del',_this.showDelArticle);
-
+			$('.resource-opr').on('click', '.add', _this.showAddRes);
+			$('#resource_list').on('click', '.edit', _this.showEditRes);
+			$('body').on('click', '.oper .del',_this.showDelRes);
 			$('body').on('click', '.nav-tabs li', _this.changeType);
+
+			$('body').on('click', '.res-menu button', function(){
+				var $this = $(this);
+				$('.res-menu li').removeClass('active');
+				$this.addClass('active');
+				_this.data.searchData.mid = $this.attr('data-id');
+				_this.$topPanel = $('#top_list');
+				_this.$panel = $('#resource_list');
+				_this.$pagebar = $('#pagebar');
+				_this.loadTop();
+				_this.loadRes();
+				$('#tree_panel').show();
+			});
 		},
 		changeType : function(){
-			//$.ajax();
-			var type = $(this).attr('data-id');
+			var type = $(this).attr('data-type');
+			var mid = $(this).attr('data-mid');
+			_this.data.searchData.mid = mid;
 			$('#editor_panel').hide();
 			$('#list_panel').hide();
 			$('#pic_panel').hide();
 			if(type == 1 || type == 2 || type == 3 || type == 6){
+				_this.showEditor(mid);
 				$('#editor_panel').show();
 			}
 			if(type == 4){
+				_this.$topPanel = $('#s_top_list');
+				_this.$panel = $('#s_resource_list');
+				_this.$pagebar = $('#s_pagebar');
+				_this.loadTop();
+				_this.loadRes();
 				$('#list_panel').show();	
 			}
 			if(type == 5){
-				$('#list_panel').show();
+				_this.$topPanel = $('#top_list');
+				_this.$panel = $('#resource_list');
+				_this.$pagebar = $('#pagebar');
+				_this.loadTop();
+				_this.loadRes();
+				$('#tree_panel').show();
 			}
 			if(type == 7){
+				_this.loadNews();
 				$('#pic_panel').show();
 			}
 
@@ -95,6 +104,7 @@
 								index : length
 							});
 						}
+						console.log(data);
 						$panel.html(_this.tpl.newsTpl.render(data));	
 					}
 				}
@@ -136,59 +146,32 @@
 				}
 			});
 		},
-		initTopic : function() {
+		loadTop : function(){
 			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'menu/tree/' + _this.pid,
-				dataType : 'json',
-				beforeSend : function() {
-					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
+				type : 'post',
+				url : 'index/list/up',
+				data : {mid:_this.data.searchData.mid},
+				beforeSend : function(){
+					_this.$topPanel.html(util.loadingPanel);
 				},
-				success : _this.handleTopic 
+				success : function(result){
+					var data = result.data;
+				    _this.$topPanel.html(_this.tpl.topListTpl.render(data));
+				}
 			});
 		},
-		handleTopic : function(data) {
-			_this.topicNodes = [];
-			var list = data.data.list;
-			for(var index in list){
-				var menu = list[index];
-				// menu['pId'] = menu.parent_id;
-				_this.topicNodes.push(menu);
-			}
-			_this.initTree();
-		},
-		searchResource : function() {
-			if(!_this.data.searchData.mid){
-				_this.data.searchData.mid = _this.pid;
-			}
-			var infoDict = {
-				'100401' : '历史',
-				'100402' : '法规',
-				'100403' : '外国',
-				'100404' : '武器 装备',
-				'100405' : '形势',
-				'100406' : '历史'
-			};
-			if(infoDict[_this.data.searchData.mid]){
-				_this.data.searchData.title = infoDict[_this.data.searchData.mid];
-				_this.searchUrl = 'admin/resource/list';
-			}else{
-				_this.searchUrl = 'article/queryArticleByMenu';
-				_this.data.searchData.keyword = '';
-			}
-			var data = _this.data.searchData;
+		loadRes : function() {
 			$.ajax({
 				type : "post",
-				url : _this.searchUrl,
-				data : data,
+				url : 'index/list/res',
+				data : _this.data.searchData,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					_this.$panel.html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
-				success : _this.initPageResource
+				success : _this.initPageRes
 			});
 		},
-		initPageResource : function(data) {
+		initPageRes : function(data) {
 			if (!data.success) {
 				util.dialog.infoDialog('查询出错');
 				return;
@@ -202,19 +185,19 @@
 			data = data.data;
 			var totalPage = data.totalPage;
 			var totalcount = data.totalCount;
-			var html = _this.data.resourceTpl.render(data);
+			var html = _this.tpl.resourceTpl.render(data);
 			if(totalcount == 0){
 				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 			}
-			$('#resource_list').html(html);
+			_this.$panel.html(html);
 			
 			if (totalPage <= 1) {
-				$("#pagebar").html('');
+				_this.$pagebar.html('');
 			}
 			if (totalPage >= 2) {
 				$(function() {
 					$.fn.jpagebar({
-						renderTo : $("#pagebar"),
+						renderTo : _this.$pagebar,
 						totalpage : totalPage,
 						totalcount : totalcount,
 						pagebarCssName : 'pagination2',
@@ -230,7 +213,7 @@
 								url : _this.searchUrl,
 								data : data,
 								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+									_this.$panel.html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 								},
 								success : function(data){
 									if (!data.success) {
@@ -246,11 +229,11 @@
 									data = data.data;
 									var totalPage = data.totalPage;
 									var totalcount = data.totalCount;
-									var html = _this.data.resourceTpl.render(data);
+									var html = _this.tpl.resourceTpl.render(data);
 									if(totalcount == 0){
 										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 									}
-									$('#resource_list').html(html);
+									_this.$panel.html(html);
 								}
 							});
 						}
@@ -258,84 +241,16 @@
 				});
 			}
 		},
-		setting : {
-			view : {
-				dblClickExpand : false,
-				showLine : true,
-				selectedMulti : false,
-				showIcon : false
-			},
-			data : {
-				simpleData : {
-					enable : true,
-					idKey : "id",// id 自定义
-					pIdKey : "parent_id",// 父节点id 自定义
-					rootPId : 14
-				}
-			},
-			check : {
-				enable : false
-			},
-			callback : {
-				beforeClick : function(treeId, treeNode) {
-					var zTree = _this.getCurrTree();
-					if (treeNode.isParent) {
-						zTree.expandNode(treeNode);
-						return true;
-					} else {
-						return true;
-					}
-				},
-				onClick: function(event,treeId, treeNode) {
-					var zTree = _this.getCurrTree();
-					var nodes = zTree.getCheckedNodes(true);
-					if(_this.currNode && _this.currNode.id == treeNode.id){
-						zTree.cancelSelectedNode(treeNode);
-						_this.currNode = null;
-						return false;
-					}
-					_this.currNode = treeNode;
-					_this.clickNode(_this.currNode);
-					// _this.data.searchData.mid = treeNode.id;
-					// _this.data.searchData.pageNo = 1;
-					// _this.searchResource();
-					return true;
-				}
-			}
-		},
-		initTree : function() {// 初始化树功能，折叠展开点击事件
-			var topicTree = $("#topic_tree");
-			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
-			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
-		},
-		getCurrTree : function(){
-			return _this.topicTree;
-		},
-		getMenuPath : function(node){
-			var menuArr = [];
-			var level = 0;
-			if(node == null){
-				return '';
-			}else{
-				level = node.level;
-			}
-			for(var i=0;i<=level;i++){
-				menuArr.push(node.id);
-				node = node.getParentNode();
-			}
-			menuArr.push(_this.pid);
-			return menuArr.join(',');
-		},
-		showAddArticle : function(){
+		showAddRes : function(){
 			var menuPath = _this.getMenuPath(_this.currNode);
 			window.open('admin/article/edit?menuPath=' + menuPath);
 		},
-		showEditArticle : function(){
+		showEditRes : function(){
 			var id = $(this).attr('data-id');
 			var menuPath = _this.getMenuPath(_this.currNode);
 			window.open('admin/article/edit/' + id + '?menuPath=' + menuPath);
 		},
-		showDelArticle : function(){
+		showDelRes : function(){
 			var id = $(this).attr('data-id');
 			util.dialog.confirmDialog(
 				'确认删除',
@@ -372,46 +287,28 @@
 			});
 		},
 		midMap : {
-			'1001'   : {type:1,smid:100101},
 			'100101' : {type:1},
 			'100102' : {type:1},
-			'100103' : {type:1},
 			'1002'   : {type:1},
 			'1005'   : {type:1},
 			'1003'   : {type:2,smid:100301}
 		},
-		clickNode : function(node){
-			var mid = node.id;
+		showEditor : function(mid){
 			var data = _this.midMap[mid];
-			
+			_this.mid = mid;
 			if(data && data.type == 1){
-				if(data.smid){
-					mid = data.smid;
-				}
 				$.ajax({
 					type : "post",
 					url : 'index/info/view/' + mid,
-					// beforeSend : function() {
-					// 	$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-					// },
 					success : function(data){
 						if(data.success){
-							$('#list_box').hide();
 							_this.editor.setValue(data.data.content);
-							$('#editor_box').show();	
 						}else{
 							alert(data.msg);
 						}
 					}
 				});
-			}else{
-				$('#list_box').show();
-				$('#editor_box').hide();
-				_this.data.searchData.mid = mid;
-				_this.data.searchData.pageNo = 1;
-				_this.searchResource();
 			}
-			
 		},
 		commitInfo : function() {
 			var node = _this.currNode;

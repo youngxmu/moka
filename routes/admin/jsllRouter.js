@@ -121,11 +121,22 @@ router.post('/save', function (req, res) {
     
     if(id == null || id == undefined){
         articleModel.insertArticle(title, author, content, 1, mid, user.id, fileName, type, description,function (err, data) {
-            if (!err) {
-                res.json({
-                    success: true,
-                    msg: "创建成功",
-                    data : data
+            if (!err && data.length > 0) {
+                var res_id = data[0].insertId;
+                var sys_type = 'article';
+                content_type = type;
+                articleModel.insertResource(res_id,sys_type,title,content_type, function(err){
+                    if(err){
+                        return res.json({
+                            success: false,
+                            msg: "创建失败"
+                        });
+                    }
+                    return res.json({
+                        success: true,
+                        msg: "创建成功",
+                        data : data
+                    });
                 });
             } else {
                 res.json({
@@ -138,9 +149,21 @@ router.post('/save', function (req, res) {
         logger.info("管理员修改文章信息", id);
         articleModel.updateArticle(id, title, author, content, -1, mid,  user.id, fileName, type,description, function (err, result) {
             if (!err) {
-                res.json({
-                    success: true,
-                    msg: "修改文章信息成功"
+                var res_id = id;
+                var sys_type = 'article';
+                content_type = type;
+                articleModel.updateResource(res_id,sys_type,title,content_type, function(err){
+                    if(err){
+                        return res.json({
+                            success: false,
+                            msg: "修改文章失败"
+                        });
+                    }
+                    return res.json({
+                        success: true,
+                        msg: "修改文章成功",
+                        data : data
+                    });
                 });
             } else {
                 logger.error("修改文章个人信息发生错误", err);
