@@ -245,24 +245,37 @@ router.post('/list/up', function (req, res, next) {
         '100405' : '形势',
         '100406' : '历史'
     }
-    indexModel.queryUpById(mid, function (err, result) {
-        if (err || !result || !commonUtils.isArray(result)) {
+    indexModel.getUp(mid, function (err, result) {
+        console.log(mid);
+        console.log(result);
+        if (err || !result || result.length == 0) {
             logger.error("查找文章出错", err);
             res.json({
                 success: false,
                 msg: "查找文章出错"
             });
         } else {
-            for (var i in result) {
-                // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
-                var date = new Date(result[i].create_time);
-                result[i].create_time = commonUtils.formatDate(date);
-            }
-            res.json({
-                success: true,
-                msg: "查找文章成功",
-                data: {
-                    list: result
+            var ids = result[0].aid;
+            console.log(ids);
+            indexModel.queryUpByIds(ids, function (err, result) {
+                if (err || !result || !commonUtils.isArray(result)) {
+                    logger.error("查找文章出错", err);
+                    res.json({
+                        success: false,
+                        msg: "查找文章出错"
+                    });
+                } else {
+                    for (var i in result) {
+                        var date = new Date(result[i].create_time);
+                        result[i].create_time = commonUtils.formatDate(date);
+                    }
+                    res.json({
+                        success: true,
+                        msg: "查找文章成功",
+                        data: {
+                            list: result
+                        }
+                    });
                 }
             });
         }
@@ -411,15 +424,19 @@ router.post('/setup', function (req, res, next) {
         '100406' : '历史'
     }
     indexModel.getUp(mid, function (err, result) {
-        if (err || !result || !commonUtils.isArray(result)) {
+        if (err || !result || result.length == 0) {
             logger.error("置顶出错", err);
             res.json({
                 success: false,
                 msg: "置顶出错"
             });
         } else {
-            var aid = result[0].aid;
-            var aids = aid.split(',');
+            var aid = res_id;
+            var aids = [];
+            if(result[0].aid && result[0].aid.length > 0){
+                aid = result[0].aid;
+                aids = aid.split(',');
+            }
             if(aids.length >=7 ){
                 return res.json({
                     success: false,
@@ -446,7 +463,7 @@ router.post('/setup', function (req, res, next) {
 });
 
 //根据”创建渠道“和”是否虚拟“查询文章
-router.post('/cancelup', function (req, res, next) {
+router.post('/setdown', function (req, res, next) {
     var mid = req.body.mid;
     var res_id = req.body.res_id;
     var map = {
@@ -459,13 +476,13 @@ router.post('/cancelup', function (req, res, next) {
         '100406' : '历史'
     }
     indexModel.getUp(mid, function (err, result) {
-        if (err || !result || !commonUtils.isArray(result)) {
-            logger.error("置顶出错", err);
+        if (err || !result || result.length == 0) {
             res.json({
                 success: false,
-                msg: "置顶出错"
+                msg: "取消置顶出错"
             });
         } else {
+
             var aid = result[0].aid;
             var aids = aid.split(',');
             if(aids.length == 0 ){
@@ -477,12 +494,12 @@ router.post('/cancelup', function (req, res, next) {
             var arr = [];
             for(var index in aids){
                 if(aids[index] != res_id){
-                    add.push(aids[index]);
+                    arr.push(aids[index]);
                 }
             }
-            indexModel.updateUp(mid, add.join(','), function (err, result) {
+            indexModel.updateUp(mid, arr.join(','), function (err, result) {
                 if (err) {
-                    logger.error("置顶出错", err);
+                    logger.error("取消置顶出错", err);
                     res.json({
                         success: false,
                         msg: "取消置顶出错"

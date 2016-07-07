@@ -24,6 +24,12 @@ exports.queryUpById = function (mid, callback) {
     db.query(sql, params, callback);
 };
 
+exports.queryUpByIds = function (ids, callback) {
+    var sql = 'select * from resource where id in (' + ids + '); ';
+    var params = [];
+    db.query(sql, params, callback);
+};
+
 exports.getUp = function (mid, callback) {
     db.query("select * from index_data where mid = ?;",
         [mid],
@@ -35,8 +41,8 @@ exports.getUp = function (mid, callback) {
 
 
 exports.updateUp = function (mid, aid, callback) {
-    db.query("update index_data set aid = ? where index_mid = ?;",
-        [content, mid],
+    db.query("update index_data set aid = ? where mid = ?;",
+        [aid, mid],
         function (err, result) {
             callback(err, result);
         }

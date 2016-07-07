@@ -171,7 +171,7 @@ exports.insertArticle = function (title, author, content, status, menu_id, autho
 
 //编辑、修改文章个人信息
 
-exports.updateArticle = function (id, title, author, content, status, menu_id, file_name, type, description, callback) {
+exports.updateArticle = function (id, title, author, content, status, menu_id, author_id, file_name, type, description, callback) {
     var sql = 'update article set title=?,author=?,content=?';
     var params = [];
     params.push(title);
@@ -185,8 +185,11 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, f
     params.push(new Date());
     sql += ',menu_id = ? ';
     params.push(menu_id);
-    sql += ',file_name = ? ';
-    params.push(file_name);
+    if(file_name){
+        sql += ',file_name = ? ';
+        params.push(file_name);    
+    }
+    
     sql += ',type = ? ';
     params.push(type);
     sql += ',description = ? ';

@@ -21,6 +21,33 @@
 .t-input .u-select-p{display: inline-block;}
 
 .t-input .u-select-p select{line-height: 40px;border: 1px solid #cccccc; width: auto;font-size: 20px;padding: 0 10px;margin-right: 5px;}
-.t-input .u-button{float: none;    vertical-align: 1px;}
+.t-input .u-button{float: none;    vertical-align: 1px;
+	    float: none;
+    vertical-align: 1px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+}
+
+.t-input .text{line-height: 40px; width: 600px;font-size: 20px;padding: 0 10px;display: inline-block;
+  vertical-align: top;
+}
+.t-input .download{line-height: 40px; width: 838px;font-size: 20px;padding: 0 10px;}
+
+.ico {
+  width: 30px;height: 30px;display: inline-block;
+  vertical-align: middle;
+}
 
 
+.t-input  a.download{
+  background-image: url("../../../img/download.png");
+  background-position: left center;
+  padding-left: 30px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
