@@ -2,7 +2,6 @@ var db = require('../lib/db.js');
 var logger = require("../lib/log.js").logger("articleArticle");
 var commonUtils = require("../lib/utils.js");
 
-
 exports.queryArticles = function (status, menu_id, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
     var params = [];
@@ -14,9 +13,6 @@ exports.queryArticles = function (status, menu_id, start, pageSize, callback) {
     if(menu_id){
         sql += ' and menu_id in ('+ menu_id +') ';    
     }
-    
-   
-
     sql += ' order by create_time desc limit ?,?;';
     params.push(start);
     params.push(pageSize);
@@ -45,7 +41,6 @@ exports.queryArticleTotalCount = function (status, menu_id, callback) {
         }
     });
 };
-
 
 exports.getArticleList = function (status, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
@@ -102,10 +97,6 @@ exports.queryArticleById = function (articleId, callback) {
         }
     });
 };
-
-
-
-
 
 exports.queryArticleByTitle = function (title, start, pageSize, callback) {
     var params = [];
