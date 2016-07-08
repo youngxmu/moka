@@ -130,9 +130,11 @@ pre{white-space: pre-wrap;font-size: 14px;}
 }
 
 /* 页脚 */
-.footer{background:#F2F6F8;margin-top:30px;padding-top:15px;font-size:14px;color:#124655;
-      height: auto;
+.footer{
+    background:#F2F6F8;margin-top:30px;padding-top:15px;font-size:14px;color:#124655;
+    height: auto;
     line-height: normal;
+    
 }
 .m-t{width: 1000px;margin: 0 auto;}
 .m-t h3{text-align: left;}

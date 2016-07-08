@@ -1,4 +1,16 @@
-.container{width: 1000px;}
+html{height: 100%;}
+body{
+  background-image: url('../../../img/bg_star.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+}
+.container{width: 1000px;background-image:none;}
 .logo-title{
   width: 570px;
   background-image: url("../../../img/resource-title.png");
