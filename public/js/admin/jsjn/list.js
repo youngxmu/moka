@@ -2,7 +2,7 @@
 	var _this = null;
 	_this = P.admin.jsjn.list = {
 		pid : 14,//系统根目录编号
-		searchUrl : 'article/queryArticleByMenu',
+		searchUrl : 'jsjn/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -21,6 +21,10 @@
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
+			_this.initEditor();
+			_this.showEditor('130101');
+
+			
 			_this.initTopic();
 			_this.searchResource();
 		},
@@ -73,7 +77,79 @@
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
 			});
-			$('body').on('click', '.oper .del',_this.showDelArticle);
+			$('body').on('click', '.oper .del', _this.showDelArticle);
+
+			$('body').on('click', '.res-menu button', function(){
+				var mid = $(this).attr('data-id');
+				_this.showEditor(mid);
+			});
+
+			$('body').on('click', '#btn_modify', _this.commitInfo);
+		},
+		changeType : function(){
+			var $this = $(this);
+			$this.addClass('active').siblings('li').removeClass('active');
+			var type = $this.attr('data-type');
+			var mid = $this.attr('data-mid');
+
+			_this.data.searchData.mid = mid;
+			$('#editor_panel').hide();
+			$('#tree_panel').hide();
+			if(type == 1 || type == 2){
+				_this.showEditor(mid);
+				$('#editor_panel').show();
+			}
+
+			if(type == 3){
+				_this.searchResource();
+				$('#tree_panel').show();	
+			}
+		},
+		initEditor : function(){
+			_this.editor = new Simditor({
+			  	textarea: $('#editor'),
+			  	upload : {
+			    	url: 'upload/img',
+				    params: null,
+				    fileKey: 'upload_file',
+				    connectionCount: 3,
+				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+			  	}
+			});
+		},
+		showEditor : function(mid){
+			_this.mid = mid;
+			$.ajax({
+				type : "post",
+				url : 'index/info/view/' + mid,
+				success : function(data){
+					if(data.success){
+						_this.editor.setValue(data.data.content);
+					}else{
+						alert(data.msg);
+					}
+				}
+			});
+		},
+		commitInfo : function() {
+			var mid = _this.mid;
+			var content = _this.editor.getValue();
+			
+			var postData = {
+				content : content,
+				mid : mid
+			};
+			$.ajax({
+				url : 'index/info/save',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
 		},
 		initTopic : function() {
 			$.ajax({
