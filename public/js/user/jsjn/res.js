@@ -19,7 +19,6 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
-			_this.data.resourceTpl = juicer($('#resource_tpl').html());
 			_this.data.picTpl = juicer($('#pic_tpl').html());
 			_this.data.videoTpl = juicer($('#video_tpl').html());
 			_this.data.pptTpl = juicer($('#ppt_tpl').html());

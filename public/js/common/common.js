@@ -212,7 +212,6 @@ var util = {
 		if(!fileName || fileName == ''){
 			fileName = '1.TXT';
 		}
-		console.log(fileName);
 		var index = fileName.lastIndexOf('.');
 		var tail = fileName.substr(index + 1);
 		var fileType = moka.fileType[tail.toUpperCase()];
