@@ -82,6 +82,32 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
+
+//根据文章id查询
+router.post('/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    articleModel.queryArticleById(id, function (err, result) {
+        if (!err && result) {
+            var article = result;
+            article.isAdmin = isAdmin;
+            article.update_time = commonUtils.formatDate(new Date(article.update_time));
+            if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
+            article.menuList = menuUtils.getMenuPathList(article.menu_id);
+            article.file_type = commonUtils.getFileTypeName(article.file_name);
+            res.json({
+                success: true,
+                data : article
+            });
+        } else {
+            res.json({
+                success: false,
+                data : article
+            });
+        }
+    });
+});
+
+
 // //根据文章id查询
 // router.get('/detail/:id', function (req, res, next) {
 //     var id = req.params.id;
