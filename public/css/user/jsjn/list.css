@@ -5,7 +5,13 @@
 	
 	font-size: 12px;
 }
+.res-menu li{
+  margin-top: 15px;
+}
 
+.res-menu li button{
+  width: 80%;
+}
 .sidebar ul li{
 	line-height: 40px;height: 40px;
     width: 100%;
