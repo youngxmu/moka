@@ -63,4 +63,11 @@ exports.delMenu = function (id, callback) {
 };
 
 
+exports.queryMenuByPid = function (pid, callback) {
+    var sql = 'select * from menu where parent_id = ?;';
+    var params = [pid];
+    db.query(sql, params, callback);
+};
+
+
 

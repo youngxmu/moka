@@ -1,7 +1,6 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.jsjn.list = {
-		pid : 14,//系统根目录编号
 		searchUrl : 'jsjn/list',
 		topicTree : null,
 		topicNodes : null,
@@ -18,6 +17,7 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
+			_this.data.submenuTpl = juicer($('#submenu-tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.picTpl = juicer($('#pic_tpl').html());
 			_this.data.videoTpl = juicer($('#video_tpl').html());
@@ -28,6 +28,7 @@
 			_this.initEditor();
 			_this.showEditor('130101');
 			_this.initTopic();
+			_this.changeType({init: true});
 			// _this.searchResource();
 		},
 		initEvent : function(){
@@ -37,37 +38,11 @@
 				var options = {isPreview : false, resourceType : 2};
 			});
 			
-			$('.tree-opr').on('click', '.unfold',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(true);
-				$(this).removeClass('unfold').addClass('shrink').text('收缩');
-			});
-				
-			$('.tree-opr').on('click', '.shrink',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(false);
-				$(this).removeClass('shrink').addClass('unfold').text('展开');
-			});
-
-			$('.tree-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.edit',function(){
-				var zTree = _this.getCurrTree();
-				_this.showEditMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.del',function(){
-				var zTree = _this.getCurrTree();
-				_this.showDelMenuDlg();
-			});
-
 			$('.resource-opr').on('click', '.add',function(){
 				var zTree = _this.getCurrTree();
 				_this.showAddArticle();
 			});
+
 			$('body').on('keydown','#keyword',function(e){
 		        var event = window.event || e;
 		        if(event.keyCode == 13){
@@ -75,6 +50,7 @@
 					_this.searchResource();
 		        }
 		    });
+
 			$('#btn_search').click(function(){
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
@@ -97,8 +73,12 @@
 				_this.initTopic();
 			});
 		},
-		changeType : function(){
+		changeType : function(options){
 			var $this = $(this);
+			if(options && options.init){
+				$this = $('.nav-tabs li').first();
+			}
+			
 			$this.addClass('active').siblings('li').removeClass('active');
 			var type = $this.attr('data-type');
 			var mid = $this.attr('data-mid');
@@ -106,8 +86,19 @@
 			$('#menu_panel').hide();
 			$('#tree_panel').hide();
 			if(type == 1 || type == 2){
-				_this.showEditor(mid);
 				$('#menu_panel').show();
+				$.ajax({
+					type : "post",
+					url : 'menu/submenu/' + mid,
+					success : function(data){
+						if(data.success){
+							$('.res-menu').html(_this.data.submenuTpl.render(data.data));
+						}else{
+							alert(data.msg);
+						}
+					}
+				});
+				// _this.showEditor(mid);
 			}
 
 			if(type == 3){
@@ -152,9 +143,6 @@
 				}
 			});
 		},
-		showContentEditor : function(content){
-			
-		},
 		commitInfo : function() {
 			var mid = _this.mid;
 			var content = _this.editor.getValue();
@@ -186,6 +174,14 @@
 			if(_this.type == 4){
 				searchUrl =  'menu/tree/1401';
 			}
+
+			if(_this.type == 1){
+				$('#txt_panel').show();
+				$('#resource_panel').hide();
+			}else{
+				$('#txt_panel').hide();
+				$('#resource_panel').show();
+			}
 			
 			$.ajax({
 				type : "post",
@@ -210,48 +206,109 @@
 				_this.topicNodes.push(menu);
 			}
 
-			if(_this.type > 1){
-				var searchUrl = 'article/queryArticleByMenu';
-				var data = _this.data.searchData;
-				if(_this.data.keyword){
-					searchUrl = 'article/queryArticleByTitle';
-				}else{
-					searchUrl = 'article/queryArticleByMenu';
-				}
+			// if(_this.type > 1){
+			// 	var searchUrl = 'article/queryArticleByMenu';
+			// 	var data = _this.data.searchData;
+			// 	if(_this.data.keyword){
+			// 		searchUrl = 'article/queryArticleByTitle';
+			// 	}else{
+			// 		searchUrl = 'article/queryArticleByMenu';
+			// 	}
 
 				
-				if(_this.type == 2){
-					data.mid = 1403;
-				}
-				if(_this.type == 3){
-					data.mid = 1402;
-				}
-				if(_this.type == 4){
-					data.mid = 1401;
-				}
+			// 	if(_this.type == 2){
+			// 		data.mid = 1403;
+			// 	}
+			// 	if(_this.type == 3){
+			// 		data.mid = 1402;
+			// 	}
+			// 	if(_this.type == 4){
+			// 		data.mid = 1401;
+			// 	}
 
-				$.ajax({
-					type : "post",
-					async : false,
-					url : searchUrl,
-					data : data,
-					success : function(result){
-						if(result.success){
-							var list = result.data.list;
-							for(var index in list){
-								var menu = list[index];
-								if(menu.title && !menu.name){
-									menu.name = menu.title;	
-								}
-								menu.parent_id = menu.menu_id;
-								// menu['pId'] = menu.parent_id;
-								_this.topicNodes.push(menu);
-							}
-						}
-					}
-				});
-			}
+			// 	$.ajax({
+			// 		type : "post",
+			// 		async : false,
+			// 		url : searchUrl,
+			// 		data : data,
+			// 		success : function(result){
+			// 			if(result.success){
+			// 				var list = result.data.list;
+			// 				for(var index in list){
+			// 					var menu = list[index];
+			// 					if(menu.title && !menu.name){
+			// 						menu.name = menu.title;	
+			// 					}
+			// 					menu.parent_id = menu.menu_id;
+			// 					// menu['pId'] = menu.parent_id;
+			// 					_this.topicNodes.push(menu);
+			// 				}
+			// 			}
+			// 		}
+			// 	});
+			// }
 			_this.initTree();
+		},
+		search : function(){
+			$.ajax({
+				type : 'post',
+				url : 'article/queryArticleByMenu',
+				data : _this.queryData,
+				beforeSend : function(){
+					$('#resource_list').html(util.loadingPanel);
+				},
+				success : _this.initPage
+			});
+		},
+		initPage : function(result) {
+			var data = result.data;
+		    $('#resource_list').html(_this.data.resourceTpl.render(data));
+
+			var totalPage = data.totalPage;
+			var totalCount = data.totalCount;
+
+			if(totalCount == 0){
+				$('#resource_list').html(P.building);
+				return;
+			}
+
+		    if (totalPage <= 1) {
+		        $("#pagebar").html('');
+		    }
+		    if (totalPage >= 2) {
+		        $(function() {
+		            $.fn.jpagebar({
+		                renderTo : $("#pagebar"),
+		                totalpage : totalPage,
+		                totalcount : totalCount,
+		                pagebarCssName : 'pagination2',
+		                currentPage: parseInt(data.currentPage),
+		                onClickPage : function(pageNo) {
+		                    $.fn.setCurrentPage(this, pageNo);
+		                    if (_this.instance_papers == null)
+		                    	_this.instance_papers = this;
+		                    _this.queryData.pageNo = parseInt(pageNo),
+		                    $.ajax({
+		                    	url : 'article/queryArticleByMenu',
+		                        type: 'POST',
+		                        data: _this.queryData,
+		                        beforeSend : function(){
+									$('#resource_list').html(util.loadingPanel);
+								},
+		                        success : function(result){
+		                        	if (result != null && result.success) {
+		                        		var data = result.data;
+		                		        $('#resource_list').html(_this.data.resourceTpl.render(data));
+		                		    }
+		                		    else {
+		                		        util.dialog.infoDialog("查询信息失败，请重试。");
+		                		    }
+		                        }
+		                    });
+		                }
+		            });
+		        });
+		    }
 		},
 		setting : {
 			view : {
@@ -317,33 +374,39 @@
 								}
 							});
 						}
+					}else{
+						_this.queryData = {
+							pageNo : 1,
+							pageSize : 15
+						};
+						_this.queryData.mid = _this.currNode.id;
+						_this.search();
 					}
-					console.log(_this.type);
-					console.log(_this.currNode);
-					if(_this.type == 2){
-						if( _this.currNode.file_name){
-							$('#content').html(_this.data.picTpl.render(_this.currNode));
-						}else{
-							$('#content').html('');			
-						}
+
+					// if(_this.type == 2){
+					// 	if( _this.currNode.file_name){
+					// 		$('#content').html(_this.data.picTpl.render(_this.currNode));
+					// 	}else{
+					// 		$('#content').html('');			
+					// 	}
 						
-					}
+					// }
 
-					if(_this.type == 3 ){
-						if( _this.currNode.file_name){
-							$('#content').html(_this.data.videoTpl.render(_this.currNode));
-						}else{
-							$('#content').html('');			
-						}
-					}
+					// if(_this.type == 3 ){
+					// 	if( _this.currNode.file_name){
+					// 		$('#content').html(_this.data.videoTpl.render(_this.currNode));
+					// 	}else{
+					// 		$('#content').html('');			
+					// 	}
+					// }
 
-					if(_this.type == 4 ){
-						if( _this.currNode.file_name){
-							$('#content').html(_this.data.pptTpl.render(_this.currNode));
-						}else{
-							$('#content').html('');			
-						}
-					}
+					// if(_this.type == 4 ){
+					// 	if( _this.currNode.file_name){
+					// 		$('#content').html(_this.data.pptTpl.render(_this.currNode));
+					// 	}else{
+					// 		$('#content').html('');			
+					// 	}
+					// }
 					
 					return true;
 				}
@@ -356,116 +419,6 @@
 		},
 		getCurrTree : function(){
 			return _this.topicTree;
-		},
-		showAddMenuDlg : function(){
-			var data = {name : ''};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.addMenu,
-				function(){},
-				'确认添加菜单'
-			);
-		},
-		showEditMenuDlg : function(){
-			var pmenu = _this.currNode;
-			var data = {name : pmenu.name};
-			util.dialog.confirmDialog(
-				_this.data.editMenuDlgTpl.render(data),
-				_this.updateMenu,
-				function(){},
-				'确认修改菜单'
-			);
-		},
-		showDelMenuDlg : function(){
-			util.dialog.confirmDialog(
-				'确认删除',
-				_this.delMenu,
-				function(){},
-				'确认删除菜单'
-			);
-		},
-		addMenu : function(){
-			var pmenu = _this.currNode;
-			var parent_id = _this.pid;
-			var mlevel = 1;
-			if(pmenu){
-				mlevel = pmenu.mlevel + 1;
-				parent_id = pmenu.id;
-			}
-
-			var name = $('#menu_name').val();
-			
-			if(!name){
-				return false;
-			}
-
-			var node = {
-				mlevel : mlevel,
-				parent_id : parent_id,
-				name : name
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'menu/add',
-				data : node,
-				success : function(result){
-					if(result.success){
-						node.id = result.data.insertId;
-					}
-					_this.getCurrTree().addNodes(_this.currNode, -1, node, true);
-				}
-			});
-		},
-		updateMenu : function(){
-			var pmenu = _this.currNode;
-
-			var name = $('#menu_name').val();
-			
-			if(!name){
-				return false;
-			}
-
-			var node = {
-				id : pmenu.id,
-				mlevel : pmenu.mlevel,
-				parent_id : pmenu.parent_id,
-				name : name
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'menu/update',
-				data : node,
-				success : function(result){
-					if(result.success){
-						pmenu.name = name;
-						_this.getCurrTree().updateNode(pmenu);
-					}
-					
-				}
-			});
-		},
-		delMenu : function(){
-			var pmenu = _this.currNode;
-			var node = {
-				id : pmenu.id
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'menu/del',
-				data : node,
-				success : function(result){
-					if(result.success){
-						_this.getCurrTree().removeNode(pmenu);
-					}
-					
-				}
-			});
 		},
 		getMenuPath : function(node){
 			var menuArr = [_this.pid];

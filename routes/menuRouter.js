@@ -130,5 +130,27 @@ router.get('/map', function(req, res, next) {
     res.json(menuMap);
 });
 
+
+router.post('/submenu/:mid', function(req, res, next) {
+    var mid = req.params.mid;
+    menuModel.queryMenuByPid(mid, function (err, result) {
+        if (err || !result || !commonUtils.isArray(result)) {
+            logger.error("", err);
+            res.json({
+                success: false,
+                msg: ""
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "",
+                data: {
+                    list: result
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;	
 

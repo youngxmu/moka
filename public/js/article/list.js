@@ -63,7 +63,6 @@
 		initView : function(fmid){
 			var menuMap = _this.menuMap;
 			var fMenu = menuMap[fmid];
-			console.log(fmid);
 			var submenu = fMenu.submenu;
 		    var leafMenus = [];
 		    var html = '';
