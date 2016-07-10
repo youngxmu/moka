@@ -12,14 +12,14 @@
     <%- include ../common/header.ejs %>   
     <div class="nav">
       <ul class="nav-ul">
-        <li data-type="1" class="active">
+        <li data-type="1" data-mid="1301" class="active">
           <a href="javascript:void(0);">训练组织</a>
         </li>
-        <li data-type="2">
-          <a href="javascript:void(0);" class="active">训练实施</a>
+        <li data-type="2" data-mid="1302">
+          <a href="javascript:void(0);" >训练实施</a>
         </li>
-        <li data-type="3">
-          <a href="jsjn/res" >辅助资料</a>
+        <li data-type="3" data-mid="1303">
+          <a href="avascript:void(0);" >辅助资料</a>
         </li>
       </ul>
     </div>
@@ -28,31 +28,62 @@
       
       
   	<div class="container">
-      <div class="sidebar">
-        <ul id="menu_panel" class="memu-panel"></ul>
-        <!-- <div id="tree-panel">
-          
+      <div id="menu_panel" >
+        <div class="sidebar">
+          <ul class="res-memu"></ul>
         </div>
-        <div class="tree-opr">
-          <a href="javascript:void(0);" class="unfold">展开</a>
-        </div> -->
-        <ul id="topic_tree" class="ztree" style="display:none;"></ul>
-      </div>
-      <div class="main">
-        <div class="panel panel-primary">
+        <div class="main">
+          <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 id="content_title" class="panel-title"></h3>
             </div>
             <div id="content" class="panel-body detail-article">
             </div>
           </div>
-        <div id="resource_panel" style="display:none;">
-          <div id="resource_list"></div>
-          <div id="pagebar"></div>
         </div>
-        
+      </div>
+
+      <div id="tree_panel" style="display:none;">
+        <div class="sidebar-menu">
+          <ul class="type-panel">
+            <li data-type="1">
+              <i class="type-ico res-txt"></i>
+              <p>文字</p>
+            </li>
+            <li data-type="2">
+              <i class="type-ico res-txt"></i>
+              <p>图片</p>
+            </li>
+            <li data-type="3">
+              <i class="type-ico res-txt"></i>
+              <p>视频</p>
+            </li>
+            <li data-type="4">
+              <i class="type-ico res-txt"></i>
+              <p>课件</p>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-tree">
+          <ul id="topic_tree" class="ztree" ></ul>
+        </div>
+        <div class="main">
+          <div id="txt_panel" class="info-content" >
+            <textarea class="editor-area" id="txt_editor" placeholder="输入文章正文" autofocus></textarea>
+            <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
+              <span id="btn_txt" class="btn btn-primary">提交</span>
+            </div>
+          </div>
+          <div id="resource_panel" style="display:none;">
+            <div id="resource_list"></div>
+            <div id="pagebar"></div>
+          </div>
+        </div>
+
       </div>
 	  </div>
+
+    
     <%- include ../common/footer.ejs %>   
     
     <script type="text/template" id="resource-tpl">

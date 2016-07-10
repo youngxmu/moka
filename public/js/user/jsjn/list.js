@@ -9,9 +9,6 @@
 		currNode : null,
 		tpl : {},
 		data : {
-			image : 'jpg,png,gif,jpeg,bmp',
-			initData : null,
-			initCallback : null,
 			searchData : {
 				pageNo : 1,
 				pageSize : 15
@@ -21,7 +18,6 @@
 			$('#hd_menu_resource').addClass('current');
 			_this.tpl.menuTpl = juicer($('#menu_tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
-			
 			_this.initEvent();
 			_this.initTopic();
 			_this.search();
@@ -29,25 +25,7 @@
 		},
 		initEvent : function(){
 			$('.nav-ul').on('click', 'li', _this.changeType);
-			$('#menu_panel').on('click', 'li', _this.showContent);
-
-			$('#resource_list').on('click','.view',function(){
-				var id = $(this).attr('data-id');
-				var data = _this.data.resourceList[id];
-				var options = {isPreview : false, resourceType : 2};
-			});
-			
-			$('.tree-opr').on('click', '.unfold',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(true);
-				$(this).removeClass('unfold').addClass('shrink').text('收缩');
-			});
-				
-			$('.tree-opr').on('click', '.shrink',function(){
-				var zTree = _this.getCurrTree();
-				zTree.expandAll(false);
-				$(this).removeClass('shrink').addClass('unfold').text('展开');
-			});
+			$('#menu_panel').on('click', '.res-menu li', _this.showContent);
 			$('body').on('keydown','#keyword',function(e){
 		        var event = window.event || e;
 		        if(event.keyCode == 13){
@@ -62,17 +40,35 @@
 		},
 		changeType : function(){
 			var $this = $(this);
-			$this.addClass('active').siblings().removeClass('active');
+			$this.addClass('active').siblings('li').removeClass('active');
+			var type = $this.attr('data-type');
+			var mid = $this.attr('data-mid');
 			_this.data.type = $this.attr('data-type');
-			if(_this.data.type == '资料'){
+
+			$('#tree_panel').hide();
+			$('#menu_panel').hide();
+			if(_this.data.type == 3){
 				_this.initTopic();
+				$('#tree_panel').show();
 			}else{
 				$('#menu_panel').show();
-				$('#topic_tree').hide();
-				_this.search();
+				$.ajax({
+					type : "post",
+					url : 'menu/submenu/' + mid,
+					success : function(data){
+						if(data.success){
+							$('.res-menu').html(_this.tpl.menuTpl.render(data.data));
+						}else{
+							alert(data.msg);
+						}
+					}
+				});
+				
+				//_this.search();
 			}
 		},
 		showContent : function(){
+			console.log(1);
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			$.ajax({
@@ -96,7 +92,7 @@
 				success : function(result){
 					if(result.success){
 						var html = _this.tpl.menuTpl.render(result.data);
-						$('#menu_panel').html(html);
+						$('.res-memu').html(html);
 						_this.listMap = {};
 						for(var index in result.data.list){
 							var item = result.data.list[index];
