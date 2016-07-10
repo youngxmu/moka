@@ -5,36 +5,52 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/admin/question/import.css' >
     <link rel='stylesheet' href='css/admin/vote/list.css' >
-    
   </head>
   <body>
     <%- include ../common/header.ejs%>   
   	<div class="container">
       <div class="main">
         <div class="top-bar">
-          <span id="btn_add" >添加试卷</span>
+          <span id="btn_add" >新的测评</span>
         </div>
-        <div id="paper_list"></div>
+        <div>
+          <table class="table table-striped" style="font-size:14px;">
+            <thead>
+              <tr>
+                <td class="">名称</td>
+                <td class="">描述</td>
+                <td class="">状态</td>
+                <td class="">时间</td>
+                <td class="">操作</td>
+              </tr>
+            </thead>
+            <tbody id="paper_list"></tbody>
+          </table>
+
+        </div>
         <div id="pagebar"></div>
       </div>
 	  </div>
 
-   
     <script type="juicer/template" id="paper-list-tpl">
-    <div class="paper-list-title" style="display:none;">
-        <div class="name">名称</div>
-        <div class="desc">描述</div>
-        <div class="oper">操作</div>
-    </div>
     {@each list as obj, index}
-    <div class="paper-list">
-      <div class="name">${obj.name}</div>
-      <div class="desc">${obj.description}</div>
-      <div class="oper">
+    <tr >
+      <td class="name">${obj.name}</td>
+      <td class="desc">${obj.description}</td>
+      <td class="desc">{@if status=1}进行中{@/if}{@if status=0}已停止{@/if}</td>
+      <td class="desc">${obj.create_time}</td>
+      <td class="oper">
+        <span data-id="${obj.id}" class="data">统计</span>
         <span data-id="${obj.id}" class="edit">编辑</span>
-        <span data-id="${obj.id}" class="del">删除</span>
-      </div>
-    </div>
+        <span data-id="${obj.id}" class="del" >删除</span>
+        {@if status=1}
+          <span data-id="${obj.id}" class="stop">关闭</span>
+        {@/if}
+        {@if status=0}
+          <span data-id="${obj.id}" class="start">开启</span>
+        {@/if}
+      </td>
+    </tr>
     {@/each}
     </script>
     

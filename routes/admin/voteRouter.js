@@ -37,6 +37,9 @@ router.post('/list', function (req, res, next) {
                     msg: "查找试卷出错"
                 });
             } else {
+                for(var index in result){
+                    result[index].create_time = commonUtils.formatDate(new Date(result[index].create_time));
+                }
                 res.json({
                     success: true,
                     msg: "查找试卷成功",
@@ -87,8 +90,6 @@ router.post('/detail/:id', function (req, res, next) {
         });
     }
 });
-
-
 
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
@@ -197,6 +198,42 @@ router.post('/del', function (req, res) {
                 res.json({
                     success: false,
                     msg: "删除试卷失败"
+                });
+            }
+        });
+    }
+});
+
+
+router.post('/status', function (req, res) {
+    var id = req.body.id;
+    var status = req.body.status;
+    var admin = req.session.admin;
+    if(!admin){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
+    
+    
+    if(id == null || id == undefined){
+        res.json({
+            success: false,
+            msg: "修改失败"
+        });
+    }else{
+        voteModel.uodateStatus(id, status, function (err, result) {
+            if (!err) {
+                res.json({
+                    success: true,
+                    msg: "修改测评信息成功"
+                });
+            } else {
+                logger.error("修改测评发生错误", err);
+                res.json({
+                    success: false,
+                    msg: "修改测评失败"
                 });
             }
         });
