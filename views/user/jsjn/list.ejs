@@ -23,14 +23,11 @@
         </li>
       </ul>
     </div>
-
-
-      
       
   	<div class="container">
       <div id="menu_panel" >
         <div class="sidebar">
-          <ul class="res-memu"></ul>
+          <ul class="res-menu"></ul>
         </div>
         <div class="main">
           <div class="panel panel-primary">
@@ -68,10 +65,13 @@
           <ul id="topic_tree" class="ztree" ></ul>
         </div>
         <div class="main">
-          <div id="txt_panel" class="info-content" >
-            <textarea class="editor-area" id="txt_editor" placeholder="输入文章正文" autofocus></textarea>
-            <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
-              <span id="btn_txt" class="btn btn-primary">提交</span>
+          <div class="info-content" >
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"></h3>
+              </div>
+              <div class="panel-body detail-article">
+              </div>
             </div>
           </div>
           <div id="resource_panel" style="display:none;">
@@ -111,6 +111,34 @@
       <a href="javascript:void(0);" class="btn btn-info btn-lg active" role="button">${resource.name}</a>
     </li>
     {@/each}
+    </script>
+
+     <script type="text/template" id="pic_tpl">
+    <div class="pic_preview">
+      <img src="${file_name}" alt="${title}" class="img-thumbnail">
+    </div>
+    </script>
+    <script type="text/template" id="video_tpl">
+    <div class="pic_preview">
+      <p>
+        <a href="${file_name}" class="btn btn-success btn-lg active" role="button">下载到本地</a>
+      </p>
+      <video id="example_video_1" class="video-js vjs-default-skin"
+        controls preload="auto" width="640" height="264" style="width:600px;height:450px;"
+        poster="http://video-js.zencoder.com/oceans-clip.png"
+        data-setup='{"example_option":true}'>
+       <source src="${file_name}" type='video/mp4' />
+       <source src="${file_name}" type='video/webm' />
+       <source src="${file_name}" type='video/ogg' />
+       <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+      </video>
+    </div>
+    </script>
+
+    <script type="text/template" id="ppt_tpl">
+    <div class="pic_preview">
+       <p><a href="${file_name}" class="btn btn-success btn-lg active" role="button">下载到本地</a></p>
+    </div>
     </script>
     <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
     <script type="text/javascript" src="js/user/jsjn/jsjn.js"></script>

@@ -22,6 +22,7 @@ router.get('/list', function (req, res, next) {
 });
 
 
+
 router.get('/info/:id', function (req, res, next) {
     var id = req.params.id;
     infoModel.queryInfoById(id, function (err, result) {

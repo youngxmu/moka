@@ -12,7 +12,7 @@ var menuUtils = require('./lib/menuUtils.js')
 
 var log4js = require('log4js');
 var logger =  require('./lib/log.js').logger('app');
-logger.setLevel('ERROR');
+logger.setLevel('info');
 
 var route = require('./route.js');
 var config = require('./config');
