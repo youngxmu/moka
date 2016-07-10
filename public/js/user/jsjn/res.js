@@ -136,6 +136,9 @@
 								if(menu.title && !menu.name){
 									menu.name = menu.title;	
 								}
+								if(menu.menu_id == 1437){
+									console.log(menu);
+								}
 								menu.parent_id = menu.menu_id;
 								// menu['pId'] = menu.parent_id;
 								_this.topicNodes.push(menu);

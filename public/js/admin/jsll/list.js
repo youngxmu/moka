@@ -1,28 +1,24 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.jsll.list = {
-		pid : 1301,//系统根目录编号
-		searchUrl : 'admin/jsll/list2',
+		searchUrl : 'jsll/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
 		currNode : null,
+		tpl : {},
 		data : {
-			image : 'jpg,png,gif,jpeg,bmp',
-			initData : null,
-			initCallback : null,
-			searchData : {
-				pageNo : 1,
-				pageSize : 15
-			}
 		},
 		init : function() {
-			$('#hd_menu_resource').addClass('current');
-			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
+			_this.tpl.menuTpl = juicer($('#menu_tpl').html());
 			_this.initEvent();
-			_this.initTopic();
+			_this.data.key = '政策';
+			_this.search();
 		},
 		initEvent : function(){
+			$('.nav-tabs').on('click', 'li', _this.changeType);
+			$('#menu_panel').on('click', 'li', _this.showContent);
+
 			$('.tree-opr').on('click', '.unfold',function(){
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(true);
@@ -34,43 +30,64 @@
 				zTree.expandAll(false);
 				$(this).removeClass('shrink').addClass('unfold').text('展开');
 			});
-
-			$('.tree-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.edit',function(){
-				var zTree = _this.getCurrTree();
-				_this.showEditMenuDlg();
-			});
-
-			$('.tree-opr').on('click', '.del',function(){
-				var zTree = _this.getCurrTree();
-				_this.showDelMenuDlg();
-			});
-
-			$('.resource-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddArticle();
-			});
-			$('body').on('keydown','#keyword',function(e){
-		        var event = window.event || e;
-		        if(event.keyCode == 13){
-		          	_this.data.searchData.keyword = $('#keyword').val();
-					_this.searchResource();
-		        }
-		    });
-			$('#btn_search').click(function(){
-				_this.data.searchData.keyword = $('#keyword').val();
-				_this.searchResource();
+			$('#btn_commit').on('click', function(){
+				if(_this.data.type == '3'){
+					_this.commitInfo();
+				}else{
+					_this.commitxx();
+				}
 			});
 		},
+		changeType : function(){
+			var $this = $(this);
+			$this.addClass('active').siblings().removeClass('active');
+			_this.data.type = $this.attr('data-type');
+			_this.data.key = $this.attr('data-key');
+			if(_this.data.key == '资料'){
+				_this.initTopic();
+			}else{
+				$('#menu_panel').show();
+				$('#topic_tree').hide();
+				_this.search();
+			}
+		},
+		search : function(){
+			$.ajax({
+				url : 'jsll/list/' + _this.data.key,
+				type : 'post',
+				success : function(result){
+					if(result.success){
+						var html = _this.tpl.menuTpl.render(result.data);
+						$('#menu_panel').html(html);
+						_this.listMap = {};
+						for(var index in result.data.list){
+							var item = result.data.list[index];
+							_this.listMap[item.id] = item;
+							if(index == 0){
+								$('#content').val(item.content);
+								_this.currItem = item;
+							}
+						}
+					}else{
+						$('#menu_panel').html('');
+						$('#content').val('');			
+					}
+				}
+			});
+		},
+		showContent : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			var item = _this.listMap[id];
+			_this.currItem = item;
+			$('#content').val(item.content);
+		},
 		initTopic : function() {
+			$('#menu_panel').hide();
+			$('#topic_tree').show();
 			$.ajax({
 				type : "post",
 				cache : false,
-				// url : 'menu/tree/' + _this.pid,
 				url : _this.searchUrl,
 				dataType : 'json',
 				beforeSend : function() {
@@ -94,7 +111,7 @@
 				dblClickExpand : false,
 				showLine : true,
 				selectedMulti : false,
-				showIcon : false
+				showIcon : true
 			},
 			data : {
 				simpleData : {
@@ -126,20 +143,21 @@
 						return false;
 					}
 					_this.currNode = treeNode;
+					$('#content_title').html(_this.currNode.name);
 					if(_this.currNode.content){
-						$('#content').html(_this.currNode.content);		
+						$('#content').val(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'admin/jsll/info2/' + _this.currNode.id,
+							url : 'jsll/info/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
 								if(data.success){
-									$('#content').html(data.data.content);		
+									$('#content').val(data.data.content);
 									_this.currNode.content = data.data.content;
 
 								}else{
-									$('#content').html('');			
+									$('#content').val('');			
 								}
 							}
 						});
@@ -153,153 +171,50 @@
 			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
 			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
 		},
+		commitInfo : function() {
+			var currNode = _this.currNode;
+			var postData = {
+				content : $('#content').val(),
+				name : currNode.name,
+				id : currNode.id
+			};
+			$.ajax({
+				url : 'admin/jsll/updateinfo',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
+		},
+		commitxx : function() {
+			var item = _this.currItem;
+			console.log($('#content').val());
+			var postData = {
+				content : $('#content').val(),
+				title : item.title,
+				id : item.id
+			};
+			$.ajax({
+				url : 'admin/jsll/updatexx',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
+		},
+		
+
+
 		getCurrTree : function(){
 			return _this.topicTree;
-		},
-		showAddMenuDlg : function(){
-			var data = {name : ''};
-			var d = dialog({
-			    title: '添加',
-			    content: _this.data.editMenuDlgTpl.render(data),
-			    okValue : '确认',
-     	        ok : _this.addMenu,
-     	        cancelValue : '取消',
-     	        cancel : function(){}
-			});
-			d.showModal();	
-		},
-		showEditMenuDlg : function(){
-			var pmenu = _this.currNode;
-			console.log(pmenu);
-			var data = {name : pmenu.name,
-				content : pmenu.content
-			};
-
-			var d = dialog({
-			    title: '确认修改',
-			    content: _this.data.editMenuDlgTpl.render(data),
-			    okValue : '确认',
-     	        ok : _this.updateMenu,
-     	        cancelValue : '取消',
-     	        cancel : function(){}
-			});
-			d.showModal();	
-		},
-		showDelMenuDlg : function(){
-			util.dialog.confirmDialog(
-				'确认删除',
-				_this.delMenu,
-				function(){},
-				'确认删除菜单'
-			);
-		},
-		addMenu : function(){
-			var pmenu = _this.currNode;
-			var parent_id = 10;
-			var mlevel = 1;
-			if(pmenu){
-				mlevel = pmenu.mlevel + 1;
-				parent_id = pmenu.id;
-			}
-
-			var name = $('#info_name').val();
-			var content = $('#info_content').val();
-			if(!name){
-				return false;
-			}
-
-			var node = {
-				mlevel : mlevel,
-				parent_id : parent_id,
-				name : name,
-				content : content
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'admin/jsll/addinfo2',
-				data : node,
-				success : function(result){
-					if(result.success){
-						node.id = result.data.insertId;
-					}
-					// _this.getCurrTree().addNodes(_this.currNode, -1, node, true);
-
-					_this.initTopic();
-				}
-			});
-		},
-		updateMenu : function(){
-			var pmenu = _this.currNode;
-
-			var name = $('#info_name').val();
-			var content = $('#info_content').val();
-			
-			if(!name){
-				return false;
-			}
-
-			var node = {
-				id : pmenu.id,
-				mlevel : pmenu.mlevel,
-				parent_id : pmenu.parent_id,
-				name : name,
-				content : content
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'admin/jsll/updateinfo2',
-				data : node,
-				success : function(result){
-					if(result.success){
-						pmenu.name = name;
-						_this.getCurrTree().updateNode(pmenu);
-						_this.initTopic();
-					}
-					
-				}
-			});
-		},
-		delMenu : function(){
-			var pmenu = _this.currNode;
-			var node = {
-				id : pmenu.id
-			};
-
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : 'admin/jsll/delinfo2',
-				data : node,
-				success : function(result){
-					if(result.success){
-						_this.getCurrTree().removeNode(pmenu);
-						_this.initTopic();
-					}
-					
-				}
-			});
-		},
-		getMenuPath : function(node){
-			var menuArr = [];
-			var level = 0;
-			if(node == null){
-				return '';
-			}else{
-				level = node.level;
-			}
-			for(var i=0;i<=level;i++){
-				menuArr.push(node.id);
-				node = node.getParentNode();
-			}
-			return menuArr.join(',');
-		},
-		showAddArticle : function(){
-			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('article/edit?menuPath=' + menuPath);
 		}
 	};
 }(moka));

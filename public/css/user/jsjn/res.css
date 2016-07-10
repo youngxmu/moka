@@ -71,7 +71,7 @@
 }
 
 
-.info-content{<span class="text"><a href="<%= file_name %>" download class="download"><%- title %></a></span>}
+.info-content{}
 
 
 .main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;}
