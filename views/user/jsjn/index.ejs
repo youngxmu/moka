@@ -1,56 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>军事技能研究</title>
+    <title>军事技能学习</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/jsjn/jsjn.css' >
   </head>
   <body>
-    <%- include ../common/header.ejs %>
-    <div class="container">
-      <div class="main">
-        <!-- <div class="index-wrapper">
-          <a href="resource/list" class="btn btn-primary btn-lg active" role="button">进入系统</a>
-        </div> -->
-
-        <div class="login-panel">
-          <div class="sys-info">
-            <div class="sys-info-txt">
-              军事技能资源，图像，文章，课件，视频，都在这里
+    <div class="bg">
+        <%- include ../common/header.ejs %>
+        <div class="container">
+            <div class="index-main" >
+                <div class="sys-logo"> <div class="sys-title"></div></div>
+                <div class="sys-msg">
+                  <div class="sys-info">
+                    <div class="sys-info-txt">
+                      军事技能资源，图像，文章，课件，视频，都在这里
+                    </div>
+                    <div class="sys-info-img">
+                      <div class="">
+                        <img src="img/jsjn/h.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/l.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/k.jpg" class="img-thumbnail">
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+                <div class="sys-enter">
+                  <div class="btn"><a href="jsjn/list">进入系统</a></div>
+                </div>
             </div>
-            <div class="sys-info-img">
-              <div class="">
-                <img src="img/jsjn/h.jpg" class="img-thumbnail">
-              </div>
-              <div class="">
-                <img src="img/jsjn/l.jpg" class="img-thumbnail">
-              </div>
-              <div class="">
-                <img src="img/jsjn/k.jpg" class="img-thumbnail">
-              </div>  
+            <div class="main" style="display:none;">
+                <div class="login-panel">
+                  <div class="sys-info">
+                    <div class="sys-info-txt">
+                      军事技能资源，图像，文章，课件，视频，都在这里
+                    </div>
+                    <div class="sys-info-img">
+                      <div class="">
+                        <img src="img/jsjn/h.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/l.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/k.jpg" class="img-thumbnail">
+                      </div>  
+                    </div>
+                  </div>
+                  
+                  <div class="login-bg">
+                    <form method="post" action="auth/user/login">
+                      <h3>登录</h3>
+                      <input type="hidden" name="sysType" value="jsjn">
+                      <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
+                      <input class="form-control" name="password" type="password" placeholder="密码">
+                      <% if(typeof errmsg != 'undefined'){%>
+                      <div class="alert alert-danger" role="alert"><%= errmsg %></div>
+                      <% } %>
+                      <div class="login-btn-wrapper">
+                        <button type="submit" class="btn btn-primary">登录</button>
+                        <a href="user/register" class="btn btn-primary" role="button">注册</a>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
             </div>
-          </div>
-          
-          <div class="login-bg">
-            <form method="post" action="auth/user/login">
-              <h3>登录</h3>
-              <input type="hidden" name="sysType" value="jsjn">
-              <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
-              <input class="form-control" name="password" type="password" placeholder="密码">
-              <% if(typeof errmsg != 'undefined'){%>
-              <div class="alert alert-danger" role="alert"><%= errmsg %></div>
-              <% } %>
-              <div class="login-btn-wrapper">
-                <button type="submit" class="btn btn-primary">登录</button>
-                <a href="user/register" class="btn btn-primary" role="button">注册</a>
-              </div>
-            </form>
-          </div>
-          
         </div>
-      </div>
+        <%- include ../common/footer.ejs %>
     </div>
-    <%- include ../common/footer.ejs %>
     <script type="text/javascript" src="js/lib/jquery.easing.js"></script>
     
     <script>
