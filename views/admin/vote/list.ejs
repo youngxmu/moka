@@ -37,18 +37,18 @@
     <tr >
       <td class="name">${obj.name}</td>
       <td class="desc">${obj.description}</td>
-      <td class="desc">{@if status=1}进行中{@/if}{@if status=0}已停止{@/if}</td>
+      <td class="desc">{@if obj.status == 1}进行中{@/if}{@if obj.status == 0}已停止{@/if}</td>
       <td class="desc">${obj.create_time}</td>
       <td class="oper">
-        <span data-id="${obj.id}" class="data">统计</span>
+        <span data-id="${obj.id}" class="view">统计</span>
         <span data-id="${obj.id}" class="edit">编辑</span>
-        <span data-id="${obj.id}" class="del" >删除</span>
-        {@if status=1}
+        {@if obj.status == 1}
           <span data-id="${obj.id}" class="stop">关闭</span>
         {@/if}
-        {@if status=0}
+        {@if obj.status == 0}
           <span data-id="${obj.id}" class="start">开启</span>
         {@/if}
+        <span data-id="${obj.id}" class="del" >删除</span>
       </td>
     </tr>
     {@/each}

@@ -20,7 +20,7 @@ router.post('/list', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
 
-    voteModel.queryVoteTotalCount(name, function (totalCount) {
+    voteModel.getVoteTotalCount(name, function (totalCount) {
         logger.info("试卷总数:", totalCount);
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
@@ -29,7 +29,7 @@ router.post('/list', function (req, res, next) {
         var start = pageSize * (pageNo - 1);
 
         logger.info("查找试卷:", start, pageSize);
-        voteModel.queryVotes(name, start, pageSize, function (err, result) {
+        voteModel.getVotes(name, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找试卷出错", err);
                 res.json({
@@ -223,7 +223,7 @@ router.post('/status', function (req, res) {
             msg: "修改失败"
         });
     }else{
-        voteModel.uodateStatus(id, status, function (err, result) {
+        voteModel.updateVote(id, status, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,

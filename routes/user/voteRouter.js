@@ -96,8 +96,6 @@ router.post('/detail/:id', function (req, res, next) {
     }
 });
 
-
-
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
@@ -205,6 +203,7 @@ router.post('/commit', function (req, res) {
     }
 
 });
+
 
 router.post('/history/:id', function (req, res, next) {
     var id = req.params.id;

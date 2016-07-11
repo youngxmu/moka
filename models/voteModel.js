@@ -35,6 +35,38 @@ exports.queryVoteTotalCount = function (name, callback) {
 };
 
 
+exports.getVotes = function (name, start, pageSize, callback) {
+    var sql = 'select * from vote where 1 = 1 ';
+    var params = [];
+    if (name || name == 0) {
+        sql += ' and name like %' + name + '% ';
+    }
+
+    sql += ' limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+//根据“是否虚拟”“创建来源”查找试卷总数
+exports.getVoteTotalCount = function (name, callback) {
+    var sql = 'select count(id) as count from vote where 1 = 1 ';
+    var params = [];
+    if (name || name == 0) {
+        sql += ' and name like %' + name + '% ';
+    }
+
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找试卷总数出错", err);
+            callback(0);
+        }
+    });
+};
+
+
 //根据id获取试卷
 exports.getVoteById = function (voteId, callback) {
     db.query("select * from vote where id = ?;", [voteId], function (err, result) {
@@ -83,8 +115,25 @@ exports.updateVote = function (id, name, description, qids, callback) {
 
 
 //编辑、修改试卷个人信息
+exports.updateVote = function (id, status, callback) {
+    var sql = 'update vote set status = ? ';
+    var params = [];
+    sql += ' where id = ?;';
+    params.push(status);
+    params.push(id);
+
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            logger.error("修改试卷出错", err);
+            callback(err);
+        } else {
+            callback(null);
+        }
+    });
+};
+//编辑、修改试卷个人信息
 exports.delVote = function (id, callback) {
-    var sql = 'update vote set status = 0';
+    var sql = 'delete from vote ';
     var params = [];
     sql += ' where id = ?;';
     params.push(id);
