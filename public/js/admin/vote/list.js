@@ -18,6 +18,7 @@
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
 			_this.search();
+			component.chart.init();
 			P.admin.question.import.init();
 		},
 		initEvent : function(){
@@ -38,7 +39,8 @@
 
 			$('#btn_commit').on('click', _this.commit);
 			$('#btn_add').on('click', _this.onAdd);
-
+			
+			$('body').on('click', '.oper .view', _this.onView);
 			$('body').on('click', '.oper .edit', _this.onEdit);
 
 			$('body').on('click', '.oper .start', _this.onStart);
@@ -200,6 +202,15 @@
 			});
 			d.showModal();
 		},
+		onView : function(){
+			var paperId = $(this).attr('data-id');
+			var options = {
+				paperId : paperId,
+				chartId : 'canvas'
+			}
+			component.chart.show(options);
+		},
+
 		onEditQuestions : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');

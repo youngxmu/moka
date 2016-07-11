@@ -78,20 +78,32 @@
     </script>
 
     <script type="juicer/template" id="question-list-tpl">
-    {@each list as obj, index}
-    <div data-id="${obj.id}" class="question-list">
-        <div class="qtype">
-          ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
-        </div>
-        <div class="qbody">${obj.qbody}</div>
-        {@if obj.qtype == 2}
-          <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
-        {@/if}
-        <div class="rtanswer">正确答案：${obj.rtanswer}</div>
-    </div>
-    {@/each}
+      {@each list as obj, index}
+      <div data-id="${obj.id}" class="question-list {@if index == 0}active{@/if}" >
+          <div class="qbody label label-info">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
+        （多选）
+        {@/if}</div>
+          {@if obj.qtype == 2 || obj.qtype == 3}
+            <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}" data-id="${obj.id}">
+              $${obj.qanswer|formatAnswer}
+            </div>
+          {@/if}
+      </div>
+      {@/each}
     </script>
 
+    <script type="juicer/template" id="question-tpl">
+    <div class="question-list">
+        <div class="qbody">${qbody}</div>
+        {@if qtype == 2 || qtype == 3}
+          <div class="qanswer">$${qanswer|formatAnswer}</div>
+        {@/if}
+        <div class="rtanswer">正确答案：${rtanswer}</div>
+    </div>
+    </script>
+
+
+    <script type="text/javascript" src="js/common/component.js"></script>
     <script type="text/javascript" src="js/common/question.js"></script>
     <script type="text/javascript" src="js/admin/question/import.js"></script>
     <script type="text/javascript" src="js/admin/vote/list.js"></script>
