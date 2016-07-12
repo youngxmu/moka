@@ -46,9 +46,14 @@
 		},
 		onAdd : function(){
 			var d = dialog({
-			    title: '新建试卷',
+			    title: '增加',
 			    content: _this.tpl.dlgEditExpertTpl.render(),
 			    okValue : '确定',
+			    onshow : function(){
+			    	$('#datetimepicker').datetimepicker({
+			    		minView : 'day'
+			    	});
+			    },
 			    ok : function(){
 					var expert = {};
 					expert.name = $('#expert_name').val();
@@ -95,10 +100,10 @@
 			expert.questionListTpl = $('#question-list-tpl').html();
 			expert.questionListData = {list: expert.questions};
 			var d = dialog({
-			    title: '编辑试卷',
+			    title: '编辑',
 			    content: _this.tpl.dlgEditExpertTpl.render(expert),
-		     	onshow: function(){
-		     		
+		     	onshow : function(){
+			    	$('#datetimepicker').datetimepicker();
 			    },
 			    okValue : '确定',
 			    ok : function(){
@@ -130,7 +135,7 @@
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			var d = dialog({
-			    title: '删除试卷',
+			    title: '删除',
 			    content: '确认删除',
 			    okValue : '确定',
 			    ok : function(){
