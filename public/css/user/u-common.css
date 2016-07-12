@@ -266,3 +266,41 @@ pre{white-space: pre-wrap;font-size: 14px;}
 @-moz-keyframes stage-0 { from{-moz-transform:scale(0.01);}to{-moz-transform:scale(1);}}
 @-o-keyframes stage-0 { from{-o-transform:scale(0.01);}to{-o-transform:scale(1);}}
 
+.foot{
+  width: 100%;
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  text-align: center;
+}
+.footer2{width: 1000px;margin: 0 auto;
+  background: url(../../img/logo-buttom.jpg) no-repeat top center #f5f5f5;
+  
+  margin: auto;
+  color: #f6f6f6;
+}
+.footer2 a{color:#f6f6f6}
+.footer2 .info{overflow:hidden;border-top:1px solid #ddd;padding:15px 15px;line-height:40px;bottom:0}
+.footer2 .copyright{float:left}
+.footer2 .copyright img{float:left}
+.footer2 .copyright h3{float:left;margin:0 10px}
+.footer2 .about-us{float:right}
+.footer2 .about-us a{margin-left:14px}
+
+.sys-hlogo{
+    background-image: url("../../../img/logo.png");
+    background-position: center left;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    float: left;
+}
+.header{
+    background: url(../../../img/logo-buttom.jpg) no-repeat top center #f5f5f5;
+    width: 100%;
+    height: auto;
+    width: 1000px;
+    margin: auto;
+}
+
+

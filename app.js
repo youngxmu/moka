@@ -47,10 +47,10 @@ if(config.env!='devv'){//开发环境不需要过滤
     app.use(function(req, res, next) {//判断是否登录的中间件
         res.locals.currDate = utils.indexDate(new Date());
         
+        console.log(res.locals.currDate);
+        res.locals.islogin = true;
 
-    res.locals.islogin = true;
-
-    return next();
+   // return next();
 
         var requestPath = req.path;//请求的uri
         var inWhitelist = false;
@@ -103,7 +103,30 @@ if(config.env!='devv'){//开发环境不需要过滤
                     if(url.indexOf('/admin/') != -1){
                         res.redirect("/auth/admin/login");    
                     }else{
-                        if(url.indexOf('/resource/') != -1){
+                        // var title = "国防教育资源库";
+                        // if(url.indexOf('jsll') != -1){
+                        //   title = '军事理论研究';
+                        // }
+                        // if(url.indexOf('jsjn') != -1){
+                        //   title = '军事技能学习';
+                        // }
+                        // if(url.indexOf('jsll') != -1){
+                        //   title = '军事理论研究';
+                        // }
+                        // if(url.indexOf('paper') != -1){
+                        //   title = '理论学习考试';
+                        // }
+                        // if(url.indexOf('hbll') != -1){
+                        //   title = '国防后备力量';
+                        // }
+                        // if(url.indexOf('vote') != -1){
+                        //   title = '国防教育测评';
+                        // }
+                        // if(url.indexOf('expert') != -1){
+                        //   title = '国防师资力量';
+                        // }
+                        // res.locals.systitle = title;
+                        if(url.indexOf('/resource/') != -1 || url.indexOf('/menu/') != -1){
                             return next();//res.redirect("/resource/index");
                         }
                         if(url.indexOf('/vote/') != -1 || url.indexOf('/article/') != -1){
@@ -114,19 +137,24 @@ if(config.env!='devv'){//开发环境不需要过滤
                         }
                         
                         if(url.indexOf('/jsll/') != -1){
+                            return next();
                             return res.redirect("/jsll/index");
                         }
                         if(url.indexOf('/jsjn/') != -1){
+                            return next();
                             return res.redirect("/jsjn/index");
                         }
                         
                         if(url.indexOf('/hbll/') != -1){
+                            return next();
                             return res.redirect("/hbll/index");
                         }
                         if(url.indexOf('/vote/') != -1){
+                            return next();
                             return res.redirect("/vote/index");
                         }
                         if(url.indexOf('/expert/') != -1){
+                            return next();
                             return res.redirect("/expert/index");
                         }
 

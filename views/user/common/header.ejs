@@ -1,9 +1,10 @@
 <div class="header">
   <div class="top-bar">
       <div class="pull-left">
-        <span id="date-time" data-markup="time"><%= locals.currDate%></span>
+        <span class="sys-hlogo"></span><span id="sys_title" class="sys-title">国防教育测评</span>
       </div>
       <div class="pull-right">
+        <span id="date-time" data-markup="time"><%= locals.currDate %></span>
         <% if(typeof username != 'undefined'){ %>
           <span id="h_login_panel">
             <a href="javascript:void(0);">欢迎你，<%= username%></a>
@@ -60,6 +61,30 @@
 </script>
 <script>
   $(document).ready(function() {
+    var url = window.location.href;
+    var title = "国防教育资源库";
+    if(url.indexOf('jsll') != -1){
+      title = '军事理论研究';
+    }
+    if(url.indexOf('jsjn') != -1){
+      title = '军事技能学习';
+    }
+    if(url.indexOf('jsll') != -1){
+      title = '军事理论研究';
+    }
+    if(url.indexOf('paper') != -1){
+      title = '理论学习考试';
+    }
+    if(url.indexOf('hbll') != -1){
+      title = '国防后备力量';
+    }
+    if(url.indexOf('vote') != -1){
+      title = '国防教育测评';
+    }
+    if(url.indexOf('expert') != -1){
+      title = '国防师资力量';
+    }
+    $('#sys_title').text(title);
     $('body').on('click', '#login_submit', function(){
       var options = {
           success: function (data) {

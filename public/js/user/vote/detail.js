@@ -5,7 +5,6 @@
 			_this.initData();
 			_this.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
-			// _this.showChart();
 			_this.initQuestions();
 		},
 		initData : function(){

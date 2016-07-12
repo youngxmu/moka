@@ -47,6 +47,9 @@
 			var $this = $(this);
 			$this.addClass('active').siblings().removeClass('active');
 			_this.data.type = $this.attr('data-type');
+			if(_this.data.type == ''){
+				return;
+			}
 			if(_this.data.type == '资料'){
 				_this.initTopic();
 			}else{

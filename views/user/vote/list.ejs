@@ -5,34 +5,45 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/vote/vote.css' >
     <link rel='stylesheet' href='css/user/vote/list.css' >
-    
   </head>
   <body>
-    <%- include ../common/header.ejs %>
-  	<div class="container">
-      <div class="main">
-        <div id="paper_list" ></div>
-        <div id="pagebar"></div>
-      </div>
-	  </div>
-
+    <div class="bg">
+      <%- include ../common/header.ejs %>
+    	<div class="container">
+        <div class="main">
+          <table class="table table-striped" style="font-size:14px;">
+            <thead>
+              <tr>
+                <td class="">名称</td>
+                <td class="">描述</td>
+                <td class="">时间</td>
+                <td class="">操作</td>
+              </tr>
+            </thead>
+            <tbody id="paper_list"></tbody>
+          </table>
+          <div id="pagebar"></div>
+        </div>
+  	  </div>
+      <%- include ../common/footer.ejs %>
+    </div>
    
     <script type="juicer/template" id="paper-list-tpl">
-    <div class="paper-list-title" style="display:none;">
-        <div class="name">名称</div>
-        <div class="desc">描述</div>
-        <div class="oper">操作</div>
-    </div>
+    
     {@each list as obj, index}
-    <div class="paper-list">
-      <div class="name">${obj.name}</div>
-      <div class="desc">${obj.description}</div>
-      <div class="oper">
-        <span data-id="${obj.id}" class="view">
-          <a href="vote/detail/${obj.id}">查看</a>
+    <tr >
+      <td class="name">${obj.name}</td>
+      <td class="desc">${obj.description}</td>
+      <td class="desc">${obj.create_time}</td>
+      <td class="oper">
+        <span data-id="${obj.id}" class="">
+          <a href="vote/detail/${obj.id}">参与测评</a>
         </span>
-      </div>
-    </div>
+        <span data-id="${obj.id}" class="view">
+          <a href="javascript:void(0);">查看统计</a>
+        </span>
+      </td>
+    </tr>
     {@/each}
     </script>
     

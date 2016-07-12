@@ -4,11 +4,45 @@
     <title>军事理论研究</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/jsll/jsll.css' >
+    <style type="text/css">
+    .header{
+        display: none;
+    }
+    .container{
+        background: transparent;
+    }
+    </style>
   </head>
   <body>
+    <div class="bg">
     <%- include ../common/header.ejs %>
     <div class="container">
-      <div class="main">
+        <div class="index-main" >
+            <div class="sys-logo"> <div class="sys-title"></div></div>
+            <div class="sys-msg">
+              <div class="sys-info">
+                <div class="sys-info-txt">
+                  国防教育理论，文字，课件，视频，资源都在这里
+                </div>
+                <div class="sys-info-img">
+                  <div class="">
+                    <img src="img/resource/file.png" class="img-thumbnail">
+                  </div>
+                  <div class="">
+                    <img src="img/resource/video.png" class="img-thumbnail">
+                  </div>
+                  <div class="">
+                    <img src="img/resource/data.png" class="img-thumbnail">
+                  </div> 
+                </div>
+              </div>
+            </div>
+            <div class="sys-enter">
+              <div class="btn"><a href="jsll/list">进入系统</a></div>
+            </div>
+        </div>
+        <div class="main" style="display:none;">
+
         <div class="login-panel">
           <div class="sys-info">
             <div class="sys-info-txt">
@@ -46,7 +80,7 @@
         </div>
       </div>
     </div>
-
+    </div>
     <script type="text/javascript" src="js/lib/jquery.easing.js"></script>
     
     <script>

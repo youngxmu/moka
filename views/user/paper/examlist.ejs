@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>练习纪录</title>
+    <title>考试</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/paper/paper.css' >
     <link rel='stylesheet' href='css/user/paperhistory/list.css' >
@@ -14,7 +14,7 @@
       <div class="main">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 id="content_title" class="panel-title">练习纪录</h3>
+            <h3 id="content_title" class="panel-title">当前考试</h3>
           </div>
           <div class="panel-body detail-article">
             <div id="paper_list"></div>
@@ -40,7 +40,7 @@
       
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="paper/history/detail/${obj.id}" target＝"_blank">详情</a>
+          <a href="paper/exam/${obj.id}" target＝"_blank">开始考试</a>
         </span>
       </div>
     </div>
@@ -57,13 +57,12 @@
         {@if obj.qtype == 2}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
-        
     </div>
     {@/each}
     </script>
 
     <script type="text/javascript" src="js/common/question.js"></script>
-    <script type="text/javascript" src="js/user/paperhistory/list.js"></script>
+    <script type="text/javascript" src="js/user/paper/examlist.js"></script>
     
     <script>
       $(document).ready(function() {

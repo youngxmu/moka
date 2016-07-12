@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
-	_this = P.user.vote.list = {
-		searchUrl : 'vote/list',
+	_this = P.user.paperhistory.list = {
+		searchUrl : 'paper/examlist',
 		tpl : {
 			paperListTpl : null
 		},
@@ -15,35 +15,22 @@
 		init : function() {
 			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
+			
 			_this.initEvent();
 			_this.search();
 		},
 		initEvent : function(){
-			$('.nav').on('click', 'span', function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				var mid = $this.attr('data-id');
-				_this.initView(mid);
-				// _this.queryData.mid = $this.attr('data-id');
-
-				// _this.search();
-			});
-			$('#s_q_type').on('change', function(){
-				var $this = $(this);
-				_this.queryData.qtype = $this.val();
+			$('body').on('keydown','#keyword',function(e){
+		        var event = window.event || e;
+		        if(event.keyCode == 13){
+		          	_this.queryData.keyword = $('#keyword').val();
+					_this.search();
+		        }
+		    });
+			$('#btn_search').click(function(){
+				_this.queryData.keyword = $('#keyword').val();
 				_this.search();
 			});
-
-			$('#btn_commit').on('click', _this.commit);
-			$('body').on('click', '.oper .view', _this.onView);
-		},
-		onView : function(){
-			var paperId = $(this).attr('data-id');
-			var options = {
-				paperId : paperId,
-				chartId : 'canvas'
-			}
-			component.chart.show(options);
 		},
 		search : function(){
 			$.ajax({
@@ -137,4 +124,4 @@
 	};
 }(moka));
 
-juicer.register('formatAnswer', moka.user.vote.list.formatAnswer );
+juicer.register('formatAnswer', moka.user.paperhistory.list.formatAnswer );

@@ -164,6 +164,8 @@ var component = {};
 	var _this = null;
 	_this = component.chart = {
 		callback : function(){},
+		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${rtanswer}</div></div>',
+		
 		paperId : null,
 		questions : null,
 		historys : null,
@@ -215,7 +217,6 @@ var component = {};
 			d.showModal();
         },
 		getData : function(){
-			
 	 		$.ajax({
 				url : 'vote/history/' + _this.paperId,
 				type : 'post',
@@ -273,7 +274,176 @@ var component = {};
 	 	},
 	 	nameArr : ['A','B','C','D','E','F','G','H'],
 	 	getQuestionData : function(question){
-	 		var tpl = juicer($('#question-tpl').html());
+	 		var tpl = juicer(_this.questionTpl);
+
+	 		$('#question_panel').html(tpl.render(question));
+	 		var qanswers = question.qanswer.split(',');
+	 		var length = qanswers.length;
+	 		var labels = [];
+	 		var backgroundColor = [];
+	 		var data = [];
+	 		for(var i=0;i<length;i++){
+	 			var answerName = _this.nameArr[i];
+	 			labels.push(answerName);
+	 			backgroundColor.push(_this.randomColor());
+	 			var count = _this.historyMap[question.id][answerName];
+	 			if(!count){
+	 				count = 0;
+	 			}
+	 			data.push(count);
+	 		}
+	 		data.push(0);
+	 		var questionData = {
+	            labels: labels,
+	            datasets: [{
+	                label: '答题统计',
+	                backgroundColor: backgroundColor,
+	                data: data
+	            }]
+	        };
+	        return questionData;
+	 	},
+	 	next : function(){
+	 		_this.questionIndex++;
+	 		if(_this.questionIndex >= _this.questions.length){
+	 			_this.questionIndex = 0;
+	 		}
+	 		var question = _this.questions[_this.questionIndex];
+	 		var data = _this.getQuestionData(question);
+	 		_this.myBar.data.labels = data.labels;
+	 		_this.myBar.data.datasets = data.datasets;
+          	_this.myBar.update();
+	 	},
+	 	prev : function(){
+	 		_this.questionIndex--;
+	 		if(_this.questionIndex <= 0){
+	 			_this.questionIndex = _this.questions.length - 1;
+	 		}
+	 		var question = _this.questions[_this.questionIndex];
+	 		var data = _this.getQuestionData(question);
+	 		_this.myBar.data.labels = data.labels;
+	 		_this.myBar.data.datasets = data.datasets;
+          	_this.myBar.update();
+	 	}
+	};
+}(component));
+
+
+(function(component){
+	var _this = null;
+	_this = component.score = {
+		callback : function(){},
+		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${rtanswer}</div></div>',
+		
+		paperId : null,
+		questions : null,
+		historys : null,
+		data : {
+
+		},
+		randomScalingFactor : function() {
+            return 1;
+        },
+        randomColorFactor : function() {
+            return Math.round(Math.random() * 255);
+        },
+        randomColor : function() {
+            return 'rgba(' + _this.randomColorFactor() + ',' + _this.randomColorFactor() + ',' + _this.randomColorFactor() + ',.7)';
+        },
+        show : function(options){
+        	_this.paperId = options.paperId;
+			if(options.callback)
+				_this.callback = options.callback;
+			_this.chartId = options.chartId;
+			
+			var content = '<div id="question_panel" style="display:inline-block;width:400px;float:left;margin-right:30px;"></div><div style="width:300px;height:300px;display:inline-block"><canvas id="canvas" width="400" height="400"></canvas></div>';
+        	var d = dialog({
+			    title: '答题统计',
+			    content: content,
+			    okValue : '关闭',
+			    width : 800,
+			    onshow : function(){
+			    	_this.getData();
+			    },
+			    ok : function(){},
+			    button: [
+			        {
+			            value: '上一题',
+			            callback: function () {
+			                _this.prev();
+			                return false;
+			            }
+			        } ,
+			        {
+			            value: '下一题',
+			            callback: function () {
+			                _this.next();
+			                return false;
+			            }
+			        } 
+		        ]
+			});
+			d.showModal();
+        },
+		getData : function(){
+	 		$.ajax({
+				url : 'vote/history/' + _this.paperId,
+				type : 'post',
+				success : function(data){
+					if(data.success){
+						var questions = data.vote.questions;
+						var historys = data.vote.historys;
+						_this.questions = questions;
+						_this.historyMap = {};
+						for(var index in historys){
+							var history = historys[index];
+							if(!_this.historyMap[history.qid]){
+								_this.historyMap[history.qid] = {};
+							}
+							_this.historyMap[history.qid][history.answer] = history.count;
+						}
+
+				        
+						var ctx = document.getElementById(_this.chartId).getContext("2d");
+						var data = _this.getQuestionData(questions[0]);
+						_this.questionIndex = 0;
+        
+						var options = {};
+						_this.myBar = new Chart(ctx, {
+			                type: 'bar',
+			                data: data,
+			                width : '400px',
+			                options: {
+			                    barPercentage : 0.2,
+			                    elements: {
+			                    	barPercentage : 0.2,
+			                        rectangle: {
+			                            borderWidth: 2,
+			                            borderColor: 'rgb(0, 255, 0)',
+			                            borderSkipped: 'bottom'
+			                        }
+			                    },
+			                    responsive: true,
+			                    legend: {
+			                        position: 'top',
+			                    },
+			                    title: {
+			                        display: false,
+			                        text: '数据统计'
+			                    }
+			                }
+			            });
+
+							
+					}else{
+						alert(data.msg);
+					}
+				}
+			});
+	 	},
+	 	nameArr : ['A','B','C','D','E','F','G','H'],
+	 	getQuestionData : function(question){
+	 		var tpl = juicer(_this.questionTpl);
 
 	 		$('#question_panel').html(tpl.render(question));
 	 		var qanswers = question.qanswer.split(',');

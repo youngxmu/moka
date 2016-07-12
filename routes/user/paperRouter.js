@@ -1,6 +1,7 @@
 var express = require('express');
 var config = require("../../config");
 var commonUtils = require("../../lib/utils.js");
+var redisUtils = require("../../lib/redisUtils.js");
 var logger = require("../../lib/log.js").logger("paperRouter");
 
 var paperModel = require('../../models/paperModel.js');
@@ -18,6 +19,10 @@ router.get('/index', function (req, res, next) {
 
 router.get('/list', function (req, res, next) {
     res.render('user/paper/list');
+});
+
+router.get('/examlist', function (req, res, next) {
+    res.render('user/paper/examlist');
 });
 
 
@@ -64,6 +69,101 @@ router.get('/detail', function (req, res, next) {
     });
 });
 
+router.get('/exam/:id', function (req, res, next) {
+    var id = req.params.id;
+    var startTime = new Date().getTime();
+    var rid = 'exam' +'_'+ req.session.user.id + '_' + id;
+    redisUtils.get(rid, function(err,reply){
+        if(err){
+            res.render('error',{
+                success: false,
+                msg: "根据id查询试卷出错"
+            });
+        }else{
+            if(reply){
+                startTime = reply;
+                var currTime = new Date().getTime();
+                var time = 45 * 60 * 1000;
+                var offset = time - (currTime - startTime);
+                
+                if(time < 0){
+                    return res.render('msg',{
+                        success: false,
+                        msg: "已经参加过考试啦"
+                    });
+                }
+                
+                console.log(offset);
+                req.session.user.startTime = startTime;
+                req.session.user.examid = id;
+                paperModel.getPaperById(id, function (err, result) {
+                    if (!err && result) {
+                        var paper = result;
+                        questionModel.queryQuestionsByIds(paper.qids, function(err, result){
+                            if(err){
+                                res.render('error',{
+                                    success: false,
+                                    msg: "根据id查询试卷出错"
+                                });
+                            }else{
+                                paper.questions = result;
+                                paper.offset = offset;
+                                res.render('user/paper/exam',paper);
+                            }
+                        });
+                    } else {
+                        res.render('error',{
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }
+                });
+            }else{
+                var currTime = new Date().getTime();
+                var time = 45 * 60 * 1000;
+                var offset = time - (currTime - startTime);
+                
+                if(time < 0){
+                    return res.render('msg',{
+                        success: false,
+                        msg: "已经参加过考试啦"
+                    });
+                }
+                console.log(offset);
+                redisUtils.set(rid, startTime, function(){
+                    req.session.user.startTime = startTime;
+                    req.session.user.examid = id;
+                    paperModel.getPaperById(id, function (err, result) {
+                        if (!err && result) {
+                            var paper = result;
+                            questionModel.queryQuestionsByIds(paper.qids, function(err, result){
+                                if(err){
+                                    res.render('error',{
+                                        success: false,
+                                        msg: "根据id查询试卷出错"
+                                    });
+                                }else{
+                                    paper.questions = result;
+                                    paper.offset = offset;
+                                    res.render('user/paper/exam',paper);
+                                }
+                            });
+                        } else {
+                            res.render('error',{
+                                success: false,
+                                msg: "根据id查询试卷出错"
+                            });
+                        }
+                    });
+                });
+            }
+        }
+
+    });
+    
+    
+});
+
 
 
 
@@ -83,6 +183,45 @@ router.post('/list', function (req, res, next) {
 
         logger.info("查找试卷:", start, pageSize);
         paperModel.queryPapers(name, start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找试卷出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找试卷出错"
+                });
+            } else {
+                res.json({
+                    success: true,
+                    msg: "查找试卷成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
+
+
+
+//根据”创建渠道“和”是否虚拟“查询试卷
+router.post('/examlist', function (req, res, next) {
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+
+    paperModel.queryExamTotalCount(function (totalCount) {
+        logger.info("试卷总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+
+        logger.info("查找试卷:", start, pageSize);
+        paperModel.queryExams(start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找试卷出错", err);
                 res.json({
@@ -188,6 +327,19 @@ router.post('/commit', function (req, res) {
             msg: "答题失败"
         });
     }else{
+        if(req.session && req.session.user && req.session.user.examid){
+            var examid = req.session.user.examid;
+            var startTime = req.session.user.startTime;
+            var currTime = new Date().getTime();
+            var offset = currTime - startTime;
+            var time = 45 * 60 * 1000;
+            if(examid == pid && offset > time){
+                return res.json({
+                    success: false,
+                    msg: "考试已结束"
+                });
+            }
+        }
         paperModel.insertPaperHistory(uid, pid, answer, function (err, data) {
             if (!err) {
                 res.json({
