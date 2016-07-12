@@ -4,39 +4,57 @@
     <title>国防师资力量</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/expert/expert.css' >
+    <style type="text/css">
+    .header{
+        display: none;
+    }
+    .container{
+      height: 100%;
+    }
+    
+    </style>
   </head>
   <body>
-    <%- include ../common/header.ejs %>
-    <div class="container">
-      <div class="main">
-        <div class="login-panel">
-          <div class="sys-info">
-            <div class="jumbotron">
-              <h1>教师●专家●学者</h1>
-              <p>更多位国防，国防教育做出杰出贡献的专家教授</p>
-            </div>
-            
+    <div class="bg">
+      <%- include ../common/header.ejs %>
+      <div class="container">
+        <div class="index-main" >
+          <div class="sys-logo"></div>
+          <div class="sys-title"></div>
+          <div class="sys-msg">
+            <p>教师●专家●学者</p>
+            <p>更多位国防，国防教育做出杰出贡献的专家教授</p>
           </div>
-          
-          <div class="login-bg">
-            <form method="post" action="auth/user/login">
-              <h3>登录</h3>
-              <input type="hidden" name="sysType" value="expert">
-              <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
-              <input class="form-control" name="password" type="password" placeholder="密码">
-              <% if(typeof errmsg != 'undefined'){%>
-              <div class="alert alert-danger" role="alert"><%= errmsg %></div>
-              <% } %>
-              <div class="login-btn-wrapper">
-                <button type="submit" class="btn btn-primary">登录</button>
-                <a href="user/register" class="btn btn-primary" role="button">注册</a>
+          <div class="sys-enter">
+            <div class="btn"><a href="expert/list">进入系统</a></div>
+          </div>
+        </div>
+        <div class="main" style="display:none;">
+          <div class="login-panel">
+            <div class="sys-info">
+              <div class="jumbotron">
+                <h1>教师●专家●学者</h1>
+                <p>更多位国防，国防教育做出杰出贡献的专家教授</p>
               </div>
-            </form>
+            </div>
+            <div class="login-bg">
+              <form method="post" action="auth/user/login">
+                <h3>登录</h3>
+                <input type="hidden" name="sysType" value="expert">
+                <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
+                <input class="form-control" name="password" type="password" placeholder="密码">
+                <% if(typeof errmsg != 'undefined'){%>
+                <div class="alert alert-danger" role="alert"><%= errmsg %></div>
+                <% } %>
+                <div class="login-btn-wrapper">
+                  <button type="submit" class="btn btn-primary">登录</button>
+                  <a href="user/register" class="btn btn-primary" role="button">注册</a>
+                </div>
+              </form>
+            </div>
           </div>
-          
         </div>
       </div>
     </div>
-    <%- include ../common/footer.ejs %>
   </body>
 </html>

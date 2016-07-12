@@ -1,28 +1,66 @@
-.sys-info{
-  width: 600px;
-  height: 302px;
+.bg{
+  background-image: url('../../../img/bg_shine.jpg');
+  width: 100%;height: 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow: auto;
 }
-.jumbotron{
-  background-color:rgba(0,0,0,0.4);
+.container{width: 1000px;background: transparent;
+  background-color: rgba(0,0,0,0.2);
+}
+.index-main{
+  padding-top: 80px;
 }
 
-.logo-title{
-  width: 570px;
+.index-main .sys-logo{
+  width: 100%;
+  height: 120px;
+  background-image: url("../../../img/logo.png");
+  background-position: center center;
+  background-size: auto 120px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.index-main .sys-title{
+  width: 600px;
+  height: 120px;
   background-image: url("../../../img/expert_title.png");
   background-position: center left;
-  background-size: auto 70px;
+  background-size: auto 120px;
   background-repeat: no-repeat;
-  display: inline-block;
-  height: 100%;
-  margin-left: 110px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.index-wrapper{
-	margin-top:270px;
-	text-align: center;
-	width: 100%;
+.index-main .sys-msg{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #f6f6f6;
 }
 
-.index-wrapper a{
-  width: 150px
+.index-main .sys-enter{
+  width: 100%;
+  text-align: right;
+  margin-top: 60px;
+}
+
+.index-main .sys-enter .btn{
+  font-size: 20px;
+  background-color: rgba(255,255,255,0.4);
+  color: #121212;
+  line-height: 2;
+  padding: 0 60px 0 60px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.index-main .sys-enter .btn a{
+    color: #333;
+    text-decoration: none;
+}
+.index-main .sys-enter .btn:hover{
+  opacity: 0.6;
 }

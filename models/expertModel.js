@@ -204,3 +204,38 @@ exports.delExpertResult = function (id, callback) {
         }
     });
 };
+
+
+
+exports.queryExpertsJob = function (job, start, pageSize, callback) {
+    var sql = 'select * from expert where status = 1 ';
+    var params = [];
+    if (job && job != '') {
+        sql += ' and job_type = ? ';
+        params.push(job);
+    }
+
+    sql += ' limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+//根据“是否虚拟”“创建来源”查找专家总数
+exports.queryExpertJobTotalCount = function (job, callback) {
+    var sql = 'select count(id) as count from expert where status = 1 ';
+    var params = [];
+    if (job && job != '') {
+        sql += ' and job_type = ? ';
+        params.push(job);
+    }
+
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找专家总数出错", err);
+            callback(0);
+        }
+    });
+};

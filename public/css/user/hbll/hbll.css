@@ -1,34 +1,88 @@
-.container{width: 1000px;}
-.logo-title{
-  width: 570px;
+.bg{
+  background-image: url('../../../img/bg_sunset.jpg');
+  width: 100%;height: 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow: auto;
+}
+.container{width: 1000px;background: transparent;
+  background-color: rgba(255,255,255,0.5);
+  position: relative;
+}
+
+.index-main{
+  padding-top: 30px;
+}
+
+
+.index-main .sys-logo{
+  width: 100%;
+  height: 120px;
+  background-image: url("../../../img/logo.png");
+  background-position: center left;
+  background-size: auto 120px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.index-main .sys-title{
+  width: 750px;
+  height: 120px;
   background-image: url("../../../img/hbll_title.png");
   background-position: center left;
-  background-size: auto 70px;
+  background-size: auto 120px;
   background-repeat: no-repeat;
-  display: inline-block;
-  height: 100%;
-  margin-left: 110px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.index-wrapper{
-	margin-top:270px;
-	text-align: center;
-	width: 100%;
+.index-main .sys-msg{
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 18px;
+  color: #f6f6f6;
 }
 
-.index-wrapper a{
-  width: 150px
+.index-main .sys-enter{
+  width: 100%;
+  text-align: right;
+  margin-top: 60px;
 }
 
-.main{ position:relative;}
-.main .slide-content{width:100%;min-width:980px;height:100%; min-height:640px;position: relative;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;}
-.main .slide-content .cloud{ position:absolute; width:200px;height:100px; background:url(../../../img/object.png);left:0px;top:0px;}
-.main .slide-content .cloud-0{background-position: -580px -240px;}
-.main .slide-content .cloud-1{background-position: -550px 0px;height:140px;width:260px;}
-.main .slide-content .cloud-2{background-position: -580px -140px;}
-.main .slide-content .cloud-3{background-position: -350px -140px;}
-.main .slide-content .cloud-4{background-position: -350px 0px;height:140px;}
-
-.clear{
-    clear:both;
+.index-main .sys-enter .btn{
+  font-size: 20px;
+  background-color: rgba(255,255,255,0.4);
+  color: #121212;
+  line-height: 2;
+  padding: 0 60px 0 60px;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
+.index-main .sys-enter .btn a{
+    color: #333;
+    text-decoration: none;
+}
+.index-main .sys-enter .btn:hover{
+  opacity: 0.6;
+}
+
+.sys-info{height: auto}
+
+.login-panel{
+  padding-top: 80px;
+}
+.login-bg{
+  top: 250px;
+  right: 0;
+  
+}
+.login-bg p:first-child{
+  margin-top: 20px;
+}
+.login-bg p{
+  font-size: 15px;
+  line-height: 2;
+}
+

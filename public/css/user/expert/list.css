@@ -45,7 +45,7 @@
 .expert-list-title div:nth-child(4){width: 110px;}
 .expert-list-title div:nth-child(5){width: 110px;}
 .expert-list-title div:nth-child(6){width: 300px;}
-.expert-list-title div:nth-child(7){width: 120px;}
+.expert-list-title div:nth-child(7){width: 100px;}
 .expert-list{line-height: 40px; height: 40px;border-bottom: 1px dashed #cccccc;}
 .expert-list:last-child{border:none;}
 .expert-list div{display: inline-block;text-align: left;font-size: 14px;
@@ -60,7 +60,7 @@
 .expert-list div:nth-child(4){width: 110px;}
 .expert-list div:nth-child(5){width: 160px;}
 .expert-list div:nth-child(6){width: 350px;}
-.expert-list div:nth-child(7){width: 120px;}
+.expert-list div:nth-child(7){width: 100px;}
 
 /*.expert-list div a{color: #333;}*/
 

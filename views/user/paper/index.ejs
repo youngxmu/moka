@@ -17,21 +17,20 @@
     <div class="bg">
     <%- include ../common/header.ejs %>
     <div  class="container">
-       <div class="index-main" >
-                <div class="sys-logo"> <div class="sys-title"></div></div>
-                <div class="login-panel">
-            <div class="sys-info">
-                <div class="sys-info-txt">
-                  军事理论学习，自测
+      <div class="index-main" >
+        <div class="sys-logo"> <div class="sys-title"></div></div>
+        <div class="login-panel">
+          <div class="sys-info">
+              <div class="sys-info-txt">
+                军事理论学习，自测
+              </div>
+              <div class="sys-info-img">
+                <div class="">
+                  <img src="img/paper/study.png" class="img-thumbnail">
                 </div>
-                <div class="sys-info-img">
-                  <div class="">
-                    <img src="img/paper/study.png" class="img-thumbnail">
-                  </div>
-                </div>
-            </div>
-          
-            <div class="login-bg">
+              </div>
+          </div>
+          <div class="login-bg">
             <form method="post" action="auth/user/login">
               <h3>登录</h3>
               <input type="hidden" name="sysType" value="paper">
@@ -49,10 +48,10 @@
                 </div>
             </form>
           </div>
-          
         </div>
-            </div>
-        <div class="main" style="display:none;">
+      </div>
+
+      <div class="main" style="display:none;">
        
 
         <div class="login-panel">

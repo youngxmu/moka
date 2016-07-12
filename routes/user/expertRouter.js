@@ -161,6 +161,44 @@ router.post('/result', function (req, res, next) {
     // }
 });
 
+//根据”创建渠道“和”是否虚拟“查询专家
+router.post('/job', function (req, res, next) {
+    var job = req.body.job;
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+    expertModel.queryExpertJobTotalCount(job, function (totalCount) {
+        logger.info("专家总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
 
+        logger.info("查找专家:", start, pageSize);
+        expertModel.queryExpertsJob(job, start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找专家出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找专家出错"
+                });
+            } else {
+                for(var index in result){
+                    result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                }
+                res.json({
+                    success: true,
+                    msg: "查找专家成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
 
 module.exports = router;

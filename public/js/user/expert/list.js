@@ -18,21 +18,38 @@
 			_this.search();
 		},
 		initEvent : function(){
-			$('.nav').on('click', 'span', function(){
+			$('.nav-tabs').on('click', 'li', function(){
 				var $this = $(this);
 				$this.addClass('active').siblings().removeClass('active');
-				var mid = $this.attr('data-id');
-				_this.initView(mid);
-				// _this.queryData.mid = $this.attr('data-id');
-
-				// _this.search();
+				var target = $this.attr('target');
+				var $target = $('#' + target);
+				$('#list_panel').hide();
+				$('#type_panel').hide();
+				$target.show();
+				_this.queryData = {
+					pageNo : 1,
+					pageSize : 15
+				};
+				$('#expert_list').html('');
+				$('#pagebar').html('');
+				if(target == 'list_panel'){
+					_this.searchUrl = 'expert/list';
+					_this.search();
+				}else{
+					_this.searchUrl = 'expert/job';
+				}
 			});
 			$('#btn_search').on('click', function(){
 				var $this = $(this);
 				_this.queryData.name = $('#search_key').val();
-				console.log(name);
 				_this.search();
 			});
+			$('#type_panel').on('click', 'button', function(){
+				var text = $(this).text();
+				_this.queryData.job = text;
+				_this.search();
+			});
+
 		},
 		search : function(){
 			$.ajax({

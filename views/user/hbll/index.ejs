@@ -4,53 +4,80 @@
     <title>国防后备力量</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/hbll/hbll.css' >
+    <style type="text/css">
+    .header{
+        display: none;
+    }
+    .container{
+        background: transparent;
+    }
+    </style>
   </head>
   <body>
-    <%- include ../common/header.ejs %>
-    <div class="container">
-      <div class="main">
-        <!-- <div class="index-wrapper">
-          <a href="resource/list" class="btn btn-primary btn-lg active" role="button">进入系统</a>
-        </div> -->
-
-        <div class="login-panel">
-          <div class="sys-info">
-            <div class="sys-info-txt">
-              资源建设中...
+    <div class="bg">
+        <%- include ../common/header.ejs %>
+        <div class="container">
+            <div class="index-main" >
+                <div class="sys-logo"> <div class="sys-title"></div></div>
+                <div class="login-panel">
+                    <div class="sys-info">
+                      <div class="sys-info-img">
+                          <img src="img/yuebing.jpg" class="img-thumbnail">
+                      </div>
+                    </div>
+                    <div class="login-bg">
+                        <form method="post" action="auth/user/login">
+                          <h3>后备力量建设中</h3>
+                          <p>提高后备力量质量</p>
+                          <p>完善后备力量体制</p>
+                          <p>增强后备力量能力</p>
+                          <div class="sys-enter">
+                              <div class="btn"><a href="hbll/list">进入系统</a></div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
             </div>
-            <div class="sys-info-img">
-              <div class="">
-                <img src="img/jsjn/h.jpg" class="img-thumbnail">
-              </div>
-              <div class="">
-                <img src="img/jsjn/l.jpg" class="img-thumbnail">
-              </div>
-              <div class="">
-                <img src="img/jsjn/k.jpg" class="img-thumbnail">
-              </div>  
+            <div class="main" style="display:none;">
+                <div class="login-panel">
+                    <div class="sys-info">
+                        <div class="sys-info-txt">
+                          资源建设中...
+                        </div>
+                        <div class="sys-info-img">
+                          <div class="">
+                            <img src="img/jsjn/h.jpg" class="img-thumbnail">
+                          </div>
+                          <div class="">
+                            <img src="img/jsjn/l.jpg" class="img-thumbnail">
+                          </div>
+                          <div class="">
+                            <img src="img/jsjn/k.jpg" class="img-thumbnail">
+                          </div>  
+                        </div>
+                        /div>
+                      
+                        <div class="login-bg">
+                            <form method="post" action="auth/user/login">
+                              <h3>登录</h3>
+                              <input type="hidden" name="sysType" value="hbll">
+                              <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
+                              <input class="form-control" name="password" type="password" placeholder="密码">
+                              <% if(typeof errmsg != 'undefined'){%>
+                              <div class="alert alert-danger" role="alert"><%= errmsg %></div>
+                              <% } %>
+                              <div class="login-btn-wrapper">
+                                <button type="submit" class="btn btn-primary">登录</button>
+                                <a href="user/register" class="btn btn-primary" role="button">注册</a>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          
-          <div class="login-bg">
-            <form method="post" action="auth/user/login">
-              <h3>登录</h3>
-              <input type="hidden" name="sysType" value="hbll">
-              <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
-              <input class="form-control" name="password" type="password" placeholder="密码">
-              <% if(typeof errmsg != 'undefined'){%>
-              <div class="alert alert-danger" role="alert"><%= errmsg %></div>
-              <% } %>
-              <div class="login-btn-wrapper">
-                <button type="submit" class="btn btn-primary">登录</button>
-                <a href="user/register" class="btn btn-primary" role="button">注册</a>
-              </div>
-            </form>
-          </div>
-          
         </div>
-      </div>
     </div>
-    <%- include ../common/footer.ejs %>
     <script type="text/javascript" src="js/lib/jquery.easing.js"></script>
     
     <script>

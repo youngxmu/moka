@@ -8,67 +8,68 @@
   </head>
   <body>
     <input type="hidden" id="expert_id" value="<%= id %>">
-    <%- include ../common/header.ejs %>
-    <div class="container">
-      <ul class="nav nav-tabs">
-        <li role="presentation" target="info_panel" class="active"><a href="javascript:void(0);">基本情况</a></li>
-        <li role="presentation" target="xs_panel" ><a href="javascript:void(0);">学术成果</a></li>
-        <!-- <li role="presentation"><a href="javascript:void(0);">授课情况</a></li> -->
-        <li role="presentation" target="jx_panel" ><a href="javascript:void(0);">教学成果</a></li>
-      </ul>
-      <div id="info_panel" class="expert-info" >
-        <div class="expert-info-left" >
-          <div class="expert-avatar" >
-            <img src="<%= avatar %>" class="img-thumbnail">
+    <div class="bg">
+      <%- include ../common/header.ejs %>
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li role="presentation" target="info_panel" class="active"><a href="javascript:void(0);">基本情况</a></li>
+          <li role="presentation" target="xs_panel" ><a href="javascript:void(0);">学术成果</a></li>
+          <!-- <li role="presentation"><a href="javascript:void(0);">授课情况</a></li> -->
+          <li role="presentation" target="jx_panel" ><a href="javascript:void(0);">教学成果</a></li>
+        </ul>
+        <div id="info_panel" class="expert-info" >
+          <div class="expert-info-left" >
+            <div class="expert-avatar" >
+              <img src="<%= avatar %>" class="img-thumbnail">
+            </div>
           </div>
-        </div>
-        <div class="expert-info-right" >
-          <div class="expert-desc" >
-            <div class="panel panel-primary">
+          <div class="expert-info-right" >
+            <div class="expert-desc" >
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 id="content_title" class="panel-title"><%= name %></h3>
+                </div>
+                <div id="content" class="panel-body detail-article">
+                  <%= description %>
+                </div>
+              </div>
+              
+            </div>
+            <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 id="content_title" class="panel-title"><%= name %></h3>
+                <h3 id="content_title" class="panel-title">电话</h3>
               </div>
               <div id="content" class="panel-body detail-article">
-                <%= description %>
+                <%= tel %>
               </div>
             </div>
-            
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 id="content_title" class="panel-title">电话</h3>
-            </div>
-            <div id="content" class="panel-body detail-article">
-              <%= tel %>
-            </div>
-          </div>
 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 id="content_title" class="panel-title">地址</h3>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 id="content_title" class="panel-title">地址</h3>
+              </div>
+              <div id="content" class="panel-body detail-article">
+                <%= address %>
+              </div>
             </div>
-            <div id="content" class="panel-body detail-article">
-              <%= address %>
-            </div>
-          </div>
 
-          <!-- <div class="expert-contactinfo" >
-            <p>电话：<%= tel %></p>
-            <p>地址：<%= address %></p>
-          </div> -->
-        </div>  
+            <!-- <div class="expert-contactinfo" >
+              <p>电话：<%= tel %></p>
+              <p>地址：<%= address %></p>
+            </div> -->
+          </div>  
+        </div>
+        <div id="xs_panel" class="xs" >
+          <div id="xs_list"></div>
+          <div id="xs_pagebar" ></div>
+        </div>
+        <div id="jx_panel" class="jx" >
+          <div id="jx_list"></div>
+          <div id="jx_pagebar" ></div>
+        </div>
       </div>
-      <div id="xs_panel" class="xs" >
-        <div id="xs_list"></div>
-        <div id="xs_pagebar" ></div>
-      </div>
-      <div id="jx_panel" class="jx" >
-        <div id="jx_list"></div>
-        <div id="jx_pagebar" ></div>
-      </div>
+      <%- include ../common/footer.ejs %>
     </div>
-    <%- include ../common/footer.ejs %>
-    
     <script type="text/template" id="result-list-tpl">
     <div class="res-list">
       <span class="res-type">序号</span>
