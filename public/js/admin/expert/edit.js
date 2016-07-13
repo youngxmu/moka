@@ -16,6 +16,15 @@
 			_this.expertId = $('#expertId').val();
 			_this.tpl.resultListTpl = juicer($('#result-list-tpl').html());
 			_this.initEvent();
+
+			$('#birthday').datetimepicker({
+				language : 'zh-CN',
+				startView : 'year',
+				format : 'yyyy-mm-dd',
+				viewSelect : 2,
+	    		minView : 2,
+	    		autoclose : true
+	    	});
 		},
 		initEvent : function(){
 			$('#btn_commit').on('click', _this.commit);

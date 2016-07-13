@@ -167,6 +167,10 @@ router.post('/save', function (req, res) {
             msg: "请登录"
         });
     }
+
+    if(!birthday){
+        birthday = null;
+    }
     
     
     if(id == null || id == undefined){
@@ -237,16 +241,18 @@ router.post('/del', function (req, res) {
 
 router.get('/result/add/:expert_id', function (req, res) {
     var expert_id = req.params.expert_id;
-    var expert_id = req.query.expert_id;
+    var type = req.query.type;
     var view = 'admin/expert/editres';
     var data={};
     data.expert_id = expert_id;
+    data.type = type;
     res.render(view,data);
 });
 
 router.get('/result/edit/:id', function (req, res) {
     var id = req.params.id;
     var expert_id = req.query.expert_id;
+    var type = req.query.type;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -266,6 +272,7 @@ router.get('/result/edit/:id', function (req, res) {
                 }
                 data = article;
                 data.expert_id = expert_id;
+                data.type = type;
             }
             res.render(view,data);
         });
@@ -282,6 +289,7 @@ router.post('/result/save', function (req, res) {
     }
     var id = req.body.id;
     var expert_id = req.body.expert_id;
+    var result_type = req.body.type;
 
     var title = req.body.title;
     var author = req.body.author;
@@ -295,7 +303,7 @@ router.post('/result/save', function (req, res) {
         articleModel.insertArticle(title, author, content, 1, mid, admin.id, fileName, type, description,function (err, data) {
             if (!err && data.length > 0) {
                 var article_id = data[0].insertId;
-                expertModel.insertExpertResult(expert_id,title,article_id,type, function(err){
+                expertModel.insertExpertResult(expert_id, title, article_id, result_type, type, function(err){
                     if(err){
                         console.log(err);
                         return res.json({
@@ -322,7 +330,7 @@ router.post('/result/save', function (req, res) {
             if (!err) {
                 var article_id = id;
                 logger.error(expert_id,title,article_id,type);
-                expertModel.updateExpertResult(expert_id,title,article_id,type, function(err){
+                expertModel.updateExpertResult(expert_id, title, article_id, type, function(err){
                     if(err){
                         console.log(err);
                         return res.json({

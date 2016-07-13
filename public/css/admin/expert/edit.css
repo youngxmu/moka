@@ -59,6 +59,16 @@
 }
 
 
+.t-dinput{font-size: 0;line-height: 32px;margin-bottom: 10px;}
+.t-dinput input{line-height: 32px;border: 1px solid #cccccc; width: 360px;font-size: 18px;padding: 0 10px;}
+
+.t-dinput label{
+  line-height: 32px;width: 60px;text-align: right;padding-right: 10px;
+  display: inline-block;
+  *display: inline;font-size: 18px;
+  vertical-align: top;
+}
+
 
 .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #333;}
 .res-list:last-child{border-bottom: 0;}

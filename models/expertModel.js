@@ -177,11 +177,11 @@ exports.queryExpertResultTotalCount = function (expert_id, type, callback) {
     });
 };
 
-exports.insertExpertResult = function (expert_id, title, article_id, type, callback) {
+exports.insertExpertResult = function (expert_id, title, article_id, type, content_type, callback) {
     var sql = 'insert into expert_result ( ';
-    sql += 'expert_id, title, article_id, type, create_time) ';
-    sql += 'values(?,?,?,?);';
-    db.query(sql, [expert_id, title, article_id, type, new Date()],
+    sql += 'expert_id, title, article_id, type, content_type, create_time) ';
+    sql += 'values(?,?,?,?,?,?);';
+    db.query(sql, [expert_id, title, article_id, type, content_type, new Date()],
         function (err, result) {
             callback(err, result);
         }
@@ -189,7 +189,7 @@ exports.insertExpertResult = function (expert_id, title, article_id, type, callb
 };
 
 exports.updateExpertResult = function (expert_id, title, article_id, type, callback) {
-    var sql = 'update expert_result set title = ?, type = ? where expert_id = ? and article_id = ? ;';
+    var sql = 'update expert_result set title = ?, type = ?, where expert_id = ? and article_id = ? ;';
     db.query(sql, [title, type, expert_id, article_id,new Date()],
         function (err, result) {
             callback(err, result);
