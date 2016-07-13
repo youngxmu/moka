@@ -25,6 +25,12 @@
 	    		minView : 2,
 	    		autoclose : true
 	    	});
+
+	    	var fileTypeFilters = [];
+			for(var type in P.fileType){
+				fileTypeFilters.push(type);
+			}
+			_this.initUploader('/upload/img', fileTypeFilters.join(','));
 		},
 		initEvent : function(){
 			$('#btn_commit').on('click', _this.commit);
@@ -63,11 +69,13 @@
 			var $inputs = $('#info_panel').find('input,select,textarea');
 			$inputs.each(function(){
 				var $this = $(this);
-				var key = $this.attr('id');
+				var key = $this.attr('name');
+				
 				var value = $this.val();
 				data[key] = value;
+				console.log(key + " " + value);
 			});
-
+			console.log(data);
 
 
 			if(_this.expertId != null){
@@ -179,6 +187,73 @@
 			    cancel : function(){}
 			});
 			d.showModal();
+		},
+		initUploader : function(uploadSrc, extensions) {// 初始化文件上传控件
+			plupload.addI18n({
+		        'File extension error.' : '文件类型错误',
+		        'File size error.' : '文件大小超出限制'
+		    });
+			_this.fileUploader = new plupload.Uploader({
+				runtimes : 'html5,flash',
+				browse_button : 'btn_upload', // 选择文件按钮ID
+				max_file_size : '100mb', // 文件上传最大值
+				chunks : false,// 不分块上传
+				unique_names : true, // 上传的文件名是否唯一,只有在未进行分块上传时文件名唯一才有效
+				url : uploadSrc,
+				flash_swf_url : 'js/lib/plupload/plupload.flash.swf',// plupload.flash.swf文件所在路径
+				multi_selection : false,
+				filters: [
+				     {title: "允许文件类型", extensions: extensions}
+		        ],
+				init : {
+					FileUploaded : function(up, file, info) {
+						$('#btn_upload').text('修改文件');
+						_this.fileUploader.disableBrowse(false);
+						var data = eval('(' + info.response + ')');
+						_this.fileName = data.fileName;
+						_this.filePath = data.filePath;
+						if (data.success == false) {
+							util.dialog.infoDialog(data.msg);
+							return;
+						} else {
+							util.dialog.toastDialog('上传成功', 2000, function(){
+								$('#process_bar').hide();
+								$('#process_rate').css('width', '0');
+								$('#process_rate').text('0%');
+							});
+							
+							$('#avatar').val(_this.fileName);
+							$('#btn_upload').html('<img src="' + _this.filePath + '">');
+						}
+					},
+					FilesAdded : function(up, file) {
+						$.each(up.files, function (i, file) {
+							if (up.files.length <= 1) {
+					            return;
+					        }
+					        up.removeFile(file);
+						});
+						var orgName = file[0].name.substring(0,file[0].name.lastIndexOf('.')).replace(/[ ]/g,' ');
+						// $('#filename').text(orgName).show();
+						_this.fileUploader.start();
+					},
+					BeforeUpload : function(up, file) {
+						_this.fileUploader.disableBrowse(true);
+					},
+					UploadProgress : function(up, file) {
+						$('#process_bar').show();
+						$('#process_rate').css('width', file.percent + '%');
+						$('#process_rate').text(file.percent + '%');
+					},
+					Error : function(up, err) {
+						$('#loading').hide();
+						_this.fileUploader.disableBrowse(false);
+						up.refresh(); // Reposition Flash/Silverlight
+						// util.checkStatus(err);
+					} 
+				}
+			});
+			_this.fileUploader.init();
 		}
 	};
 }(moka));

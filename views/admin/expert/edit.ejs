@@ -17,17 +17,26 @@
       <div id="info_panel" class="main">
         <div class="t-dinput">
           <label>姓名</label><input name="name" value="<%= name %>" style="margin-right:58px;">
+        </div>
+        <div class="t-dinput">
           <label>性别</label>
           男<input name="gender" type="radio" value="男" <%if(gender == '男'){%>checked=checked<%}%>>
           女<input name="gender" type="radio" value="女" <%if(gender == '女'){%>checked=checked<%}%>>
         </div>
         <div class="t-dinput">
           <label>生日</label><input name="birthday" value="<%= birthday %>" style="margin-right:58px;">
+        </div>
+        <div class="t-dinput">
           <label>电话</label><input name="tel" value="<%= tel %>" >
         </div>
         <div class="t-dinput">
           <label>职称</label><input name="title" value="<%= title %>"  style="margin-right:58px;">
+        </div>
+         <div class="t-dinput">
           <label>方向</label><input name="topic" value="<%= topic %>" >
+          <label>区域</label>
+          地方专家学者<input name="job_type" type="radio" value="地方专家学者" <%if(job_type == '地方专家学者'){%>checked=checked<%}%>>
+          军队专家学者<input name="job_type" type="radio" value="军队专家学者" <%if(job_type == '军队专家学者'){%>checked=checked<%}%>>
         </div>
         <div class="t-input">
           <label>单位</label><input name="unit" value="<%= unit %>" >
@@ -35,13 +44,12 @@
         <div class="t-input">
           <label>地址</label><input name="address" value="<%= address %>" >
         </div>
-        <div class="t-input">
-          <label>区域</label>
-          地方专家学者<input name="job_type" type="radio" value="地方专家学者" <%if(job_type == '地方专家学者'){%>checked=checked<%}%>>
-          军队专家学者<input name="job_type" type="radio" value="军队专家学者" <%if(job_type == '军队专家学者'){%>checked=checked<%}%>>
-        </div>
-        <div class="t-input">
-          <label>头像</label><input name="title" value="<%= title %>" >
+        <div class="avatar-panel">
+          <label>头像</label><input id="avatar" name="avatar" value="<%= avatar %>" type="hidden" >
+          <div id="btn_upload" class="avatar-view">
+            <% if(typeof avatar != 'undefined'){%><img src="<%= avatar %>"><% } %>
+
+          </div>
         </div>
         <div class="t-input">
           <label>描述</label><textarea name="description" ><%= description %></textarea>
