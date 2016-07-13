@@ -5,7 +5,7 @@
 
 		},
 		init : function(){
-			_this.articleId = $('#article_id').val();;
+			_this.articleId = $('#article_id').val();
 			var $content = $('#article_content');
 			$content.find('img').each(function(){
 				var $img = $(this);

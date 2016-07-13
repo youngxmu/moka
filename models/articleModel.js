@@ -1,5 +1,5 @@
 var db = require('../lib/db.js');
-var logger = require("../lib/log.js").logger("articleArticle");
+var logger = require("../lib/log.js").logger("articleModel");
 var commonUtils = require("../lib/utils.js");
 
 exports.queryArticles = function (status, menu_id, start, pageSize, callback) {
@@ -199,12 +199,7 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, a
 
 
     db.query(sql, params, function (err, result) {
-        if (!err && result && result[0]) {
-            callback(result[0].count);
-        } else {
-            logger.error("修改文章出错", err);
-            callback(err);
-        }
+        callback(err);
     });
 };
 

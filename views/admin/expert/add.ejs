@@ -6,7 +6,6 @@
     <link rel='stylesheet' href='css/admin/expert/edit.css' />
   </head>
   <body>
-  	<input type="hidden" id="expertId" value="<%= id %>">
     <%- include ../common/header.ejs %>  
     <div class="container">
       <ul class="nav nav-tabs">
@@ -16,37 +15,37 @@
       </ul>
       <div id="info_panel" class="main">
         <div class="t-input">
-          <label>姓名</label><input id="name" value="<%= name %>" >
+          <label>姓名</label><input id="name" value="" >
         </div>
         <div class="t-input">
-          <label>性别</label><input id="gender" value="<%= gender %>" >
+          <label>性别</label><input id="gender" value="" >
         </div>
         <div class="t-input">
-          <label>生日</label><input id="birthday" value="<%= birthday %>" >
+          <label>生日</label><input id="birthday" value="" >
         </div>
         <div class="t-input">
-          <label>职称</label><input id="title" value="<%= title %>" >
+          <label>职称</label><input id="title" value="" >
         </div>
         <div class="t-input">
-          <label>单位</label><input id="unit" value="<%= unit %>" >
+          <label>单位</label><input id="unit" value="" >
         </div>
         <div class="t-input">
-          <label>地址</label><input id="address" value="<%= address %>" >
+          <label>地址</label><input id="address" value="" >
         </div>
         <div class="t-input">
-          <label>电话</label><input id="tel" value="<%= tel %>" >
+          <label>电话</label><input id="tel" value="" >
         </div>
         <div class="t-input">
-          <label>方向</label><input id="topic" value="<%= topic %>" >
+          <label>方向</label><input id="topic" value="" >
         </div>
         <div class="t-input">
-          <label>区域</label><input id="job_type" value="<%= job_type %>" >
+          <label>区域</label><input id="job_type" value="" >
         </div>
         <div class="t-input">
-          <label>头像</label><input id="title" value="<%= title %>" >
+          <label>头像</label><input id="title" value="" >
         </div>
         <div class="t-input">
-          <label>描述</label><textarea id="description" ><%= description %></textarea>
+          <label>描述</label><textarea id="description" ></textarea>
         </div>
         <div class="t-btn" style="margin-top:0;padding-left:60px;">
           <span id="btn_commit" class="btn btn-primary">提交</span>

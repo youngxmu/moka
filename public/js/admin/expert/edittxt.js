@@ -11,6 +11,7 @@
 		},
 		init : function() {
 			_this.articleId = $('#article_id').val();
+			_this.expert_id = $('#expert_id').val();
 			_this.tpl.menuListTpl = juicer($('#menu_list_tpl').html());
 			var $span = $('.u-select-p').find('span');
 			if($span.length == 0){
@@ -98,9 +99,10 @@
 			var content = _this.editor.getValue();
 			var title = $('#title').val();
 			var author = $('#author').val();
-			var url = 'admin/article/save';
+			var url = 'admin/expert/result/save';
 			
 			var postData = {
+				expert_id : _this.expert_id,
 				title : title,
 				author : author,
 				content : content,

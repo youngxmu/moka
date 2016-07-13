@@ -16,7 +16,7 @@
 			}
 		},
 		init : function() {
-			$('#hd_menu_resource').addClass('current');
+			// $('#hd_menu_resource').addClass('current');
 			_this.initEvent();
 			_this.initTopic();
 		},
@@ -32,6 +32,7 @@
 				zTree.expandAll(false);
 				$(this).removeClass('shrink').addClass('unfold').text('展开');
 			});
+
 			$('body').on('keydown','#keyword',function(e){
 		        var event = window.event || e;
 		        if(event.keyCode == 13){
@@ -39,6 +40,7 @@
 					_this.searchResource();
 		        }
 		    });
+		    
 			$('#btn_search').click(function(){
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
@@ -61,7 +63,6 @@
 			var list = data.data.list;
 			for(var index in list){
 				var menu = list[index];
-				// menu['pId'] = menu.parent_id;
 				_this.topicNodes.push(menu);
 			}
 			_this.initTree();

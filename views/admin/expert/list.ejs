@@ -11,7 +11,7 @@
   	<div class="container">
       <div class="main">
         <div class="top-bar">
-          <span id="btn_add" class="btn btn-primary">添加专家</span>
+          <a href="admin/expert/add" class="btn btn-primary">添加专家</a>
         </div>
         <div id="expert_list"></div>
         <div id="pagebar"></div>
@@ -39,7 +39,7 @@
       <div class="desc">${obj.description}</div>
       <div class="oper">
         <span data-id="${obj.id}" ><a href="expert/detail/${obj.id}" target="_blank">查看</a></span>
-        <span data-id="${obj.id}" class="edit">编辑</span>
+        <span data-id="${obj.id}" ><a href="admin/expert/edit/${obj.id}" target="_blank">编辑</a></span>
         <span data-id="${obj.id}" class="del">删除</span>
       </div>
     </div>

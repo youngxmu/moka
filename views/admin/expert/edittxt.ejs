@@ -7,8 +7,10 @@
     <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
   </head>
   <body>
+    <input type="hidden" id="expert_id" value="<%= expert_id %>">
     <% if(typeof id != 'undefined'){%>
       <input type="hidden" id="article_id" value="<%= id %>">
+      
     <% } %> 
     <%- include ../common/header.ejs %>
   	<div class="container">
@@ -46,7 +48,7 @@
 	<script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
 	<script type="text/javascript" src="simditor/scripts/uploader.js"></script>
 	<script type="text/javascript" src="simditor/scripts/simditor.js"></script>
-	<script type="text/javascript" src="js/admin/article/edit.js"></script>
+	<script type="text/javascript" src="js/admin/expert/edittxt.js"></script>
   <script type="text/template" id="menu_list_tpl">
   {@each list as menu}
   <option value="${menu.id}">${menu.name}</option>

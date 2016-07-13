@@ -85,7 +85,7 @@ router.post('/save', function (req, res) {
     var mid = req.body.mid;//明文
     var fileName = req.body.fileName;//明文
     var description = req.body.description;//明文
-    var type = 2;//resource
+    var type = commonUtils.getFileType(fileName);
     var user = req.session.user;
     if(!user){
         return res.json({
