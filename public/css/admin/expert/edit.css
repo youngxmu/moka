@@ -1,8 +1,9 @@
 .container{padding-top: 15px;padding-bottom: 32px;}
 .main{padding-top: 10px;}
 
-.t-input{font-size: 0;line-height: 32px;margin-bottom: 10px;}
+.t-input{font-size: 16px;line-height: 32px;margin-bottom: 10px;}
 .t-input input{line-height: 32px;border: 1px solid #cccccc; width: 838px;font-size: 18px;padding: 0 10px;}
+.t-input input[type=radio]{width:50px;}
 .t-input textarea{line-height: 32px;border: 1px solid #cccccc; width: 838px;font-size: 18px;padding: 0 10px;resize: vertical;
 	height: 300px;
 }
@@ -59,7 +60,7 @@
 }
 
 
-.t-dinput{font-size: 0;line-height: 32px;margin-bottom: 10px;}
+.t-dinput{font-size: 16px;line-height: 32px;margin-bottom: 10px;}
 .t-dinput input{line-height: 32px;border: 1px solid #cccccc; width: 360px;font-size: 18px;padding: 0 10px;}
 
 .t-dinput label{
@@ -68,6 +69,8 @@
   *display: inline;font-size: 18px;
   vertical-align: top;
 }
+
+.t-dinput input[type=radio]{width:50px;}
 
 
 .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #333;}
