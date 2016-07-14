@@ -4,7 +4,9 @@ html,body{height: 100%; width: 100%;
 .clear{
     clear:both;
 }
-
+.container{
+  min-height: 80%;
+}
 ul{padding: 0;}
 
 body{}

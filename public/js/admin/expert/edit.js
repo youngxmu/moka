@@ -36,6 +36,9 @@
 			$('#btn_commit').on('click', _this.commit);
 			$('body').on('click', '.nav-tabs li', _this.changeType);
 			$('body').on('click', '.oper .del',_this.onDel);
+			$('body').on('click', '#add_result', function(){
+				window.open('admin/expert/result/add/' + _this.expertId + '?type=' + _this.queryData.type);				
+			});
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -70,14 +73,15 @@
 			$inputs.each(function(){
 				var $this = $(this);
 				var key = $this.attr('name');
-				
 				var value = $this.val();
-				data[key] = value;
-				console.log(key + " " + value);
+				if($this.attr('type') == 'radio'){
+					if($this.is(':checked')){
+						data[key] = value;		
+					}
+				}else{
+					data[key] = value;	
+				}
 			});
-			console.log(data);
-
-
 			if(_this.expertId != null){
 				data.id = _this.expertId;
 			}
@@ -223,7 +227,7 @@
 							});
 							
 							$('#avatar').val(_this.fileName);
-							$('#btn_upload').html('<img src="' + _this.filePath + '">');
+							$('#btn_upload').html('<img src="' + _this.filePath + '" class="img-thumbnail">');
 						}
 					},
 					FilesAdded : function(up, file) {

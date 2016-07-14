@@ -8,9 +8,11 @@
   </head>
   <body>
     <input type="hidden" id="expert_id" value="<%= expert_id %>">
+    <% if(typeof type != 'undefined'){%>
+      <input type="hidden" id="type" value="<%= type %>">
+    <% } %> 
     <% if(typeof id != 'undefined'){%>
       <input type="hidden" id="article_id" value="<%= id %>">
-      
     <% } %> 
     <%- include ../common/header.ejs %>
   	<div class="container">

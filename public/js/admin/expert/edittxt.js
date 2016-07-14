@@ -12,6 +12,8 @@
 		init : function() {
 			_this.articleId = $('#article_id').val();
 			_this.expert_id = $('#expert_id').val();
+			_this.type = $('#type').val();
+
 			_this.tpl.menuListTpl = juicer($('#menu_list_tpl').html());
 			var $span = $('.u-select-p').find('span');
 			if($span.length == 0){
@@ -106,6 +108,7 @@
 				title : title,
 				author : author,
 				content : content,
+				type : _this.type,
 				mid : mid
 			};
 

@@ -189,7 +189,7 @@ exports.insertExpertResult = function (expert_id, title, article_id, type, conte
 };
 
 exports.updateExpertResult = function (expert_id, title, article_id, type, callback) {
-    var sql = 'update expert_result set title = ?, type = ?, where expert_id = ? and article_id = ? ;';
+    var sql = 'update expert_result set title = ?, type = ? where expert_id = ? and article_id = ? ;';
     db.query(sql, [title, type, expert_id, article_id,new Date()],
         function (err, result) {
             callback(err, result);

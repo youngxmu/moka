@@ -46,7 +46,9 @@ router.post('/list', function (req, res, next) {
                 });
             } else {
                 for(var index in result){
-                    result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                    if(result[index].birthday && result[index].birthday != '0000-00-00'){
+                        result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                    }
                 }
                 res.json({
                     success: true,
@@ -184,7 +186,9 @@ router.post('/job', function (req, res, next) {
                 });
             } else {
                 for(var index in result){
-                    result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                    if(result[index].birthday && result[index].birthday != '0000-00-00'){
+                        result[index].birthday =  commonUtils.formatShortDate(result[index].birthday);
+                    }
                 }
                 res.json({
                     success: true,

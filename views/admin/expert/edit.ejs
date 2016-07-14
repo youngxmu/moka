@@ -8,6 +8,7 @@
   </head>
   <body>
   	<input type="hidden" id="expertId" value="<%= id %>">
+    <%- include ../common/header.ejs %>
     <div class="container">
       <ul class="nav nav-tabs">
         <li role="presentation" data-type="1" class="active"><a href="javascript:void(0);">基本情况</a></li>
@@ -24,7 +25,7 @@
           女<input name="gender" type="radio" value="女" <%if(gender == '女'){%>checked=checked<%}%>>
         </div>
         <div class="t-dinput">
-          <label>生日</label><input name="birthday" value="<%= birthday %>" style="margin-right:58px;">
+          <label>生日</label><input id="birthday" name="birthday" value="<%= birthday %>" style="margin-right:58px;">
         </div>
         <div class="t-dinput">
           <label>电话</label><input name="tel" value="<%= tel %>" >
@@ -47,8 +48,7 @@
         <div class="avatar-panel">
           <label>头像</label><input id="avatar" name="avatar" value="<%= avatar %>" type="hidden" >
           <div id="btn_upload" class="avatar-view">
-            <% if(typeof avatar != 'undefined'){%><img src="<%= avatar %>"><% } %>
-
+            <% if(typeof avatarView != 'undefined'){%><img src="<%= avatarView %>" class="img-thumbnail"><% } %>
           </div>
         </div>
         <div class="t-input">
@@ -59,6 +59,7 @@
         </div>
       </div>
       <div id="list_panel" class="main" style="display:none;">
+        <span id="add_result" class="btn btn-primary add-result">添加成果</span>
         <table class="table table-striped" style="font-size:14px;">
             <thead>
               <tr>

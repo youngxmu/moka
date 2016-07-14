@@ -14,9 +14,8 @@ router.get('/img', function(req, res) {
 //uri: upload/img
 router.post('/img', function(req, res, next) {
 	var files = req.files.file;
-	console.log(req.files);
 	var file = files[0];//?req.files.file[0]:req.files.profile[0];
-	var filePath = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
+	var filePath = file.path.replace(config.uploadDir, config.imgHost + '/uploads'); 
 	var index = filePath.lastIndexOf('/');
 	var fileName = filePath.substr(index + 1);
 	res.json({
@@ -31,7 +30,7 @@ router.post('/img', function(req, res, next) {
 router.post('/file', function(req, res, next) {
 	var files = req.files.file;
 	var file = files[0];//?req.files.file[0]:req.files.profile[0];
-	var filePath = file.path.replace(config.uploadDir +'\\', config.imgHost + '/uploads/'); 
+	var filePath = file.path.replace(config.uploadDir, config.imgHost + '/uploads'); 
 	var index = filePath.lastIndexOf('/');
 	var fileName = filePath.substr(index + 1);
 	res.json({

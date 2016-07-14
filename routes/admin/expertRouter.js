@@ -96,7 +96,7 @@ router.get('/detail/:id', function (req, res, next) {
         expertModel.getExpertById(id, function (err, result) {
             if (!err && result) {
                 var expert = result;
-                expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
+                expert.avatarView = config.imgHost + '/uploads/' + expert.avatar;
                 res.render('admin/expert/detail', expert);
             } else {
                 res.render('error', {
@@ -108,9 +108,22 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
-
 router.get('/add', function (req, res) {
-    res.render('admin/expert/add');
+    var expert = {
+        id : '',
+        name : '',
+        gender : '',
+        birthday : '',
+        tel : '',
+        title : '',
+        topic : '',
+        job_type : '',
+        unit : '',
+        address : '',
+        avatar : '',
+        description : ''
+    }
+    res.render('admin/expert/edit', expert);
 });
 
 //根据专家id查询
@@ -130,7 +143,8 @@ router.get('/edit/:id', function (req, res, next) {
                     expert.birthday = commonUtils.formatShortDate(expert.birthday);    
                 }
                 
-                expert.avatar = config.imgHost + '/uploads/' + expert.avatar;
+                expert.avatarView = config.imgHost + '/uploads/' + expert.avatar;
+
                 res.render('admin/expert/edit', expert);
             } else {
                 res.render('error', {
@@ -173,7 +187,7 @@ router.post('/save', function (req, res) {
     }
     
     
-    if(id == null || id == undefined){
+    if(id == '' || id == null || id == undefined){
         expertModel.insertExpert(name,gender,birthday,title,unit,address,tel,avatar,description,topic,video,poster,job_type, function (err, data) {
             if (!err) {
                 res.json({
@@ -301,8 +315,8 @@ router.post('/result/save', function (req, res) {
     
     if(id == null || id == undefined){
         articleModel.insertArticle(title, author, content, 1, mid, admin.id, fileName, type, description,function (err, data) {
-            if (!err && data.length > 0) {
-                var article_id = data[0].insertId;
+            if (!err) {
+                var article_id = data.insertId;
                 expertModel.insertExpertResult(expert_id, title, article_id, result_type, type, function(err){
                     if(err){
                         console.log(err);
@@ -318,6 +332,7 @@ router.post('/result/save', function (req, res) {
                     });
                 });
             } else {
+                console.log(err);
                 res.json({
                     success: false,
                     msg: "创建失败"

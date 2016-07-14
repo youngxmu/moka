@@ -12,7 +12,7 @@
 	color: #333
 }
 
-.expert-info{padding: 0 15px;}
+.expert-info{padding: 0 15px;font-size: 14px;}
 .expert-info-left{width: 220px;margin-right: 20px;display: inline-block;vertical-align: top;}
 .expert-info-right{width: 700px;display: inline-block;}
 
@@ -34,12 +34,14 @@
 	display: none;
 	padding: 15px;
 	width: 1000px;
+	font-size: 14px;
 }
 
 .jx{
 	display: none;
 	padding: 15px;
 	width: 1000px;
+	font-size: 14px;
 }
 
 

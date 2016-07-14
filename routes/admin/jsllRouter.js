@@ -96,8 +96,8 @@ router.post('/save', function (req, res) {
     
     if(id == null || id == undefined){
         articleModel.insertArticle(title, author, content, 1, mid, user.id, fileName, type, description,function (err, data) {
-            if (!err && data.length > 0) {
-                var res_id = data[0].insertId;
+            if (!err && data) {
+                var res_id = data.insertId;
                 var sys_type = 'article';
                 content_type = type;
                 articleModel.insertResource(res_id,sys_type,title,content_type, function(err){

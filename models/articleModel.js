@@ -1,6 +1,7 @@
 var db = require('../lib/db.js');
 var logger = require("../lib/log.js").logger("articleModel");
 var commonUtils = require("../lib/utils.js");
+var config = require("../config");
 
 exports.queryArticles = function (status, menu_id, start, pageSize, callback) {
     var sql = 'select * from article where 1=1 ';
@@ -186,6 +187,7 @@ exports.updateArticle = function (id, title, author, content, status, menu_id, a
     sql += ',menu_id = ? ';
     params.push(menu_id);
     if(file_name){
+        file_name = file_name.replace(config.imgHost + '/uploads/', '');
         sql += ',file_name = ? ';
         params.push(file_name);    
     }

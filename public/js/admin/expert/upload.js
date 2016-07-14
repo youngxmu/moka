@@ -13,6 +13,7 @@
 			_this.articleId = $('#article_id').val();
 			_this.fileName = $('#file_name').val();
 			_this.expert_id = $('#expert_id').val();
+			_this.type = $('#type').val();
 			_this.tpl.menuListTpl = juicer($('#menu_list_tpl').html());
 			var $span = $('.u-select-p').find('span');
 			if($span.length == 0){
@@ -161,7 +162,7 @@
 			var url = 'admin/expert/result/save';
 			
 			var fileName = _this.fileName;
-			if(fileName.indexOf('/uploads/') != -1){
+			if(fileName && fileName.indexOf('/uploads/') != -1){
 				fileName = fileName.split('/uploads/')[1];
 			}
 			var postData = {
@@ -170,6 +171,7 @@
 				author : author,
 				description : description,
 				fileName : _this.fileName,
+				type : _this.type,
 				mid : mid
 			};
 
