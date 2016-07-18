@@ -69,6 +69,32 @@ router.get('/detail', function (req, res, next) {
     });
 });
 
+
+//根据试卷id查询
+router.get('/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.user ? true : false;
+    if(id == null || id == undefined){
+        res.render('error', {
+            success: false,
+            msg: "根据id查询试卷出错"
+        });
+    }else{
+        paperModel.getPaperById(id, function (err, result) {
+            if (!err && result) {
+                var paper = result;
+                res.render('user/paper/detail', paper);
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询试卷出错"
+                });
+            }
+        });
+    }
+});
+
+
 router.get('/exam/:id', function (req, res, next) {
     var id = req.params.id;
     var startTime = new Date().getTime();
@@ -160,11 +186,27 @@ router.get('/exam/:id', function (req, res, next) {
         }
 
     });
-    
-    
 });
 
+router.get('/history/list', function (req, res, next) {
+    res.render('user/paperhistory/list');
+});
 
+//根据试卷id查询
+router.get('/history/detail/:id', function (req, res, next) {
+    var id = req.params.id;
+    paperModel.getPaperHistoryById(id, function (err, result) {
+        if (!err && result) {
+            var paper = result;
+            res.render('user/paperhistory/detail', paper);
+        } else {
+            res.render('error', {
+                success: false,
+                msg: "根据id查询试卷出错"
+            });
+        }
+    });
+});
 
 
 //根据”创建渠道“和”是否虚拟“查询试卷
@@ -204,8 +246,6 @@ router.post('/list', function (req, res, next) {
         });
     });
 });
-
-
 
 //根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/examlist', function (req, res, next) {
@@ -281,31 +321,6 @@ router.post('/detail/:id', function (req, res, next) {
 });
 
 
-
-//根据试卷id查询
-router.get('/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
-    if(id == null || id == undefined){
-        res.render('error', {
-            success: false,
-            msg: "根据id查询试卷出错"
-        });
-    }else{
-        paperModel.getPaperById(id, function (err, result) {
-            if (!err && result) {
-                var paper = result;
-                res.render('user/paper/detail', paper);
-            } else {
-                res.render('error', {
-                    success: false,
-                    msg: "根据id查询试卷出错"
-                });
-            }
-        });
-    }
-});
-
 //创建试卷
 router.post('/commit', function (req, res) {
     var pid = req.body.id;
@@ -360,9 +375,7 @@ router.post('/commit', function (req, res) {
 });
 
 
-router.get('/history/list', function (req, res, next) {
-    res.render('user/paperhistory/list');
-});
+
 
 
 //根据”创建渠道“和”是否虚拟“查询试卷
@@ -460,29 +473,10 @@ router.post('/history/detail/:id', function (req, res, next) {
               });
           }
       });
-
-        
 });
 
 
 
-//根据试卷id查询
-router.get('/history/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-
-        console.log(id);
-        paperModel.getPaperHistoryById(id, function (err, result) {
-            if (!err && result) {
-                var paper = result;
-                res.render('user/paperhistory/detail', paper);
-            } else {
-                res.render('error', {
-                    success: false,
-                    msg: "根据id查询试卷出错"
-                });
-            }
-        });
-});
 
 
 module.exports = router;
