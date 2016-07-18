@@ -2,7 +2,7 @@
 .sidebar {width: 80px;
 	padding: 0;
 	display: inline-block;
-	font-size: 12px;
+	font-size: 16px;
 	min-height: 500px;
 	border-right: 1px solid #cccccc;
 	vertical-align: top;
@@ -57,10 +57,10 @@
 
 
 .info-content{}
-.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #f6f6f6;}
+.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #f6f6f6;font-size:16px;}
 .main .res-list:last-child{border-bottom: 0;}
-.main .res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
-.main .res-list-title span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;text-align: center;}
+.main .res-list span{width: 150px;display: inline-block;vertical-align: top;}
+.main .res-list-title span{width: 150px;display: inline-block;vertical-align: top;text-align: center;}
 .main .res-list-title span:nth-child(1){width:60px;}
 .main .res-list-title span:nth-child(2){width:649px;}
 .main .res-list-title span:nth-child(3){width:150px;}

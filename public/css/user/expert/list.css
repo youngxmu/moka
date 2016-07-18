@@ -1,7 +1,5 @@
 /** 主页面 */
-.container{width: 1000px;}
 .main{color: #ffffff;}
-
 .nav{margin-bottom: 15px;}
 .nav li  a{
   color: #ffffff
@@ -29,11 +27,9 @@
 }
 
 
-.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
-
-
 .expert-list-title{line-height: 40px; height: 40px;}
-.expert-list-title div{display: inline-block;text-align: center;font-size: 14px;
+.expert-list-title div{
+  display: inline-block;text-align: center;font-size: 14px;
   white-space: nowrap;text-overflow:ellipsis;
   overflow: hidden;
   vertical-align: top;
