@@ -3,8 +3,6 @@ var config = require("../config");
 var logger = require("../lib/log.js").logger("indexRouter");
 var commonUtils = require("../lib/utils.js");
 var menuUtils = require("../lib/menuUtils.js");
-
-
 var articleModel = require('../models/articleModel.js');
 var infoModel = require('../models/infoModel.js');
 var paperModel = require('../models/paperModel.js');
@@ -14,13 +12,11 @@ var menuModel = require('../models/menuModel.js');
 var resourceModel = require('../models/resourceModel.js');
 
 
-
 var router = express.Router();
 
 router.get('', function (req, res, next) {
     res.render('index/index');
 });
-
 
 router.post('/news', function (req, res, next) {
     newsModel.queryNewsList(function(err, results){
@@ -206,8 +202,8 @@ var listData = {
     },
     science : {
         link : 'index/data/science',
-        title : '数字资源',
-        subtitle : '学术成果',
+        title : '学术成果',
+        // subtitle : '学术成果',
         keyword : '学术 成果',
         mid : 100406
     }

@@ -42,7 +42,7 @@
       <span class="res-title">
         <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
-      <span>${resource.author}</span>
+      <span>{@if resource.author}${resource.author}{@else}admin{@/if}</span>
       <span>${resource.create_time}</span>
     </div>
     {@/each}
@@ -54,7 +54,7 @@
       <span class="res-title">
         <a href="article/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
-      <span>${resource.author}</span>
+      <span>{@if resource.author}${resource.author}{@else}admin{@/if}</span>
       <span>${resource.create_time}</span>
     </div>
     {@/each}

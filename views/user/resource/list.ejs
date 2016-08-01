@@ -10,7 +10,9 @@
     <div class="bg">
       <%- include ../common/header.ejs %>
       <input id="search_title" value="<%= keyword %>" type="hidden" >
-    	<div class="container">
+    	
+
+      <div class="container">
         <div class="sidebar">
           <ul class="type-panel">
             <li data-type="1">
@@ -42,6 +44,7 @@
     <div class="res-list">
       <span class="res-type">类型</span>
       <span class="res-title">标题</span>
+      <span>作者</span>
       <span>时间</span>
     </div>
     {@each list as resource}
@@ -50,6 +53,7 @@
       <span class="res-title">
         <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
+      <span>{@if resource.author}${resource.author}{@/if}{@if !resource.author}admin{@/if}</span>
       <span>${resource.create_time}</span>
     </div>
     {@/each}

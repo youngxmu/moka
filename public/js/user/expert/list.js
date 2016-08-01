@@ -10,7 +10,7 @@
 		},
 		queryData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function() {
 			_this.tpl.expertListTpl = juicer($('#expert-list-tpl').html());
@@ -28,7 +28,7 @@
 				$target.show();
 				_this.queryData = {
 					pageNo : 1,
-					pageSize : 15
+					pageSize : 10
 				};
 				$('#expert_list').html('');
 				$('#pagebar').html('');

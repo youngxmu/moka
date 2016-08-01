@@ -29,7 +29,7 @@
           <span class="res-title">标题</span>
           <span>作者</span>
           <span>时间</span>
-          <span>操作</span>
+          <span></span>
         </div>
         <div id="top_list" style="border-bottom: 1px dashed #cccccc;"></div>
         <div id="resource_list"></div>
@@ -44,7 +44,7 @@
       <span class="res-title">
         <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
-      <span>${resource.author}</span>
+      <span>{@if resource.author}${resource.author}{@else}admin{@/if}</span>
       <span>${resource.create_time}</span>
       <span><em class="label label-danger">置顶</em></span>
     </div>
@@ -59,7 +59,7 @@
       <span class="res-title">
         <a href="resource/detail/${resource.id}" target="_blank">${resource.title}</a>
       </span>
-      <span>${resource.author}</span>
+      <span>{@if resource.author}${resource.author}{@else}admin{@/if}</span>
       <span>${resource.create_time}</span>
       <span></span>
     </div>
@@ -71,7 +71,6 @@
     <script>
       if($('#title').val() == '学术成果' ){
         $('#nav_science').addClass('active');  
-        
       }else{
         $('#nav_res').addClass('active');  
       }

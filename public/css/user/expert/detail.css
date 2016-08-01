@@ -30,16 +30,16 @@
 
 .xs{
 	display: none;
-	padding: 15px;
+	padding: 0 15px;
 	width: 1000px;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .jx{
 	display: none;
-	padding: 15px;
+	padding: 0 15px;
 	width: 1000px;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 
@@ -92,8 +92,8 @@
 
 .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #f6f6f6;}
 .res-list:last-child{border-bottom: 0;}
-.res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
-.res-list-title span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;text-align: center;}
+.res-list span{width: 150px;display: inline-block;vertical-align: top;}
+.res-list-title span{width: 150px;display: inline-block;vertical-align: top;text-align: center;}
 .res-list-title span:nth-child(1){width:50px;}
 .res-list-title span:nth-child(2){width:750px;}
 .res-list-title span:nth-child(3){width:150px;}

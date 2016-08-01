@@ -10,11 +10,11 @@
 		},
 		queryXSData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		queryJXData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function() {
 			// _this.tpl.resultListTpl = juicer($('#expert-det-tpl').html());

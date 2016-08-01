@@ -112,19 +112,3 @@ padding-top: 10px;}
 
 
 
-.ico {background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: inline-block;
-}
-.ico-video {
-  background-image: url('../img/ico/ico-video.png');
-}
-.ico-doc {background-image: url('../img/ico/ico-word.png');}
-.ico-pic {background-image: url('../img/ico/ico-pic.png');}
-.ico-pdf {background-image: url('../img/ico/ico-pdf.png');}
-.ico-txt {background-image: url('../img/ico/ico-txt.png');}
-.ico-mp3 {background-image: url('../img/ico/ico-mp3.png');}
-.ico-ppt {background-image: url('../img/ico/ico-ppt.png');}
-
-

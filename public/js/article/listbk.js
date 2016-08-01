@@ -10,7 +10,7 @@
 		},
 		queryData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function() {
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());

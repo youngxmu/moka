@@ -15,7 +15,7 @@
 		},
 		queryData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function() {
 			_this.tpl.menuTpl = juicer($('#menu_tpl').html());

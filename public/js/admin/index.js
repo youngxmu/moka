@@ -10,7 +10,7 @@
 		data : {
 			userMap : {},
 			searchData : {
-				pageSize : 15,
+				pageSize : 10,
 				pageNo : 1	
 			}
 		},

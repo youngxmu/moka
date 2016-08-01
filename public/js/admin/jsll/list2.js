@@ -13,7 +13,7 @@
 			initCallback : null,
 			searchData : {
 				pageNo : 1,
-				pageSize : 15
+				pageSize : 10
 			}
 		},
 		init : function() {

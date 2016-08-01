@@ -11,7 +11,7 @@
 		},
 		queryData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function(){
 			_this.tpl.userListTpl = juicer($('#user_list_tpl').html());
@@ -22,7 +22,7 @@
 			$('#btn_search').click(function(){
 				_this.queryData = {
 					pageNo : 1,
-					pageSize : 15
+					pageSize : 10
 				};
 
 				if($('#user_id').val()){

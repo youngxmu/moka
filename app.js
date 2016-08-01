@@ -39,7 +39,7 @@ app.use(expressSession({
 //app.use(csrf());
 app.use(express.static(config.staticPath));
 
-if(config.env!='devv'){//开发环境不需要过滤
+if(config.env!='dev'){//开发环境不需要过滤
 
 
 

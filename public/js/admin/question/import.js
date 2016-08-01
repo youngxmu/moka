@@ -16,7 +16,7 @@
 		},
 		queryData : {
 			pageNo : 1,
-			pageSize : 15
+			pageSize : 10
 		},
 		init : function(options) {
 			_this.tpl.dlgTpl = juicer(_this.tpl.dlgTpl);
