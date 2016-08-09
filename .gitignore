@@ -3,3 +3,5 @@ node_modules/
 .idea
 logs/*.log*
 public/uploads/*
+public/jsjn/JPG/*
+public/jsjn/PNG/*

@@ -1,7 +1,7 @@
 nc.c1 = {
 	menu : {
 		top : '01148[225x60x8BPP]',//c1
-		rightTop : '前言01149[533x49x8BPP]',
+		rightTop : '01149[533x49x8BPP]',
 		jie : [
 			{
 				'default' 	: '00065[208x56x8BPP]',
