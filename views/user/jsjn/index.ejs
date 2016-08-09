@@ -21,8 +21,25 @@
                   <ul id="sub_menu_bar" class="res-menu"></ul>
                 </div>
                 <div id="sub_menu_content" class="main"></div>
-                <div id="sub_footer" class="sub-footer">
+                <div class="sub-footer">
+                  <span class="sub-back"></span>
+                  <span class="sub-exit"></span>
+                </div>
+            </div>
 
+            <div id="detail_sys" class="wrapper detail-sys" >
+                <div id="detail_menu_bar" class="sidebar">
+                  
+                </div>
+                <div id="detail_menu_content" class="main"></div>
+                <div class="detail-footer">
+                  <span class="detail-exit"></span>
+                  <span class="detail-page-first"></span>
+                  <span class="detail-page-pre"></span>
+                  <span class="detail-page-next"></span>
+                  <span class="detail-page-last"></span>
+                  <span class="detail-page-go"></span>
+                  <span class="detail-back"></span>
                 </div>
             </div>
         </div>
@@ -41,17 +58,43 @@
       </div>
       <div class="main-list">
         <ul class="main-menu-list">
-          {@each jie as obj}
+          {@each menu as obj, index}
           <li data-type="${sysType}" data-index="${index}" style="${obj.def|getImgStyle}">
             <img class="def" src="jsjn/png/${obj.def}.png">
             <img class="hover" src="jsjn/png/${obj.hover}.png">
           </li>
           {@/each}
         </ul>
-        
       </div>
     </script>
 
+    <script type="text/template" id="detail-menu-tpl">
+    <ul class="res-menu">
+    <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+    {@each jie as obj, index}
+    <li data-index="${index}" style="${obj.def|getImgStyle}">
+      <img class="def" src="jsjn/png/${obj.def}.png">
+      <img class="hover" src="jsjn/png/${obj.hover}.png">
+      <img class="active" src="jsjn/png/${obj.active}.png">
+    </li>
+    {@/each}
+    </ul>
+    </script>
+    
+    <script type="text/template" id="detail-content-tpl">
+      <div class="detail-title">
+        <img style="${rightTop|getImgStyle}" src="jsjn/png/${rightTop}.png">
+      </div>
+      <div class="detail-main-list">
+        <ul class="content-list">
+          {@each content as obj, index}
+          <li class="content" data-index="${index}" style="${obj.def|getImgStyle}">
+            <img class="def" src="jsjn/png/${obj.def}.png">
+          </li>
+          {@/each}
+        </ul>
+      </div>
+    </script>
 
     <script type="text/javascript" src="js/user/jsjn/nc.js"></script>
     <script type="text/javascript" src="js/user/jsjn/c1.js"></script>

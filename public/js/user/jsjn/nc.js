@@ -82,7 +82,17 @@ var nc = {
 				]
 			}
 		}
-	]
+	],
+	sub : {
+		exit : {
+			'def' 	: '00041[151x42x8BPP]',
+			'hover'	: '00042[151x42x8BPP]'
+		},
+		back : {
+			'def' 	: '00037[151x42x8BPP]',
+			'hover'	: '00038[151x42x8BPP]'
+		}
+	}
 };
 
 nc.xxrj = {

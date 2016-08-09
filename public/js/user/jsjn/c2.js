@@ -1,12 +1,12 @@
-nc.c2 = {
+nc.xxrj.c2 = {
 	menu : {
 		top : '01203[225x60x8BPP]',//c1
 		rightTop : '01204[533x49x8BPP]',
 		jie : [
 			{
-				'default' 	: '00065[208x56x8BPP]',
-				'hover'		: '00066[208x56x8BPP]',
-				'active'	: '00066[208x56x8BPP]',
+				'def' 	: '00018[218x45x8BPP]',
+				'hover'		: '00019[218x45x8BPP]',
+				'active'	: '00020[218x45x8BPP]',
 				'content'	: [
 					'01205[680x439x8BPP]',
 					'01206[680x439x8BPP]',
@@ -26,9 +26,9 @@ nc.c2 = {
 				]
 			},
 			{
-				'default' 	: '00065[208x56x8BPP]',
-				'hover'		: '00066[208x56x8BPP]',
-				'active'	: '00066[208x56x8BPP]',
+				'def' 	: '00026[218x45x8BPP]',
+				'hover'		: '00027[218x45x8BPP]',
+				'active'	: '00028[218x45x8BPP]',
 				'content'	: [
 					'01231[680x439x8BPP]',
 					'01232[680x439x8BPP]',
@@ -44,9 +44,9 @@ nc.c2 = {
 				]
 			},
 			{
-				'default' 	: '00065[208x56x8BPP]',
-				'hover'		: '00066[208x56x8BPP]',
-				'active'	: '00066[208x56x8BPP]',
+				'def' 	: '00023[218x45x8BPP]',
+				'hover'		: '00024[218x45x8BPP]',
+				'active'	: '00025[218x45x8BPP]',
 				'content'	: [
 					'01220[680x439x8BPP]',
 					'01221[680x439x8BPP]',
@@ -62,9 +62,9 @@ nc.c2 = {
 				]
 			},
 			{
-				'default' 	: '00065[208x56x8BPP]',
-				'hover'		: '00066[208x56x8BPP]',
-				'active'	: '00066[208x56x8BPP]',
+				'def' 	: '00029[218x45x8BPP]',
+				'hover'		: '00030[218x45x8BPP]',
+				'active'	: '00031[218x45x8BPP]',
 				'content'	: [
 					'01242[680x439x8BPP]',
 					'01243[680x439x8BPP]',

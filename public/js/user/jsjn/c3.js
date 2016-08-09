@@ -1,4 +1,4 @@
-nc.c3 = {
+nc.xxrj.c3 = {
 	[
 		'队列',
 		'军体拳',
@@ -12,7 +12,7 @@ nc.c3 = {
 
 /**
 {
-			'default' 	: '',
+			'def' 	: '',
 			'hover'		: '',
 			'content'	: '',
 		}
@@ -20,22 +20,22 @@ nc.c3 = {
 nc.c3.jtq = {
 	menu : [
 		{
-			'default' 	: '00065[208x56x8BPP]',
+			'def' 	: '00065[208x56x8BPP]',
 			'hover'		: '00066[208x56x8BPP]',
 			'content'	: '00067[567x270x8BPP]',
 		},
 		{
-			'default' 	: '00087[208x56x8BPP]',
+			'def' 	: '00087[208x56x8BPP]',
 			'hover'		: '00088[208x56x8BPP]',
 			'content'	: '00082[583x290x8BPP]',
 		},
 		{
-			'default' 	: '',
+			'def' 	: '',
 			'hover'		: '',
 			'content'	: '00083[583x290x8BPP]',
 		},
 		{
-			'default' 	: '',
+			'def' 	: '',
 			'hover'		: '',
 			'content'	: '00081[583x290x8BPP]',
 		}
@@ -53,7 +53,7 @@ nc.c3.jtq.sub = [
 			p1 : {
 				menu : [
 					{
-						'default' 	: '00065[208x56x8BPP]',
+						'def' 	: '00065[208x56x8BPP]',
 						'hover'		: '00066[208x56x8BPP]',
 						'content'	: '00067[567x270x8BPP]',
 					},
@@ -73,7 +73,7 @@ nc.c3.jtq.sub = [
 			top : '00048[225x60x8BPP]',
 			p1 : [
 				{
-					'default' 	: '00065[208x56x8BPP]',
+					'def' 	: '00065[208x56x8BPP]',
 					'hover'		: '00066[208x56x8BPP]',
 					'content'	: '00067[567x270x8BPP]',
 				},
@@ -87,7 +87,7 @@ nc.c3.jtq.sub = [
 
 nc.c3.jtq.details = {
 	70 : {
-		'default' 	: '00070[218x39x8BPP]',
+		'def' 	: '00070[218x39x8BPP]',
 		'hover'		: '00071[218x39x8BPP]',
 		'active'	: '00072[218x39x8BPP]',
 		'content' 	: '00075[381x479x8BPP]'.
