@@ -1,0 +1,168 @@
+.detail-sys{
+	width: 1024px;
+	height: 768px;
+	background-image: url(../../../jsjn/JPG/00003[1024x768x24BPP].jpg);
+	background-size: 100%;
+	background-position: center;
+	padding-top: 155px;
+	display: none;
+}
+
+.detail-footer{
+	position: absolute;
+	bottom: 36px;
+	width: 100%;
+	text-align: right;
+	padding-right: 206px;
+}
+.detail-footer span{display: inline-block;}
+
+.detail-exit{
+	width: 114px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00039[114x38x8BPP].png);
+	background-size: 114px 38px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+	float: left;
+}
+.detail-exit:hover{
+	background-image: url(../../../jsjn/png/00040[114x38x8BPP].png);
+}
+.detail-page-first{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00021[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+.detail-page-first:hover{background-image: url(../../../jsjn/png/00022[100x48x8BPP].png);}
+.detail-page-pre{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00002[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+.detail-page-pre:hover{background-image: url(../../../jsjn/png/00003[100x48x8BPP].png);}
+.detail-page-next{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00004[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+.detail-page-next:hover{background-image: url(../../../jsjn/png/00005[100x48x8BPP].png);}
+.detail-page-last{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00012[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+.detail-page-last:hover{background-image: url(../../../jsjn/png/00013[100x48x8BPP].png);}
+.detail-back{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00033[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+.detail-back:hover{
+	background-image: url(../../../jsjn/png/00034[100x48x8BPP].png);
+}
+
+.detail-page-go{
+	width: 100px;
+	height: 48px;
+	background-image: url(../../../jsjn/png/00032[100x48x8BPP].png);
+	background-size: 100px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: inline-block;cursor: pointer;
+}
+
+.detail-page-go input{
+	width: 28px;
+	height: 28px;
+	margin: 10px 0 0 42px;
+	border: 1px solid #000000;
+	text-align: center;
+	font-size: 12px;
+	float: left;
+}
+
+.detail-sys .sidebar {
+	width: 224px;
+    padding: 0;
+    display: inline-block;
+    font-size: 14px;
+    height: 500px;
+    border: 1px solid #000000;
+    margin: 0 10px;
+}
+
+.detail-sys .sidebar .top{
+	margin-bottom: 80px;
+}
+.detail-sys .sidebar ul.res-menu li{
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.detail-sys .sidebar ul.res-menu li.active{
+    background-image: none;
+}
+
+
+.detail-sys .sidebar ul.res-menu li .def{
+	display: inline-block;
+}
+.detail-sys .sidebar ul.res-menu li .hover{
+	display: none;
+}
+.detail-sys .sidebar ul.res-menu li:hover .def{
+	display: none;
+}
+.detail-sys .sidebar ul.res-menu li:hover .hover{
+	display: inline-block;
+}
+
+.detail-sys .sidebar ul.res-menu li .active{
+	display: none;
+}
+.detail-sys .sidebar ul.res-menu li.active .active{
+	display: inline-block;
+}
+.detail-sys .sidebar ul.res-menu li.active .def{
+	display: none;
+}
+.detail-sys .sidebar ul.res-menu li.active .hover{
+	display: none;
+}
+
+
+/*.detail-sys .sidebar ul.res-menu li.active:hover .active{
+	display: inline-block;
+}*/
+/*
+	详情页面
+*/
+.detail-main-list .content-list .content{
+	display: none;
+}
+
+.detail-main-list .content-list .content.current{
+	display: block;
+}
