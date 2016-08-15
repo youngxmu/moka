@@ -8,6 +8,7 @@
 			_this.tpl.menuContentTpl = juicer($('#menu-content-tpl').html());
 			_this.initEvent();
 			_this.initMenu();
+			_this.onSelMenu({init:true})
 		},
 		initEvent : function(){
 			$('body #main_sys').on('click', '#menu_bar.res-menu li', _this.onSelMenu);
@@ -18,8 +19,11 @@
 			var html = _this.tpl.menuTpl.render({list: menuList});
 			$('#menu_bar').html(html);
 		},
-		onSelMenu : function(){
+		onSelMenu : function(options){
 			var $this = $(this);
+			if(options && options.init){
+				$this = $('#main_sys #menu_bar li').first();
+			}
 			$this.addClass('active').siblings('li').removeClass('active');
 			var menuIndex = $this.attr('data-index');
 			var menu = nc.menu[menuIndex];
@@ -52,6 +56,7 @@
 		init : function(){
 			_this.tpl.menuTpl = juicer($('#menu-tpl').html());
 			_this.tpl.menuContentTpl = juicer($('#menu-content-tpl').html());
+			_this.tpl.ssmenuContentTpl = juicer($('#ss-menu-content-tpl').html());
 			_this.menu = nc.xxrj.menu;
 			_this.initEvent();
 		},
@@ -63,6 +68,7 @@
 		},
 		show : function(mindex){
 			_this.initMenu();
+			_this.onSelMenu({init:true})
 			$('#sub_sys').show().siblings('div').hide();
 		},
 		initMenu : function(){
@@ -70,13 +76,20 @@
 			var html = _this.tpl.menuTpl.render({list: menuList});
 			$('#sub_menu_bar').html(html);
 		},
-		onSelMenu : function(){
+		onSelMenu : function(options){
 			var $this = $(this);
+			if(options && options.init){
+				$this = $('#sub_sys #sub_menu_bar li').first();
+			}
 			$this.addClass('active').siblings('li').removeClass('active');
 			var menuIndex = $this.attr('data-index');
 			var menu = _this.menu[menuIndex];
 			console.log(menu);
+
 			var html = _this.tpl.menuContentTpl.render(menu.content);
+			if(menu.content.style == 2){
+				html = _this.tpl.ssmenuContentTpl.render(menu.content);
+			}
 			$('#sub_menu_content').html(html);
 		},
 		onSelMenuList : function(){

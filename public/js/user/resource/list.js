@@ -55,6 +55,7 @@
 				}
 
 				$this.addClass('active').siblings().removeClass('active');
+				_this.data.searchData.pageNo = 1;
 				_this.searchResource();
 			});
 

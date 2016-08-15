@@ -37,3 +37,26 @@
 .sub-exit:hover{
 	background-image: url(../../../jsjn/png/00042[151x42x8BPP].png);
 }
+
+.main-list .ss-main-menu-list li{
+	width: 150px;
+	margin-left: 40px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+
+}
+.main-list .ss-main-menu-list li .def{
+	display: inline-block;
+}
+.main-list .ss-main-menu-list li .hover{
+	display: none;
+}
+.main-list .ss-main-menu-list li:hover .def{
+	display: none;
+}
+.main-list .ss-main-menu-list li:hover .hover{
+	display: inline-block;
+}
+
