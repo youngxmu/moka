@@ -258,3 +258,10 @@ pre{white-space: pre-wrap;font-size: 14px;}
 }
 
 
+
+.main .res-list span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

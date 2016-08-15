@@ -10,9 +10,19 @@
     <div class="bg">
       <%- include ../common/header.ejs %>
       <input id="search_title" value="<%= keyword %>" type="hidden" >
+
+      <div class="sidebar-tab">
+        <span class="info active">教育资料</span>
+        <span class="res ">相关文件</span>
+      </div>
+
       <div class="container">
-        <div class="sidebar">
-          <ul class="type-panel">
+        <div id="tree_panel" class="sidebar sidebar-tree" >
+          <ul id="topic_tree" class="ztree"></ul>
+        </div>
+
+        <div id="menu_panel" class="sidebar" style="display:none;" >
+          <ul class="type-panel" >
             <li data-type="1">
               <i class="type-ico res-txt"></i>
               <p>文字</p>
@@ -31,9 +41,24 @@
             </li>
           </ul>
         </div>
-        <div class="main">
+
+        <div id="res_panel" class="main " style="display:none;">
           <div id="resource_list"></div>
           <div id="pagebar"></div>
+        </div>
+
+        <div id="info_panel" class="main main-tree">
+          <div class="info-content" >
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 id="content_title" class="panel-title"></h3>
+              </div>
+              <div class="panel-body detail-article">
+                <pre id="content" >
+                </pre>
+              </div>
+            </div>
+          </div>
         </div>
   	  </div>
       <%- include ../common/footer.ejs %>

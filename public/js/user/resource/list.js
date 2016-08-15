@@ -3,6 +3,7 @@
 	_this = P.user.resource.list = {
 		pid : 11,
 		searchUrl : 'resource/list',
+		treeUrl : 'jsll/list',
 		data : {
 			searchData : {
 				pageNo : 1,
@@ -17,9 +18,26 @@
 			}
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
-			_this.searchResource();
+			_this.initTopic();
+			// _this.searchResource();
 		},
 		initEvent : function(){
+			// $('.nav-ul').on('click', 'li', _this.changeType);
+
+
+			$('.tree-opr').on('click', '.unfold',function(){
+				var zTree = _this.getCurrTree();
+				zTree.expandAll(true);
+				$(this).removeClass('unfold').addClass('shrink').text('收缩');
+			});
+				
+			$('.tree-opr').on('click', '.shrink',function(){
+				var zTree = _this.getCurrTree();
+				zTree.expandAll(false);
+				$(this).removeClass('shrink').addClass('unfold').text('展开');
+			});
+
+
 			$('body').on('click','.type-panel li',function(){
 				var $this = $(this)
 				var type = $this.attr('data-type');
@@ -56,6 +74,25 @@
 				_this.data.searchData.keyword = $('#keyword').val();
 				_this.searchResource();
 			});
+
+			$('.sidebar-tab').on('click', 'span', function(){
+				var $this = $(this);
+				$this.addClass('active').siblings('span').removeClass('active');
+				if($this.hasClass('info')){
+					$('#menu_panel').hide();
+					$('#tree_panel').show();
+					$('#res_panel').hide();
+					$('#info_panel').show();
+					_this.initTopic();
+				}else{
+					$('#menu_panel').show();
+					$('#tree_panel').hide();
+					$('#res_panel').show();
+					$('#info_panel').hide();
+					_this.searchResource();
+				}
+			});
+			
 		},
 		searchResource : function() {
 			var data = _this.data.searchData;
@@ -138,6 +175,125 @@
 					});
 				});
 			}
+		},
+
+		initTopic : function() {
+			
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : _this.treeUrl,
+				dataType : 'json',
+				beforeSend : function() {
+					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
+				},
+				success : _this.handleTopic 
+			});
+		},
+		handleTopic : function(data) {
+			_this.topicNodes = [];
+			var list = data.data.list;
+			for(var index in list){
+				var menu = list[index];
+				// menu['pId'] = menu.parent_id;
+				_this.topicNodes.push(menu);
+			}
+			_this.initTree();
+		},
+		setting : {
+			view : {
+				dblClickExpand : false,
+				showLine : true,
+				selectedMulti : false,
+				showIcon : true
+			},
+			data : {
+				simpleData : {
+					enable : true,
+					idKey : "id",// id 自定义
+					pIdKey : "parent_id",// 父节点id 自定义
+					rootPId : 14
+				}
+			},
+			check : {
+				enable : false
+			},
+			callback : {
+				beforeClick : function(treeId, treeNode) {
+					var zTree = _this.getCurrTree();
+					if (treeNode.isParent) {
+						zTree.expandNode(treeNode);
+						return true;
+					} else {
+						return true;
+					}
+				},
+				onClick: function(event,treeId, treeNode) {
+					var zTree = _this.getCurrTree();
+					var nodes = zTree.getCheckedNodes(true);
+					if(_this.currNode && _this.currNode.id == treeNode.id){
+						zTree.cancelSelectedNode(treeNode);
+						_this.currNode = null;
+						return false;
+					}
+					_this.currNode = treeNode;
+					console.log(_this.currNode);
+					$('#content_title').html(_this.currNode.name);
+					if(_this.currNode.content){
+						$('#content').html(_this.currNode.content);		
+					}else{
+						$.ajax({
+							url : 'jsll/info/' + _this.currNode.id,
+							type : 'get',
+							async : false,
+							success : function(data){
+								if(data.success){
+
+									$('#content').html(data.data.content);
+									_this.currNode.content = data.data.content;
+
+								}else{
+									$('#content').html('');			
+								}
+							}
+						});
+					}
+					return true;
+				}
+			}
+		},
+		initTree : function() {// 初始化树功能，折叠展开点击事件
+			var topicTree = $("#topic_tree");
+			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
+			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
+
+			var node = topicTree.getNodeByParam('id','1000000000000');
+			topicTree.selectNode(node);
+			_this.currNode = node;
+
+			$('#content_title').html(_this.currNode.name);
+			if(_this.currNode.content){
+				$('#content').html(_this.currNode.content);		
+			}else{
+				$.ajax({
+					url : 'jsll/info/' + _this.currNode.id,
+					type : 'get',
+					async : false,
+					success : function(data){
+						if(data.success){
+
+							$('#content').html(data.data.content);
+							_this.currNode.content = data.data.content;
+
+						}else{
+							$('#content').html('');			
+						}
+					}
+				});
+			}
+		},
+		getCurrTree : function(){
+			return _this.topicTree;
 		}
 	};
 	
