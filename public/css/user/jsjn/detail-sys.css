@@ -108,8 +108,8 @@
     padding: 0;
     display: inline-block;
     font-size: 14px;
-    height: 500px;
-    border: 1px solid #000000;
+    min-height: 500px;
+    /*border: 1px solid #000000;*/
     margin: 0 10px;
 }
 
@@ -119,6 +119,9 @@
 .detail-sys .sidebar ul.res-menu li{
     margin-bottom: 15px;
     cursor: pointer;
+    width: 100%;
+	text-align: center;
+	padding: 0;
 }
 
 .detail-sys .sidebar ul.res-menu li.active{
@@ -166,3 +169,46 @@
 .detail-main-list .content-list .content.current{
 	display: block;
 }
+
+.detail-sys .sidebar .detail2-res-menu .top{
+	margin-bottom: 0;
+}
+.detail-sys .sidebar .detail2-res-menu li{
+	margin-bottom: 10px;
+}
+
+.detail2-res-menu li img{
+	/*margin-left: -20px;*/
+}
+
+
+/** menu*/
+.mjie1{
+	text-align: center;
+}
+.detail-sys .sidebar ul.res-menu ul.mjie1 li{
+	width: 45%;
+	display: inline-block;
+	margin: 0;
+	height: 35px;
+}
+
+.mjie2{
+	text-align: center;
+}
+.detail-sys .sidebar ul.res-menu ul.mjie2 li{
+	width: 45%;
+	display: inline-block;
+	margin: 0;
+	height: 35px;
+}
+
+.mjie3{
+	text-align: center;
+}
+.detail-sys .sidebar ul.res-menu ul.mjie3 li{
+	width: 100%;
+	margin: 0;
+	/*height: 35px;*/
+}
+.detail-sys .sidebar ul.res-menu ul.mjie3 li img{margin: 0;}

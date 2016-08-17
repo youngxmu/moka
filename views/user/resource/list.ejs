@@ -11,12 +11,13 @@
       <%- include ../common/header.ejs %>
       <input id="search_title" value="<%= keyword %>" type="hidden" >
 
-      <div class="sidebar-tab">
-        <span class="info active">教育资料</span>
-        <span class="res ">相关文件</span>
-      </div>
+      
 
       <div class="container">
+        <div class="sidebar-tab">
+          <span class="info active">教育资料</span>
+          <span class="res ">相关文件</span>
+        </div>
         <div id="tree_panel" class="sidebar sidebar-tree" >
           <ul id="topic_tree" class="ztree"></ul>
         </div>

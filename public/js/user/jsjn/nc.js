@@ -63,23 +63,45 @@ var nc = {
 			'content'	: {
 				style 	: 1,
 				top		: '01277[380x45x8BPP]',
-				jie		: [
+				videos  : [
 					{
-						'def' 	: '01162[595x45x8BPP]',
-						'hover'		: '01163[595x45x8BPP]',
-						'click'		: {}
+						src 	: 'uploads/gsjyzy/video/单个军人队列动作.mp4',
+						title 	: '单个军人队列动作',
+						link	: 'resource/detail/4630'	
 					},
 					{
-						'def' 	: '01164[595x45x8BPP]',
-						'hover'		: '01165[595x45x8BPP]',
-						'click'		: {}
+						src 	: 'uploads/jsjn/视频/A.军训技能/军体拳.mp4',
+						title 	: '军体拳',
+						link	: 'resource/detail/6305'	
 					},
 					{
-						'def' 	: '01166[595x45x8BPP]',
-						'hover'		: '01167[595x45x8BPP]',
-						'click'		: {}
+						src 	: 'uploads/jsjn/视频/A.军训技能/54式手枪分解结合.mp4',
+						title 	: '54式手枪分解结合',
+						link	: 'resource/detail/6303'	
+					},
+					{
+						src 	: 'uploads/jsjn/视频/A.军训技能/81-1步枪分解结合.mp4',
+						title 	: '81-1步枪分解结合',
+						link	: 'resource/detail/6304'	
 					}
 				]
+				// jie		: [
+				// 	{
+				// 		'def' 	: '01162[595x45x8BPP]',
+				// 		'hover'		: '01163[595x45x8BPP]',
+				// 		'click'		: {}
+				// 	},
+				// 	{
+				// 		'def' 	: '01164[595x45x8BPP]',
+				// 		'hover'		: '01165[595x45x8BPP]',
+				// 		'click'		: {}
+				// 	},
+				// 	{
+				// 		'def' 	: '01166[595x45x8BPP]',
+				// 		'hover'		: '01167[595x45x8BPP]',
+				// 		'click'		: {}
+				// 	}
+				// ]
 			}
 		}
 	],
@@ -111,13 +133,13 @@ nc.xxrj = {
 						'click'		: {}
 					},
 					{
-						'def' 	: '01164[595x45x8BPP]',
-						'hover'		: '01165[595x45x8BPP]',
+						'def' 	: '01166[595x45x8BPP]',
+						'hover'		: '01167[595x45x8BPP]',
 						'click'		: {}
 					},
 					{
-						'def' 	: '01166[595x45x8BPP]',
-						'hover'		: '01167[595x45x8BPP]',
+						'def' 	: '01164[595x45x8BPP]',
+						'hover'		: '01165[595x45x8BPP]',
 						'click'		: {}
 					}
 				]
@@ -173,8 +195,8 @@ nc.xxrj = {
 						'hover'	: '01180[150x150x8BPP]'
 					},
 					{
-						'def' 	: '01172[150x150x8BPP]',
-						'hover'	: '01173[150x150x8BPP]'
+						'def' 	: '01172[150x135x8BPP]',
+						'hover'	: '01173[152x136x8BPP]'
 					},
 					{
 						'def' 	: '01174[150x150x8BPP]',

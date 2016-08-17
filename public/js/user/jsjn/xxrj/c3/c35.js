@@ -1,4 +1,4 @@
-nc.xxrj.c3.zj = {
+nc.xxrj.c35 = {
 	menu : [
 		{
 			'def' 		: '00662[208x56x8BPP]',
@@ -58,7 +58,7 @@ nc.xxrj.c3.zj = {
 };
 
 
-nc.xxrj.c3.zj.details = {
+nc.xxrj.c35.details = {
 	'zsjh1' : {
 		menu : {
 			top : '01203[225x60x8BPP]',//c1

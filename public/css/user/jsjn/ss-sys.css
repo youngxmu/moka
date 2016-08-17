@@ -1,4 +1,4 @@
-.sub-sys{
+.ss-sys{
 	width: 1024px;
 	height: 768px;
 	background-image: url(../../../jsjn/00180[1024x768x24BPP].jpg);
@@ -7,12 +7,12 @@
 	display: none;
 }
 
-.sub-footer{
+.ss-footer{
 	position: absolute;
 	bottom: 60px;
 	right: 50px;
 }
-.sub-back{
+.ss-back{
 	width: 151px;
 	height: 42px;
 	background-image: url(../../../jsjn/png/00037[151x42x8BPP].png);
@@ -21,11 +21,11 @@
 	background-repeat: no-repeat;
 	display: inline-block;cursor: pointer;
 }
-.sub-back:hover{
+.ss-back:hover{
 	background-image: url(../../../jsjn/png/00038[151x42x8BPP].png);
 }
 
-.sub-exit{
+.ss-exit{
 	width: 151px;
 	height: 42px;
 	background-image: url(../../../jsjn/png/00041[151x42x8BPP].png);
@@ -34,7 +34,7 @@
 	background-repeat: no-repeat;
 	display: inline-block;cursor: pointer;
 }
-.sub-exit:hover{
+.ss-exit:hover{
 	background-image: url(../../../jsjn/png/00042[151x42x8BPP].png);
 }
 
@@ -59,4 +59,8 @@
 .main-list .ss-main-menu-list li:hover .hover{
 	display: inline-block;
 }
-
+.menu-start{text-align: right;margin-top:10px;}
+.menu-start span{font-size: 15px;color: yellow;display: inline-block;line-height: 30px;padding: 0 10px;border-radius: 4px;cursor: pointer;
+	background-color: rgba(0,0,0,0.4);
+}
+.menu-start span:hover{opacity: 0.7;}

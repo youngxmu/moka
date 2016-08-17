@@ -1,3 +1,4 @@
+
 .container{
 	width: 1024px;
 	height: 768px;
@@ -88,3 +89,13 @@
 .main-list .main-menu-list li:hover .hover{
 	display: inline-block;
 }
+
+.main-list .main-menu-list li.video-wrapper{
+	width: 200px;
+	height: 150px;
+	display: inline-block;margin-left: 20px;
+	margin-bottom: 40px;
+	float: left;
+	background-color: #000000;
+}
+.main-list .main-menu-list li.video-wrapper video{width: 100%;height: 100%;}
