@@ -4,12 +4,22 @@ ul{margin: 0;padding: 0;}
 .page-header{
   background: url(../../img/bg.png) no-repeat top center #f5f5f5;
   width: 100%;
-  height: auto;
+  height: 180px;
   width: 1000px;
-  margin: auto;
   padding: 0 20px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin : 0;
+  margin-left: -500px;
+  z-index: 1;
 }
 
+.container{
+  height: 100%;
+  padding-top: 180px;
+  position: relative;
+}
 
 /** 导航 */
 

@@ -8,6 +8,8 @@
 	border-right: 1px solid #cccccc;
 	vertical-align: top;
 	overflow: auto;
+	height: 100%;
+	overflow: auto;
 }
 
 .sidebar-tab{
@@ -85,9 +87,11 @@
 	display: inline-block;vertical-align: top;
 	padding: 10px 20px;
 	font-size:14px;color:#333;
-	border-left: 1px solid #cccccc;
+	/*border-left: 1px solid #cccccc;*/
 	min-height: 500px;
-	margin-left: -1px;
+	/*margin-left: -1px;*/
+	height: 100%;
+	overflow: auto;
 }
 
 

@@ -3,30 +3,31 @@
   <head>
     <title>军事理论研究分系统</title>
     <%- include ../common/meta.ejs %>
-        <link rel='stylesheet' href='css/admin/jsll/list.css' >
-    
+    <link rel='stylesheet' href='css/admin/jsll/list.css' >
   </head>
   <body>
     <%- include ../common/header.ejs %>
     <div class="container">
-      <ul class="nav nav-tabs" style="margin-top:15px;">
-        <li role="presentation" data-type="1" data-key="政策" class="active">
-          <a href="javascript:void(0);">军训规定</a>
-        </li>
-        <li role="presentation" data-type="2" data-key="理论"><a href="javascript:void(0);">军训理论</a></li>
-        <li role="presentation" data-type="3" data-key="资料"><a href="javascript:void(0);">辅助资料</a></li>
-        <li role="presentation" data-type="4" data-key="系统帮助"><a href="javascript:void(0);">系统帮助</a></li>
-      </ul>
-      <div class="sidebar">
-        <ul id="menu_panel" class="memu-panel"></ul>
-        <ul id="topic_tree" class="ztree" style="display:none;"></ul>
-      </div>
-      <div class="main">
-        <div class="info-content" >
-          <div id="txt_panel" class="info-content" >
-            <textarea class="editor-area" id="content" placeholder="输入文章正文" autofocus></textarea>
-            <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
-              <span id="btn_commit" class="btn btn-primary">提交</span>
+      <div class="fpanel">
+        <ul class="nav nav-tabs sub-nav" style="margin-top:15px;">
+          <li role="presentation" data-type="1" data-key="政策" class="active">
+            <a href="javascript:void(0);">军训规定</a>
+          </li>
+          <li role="presentation" data-type="2" data-key="理论"><a href="javascript:void(0);">军训理论</a></li>
+          <li role="presentation" data-type="3" data-key="资料"><a href="javascript:void(0);">辅助资料</a></li>
+          <li role="presentation" data-type="4" data-key="系统帮助"><a href="javascript:void(0);">系统帮助</a></li>
+        </ul>
+        <div class="sidebar">
+          <ul id="menu_panel" class="memu-panel"></ul>
+          <ul id="topic_tree" class="ztree" style="display:none;"></ul>
+        </div>
+        <div class="main">
+          <div class="info-content" >
+            <div id="txt_panel" class="info-content" >
+              <textarea class="editor-area" id="content" placeholder="输入文章正文" autofocus></textarea>
+              <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
+                <span id="btn_commit" class="btn btn-primary">提交</span>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +65,7 @@
       <p><textarea id="info_content" placeholder="输入内容" style="width:600px;height:400px;">${content}</textarea></p>
     </div>
     </script>
-    <script type="text/javascript" src="js/lib/jquery.ztree.all.min.js"></script>
+    
     <script type="text/javascript" src="js/admin/jsll/list.js"></script>
     
     <script>
