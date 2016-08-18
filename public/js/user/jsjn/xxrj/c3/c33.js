@@ -1,50 +1,33 @@
-nc.xxrj.c3.dz = {
+//步枪射击
+nc.xxrj.c33 = {
+	content : '00845[583x290x8BPP]',
 	menu : [
 		{
-			'def' 		: '',
-			'hover'		: '00734[208x56x8BPP]',
+			'def' 		: '00840[208x56x8BPP]',
+			'hover'		: '00841[208x56x8BPP]',
 			'content'	: {
 				style 	: 3,
-				top		: '01185[652x45x8BPP]',
-				content	: ''
+				content	: '00842[583x290x8BPP]',
+				click 	: 'changshi'
 			}
 		},
 		{
-			'def' 		: '00708[208x56x8BPP]',
-			'hover'		: '00709[208x56x8BPP]',
+			'def' 		: '00848[208x56x8BPP]',
+			'hover'		: '00849[208x56x8BPP]',
 			'content'	: {
 				style 	: 3,
-				top		: '01185[652x45x8BPP]',
-				content	: ''
+				content	: '00067[567x270x8BPP]',
+				click 	: 'sxybx'
 			}
 		},
 		{
-			'def' 		: '00749[208x56x8BPP]',
-			'hover'		: '00750[208x56x8BPP]',
+			'def' 		: '00838[208x56x8BPP]',
+			'hover'		: '00839[208x56x8BPP]',
 			'content'	: {
 				style 	: 3,
-				top		: '01178[652x45x8BPP]',
-				content	: ''
-			}
-		}
-		,
-		{
-			'def' 		: '00697[208x56x8BPP]',
-			'hover'		: '00698[208x56x8BPP]',
-			'content'	: {
-				style 	: 3,
-				top		: '01178[652x45x8BPP]',
-				content	: ''
-			}
-		}
-		,
-		{
-			'def' 		: '00760[208x56x8BPP]',
-			'hover'		: '00761[208x56x8BPP]',
-			'content'	: {
-				style 	: 3,
-				top		: '01178[652x45x8BPP]',
-				content	: ''
+				top		: '01185[652x45x8BPP]',
+				content	: '00067[567x270x8BPP]',
+				click 	: 'sxybx'
 			}
 		}
 	]
@@ -52,125 +35,94 @@ nc.xxrj.c3.dz = {
 
 
 nc.xxrj.c3.zj.details = {
-	'zsjh1' : {
+	'changshi' : {
 		menu : {
-			top : '01203[225x60x8BPP]',//c1
-			jie : [
+			top : '00978[225x60x8BPP]',//c1
+			mjie : [
 				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				/** 已经定位 */
-				{
-					'def' 		: '00608[218x45x8BPP]',
-					'hover'		: '00609[218x45x8BPP]',
-					'active'	: '00610[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00610[218x45x8BPP]',
-					'hover'		: '00611[218x45x8BPP]',
-					'active'	: '00612[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				}
-			]
-		}
-	},
-	'zsjh2' : {
-		menu : {
-			top : '00668[225x60x8BPP]',//c1
-			rightTop : '',
-			jie : [
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'content'	: [
-						'01205[680x439x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00604[218x45x8BPP]',
-					'hover'		: '00605[218x45x8BPP]',
-					'active'	: '00606[218x45x8BPP]',
-					'jie' 		: [
+					style : 3,
+					menu : [
 						{
-							'def' 		: '00604[218x45x8BPP]',
-							'hover'		: '00605[218x45x8BPP]',
-							'active'	: '00606[218x45x8BPP]',
+							'def' 		: '01374[218x45x8BPP]',
+							'hover'		: '01373[218x45x8BPP]',
+							'active'	: '01372[218x45x8BPP]',
 							'content'	: [
-								'01205[680x439x8BPP]'
+								'00262[381x479x8BPP]'
+							]
+						}
+					]
+				},
+				{
+					style : 3,
+					menu : [
+						{
+							'def' 		: '01371[218x45x8BPP]',
+							'hover'		: '01370[218x45x8BPP]',
+							'active'	: '01369[218x45x8BPP]',
+							'content'	: [
+								'01509[722x522x8BPP]'
+							]
+						}
+					]
+				},
+				{
+					style : 4,
+					'def' 		: '01383[218x45x8BPP]',
+					'hover'		: '01382[218x45x8BPP]',
+					'active'	: '01381[218x45x8BPP]',
+					menu : [
+						{
+							'def' 		: '01421[218x39x8BPP]',
+							'hover'		: '01420[218x39x8BPP]',
+							'active'	: '01419[218x39x8BPP]',
+							'content'	: [
+								'01510[722x522x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00604[218x45x8BPP]',
-							'hover'		: '00605[218x45x8BPP]',
-							'active'	: '00606[218x45x8BPP]',
+							'def' 		: '01427[218x39x8BPP]',
+							'hover'		: '01426[218x39x8BPP]',
+							'active'	: '01425[218x39x8BPP]',
 							'content'	: [
-								'01205[680x439x8BPP]'
-							]
-						},
-						/** 已经定位 */
-						{
-							'def' 		: '00608[218x45x8BPP]',
-							'hover'		: '00609[218x45x8BPP]',
-							'active'	: '00610[218x45x8BPP]',
-							'content'	: [
-								'01205[680x439x8BPP]'
+								'01512[722x522x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00610[218x45x8BPP]',
-							'hover'		: '00611[218x45x8BPP]',
-							'active'	: '00612[218x45x8BPP]',
+							'def' 		: '01424[218x39x8BPP]',
+							'hover'		: '01423[218x39x8BPP]',
+							'active'	: '01422[218x39x8BPP]',
 							'content'	: [
-								'01205[680x439x8BPP]'
+								'01511[722x522x8BPP]'
+							]
+						}
+					]
+				},
+				{
+					style : 4,
+					'def' 		: '01386[218x45x8BPP]',
+					'hover'		: '01385[218x45x8BPP]',
+					'active'	: '01384[218x45x8BPP]',
+					menu : [
+						{
+							'def' 		: '01436[218x39x8BPP]',
+							'hover'		: '01435[218x39x8BPP]',
+							'active'	: '01434[218x39x8BPP]',
+							'content'	: [
+								'01513[722x522x8BPP]'
+							]
+						},
+						{
+							'def' 		: '01442[218x39x8BPP]',
+							'hover'		: '01441[218x39x8BPP]',
+							'active'	: '01440[218x39x8BPP]',
+							'content'	: [
+								'01514[722x522x8BPP]'
 							]
 						}
 					]
 				}
 			]
 		}
-	}
+	},
 }
 	
