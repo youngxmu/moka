@@ -4,13 +4,54 @@
 		tpl : {},
 		init : function(){
 			_this['xxrj'].init();
-			_this['xxrj'].show(0);
+			_this.tpl.menuTpl = juicer($('#menu-tpl').html());
+			_this.tpl.menuContentTpl = juicer($('#menu-content-tpl').html());
+			_this.tpl.menuContent3Tpl = juicer($('#menu-content3-tpl').html());
+			_this.initEvent();
+			_this.initMenu();
+			_this.onSelMenu({init:true})
+		},
+		initEvent : function(){
+			$('body #main_sys').on('click', '#menu_bar.res-menu li', _this.onSelMenu);
+			$('body #main_sys').on('click', '#menu_content .main-menu-list li', _this.onSelMenuList);
+		},
+		initMenu : function(){
+			var menuList = nc.menu;
+			var html = _this.tpl.menuTpl.render({list: menuList});
+			$('#menu_bar').html(html);
+		},
+		onSelMenu : function(options){
+			var $this = $(this);
+			if(options && options.init){
+				$this = $('#main_sys #menu_bar li').first();
+			}
+			$this.addClass('active').siblings('li').removeClass('active');
+			var menuIndex = $this.attr('data-index');
+			var menu = nc.menu[menuIndex];
+			// console.log(menu);
+			var html = '';
+			if(menu.content.jie){
+				html += _this.tpl.menuContentTpl.render(menu.content);	
+			}
+
+			if(menu.content.videos){
+				html += _this.tpl.menuContent3Tpl.render(menu.content);	
+			}
+			
+
+			$('#menu_content').html(html);
+		},
+		onSelMenuList : function(){
+			var $this = $(this);
+			var sysType = $this.attr('data-type');
+			// console.log(sysType);
+			var subIndex = $this.attr('data-index');
+			_this[sysType].show(subIndex);
 		},
 		getImgStyle : function(defaultImg){
 			// console.log(defaultImg);
 			if(!defaultImg){
-				// console.log(defaultImg);
-				return;
+				return console.log(defaultImg);
 			}
 			var tail = defaultImg.split('[')[1];
 			var size = tail.split('x');
@@ -18,6 +59,7 @@
 			var height = size[1];
 			return 'height:' + height + 'px;width:'+ width +'px;';
 		}
+
 	};
 	juicer.register('getImgStyle', _this.getImgStyle);
 })(moka);
@@ -109,7 +151,6 @@
 			_this.tpl.menuTpl = juicer($('#menu-tpl').html());
 			_this.tpl.menuContentTpl = juicer($('#menu-content-tpl').html());
 			_this.tpl.menuContent2Tpl = juicer($('#menu-content2-tpl').html());
-			_this.tpl.menuContent3Tpl = juicer($('#menu-content3-tpl').html());
 			_this.initEvent();
 		},
 		initEvent : function(){
@@ -118,15 +159,13 @@
 			$('body #ss_sys').on('click', ' .ss-exit', _this.exit);
 			$('body #ss_sys').on('click', ' .ss-back', _this.back);
 			$('body #ss_sys').on('click', ' .menu-start', _this.onStart);
-			$('body #ss_sys').on('click', ' .menu-start-list', _this.onStart);
-
-			
 		},
 		show : function(options){
 			var cindex = 'c' + (parseInt(options.cindex) + 1);
 			var sindex = parseInt(options.subIndex) + 1;
 			cindex = cindex + sindex;
 			_this.cindex = cindex;
+			// console.log(cindex);
 			_this.menu = nc.xxrj[cindex].menu;
 			_this.initMenu();
 
@@ -152,15 +191,8 @@
 			var menuIndex = $this.attr('data-index');
 			var menu = _this.menu[menuIndex];
 			var html = '';
-			console.log(123);
-			if(menu.content.style == 1){
-				html = _this.tpl.menuContentTpl.render(menu.content);
-			}
-			if(menu.content.style == 2){
-				html = _this.tpl.menuContent2Tpl.render(menu.content);
-			}
 			if(menu.content.style == 3){
-				html = _this.tpl.menuContent3Tpl.render(menu.content);
+				html = _this.tpl.menuContent2Tpl.render(menu.content);
 			}
 			$('#ss_menu_content').html(html);
 		},
@@ -309,8 +341,7 @@
 			_this.tpl.menuTpl = juicer($('#detail-menu-tpl').html());
 			_this.tpl.menu2Tpl = juicer($('#detail-menu2-tpl').html());
 			
-			_this.tpl.detailContentTpl = juicer($('#detail-content-tpl').html());
-			
+			_this.tpl.menuContentTpl = juicer($('#detail-content-tpl').html());
 			_this.initEvent();
 		},
 		initEvent : function(){
@@ -323,7 +354,6 @@
 			var cindex = options.cindex;
 			var click = options.click;
 			console.log(cindex+' '+ click);
-			console.log(nc.xxrj[cindex].details);
 			_this.menu = nc.xxrj[cindex].details[click].menu;
 			_this.menu.detailMenuStyle = 2;
 			_this.initMenu();
@@ -340,7 +370,7 @@
 				data.content =  jie.content;
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
-				html = _this.tpl.detailContentTpl.render(data);
+				html = _this.tpl.menuContentTpl.render(data);
 			}
 
 			if(_this.menu.mjie){
@@ -352,7 +382,7 @@
 				data.content =  jie.content;
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
-				html = _this.tpl.detailContentTpl.render(data);
+				html = _this.tpl.menuContentTpl.render(data);
 			}
 			
 			
@@ -379,7 +409,7 @@
 				data.content =  jie.content;
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
-				html = _this.tpl.detailContentTpl.render(data);
+				html = _this.tpl.menuContentTpl.render(data);
 			}
 
 			if(_this.menu.mjie){
@@ -391,7 +421,7 @@
 				data.content =  jie.content;
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
-				html = _this.tpl.detailContentTpl.render(data);
+				html = _this.tpl.menuContentTpl.render(data);
 			}
 			$('#detail_menu_content').html(html);
 		},
@@ -435,5 +465,5 @@
 moka.user.jsjn.index.xxrj.sub.init();
 moka.user.jsjn.index.xxrj.detail.init();
 moka.user.jsjn.index.xxrj.ssdetail.init();
-// moka.user.jsjn.index.xxrj.sub.show({cindex:2,subIndex:5});
+// moka.user.jsjn.index.xxrj.sub.show({cindex:2,subIndex:1});
 // moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});
