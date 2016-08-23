@@ -20,6 +20,7 @@
 			_this.data.pptTpl = juicer($('#ppt_tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
+			_this.type = 1;
 			_this.data.type = '政策';
 			_this.search();
 		},
@@ -57,6 +58,7 @@
 				var $this = $(this);
 				$this.addClass('active').siblings().removeClass('active');
 				_this.type = $this.attr('data-type');
+				console.log(_this.type);
 				_this.initTopic();
 			});
 		},
@@ -228,6 +230,7 @@
 					
 					$title.html(_this.currNode.name);
 					// console.log(_this.currNode.content);
+					console.log(_this.type);
 					if(_this.type == 1){
 						if(_this.currNode.content){
 							if(_this.currNode.content == 'null'){
@@ -288,7 +291,7 @@
 			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
 			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
 
-			_this.type = 1;
+			
 		},
 		getCurrTree : function(){
 			return _this.topicTree;

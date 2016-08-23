@@ -82,9 +82,12 @@
 			}
 		},
 		showContent : function(){
-			console.log(1);
 			var $this = $(this);
 			var id = $this.attr('data-id');
+			console.log(id);
+			if(id == 130202){
+				return window.open('jsjn/index');
+			}
 			$.ajax({
 				url : 'index/info/view/' + id,
 				type : 'post',

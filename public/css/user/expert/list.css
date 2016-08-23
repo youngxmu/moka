@@ -1,6 +1,8 @@
+.container{width: 1000px;position: relative;}
 /** 主页面 */
-.main{color: #ffffff;}
-.nav{margin-bottom: 15px;}
+.main{color: #ffffff;padding: 10px;}
+/*.nav{margin-bottom: 15px;}*/
+.nav{position: absolute;top: 0;left: 50px;z-index: 2;width: auto;}
 .nav li  a{
   color: #ffffff
 }

@@ -11,11 +11,21 @@
     <div class="bg">
       <%- include ../common/header.ejs %>
       <div class="container" style="padding:0;">
-        <ul class="nav nav-tabs" style="font-size:12px;">
+        <div id="nav_tabs" class="nav">
+          <ul class="nav-ul">
+            <li target="list_panel" class="active">
+              <a href="javascript:void(0);">基本搜索</a>
+            </li>
+            <li target="type_panel">
+              <a href="javascript:void(0);" >分类搜索</a>
+            </li>
+          </ul>
+        </div>
+       <!--  <ul class="nav nav-tabs" style="font-size:12px;">
           <li role="presentation" target="list_panel" class="active"><a href="javascript:void(0);">基本搜索</a></li>
           <li role="presentation" target="type_panel" ><a href="javascript:void(0);">分类搜索</a></li>
-        </ul>
-        <div class="main" style="padding:0 10px;">
+        </ul> -->
+        <div class="main" >
           <div id="list_panel" >
             <div class="search-bar">
               <input id="search_key" type="text" class="form-control" placeholder="输入姓名" style="display:inline-block;width:180px;height:34px;line-height:34px;">

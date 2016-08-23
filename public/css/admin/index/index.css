@@ -1,5 +1,6 @@
-.container{font-size: 0;padding-bottom: 50px;
-  padding-top: 20px;
+.container{
+  font-size: 0;padding-bottom: 50px;
+  margin-top: 20px;
 }
 
 .editor-panel{

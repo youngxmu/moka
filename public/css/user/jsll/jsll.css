@@ -11,6 +11,12 @@
   position: relative;padding-top: 40px;
 }
 
+.tnav{
+  position: absolute;top: -40px;
+  width: auto;
+  z-index: 2;
+}
+
 .index-main{
   padding-top: 30px;
 }
