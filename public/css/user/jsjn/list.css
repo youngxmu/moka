@@ -1,11 +1,13 @@
 .container{width: 1000px;}
-.sidebar {width: 206px;
-	padding: 10px 20px 10px 0;
+.nav{position: absolute;top: 0;left: 50px;z-index: 2;width: auto;}
+.sidebar {
+	width: 220px;
+    padding: 10px ;
 	display: inline-block;
 	font-size: 14px;
 }
 .res-menu li{
-  margin-top: 15px;
+  /*margin-top: 15px;*/
 }
 
 .res-menu li button{
@@ -26,8 +28,8 @@
     font-size: 12px;
 }
 
-.main{width: 730px;display: inline-block;vertical-align: top;
-	padding: 20px 0 20px 20px;
+.main{width: 780px;display: inline-block;vertical-align: top;
+	padding: 10px;
 	font-size:14px;color:#333;
 	border-left: 1px solid #cccccc;
 	min-height: 500px;

@@ -1,18 +1,20 @@
 .container{width: 1000px;}
-.nav{position: absolute;top: 40px;left: 0;z-index: 2;}
+.nav{position: absolute;top: 0;left: 50px;z-index: 2;width: auto;}
+
+.main-panel{height: 100%;}
 .sidebar {
-	width: 209px;
-    padding: 10px 20px 10px 0;
+	width: 220px;
+    padding: 10px ;
     display: inline-block;
     font-size: 12px;
     overflow: auto;
-    min-height: 500px;
+    height: 100%;
     border-right: 1px solid #cccccc;
 }
 
 .sidebar ul.memu-panel li{
 	line-height: 40px;height: 40px;
-    width: 100%;
+    width: 180px;
     margin-bottom: 15px;
 }
 .sidebar ul.memu-panel li a{
@@ -25,11 +27,14 @@
     font-size: 12px;
 }
 
-.main{width: 730px;display: inline-block;vertical-align: top;
+.main{width: 779px;
+    display: inline-block;vertical-align: top;
 	padding: 20px 0 20px 20px;
 	font-size:14px;color:#333;
 	border-left: 1px solid #cccccc;
 	min-height: 500px;
+    max-height: 100%;
+    overflow: auto;
 	margin-left: -1px;
 }
 .submenu{
@@ -50,14 +55,14 @@
 }
 
 
-.sidebar-menu {width: 60px;
+.sidebar-menu {
+    width: 60px;
     padding: 0;
     display: inline-block;
     font-size: 12px;
-    min-height: 500px;
+    height: 100%;
     border-right: 1px solid #cccccc;
     vertical-align: top;
-    padding-top: 10px;
 }
 
 
@@ -98,17 +103,16 @@
     text-align: center;
     color: #f6f6f6;
 }
-.sidebar-tree {width: 209px;
-    width: 209px;
-    padding: 10px 20px 10px 0;
+.sidebar-tree {
+    width: 240px;
+    padding: 5px 0;
     display: inline-block;
     font-size: 12px;
     overflow: auto;
-    min-height: 500px;
+    height: 100%;
     border-right: 1px solid #cccccc;
-    border-left: 1px solid #cccccc;
-    margin-left: -1px;
-        vertical-align: top;
+    vertical-align: top;
 }
 
-#tree_panel .main{width: 690px;}
+.tree-panel{height: 100%;}
+.tree-panel .main{width: 700px;padding: 10px 5px;}

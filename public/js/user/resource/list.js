@@ -76,9 +76,9 @@
 				_this.searchResource();
 			});
 
-			$('.sidebar-tab').on('click', 'span', function(){
+			$('.nav-ul').on('click', 'li', function(){
 				var $this = $(this);
-				$this.addClass('active').siblings('span').removeClass('active');
+				$this.addClass('active').siblings('li').removeClass('active');
 				if($this.hasClass('info')){
 					$('#menu_panel').hide();
 					$('#tree_panel').show();

@@ -18,7 +18,7 @@
 			_this.search();
 		},
 		initEvent : function(){
-			$('.nav-tabs').on('click', 'li', function(){
+			$('#nav_tabs').on('click', 'li', function(){
 				var $this = $(this);
 				$this.addClass('active').siblings().removeClass('active');
 				var target = $this.attr('target');

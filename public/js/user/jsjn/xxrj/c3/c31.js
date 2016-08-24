@@ -80,16 +80,17 @@ nc.xxrj.c31 = {
 				content	: '01525[553x351x8BPP]',
 				click 	: 'tuomao'
 			}
-		},
-		{
-			'def' 		: '01517[208x56x8BPP]',
-			'hover'		: '01518[208x56x8BPP]',
-			'content'	: {
-				style 	: 3,
-				content	: '01525[553x351x8BPP]',
-				click 	: 'tuomao'
-			}
 		}
+		// ,
+		// {
+		// 	'def' 		: '01517[208x56x8BPP]',
+		// 	'hover'		: '01518[208x56x8BPP]',
+		// 	'content'	: {
+		// 		style 	: 3,
+		// 		content	: '01525[553x351x8BPP]',
+		// 		click 	: 'tuomao'
+		// 	}
+		// }
 	]
 };
 
@@ -149,9 +150,9 @@ nc.xxrj.c31.details = {
 							]
 						},
 						{
-							'def' 		: '01424[218x39x8BPP]',
+							'def' 		: '01422[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
-							'active'	: '01422[218x39x8BPP]',
+							'active'	: '01424[218x39x8BPP]',
 							'content'	: [
 								'01511[722x522x8BPP]'
 							]
@@ -246,9 +247,9 @@ nc.xxrj.c31.details = {
 							]
 						},
 						{
-							'def' 		: '01431[218x39x8BPP]',
+							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
-							'active'	: '01433[218x39x8BPP]',
+							'active'	: '01431[218x39x8BPP]',
 							'content'	: [
 								'01549[722x522x8BPP]'
 							]
@@ -290,7 +291,7 @@ nc.xxrj.c31.details = {
 			]
 		}
 	},
-	'lizheng' : {
+	'xiaoxi' : {
 		menu : {
 			top : '01463[225x60x8BPP]',//c1
 			mjie : [
@@ -440,9 +441,9 @@ nc.xxrj.c31.details = {
 							]
 						},
 						{
-							'def' 		: '01431[218x39x8BPP]',
+							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
-							'active'	: '01433[218x39x8BPP]',
+							'active'	: '01431[218x39x8BPP]',
 							'content'	: [
 								'01365[722x522x8BPP]'
 							]
@@ -545,9 +546,9 @@ nc.xxrj.c31.details = {
 							]
 						},
 						{
-							'def' 		: '01431[218x39x8BPP]',
+							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
-							'active'	: '01433[218x39x8BPP]',
+							'active'	: '01431[218x39x8BPP]',
 							'content'	: [
 								'01566[722x522x8BPP]'
 							]
@@ -755,9 +756,9 @@ nc.xxrj.c31.details = {
 							]
 						},
 						{
-							'def' 		: '01431[218x39x8BPP]',
+							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
-							'active'	: '01433[218x39x8BPP]',
+							'active'	: '01431[218x39x8BPP]',
 							'content'	: [
 								'01487[722x522x8BPP]'
 							]
@@ -1037,115 +1038,116 @@ nc.xxrj.c31.details = {
 				}
 			]
 		}
-	},
-	'tuomao' : {
-		content : '01519[722x522x8BPP]',
-		menu : {
-			top : '01465[225x60x8BPP]',//c1
-			mjie : [
-				{
-					style : 4,
-					'def' 		: '01374[218x45x8BPP]',
-					'hover'		: '01373[218x45x8BPP]',
-					'active'	: '01372[218x45x8BPP]',
-					menu : [
-						{
-							'def' 		: '01418[218x39x8BPP]',
-							'hover'		: '01417[218x39x8BPP]',
-							'active'	: '01416[218x39x8BPP]',
-							'content'	: [
-								'00258[381x479x8BPP]'
-							]
-						},
-						{
-							'def' 		: '01457[218x39x8BPP]',
-							'hover'		: '01456[218x39x8BPP]',
-							'active'	: '01455[218x39x8BPP]',
-							'content'	: [
-								'00269[381x479x8BPP]'
-							]
-						},
-						{
-							'def' 		: '01454[218x39x8BPP]',
-							'hover'		: '01453[218x39x8BPP]',
-							'active'	: '01452[218x39x8BPP]',
-							'content'	: [
-								'00264[381x479x8BPP]'
-							]
-						}
-					]
-				},
-				{
-					style : 3,
-					menu : [
-						{
-							'def' 		: '01371[218x45x8BPP]',
-							'hover'		: '01370[218x45x8BPP]',
-							'active'	: '01369[218x45x8BPP]',
-							'content'	: [
-								'01398[722x522x8BPP]'
-							]
-						}
-					]
-				},
-				{
-					style : 4,
-					'def' 		: '01383[218x45x8BPP]',
-					'hover'		: '01382[218x45x8BPP]',
-					'active'	: '01381[218x45x8BPP]',
-					menu : [
-						{
-							'def' 		: '01421[218x39x8BPP]',
-							'hover'		: '01420[218x39x8BPP]',
-							'active'	: '01419[218x39x8BPP]',
-							'content'	: [
-								'01399[722x522x8BPP]'
-							]
-						},
-						{
-							'def' 		: '01427[218x39x8BPP]',
-							'hover'		: '01426[218x39x8BPP]',
-							'active'	: '01425[218x39x8BPP]',
-							'content'	: [
-								'01400[722x522x8BPP]'
-							]
-						}
-					]
-				},
-				{
-					style : 4,
-					'def' 		: '01386[218x45x8BPP]',
-					'hover'		: '01385[218x45x8BPP]',
-					'active'	: '01384[218x45x8BPP]',
-					menu : [
-						{
-							'def' 		: '01436[218x39x8BPP]',
-							'hover'		: '01435[218x39x8BPP]',
-							'active'	: '01434[218x39x8BPP]',
-							'content'	: [
-								'01401[722x522x8BPP]'
-							]
-						},
-						{
-							'def' 		: '01442[218x39x8BPP]',
-							'hover'		: '01441[218x39x8BPP]',
-							'active'	: '01440[218x39x8BPP]',
-							'content'	: [
-								'01403[722x522x8BPP]'
-							]
-						},
-						{
-							'def' 		: '01424[218x39x8BPP]',
-							'hover'		: '01423[218x39x8BPP]',
-							'active'	: '01422[218x39x8BPP]',
-							'content'	: [
-								'01402[722x522x8BPP]'
-							]
-						}
-					]
-				}
-			]
-		}
 	}
+	// ,
+	// 'tuomao' : {
+	// 	content : '01519[722x522x8BPP]',
+	// 	menu : {
+	// 		top : '01465[225x60x8BPP]',//c1
+	// 		mjie : [
+	// 			{
+	// 				style : 4,
+	// 				'def' 		: '01374[218x45x8BPP]',
+	// 				'hover'		: '01373[218x45x8BPP]',
+	// 				'active'	: '01372[218x45x8BPP]',
+	// 				menu : [
+	// 					{
+	// 						'def' 		: '01418[218x39x8BPP]',
+	// 						'hover'		: '01417[218x39x8BPP]',
+	// 						'active'	: '01416[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'00258[381x479x8BPP]'
+	// 						]
+	// 					},
+	// 					{
+	// 						'def' 		: '01457[218x39x8BPP]',
+	// 						'hover'		: '01456[218x39x8BPP]',
+	// 						'active'	: '01455[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'00269[381x479x8BPP]'
+	// 						]
+	// 					},
+	// 					{
+	// 						'def' 		: '01454[218x39x8BPP]',
+	// 						'hover'		: '01453[218x39x8BPP]',
+	// 						'active'	: '01452[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'00264[381x479x8BPP]'
+	// 						]
+	// 					}
+	// 				]
+	// 			},
+	// 			{
+	// 				style : 3,
+	// 				menu : [
+	// 					{
+	// 						'def' 		: '01371[218x45x8BPP]',
+	// 						'hover'		: '01370[218x45x8BPP]',
+	// 						'active'	: '01369[218x45x8BPP]',
+	// 						'content'	: [
+	// 							'01398[722x522x8BPP]'
+	// 						]
+	// 					}
+	// 				]
+	// 			},
+	// 			{
+	// 				style : 4,
+	// 				'def' 		: '01383[218x45x8BPP]',
+	// 				'hover'		: '01382[218x45x8BPP]',
+	// 				'active'	: '01381[218x45x8BPP]',
+	// 				menu : [
+	// 					{
+	// 						'def' 		: '01421[218x39x8BPP]',
+	// 						'hover'		: '01420[218x39x8BPP]',
+	// 						'active'	: '01419[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'01399[722x522x8BPP]'
+	// 						]
+	// 					},
+	// 					{
+	// 						'def' 		: '01427[218x39x8BPP]',
+	// 						'hover'		: '01426[218x39x8BPP]',
+	// 						'active'	: '01425[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'01400[722x522x8BPP]'
+	// 						]
+	// 					}
+	// 				]
+	// 			},
+	// 			{
+	// 				style : 4,
+	// 				'def' 		: '01386[218x45x8BPP]',
+	// 				'hover'		: '01385[218x45x8BPP]',
+	// 				'active'	: '01384[218x45x8BPP]',
+	// 				menu : [
+	// 					{
+	// 						'def' 		: '01436[218x39x8BPP]',
+	// 						'hover'		: '01435[218x39x8BPP]',
+	// 						'active'	: '01434[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'01401[722x522x8BPP]'
+	// 						]
+	// 					},
+	// 					{
+	// 						'def' 		: '01442[218x39x8BPP]',
+	// 						'hover'		: '01441[218x39x8BPP]',
+	// 						'active'	: '01440[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'01403[722x522x8BPP]'
+	// 						]
+	// 					},
+	// 					{
+	// 						'def' 		: '01424[218x39x8BPP]',
+	// 						'hover'		: '01423[218x39x8BPP]',
+	// 						'active'	: '01422[218x39x8BPP]',
+	// 						'content'	: [
+	// 							'01402[722x522x8BPP]'
+	// 						]
+	// 					}
+	// 				]
+	// 			}
+	// 		]
+	// 	}
+	// }
 	//,
 }

@@ -108,16 +108,17 @@
     padding: 0;
     display: inline-block;
     font-size: 14px;
-    min-height: 500px;
+    min-height: 520px;
     /*border: 1px solid #000000;*/
     margin: 0 10px;
+    overflow: auto;
 }
 
 .detail-sys .sidebar .top{
 	margin-bottom: 80px;
 }
 .detail-sys .sidebar ul.res-menu li{
-    margin-bottom: 15px;
+    margin-bottom: 0;
     cursor: pointer;
     width: 100%;
 	text-align: center;
@@ -212,3 +213,5 @@
 	/*height: 35px;*/
 }
 .detail-sys .sidebar ul.res-menu ul.mjie3 li img{margin: 0;}
+
+.content-list{max-height: 495px;overflow: auto;}

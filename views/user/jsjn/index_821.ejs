@@ -71,12 +71,12 @@
     </script>
     <script type="text/template" id="menu-content-tpl">
       <div class="main-title">
-        {@if top}{@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}{@/if}
+        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
       </div>
       <div class="main-list">
         <ul class="main-menu-list">
           {@each jie as obj, index}
-          <li class="menu-start-list" data-click="${obj.click}" data-type="${sysType}" data-index="${index}">
+          <li data-type="${sysType}" data-index="${index}">
             <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
             <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png">
           </li>
@@ -87,36 +87,36 @@
 
     <script type="text/template" id="menu-content2-tpl">
       <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
+        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
       </div>
       <div class="main-list">
-        <ul class="main-menu-list menu-h {@if reclass}${reclass}{@/if}" >
-          {@each jie as obj, index}
-          <li class="menu-start-list" data-click="${obj.click}" data-type="${sysType}" data-index="${index}">
-            <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
-            <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png">
+        <ul class="main-menu-list">
+          <img style="${content|getImgStyle}" src="jsjn/png/${content}.png">
+        </ul>
+      </div>
+      <div class="menu-start" data-click="${click}" ><span>开始学习</span><div>
+    </script>
+
+    <script type="text/template" id="menu-content3-tpl">
+      <div class="main-title">
+        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
+      </div>
+      <div class="main-list">
+        <ul class="main-menu-list">
+          {@each videos as obj, index}
+          <li class="video-wrapper" data-type="${sysType}" data-index="${index}">
+            <video src="${obj.src}" controls='controls' preload="preload"></video>
+            <a class="video-title" target="_blank" href="${obj.link}">${obj.title}</a>
           </li>
           {@/each}
         </ul>
       </div>
     </script>
 
-    <script type="text/template" id="menu-content3-tpl">
-      <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      </div>
-      <div class="main-list">
-        <ul class="main-menu-list">
-          {@if content}<img style="${content|getImgStyle}" src="jsjn/png/${content}.png">{@/if}
-        </ul>
-      </div>
-      <div class="menu-start" data-click="${click}" ><span>开始学习</span><div>
-    </script>
-
     <!-- sub-submenu -->
     <script type="text/template" id="ss-menu-content-tpl">
       <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
+        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
       </div>
       <div class="main-list">
         <ul class="ss-main-menu-list">
@@ -132,7 +132,7 @@
 
     <script type="text/template" id="detail-menu-tpl">
     <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
-      {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
+      <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
       {@each jie as obj, index}
       <li data-index="${index}" >
         <img class="def" src="jsjn/png/${obj.def}.png" style="{@if imgStyle}${imgStyle}{@/if}${obj.def|getImgStyle}">
@@ -145,11 +145,11 @@
 
     <script type="text/template" id="detail-menu2-tpl">
     <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
-      {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
+      <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
       {@each mjie as m, jindex}
         <ul class="mjie${m.style}">
-        {@if (m.style==2 || m.style==4 ) && m.active}
-          <img style="${m.active|getImgStyle}" src="jsjn/png/${m.active}.png">
+        {@if m.style==2 && m.def}
+          <img style="${m.def|getImgStyle}" src="jsjn/png/${m.def}.png">
         {@/if}
         {@each m.menu as obj, mindex}
           <li data-index="${jindex}-${mindex}" >
@@ -165,7 +165,9 @@
     
     <script type="text/template" id="detail-content-tpl">
       <div class="detail-title">
-        {@if rightTop}<img style="${rightTop|getImgStyle}" src="jsjn/png/${rightTop}.png">{@/if}
+        {@if rightTop}
+        <img style="${rightTop|getImgStyle}" src="jsjn/png/${rightTop}.png">
+        {@/if}
       </div>
       <div class="detail-main-list">
         <ul class="content-list">
@@ -187,8 +189,6 @@
     <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c33.js"></script>
     <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c34.js"></script>
     <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c35.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c36.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c37.js"></script>
     <script type="text/javascript" src="js/user/jsjn/c4.js"></script>
     <script type="text/javascript" src="js/user/jsjn/index.js"></script>
     <script>
