@@ -87,7 +87,9 @@
 
     <script type="text/template" id="menu-content2-tpl">
       <div class="main-title">
-        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
+        {@if top}
+        <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+        {@/if}
       </div>
       <div class="main-list">
         <ul class="main-menu-list">
@@ -99,7 +101,9 @@
 
     <script type="text/template" id="menu-content3-tpl">
       <div class="main-title">
-        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
+        {@if top}
+        <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+        {@/if}
       </div>
       <div class="main-list">
         <ul class="main-menu-list">
@@ -116,7 +120,9 @@
     <!-- sub-submenu -->
     <script type="text/template" id="ss-menu-content-tpl">
       <div class="main-title">
-        <img style="${top|getImgStyle}" src="jsjn/png/${top}.png">
+        {@if top}
+        <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+        {@/if}
       </div>
       <div class="main-list">
         <ul class="ss-main-menu-list">
@@ -132,7 +138,9 @@
 
     <script type="text/template" id="detail-menu-tpl">
     <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
+      {@if top}
       <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+      {@/if}
       {@each jie as obj, index}
       <li data-index="${index}" >
         <img class="def" src="jsjn/png/${obj.def}.png" style="{@if imgStyle}${imgStyle}{@/if}${obj.def|getImgStyle}">
@@ -145,7 +153,9 @@
 
     <script type="text/template" id="detail-menu2-tpl">
     <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
+      {@if top}
       <img class="top" src="jsjn/png/${top}.png" style="${top|getImgStyle}">
+      {@/if}
       {@each mjie as m, jindex}
         <ul class="mjie${m.style}">
         {@if m.style==2 && m.def}
@@ -184,7 +194,10 @@
     <script type="text/javascript" src="js/user/jsjn/c1.js"></script>
     <script type="text/javascript" src="js/user/jsjn/c2.js"></script>
     <!--<script type="text/javascript" src="js/user/jsjn/c3.js"></script>-->
+    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c31.js"></script>
     <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c32.js"></script>
+    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c33.js"></script>
+    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c34.js"></script>
     <script type="text/javascript" src="js/user/jsjn/c4.js"></script>
     <script type="text/javascript" src="js/user/jsjn/index.js"></script>
     <script>

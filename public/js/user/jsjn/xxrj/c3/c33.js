@@ -34,7 +34,7 @@ nc.xxrj.c33 = {
 };
 
 
-nc.xxrj.c3.zj.details = {
+nc.xxrj.c33.details = {
 	'changshi' : {
 		menu : {
 			top : '00978[225x60x8BPP]',//c1
