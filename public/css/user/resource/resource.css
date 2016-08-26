@@ -5,7 +5,9 @@
   background-repeat: no-repeat;
   overflow: auto;
 }
-.container{width: 1000px;background: transparent;}
+.container{width: 1000px;
+  background: transparent;
+}
 .index-main{
   padding-top: 80px;
 }

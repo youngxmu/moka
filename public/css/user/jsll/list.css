@@ -1,5 +1,5 @@
 .container{width: 1000px;}
-.nav{position: absolute;top: 0;left: 50px;z-index: 2;}
+.nav{position: absolute;top: 0;left: 50px;z-index: 2;width: auto;}
 
 .main-panel{height: 100%;}
 .sidebar {
