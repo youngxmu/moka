@@ -11,7 +11,7 @@ router.get('/list', function (req, res, next) {
     res.render('admin/user/list');
 });
 
-//根据”创建渠道“和”是否虚拟“查询宅男
+//根据”创建渠道“和”是否虚拟“查询
 router.post('/querylist', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
@@ -19,20 +19,20 @@ router.post('/querylist', function (req, res, next) {
     var createFrom = parseInt(req.body.createFrom) || 0;//创建渠道：1后台，0前台
 
     userModel.getUserTotalCount(isVirtual, createFrom, function (totalCount) {
-        logger.info("宅男总数:", totalCount);
+        logger.info("总数:", totalCount);
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
         else totalPage = totalCount / pageSize + 1;
         totalPage = parseInt(totalPage, 10);
         var start = pageSize * (pageNo - 1);
 
-        logger.info("查找宅男:", start, pageSize);
+        logger.info("查找:", start, pageSize);
         userModel.queryUserList(isVirtual, createFrom, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
-                logger.error("查找宅男出错", err);
+                logger.error("查找出错", err);
                 res.json({
                     success: false,
-                    msg: "查找宅男出错"
+                    msg: "查找出错"
                 });
             } else {
                 for (var i in result) {
@@ -42,7 +42,7 @@ router.post('/querylist', function (req, res, next) {
                 }
                 res.json({
                     success: true,
-                    msg: "查找宅男成功",
+                    msg: "查找成功",
                     data: {
                         totalCount: totalCount,
                         totalPage: totalPage,
@@ -56,7 +56,7 @@ router.post('/querylist', function (req, res, next) {
 });
 
 
-//根据宅男id查询
+//根据id查询
 router.post('/queryUserById', function (req, res, next) {
     var userId = parseInt(req.body.userId);
 
@@ -76,13 +76,13 @@ router.post('/queryUserById', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据id查询宅男出错"
+                msg: "根据id查询出错"
             });
         }
     })
 });
 
-//根据宅男电话查询
+//根据电话查询
 router.post('/queryUserByTel', function (req, res, next) {
     var tel = req.body.tel;
 
@@ -102,13 +102,13 @@ router.post('/queryUserByTel', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据电话查询宅男出错"
+                msg: "根据电话查询出错"
             });
         }
     })
 });
 
-//根据宅男姓名模糊查询
+//根据姓名模糊查询
 router.post('/queryUserByName', function (req, res, next) {
     var name = req.body.name;
 
@@ -128,13 +128,13 @@ router.post('/queryUserByName', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据电话查询宅男出错"
+                msg: "根据电话查询出错"
             });
         }
     })
 });
 
-//根据宅男姓名模糊查询
+//根据姓名模糊查询
 router.post('/queryUserByEmail', function (req, res, next) {
     var name = req.body.email;
 
@@ -154,15 +154,12 @@ router.post('/queryUserByEmail', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据电话查询宅男出错"
+                msg: "根据电话查询出错"
             });
         }
     })
 });
 
-
-
-//创建宅男
 router.post('/create', function (req, res) {
     var tel = req.body.tel;
     var nickname = req.body.nickname;
@@ -189,8 +186,6 @@ router.post('/create', function (req, res) {
     });
 });
 
-
-//编辑修改宅男信息
 router.post('/modify', function (req, res) {
     var userId = req.body.userId;
     var tel = req.body.tel;
@@ -215,7 +210,7 @@ router.post('/modify', function (req, res) {
         });
     }
 
-    logger.info("管理员修改宅男个人信息", userId, tel, nickname, password,  beanCount, isVirtual, profile);
+    logger.info("管理员修改个人信息", userId, tel, nickname, password,  beanCount, isVirtual, profile);
 
     password = commonUtils.md5(password, "-weimo");//模拟生成手机端提交的密码
     password = commonUtils.md5(password);//加盐生成真实入库密码
@@ -223,13 +218,13 @@ router.post('/modify', function (req, res) {
         if (!err) {
             res.json({
                 success: true,
-                msg: "修改宅男信息成功"
+                msg: "修改信息成功"
             });
         } else {
-            logger.error("修改宅男个人信息发生错误", err);
+            logger.error("修改个人信息发生错误", err);
             res.json({
                 success: false,
-                msg: "修改宅男个人信息失败"
+                msg: "修改个人信息失败"
             });
         }
     });
