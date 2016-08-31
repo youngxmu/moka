@@ -30,14 +30,14 @@ router.get('/detail', function (req, res, next) {
     var name = 'young的自测试卷';
     var description = 'young的自测试卷';
     
-    questionModel.queryRandQuestions(4, 0, 4, function (err, result) {
+    questionModel.queryRandQuestions(4, 0, 24, function (err, result) {
         if (err || !result || !commonUtils.isArray(result)) {
             logger.error("查找题目出错", err);
             res.render('error', {msg: '出错啦'});
         } else {
             var  list = [];
             list = result;
-            questionModel.queryRandQuestions(2, 0, 6, function (err, result2) {
+            questionModel.queryRandQuestions(2, 0, 36, function (err, result2) {
                 if (err || !result || !commonUtils.isArray(result2)) {
                     logger.error("查找题目出错", err);
                     res.render('error', {msg: '出错啦'});

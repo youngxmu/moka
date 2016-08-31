@@ -1,19 +1,93 @@
-.main{padding: 15px;}
-.question-list{padding: 10px;
+.sidebar{width: 100px;display: inline-block;vertical-align: top;
+	height: 100%;
+    border-right: 1px solid #cccccc;
+    position: relative;
+}
+
+.sidebar .v-title{
+	width: 80px;font-size: 50px;
+	text-align: center;
+	color: #ffffff;
+	margin: auto;
+}
+.sidebar .sidebar-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	padding-bottom: 20px;
+	color: #ffffff;
+}
+
+.sidebar .sidebar-bottom .exam-time{
+	font-size: 14px;
+	line-height: 2;
+}
+
+.main{width: 900px;padding: 20px;display: inline-block;vertical-align: top;}
+.question-panel{
+	padding: 10px;
 	display: none;
-	border-bottom: 1px dashed #cccccc;
+	/*border-bottom: 1px dashed #cccccc;*/
 	display: block;
 	color :#000000;
 }
-.question-list.active{display: block;}
-.question-list .qbody{line-height: 1.5;}
-.question-list .qanswer-panel{line-height: 1.5;}
-.question-list .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
-.question-list .qanswer.selected{background: blue;color: #ffffff}
-.question-list .rtanswer{line-height: 1.5;}
+.question-panel.active{display: block;}
+.question-panel .qbody{}
+.question-panel .qanswer-panel{line-height: 1.5;}
+.question-panel .qanswer{cursor: pointer;line-height: 2;padding: 0 10px;}
+.question-panel .qanswer.selected{background: blue;color: #ffffff}
 
-.btn-wrapper{margin: 10px;}
-.btn-commit{display: inline-block;line-height: 30px;padding: 0 20px;border: 1px solid #cccccc;
+.selection-panel{padding: 20px 0; 
+	/*border-bottom: 1px solid #cccccc;*/
+}
+
+.selection-panel span{height: 30px;
+	line-height: 30px;
+	border: 1px solid #cccccc;
+	display: inline-block;
+	margin-right: 10px;
+	padding: 0 10px;
 	cursor: pointer;
 }
 
+.selection-panel span:hover{opacity: 0.7;}
+.selection-panel span.selected{
+	background-color: #70B4E0;
+	color: #ffffff;
+}
+
+.answer-panel{padding: 20px 0; }
+
+.answer-panel .answer-index{line-height:30px;padding: 0 10px;height: 30px;text-align: center;
+	margin: 0 10px 10px 0;border: 1px solid #cccccc;
+	background-color: #f6f6f6;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.answer-panel .answer-index:hover{
+	opacity: 0.7;
+}
+
+.answer-panel .answer-index.answered{
+	background-color: #70B4E0;
+	color: #ffffff;
+}
+
+.answer-panel .answer-index.selected{
+	border: 2px solid #679966;
+}
+
+
+
+.btn-wrapper{}
+.btn-commit{
+	display: inline-block;line-height: 30px;padding: 0 20px;border: 1px solid #cccccc;
+	cursor: pointer;
+}
+
+.btn-commit:hover{
+	opacity: 0.7;
+}
