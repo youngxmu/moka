@@ -13,6 +13,11 @@ router.get('', function (req, res, next) {
     res.render('user/exam/index');
 });
 
+
+router.get('login', function (req, res, next) {
+    res.render('user/exam/login');
+});
+
 router.get('/index', function (req, res, next) {
     res.render('user/exam/index');
 });
@@ -21,55 +26,13 @@ router.get('/list', function (req, res, next) {
     res.render('user/exam/list');
 });
 
-
-router.get('/detail', function (req, res, next) {
-    var name = 'young的自测试卷';
-    var description = 'young的自测试卷';
-    
-    questionModel.queryRandQuestions(4, 0, 24, function (err, result) {
-        if (err || !result || !commonUtils.isArray(result)) {
-            logger.error("查找题目出错", err);
-            res.render('error', {msg: '出错啦'});
-        } else {
-            var  list = [];
-            list = result;
-            questionModel.queryRandQuestions(2, 0, 36, function (err, result2) {
-                if (err || !result || !commonUtils.isArray(result2)) {
-                    logger.error("查找题目出错", err);
-                    res.render('error', {msg: '出错啦'});
-                } else {
-                    for(var index in result2){
-                        list.push(result2[index]);
-                    }
-                    var qidArr = [];
-                    for(var key in list){
-                        qidArr.push(list[key].id);
-                    }
-
-                    var qids = qidArr.join(',');//明文
-                   
-                    examModel.insertExam(name, description, qids, function (err, result) {
-                        if (!err) {
-                            res.render('user/exam/detail',{
-                                id : result.insertId,
-                                name : name,
-                                description : description
-                            });
-                        } else {
-                            res.render('error', {msg: '出错啦'});
-                        }
-                    });
-                }
-            });
-        }
-    });
-});
-
-
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect('user/exam/login');
+    }
+    var user = req.session.user;
     var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -79,7 +42,36 @@ router.get('/detail/:id', function (req, res, next) {
         examModel.getExamById(id, function (err, result) {
             if (!err && result) {
                 var exam = result;
-                res.render('user/exam/detail', exam);
+                examModel.queryUserExam(user.id, id, function(err, userexams){
+                    if(err){
+                        return res.render('error', {
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }
+                    if(userexams.length == 0 ){
+                        examModel.insertUserExam(user.id, id, function(err){
+                            if(err){
+                                return res.render('error', {
+                                    success: false,
+                                    msg: "根据id查询试卷出错"
+                                });
+                            }else{
+                                exam.limit = 60 * 60;        
+                                return res.render('user/exam/detail', exam);
+                            }
+                        });
+                    }else{
+                        var userexam = userexams[0];
+                        var startTime = userexam.start_time;
+                        var limit = 60 * 60 - (new Date().getTime() - startTime.getTime()) / 1000;
+                        exam.limit = limit;
+                        if(limit <= 0){
+                            exam.isover = true;
+                            return res.render('user/exam/detail', exam);
+                        }
+                    }
+                });
             } else {
                 res.render('error', {
                     success: false,
