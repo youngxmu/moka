@@ -133,7 +133,11 @@ if(config.env!='devvv'){//开发环境不需要过滤
                             return next();
                         }
                         if(url.indexOf('/paper/') != -1){
-                            return res.redirect("/paper/index");
+                            return next();
+                            // return res.redirect("/paper/index");
+                        }
+                        if(url.indexOf('/question/') != -1){
+                            return next();
                         }
                         
                         if(url.indexOf('/jsll/') != -1){

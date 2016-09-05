@@ -20,7 +20,10 @@
 		init : function() {
 			_this.tpl.menuTpl = juicer($('#menu_tpl').html());
 			// _this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
-			// _this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
+
+			
+			_this.tpl.questionTypeTpl = juicer($('#question-type-tpl').html());
+			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
 			
 			_this.initEvent();
 			_this.data.type = '理论';
@@ -42,6 +45,16 @@
 				zTree.expandAll(false);
 				$(this).removeClass('shrink').addClass('unfold').text('展开');
 			});
+
+			$('body').on('click', '.q-type-list .q-type', function(){
+				var $this = $(this);
+				var id = $this.attr('data-id');
+				var question = _this.questionMap[id];
+				var html = _this.tpl.questionListTpl.render({list:[question]});
+				$('#content_title').html($this.text());
+				$('#content').html(html);
+
+			});
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -52,10 +65,17 @@
 			}
 			if(_this.data.type == '资料'){
 				_this.initTopic();
-			}else{
+			}
+			if(_this.data.type == '理论'){
 				$('#menu_panel').show();
 				$('#topic_tree').hide();
 				_this.search();
+			}
+
+			if(_this.data.type == '题库'){
+				$('#menu_panel').hide();
+				$('#topic_tree').show();
+				_this.searchQuestions();
 			}
 		},
 		search : function(){
@@ -82,6 +102,37 @@
 				}
 			});
 		},
+		searchQuestions : function(){
+			var queryData = {
+				pageNo : 1,
+				pageSize: 1000
+			};
+			$.ajax({
+				url : 'question/list',
+				type : 'post',
+				data : queryData,
+				success : function(result){
+					if(result.success){
+						var html = _this.tpl.questionTypeTpl.render(result.data);
+						console.log(html);
+						$('#topic_tree').html(html);
+						_this.questionMap = {};
+						for(var index in result.data.list){
+							var item = result.data.list[index];
+							_this.questionMap[item.id] = item;
+							if(index == 0){
+								console.log(item);
+								$('#content_title').html(item.title);
+								$('#content').html(item.content);
+							}
+						}
+					}else{
+						$('#menu_panel').html('');
+						$('#content').html('');			
+					}
+				}
+			});
+		},
 		showContent : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');
@@ -91,8 +142,6 @@
 			$('#content_title').html(item.title);
 			$('#content').html(item.content);
 		},
-
-
 		initTopic : function() {
 			$('#menu_panel').hide();
 			$('#topic_tree').show();
@@ -196,4 +245,4 @@
 	};
 }(moka));
 
-juicer.register('formatAnswer', moka.user.paper.list.formatAnswer );
+// juicer.register('formatAnswer', moka.user.paper.list.formatAnswer );

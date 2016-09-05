@@ -4,30 +4,32 @@
     <title>军事理论考试</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/paper/paper.css' >
-    <link rel='stylesheet' href='css/user/jsll/list.css' >
+    <link rel='stylesheet' href='css/user/paper/list.css' >
   </head>
   <body>
     <div class="bg">
     <%- include ../common/header.ejs %>
-    
   	<div class="container">
       <div class="nav">
         <ul class="nav-ul">
           <li data-type="理论" class="active">
-            <a href="javascript:void(0);" >理论知识</a>
+            <a href="javascript:void(0);" >军事理论</a>
           </li>
-          <li data-type="资料">
+          <li data-type="题库">
+            <a href="javascript:void(0);" target="_blank" >题库浏览</a>
+          </li>
+          <li data-type="">
+            <a href="paper/detail" target="_blank" >模拟考试</a>
+          </li>
+          <li data-type="">
+            <a href="paper/history/list" target="_blank" >考试查询</a>
+          </li>
+          <!-- <li data-type="资料">
             <a href="javascript:void(0);" >学习资料</a>
-          </li>
-          <li data-type="">
-            <a href="paper/detail" target="_blank" >自测练习</a>
-          </li>
-          <li data-type="">
-            <a href="paper/history/list" target="_blank" >练习纪录</a>
-          </li>
-          <li data-type="">
+          </li> -->
+          <!-- <li data-type="">
             <a href="paper/examlist" target="_blank" >考试</a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="sidebar">
@@ -69,14 +71,21 @@
     {@/each}
     </script>
     
+    <script type="juicer/template" id="question-type-tpl">
+    <div class="q-type-list">
+    {@each list as obj, index}
+      <div data-id="${obj.id}" class="q-type">
+        ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
+      </div>
+    {@/each}
+    </div>
+    </script>
+
     <script type="juicer/template" id="question-list-tpl">
     {@each list as obj, index}
     <div data-id="${obj.id}" class="question-list">
-        <div class="qtype">
-          ${index|formatIndex}.&nbsp;${obj.qtype|getQType}
-        </div>
         <div class="qbody">${obj.qbody}</div>
-        {@if obj.qtype == 2}
+        {@if obj.qtype == 2 || obj.qtype == 3}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
         <div class="rtanswer">正确答案：${obj.rtanswer}</div>
@@ -117,8 +126,8 @@
     
     <script>
       $(document).ready(function() {
-            moka.user.paper.list.init();
-        });
+          moka.user.paper.list.init();
+      });
     </script>
   </body>
 </html>
