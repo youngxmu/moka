@@ -29,7 +29,7 @@ router.get('/list', function (req, res, next) {
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     if(!req.session || !req.session.user){
-        return res.redirect('user/exam/login');
+        return res.redirect(config.redirectPath + 'user/exam/login');
     }
     var user = req.session.user;
     var id = req.params.id;

@@ -14,6 +14,19 @@ router.get('/user/login', function (req, res, next) {
     res.render('user/login');
 });
 
+
+
+router.post('/user/islogin', function (req, res, next) {
+    if(req.session && req.session.user){
+        return res.json({
+            success : true
+        });
+    }
+    return res.json({
+        success : false
+    });
+});
+
 router.post('/admin/login', function (req, res, next) {
     var password = req.body.password.trim();
     var username = req.body.username.trim();
@@ -40,9 +53,7 @@ router.post('/admin/login', function (req, res, next) {
             delete admin.password;
             req.session.admin = admin;
             //登录成功
-            // res.redirect('/moka/admin/index');
-            res.redirect('/admin/index');
-            // res.send(admin);
+            res.redirect(config.redirectPath + 'admin/index');
         } else {
             res.render('error', {
                 success: false,
@@ -95,7 +106,7 @@ router.post('/user/login', function (req, res, next) {
             res.locals.username = user.name;
             //登录成功
             // res.redirect('/moka/index');
-            res.redirect('/'+view);
+            res.redirect(config.redirectPath +view);
         } else {
             return res.render(errView, {
                 success: false,
@@ -107,12 +118,12 @@ router.post('/user/login', function (req, res, next) {
 
 router.get('/admin/logout', function (req, res, next) {
     delete req.session.admin;
-    res.redirect('/auth/admin/login');
+    res.redirect(config.redirectPath + 'auth/admin/login');
 });
 
 router.get('/user/logout', function (req, res, next) {
     delete req.session.user;
-    res.redirect('/index');
+    res.redirect(config.redirectPath + 'index');
 });
 
 module.exports = router;

@@ -11,6 +11,7 @@
   		<div class="bg">
   		<%- include ../common/header.ejs %>
   		<input id="pid" value="<%= id %>" type="hidden">
+  		<input id="limit_time" value="<%= offset %>" type="hidden">
 
   		<div class="container">
   			<div class="sidebar">
@@ -18,7 +19,7 @@
   				<div class="sidebar-bottom">
   					<div class="exam-time">
   						<div>剩余时间</div>
-  						<div><span class='limit-time'>60</span>分钟</div>
+  						<div id="timer">60:00</div>
   					</div>
   					<div class="btn-wrapper" style="font-size:14px;">
 						<span id="btn_commit" class="btn btn-primary">提交</span>

@@ -9,6 +9,7 @@
 			_this.answerTpl = juicer($('#answer-tpl').html());
 			_this.initEvent();
 			_this.initQuestions();
+			_this.initCounter();
 		},
 		initData : function(){
 			_this.pid = $('#pid').val();
@@ -152,6 +153,23 @@
 				
 			}
 			return html;
+		},
+		initCounter : function(){
+			var limit = $('#limit_time').val();
+			var secs = Math.floor(limit / 1000);
+			console.log(secs);
+			var timer = setInterval(function(){
+				if(secs <= 0){
+					_this.commit();
+					util.dialog.infoDialog('考试结束自动提交啦');
+					clearInterval(timer);
+				}
+				var min = Math.floor(secs / 60);
+				var sec = secs % 60;
+				var str = min + ':' + sec;
+				secs--;
+				$('#timer').text(str);
+			}, 1000);
 		}
 	};
 }(moka));

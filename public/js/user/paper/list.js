@@ -53,8 +53,19 @@
 				var html = _this.tpl.questionListTpl.render({list:[question]});
 				$('#content_title').html($this.text());
 				$('#content').html(html);
-
 			});
+
+		 	$('body').on('click', '#login_submit', function(){
+		      	$('#ajax_login_form').ajaxSubmit(function(){
+			        if(_this.data.type == 'test'){
+			        	window.location.href=  'paper/detail';
+			        }
+
+			        if(_this.data.type == 'history'){
+			        	window.location.href=  'paper/history/list';
+			        }
+		      	});
+		    });
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -76,6 +87,35 @@
 				$('#menu_panel').hide();
 				$('#topic_tree').show();
 				_this.searchQuestions();
+			}
+
+			if(_this.data.type == 'test'){
+				$.ajax({
+					url : 'auth/user/islogin',
+					type : 'post',
+					success : function(result){
+						if(result.success){
+							
+							window.location.href=  'paper/detail';
+						}else{
+							showLogin();
+						}
+					}
+				});
+			}
+
+			if(_this.data.type == 'history'){
+				$.ajax({
+					url : 'auth/user/islogin',
+					type : 'post',
+					success : function(result){
+						if(result.success){
+							window.location.href=  'paper/history/list';
+						}else{
+							showLogin();
+						}
+					}
+				});
 			}
 		},
 		search : function(){

@@ -50,9 +50,6 @@
             <div class="btn_wrap" id="login_submit" style="height:48px;">
               <a href="javascript:void(0)" class="btn_green37">登录</a>
             </div>
-            <div style="margin:20px 0;height:48px;" class="btn_wrap">
-              <a class="btn_green37" href="user/register">注册</a>
-            </div>
           </div>
         </div>
       </form>
@@ -60,6 +57,13 @@
   </div>
 </script>
 <script>
+  var showLogin = function(){
+    var dd = dialog({
+        title: '登录',
+        content: $('#dlg-login-tpl').html()
+    });
+    dd.showModal();
+  };
   $(document).ready(function() {
     var url = window.location.href;
     var title = "国防教育资源库";
@@ -86,22 +90,8 @@
     }
     title='';
     $('#sys_title').text(title);
-    $('body').on('click', '#login_submit', function(){
-      var options = {
-          success: function (data) {
-              console.log(data);
-          }
-      };
-      // ajaxForm
-      $("#ajax_login_form")[0].submit();
-    });
-    $('#btn_login').click(function(){
-      var dd = dialog({
-          title: '登录',
-          content: $('#dlg-login-tpl').html()
-      });
-      dd.showModal();
-    });
+   
+    $('#btn_login').click(showLogin);
 
     $('#h_btn_search').click(function(){
       var keyword = $('#h_search_key').val();

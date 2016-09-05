@@ -8,6 +8,7 @@ module.exports = {
 	staticPath: path.resolve(__dirname, '..', 'public'),
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
+	redirectPath : '/',
 	imgHost: 'http://localhost:8200',
 	host: 'http://localhost:8200',
 	env: 'dev',

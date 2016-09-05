@@ -27,8 +27,9 @@ router.get('/examlist', function (req, res, next) {
 
 
 router.get('/detail', function (req, res, next) {
-    var name = 'young的自测试卷';
-    var description = 'young的自测试卷';
+    var date = commonUtils.formatNumDate(new Date());
+    var name = '练习' + date;
+    var description = '练习' + date;
     
     questionModel.queryRandQuestions(4, 0, 24, function (err, result) {
         if (err || !result || !commonUtils.isArray(result)) {
@@ -54,11 +55,7 @@ router.get('/detail', function (req, res, next) {
                    
                     paperModel.insertPaper(name, description, qids, function (err, result) {
                         if (!err) {
-                            res.render('user/paper/detail',{
-                                id : result.insertId,
-                                name : name,
-                                description : description
-                            });
+                            res.redirect(config.redirectPath + 'paper/detail/' + result.insertId);
                         } else {
                             res.render('error', {msg: '出错啦'});
                         }
@@ -72,8 +69,16 @@ router.get('/detail', function (req, res, next) {
 
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect(config.redirectPath + 'paper/list');
+    }
     var id = req.params.id;
+    console.log(req.session.user);
     var isAdmin = req.session.user ? true : false;
+    var rid = 'test' +'_'+ req.session.user.id + '_' + id;
+    var startTime = new Date().getTime();
+    var currTime = new Date().getTime();
+    var time = 60 * 60 * 1000;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
@@ -83,7 +88,40 @@ router.get('/detail/:id', function (req, res, next) {
         paperModel.getPaperById(id, function (err, result) {
             if (!err && result) {
                 var paper = result;
-                res.render('user/paper/detail', paper);
+                redisUtils.get(rid, function(err,reply){
+                    if(err){
+                        res.render('error',{
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }else{
+                        if(reply){
+                            startTime = reply;
+                            var offset = time - (currTime - startTime);
+                            
+                            if(time < 0){
+                                return res.render('msg',{
+                                    success: false,
+                                    msg: "已经参加过考试啦"
+                                });
+                            }
+                            paper.offset = offset;
+                            res.render('user/paper/detail', paper);
+                        }else{
+                            var offset = time - (currTime - startTime);
+                            if(time < 0){
+                                return res.render('msg',{
+                                    success: false,
+                                    msg: "已经参加过考试啦"
+                                });
+                            }
+                            redisUtils.set(rid, startTime, function(){
+                                paper.offset = offset;
+                                res.render('user/paper/detail', paper);                
+                            });
+                        }
+                    }
+                });
             } else {
                 res.render('error', {
                     success: false,
