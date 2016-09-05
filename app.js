@@ -46,8 +46,6 @@ if(config.env!='devvv'){//开发环境不需要过滤
     var whitelist = config.whitelist;
     app.use(function(req, res, next) {//判断是否登录的中间件
         res.locals.currDate = utils.indexDate(new Date());
-        
-        console.log(res.locals.currDate);
         res.locals.islogin = true;
 
    // return next();
@@ -86,7 +84,6 @@ if(config.env!='devvv'){//开发环境不需要过滤
                 if(!name){
                     name = req.session.user.email;
                 }
-                console.log(name);
                 res.locals.username = name;
                 var sid = req.session.id;
                 var uid = req.session.user.id;

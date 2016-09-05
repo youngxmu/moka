@@ -26,11 +26,12 @@
 		},
 		search : function(){
 			var username = $('#user_name').val();
-			var tel = $('#tel').val();
+			var tel = $('#user_tel').val();
 
 			_this.queryData.pageNo = 1;
 			_this.queryData.username = username;
 			_this.queryData.tel = tel;
+			console.log(_this.queryData);
 			$.ajax({
 				type : 'post',
 				url : _this.searchUrl,
@@ -42,6 +43,9 @@
 			});
 		},
 		initPage : function(result) {
+			if(!result.success){
+				return alert('查询出错');
+			}
 			var data = result.data;
 		    $('#user_list').html(_this.tpl.userListTpl.render(data));
 

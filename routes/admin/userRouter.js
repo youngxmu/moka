@@ -8,7 +8,11 @@ var userModel = require('../../models/userModel.js');
 var router = express.Router();
 
 router.get('/list', function (req, res, next) {
-    res.render('admin/user/list');
+    var type = 2;
+    if(req.session && req.session.admin && req.session.admin.type == 1){
+        type = 1;
+    }
+    res.render('admin/user/list', {type: type});
 });
 
 //根据”创建渠道“和”是否虚拟“查询

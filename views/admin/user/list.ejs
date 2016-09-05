@@ -9,7 +9,7 @@
     <%- include ../common/header.ejs %>
   	<div class="container">
         <ul class="nav nav-tabs">
-            <li data-type="1" ><a href="admin/teacher/list">教师管理</a></li>
+            <% if(type == 1){ %><li data-type="1" ><a href="admin/teacher/list">教师管理</a></li><%}%>
             <li data-type="2" class="active"><a href="admin/user/list">学员管理</a></li>
         </ul>
     	<div class="search-panel" >

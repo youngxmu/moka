@@ -50,7 +50,7 @@ exports.del = function (id, callback) {
 
 
 //根据“是否虚拟”“创建来源”查找宅男列表
-exports.queryTeacherList = function (username, tel, star4t, pageSize, callback) {
+exports.queryTeacherList = function (username, tel, start, pageSize, callback) {
 	var params = [];
 	var sql = 'select * from admin where 1 = 1 ';
 	if(username){
@@ -62,7 +62,7 @@ exports.queryTeacherList = function (username, tel, star4t, pageSize, callback) 
 	sql += ' order by create_time desc limit ?,?;';
 	params.push(start);
 	params.push(pageSize);
-    db.query(sql,[], callback);
+    db.query(sql,params, callback);
 };
 
 //根据“是否虚拟”“创建来源”查找宅男总数

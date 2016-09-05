@@ -22,6 +22,8 @@ router.post('/list', function (req, res, next) {
             msg : '没有权限'
         });
     }
+
+
     var username = req.body.username;
     var tel = req.body.tel;
     var pageNo = parseInt(req.body.pageNo);
