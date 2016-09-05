@@ -131,6 +131,7 @@
 			var $this = $(this);
 			var id = $this.attr('data-id');
 			var paper = _this.data.paperMap[id];
+			console.log(paper);
 			if(!paper.questions){
 			 	$.ajax({
 					type : 'post',
@@ -140,7 +141,7 @@
 						if(!result.success){
 							return false;
 						}else{
-							paper = result.paper;
+							paper = result.exam;
 							_this.data.paperMap[id] = paper;
 						}
 					}

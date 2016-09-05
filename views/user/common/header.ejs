@@ -56,11 +56,44 @@
     </div>
   </div>
 </script>
+
+<script type="juicer/template" id="dlg-admin-tpl">
+  <div class="login_bg">
+    <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>
+      <form method="post" id="ajax_admin_form" action="auth/admin/login">
+        <input name="type" value="1" type="hidden"><!--普通用户登录-->
+        <div class="login_con">
+          <div class="login_list">
+            <div class="login_line">
+              <p>邮箱</p>
+              <input type="text" id="username" placeholder="用户名" name="username" class="input_text" >
+            </div>
+            <div class="login_line">
+              <p>密码</p>
+              <input type="password" id="password" placeholder="密码" name="password" class="input_text">
+            </div>
+            <div class="btn_wrap" id="admin_login_submit" style="height:48px;">
+              <a href="javascript:void(0)" class="btn_green37">登录</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>
+
 <script>
   var showLogin = function(){
     var dd = dialog({
         title: '登录',
         content: $('#dlg-login-tpl').html()
+    });
+    dd.showModal();
+  };
+  var showAdminLogin = function(){
+    var dd = dialog({
+        title: '登录',
+        content: $('#dlg-admin-tpl').html()
     });
     dd.showModal();
   };

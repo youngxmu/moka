@@ -133,6 +133,10 @@ if(config.env!='devvv'){//开发环境不需要过滤
                             return next();
                             // return res.redirect("/paper/index");
                         }
+                        if(url.indexOf('/exam/') != -1){
+                            return next();
+                            // return res.redirect("/paper/index");
+                        }
                         if(url.indexOf('/question/') != -1){
                             return next();
                         }

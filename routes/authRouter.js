@@ -15,6 +15,16 @@ router.get('/user/login', function (req, res, next) {
 });
 
 
+router.post('/admin/islogin', function (req, res, next) {
+    if(req.session && req.session.admin){
+        return res.json({
+            success : true
+        });
+    }
+    return res.json({
+        success : false
+    });
+});
 
 router.post('/user/islogin', function (req, res, next) {
     if(req.session && req.session.user){

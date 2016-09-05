@@ -3,8 +3,48 @@
 	_this = P.user.paper = {
 		init : function(){
 			$('#nav_llks').addClass('aHover');
+			_this.initEvent();
 		},
 		initEvent : function(){
+			$('body').on('click', '#exam', function(){
+				$.ajax({
+					url : 'auth/user/islogin',
+					type : 'post',
+					success : function(result){
+						if(result.success){
+							window.location.href=  'exam/list';
+						}else{
+							showLogin();
+						}
+					}
+				});
+			});
+
+			$('body').on('click', '#exam_manage', function(){
+				$.ajax({
+					url : 'auth/admin/islogin',
+					type : 'post',
+					success : function(result){
+						if(result.success){
+							window.location.href=  'admin/paper/list';
+						}else{
+							showAdminLogin();
+						}
+					}
+				});
+			});
+
+			$('body').on('click', '#login_submit', function(){
+		      	$('#ajax_login_form').ajaxSubmit(function(){
+		        	window.location.href=  'exam/list';
+		      	});
+		    });
+
+		    $('body').on('click', '#admin_login_submit', function(){
+		      	$('#ajax_admin_form').ajaxSubmit(function(){
+		        	window.location.href=  'admin/paper/list';
+		      	});
+		    });
 		},
 		formatAnswer : function(answerStr){
 			var answerArr = answerStr.split(',');

@@ -20,6 +20,7 @@ var moka = {
 		user : {},
 		vote : {},
 		paper : {},
+		exam : {},
 		paperhistory : {},
 		question : {},
 		article : {},

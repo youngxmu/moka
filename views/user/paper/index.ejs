@@ -28,7 +28,7 @@
                   <div class="sys-info-txt">学习</div>
               </div>
             </a>
-            <a href="paper/exam">
+            <a id="exam" href="javascript:void(0);">
               <div class="sys-info">
                   <div class="sys-info-img">
                     <img src="img/paper/study.png" class="img-thumbnail">
@@ -36,7 +36,7 @@
                   <div class="sys-info-txt">考试</div>
               </div>
             </a>
-            <a href="admin/paper/list" target="_blank">
+            <a id="exam_manage" href="javascript:void(0);" target="_blank">
               <div class="sys-info">
                   <div class="sys-info-img">
                       <img src="img/paper/study.png" class="img-thumbnail">
@@ -48,5 +48,9 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="js/user/paper/paper.js"></script>
+    <script type="text/javascript" >
+      moka.user.paper.init();
+    </script>
   </body>
 </html>

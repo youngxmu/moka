@@ -1,9 +1,9 @@
 var express = require('express');
 var config = require("../../config");
 var commonUtils = require("../../lib/utils.js");
-var logger = require("../../lib/log.js").logger("paperRouter");
+var logger = require("../../lib/log.js").logger("examRouter");
 
-var paperModel = require('../../models/paperModel.js');
+var examModel = require('../../models/examModel.js');
 var questionModel = require('../../models/questionModel.js');
 
 var router = express.Router();
@@ -20,16 +20,13 @@ router.post('/list', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
 
-    paperModel.queryPaperTotalCount(name, function (totalCount) {
-        logger.info("试卷总数:", totalCount);
+    examModel.queryExamTotalCount(name, function (totalCount) {
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
         else totalPage = totalCount / pageSize + 1;
         totalPage = parseInt(totalPage, 10);
         var start = pageSize * (pageNo - 1);
-
-        logger.info("查找试卷:", start, pageSize);
-        paperModel.queryPapers(name, start, pageSize, function (err, result) {
+        examModel.queryExams(name, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找试卷出错", err);
                 res.json({
@@ -61,20 +58,20 @@ router.post('/detail/:id', function (req, res, next) {
             msg: "根据id查询试卷出错"
         });
     }else{
-        paperModel.getPaperById(id, function (err, result) {
+        examModel.getExamById(id, function (err, result) {
             if (!err && result) {
-                var paper = result;
-                questionModel.queryQuestionsByIds(paper.qids, function(err, result){
+                var exam = result;
+                questionModel.queryQuestionsByIds(exam.qids, function(err, result){
                     if(err){
                         res.json({
                             success: false,
                             msg: "根据id查询试卷出错"
                         });
                     }else{
-                        paper.questions = result;
+                        exam.questions = result;
                         res.json({
                             success: true,
-                            paper : paper
+                            exam : exam
                         });
                     }
                 });
@@ -100,15 +97,11 @@ router.get('/detail/:id', function (req, res, next) {
             msg: "根据id查询试卷出错"
         });
     }else{
-        paperModel.getPaperById(id, function (err, result) {
+        examModel.getExamById(id, function (err, result) {
             if (!err && result) {
-                var paper = result;
-                paper.isAdmin = isAdmin;
-                paper.update_time = commonUtils.formatDate(new Date(paper.update_time));
-                paper.file_name = config.imgHost + '/uploads/' + paper.file_name;
-                paper.menuList = menuUtils.getMenuPathList(paper.menu_id);
-                paper.file_type = commonUtils.getFileTypeName(paper.file_name);
-                res.render('admin/paper/detail', paper);
+                var exam = result;
+                exam.isAdmin = isAdmin;
+                res.render('admin/paper/detail', exam);
             } else {
                 res.render('error', {
                     success: false,
@@ -135,7 +128,7 @@ router.post('/save', function (req, res) {
     
     
     if(id == null || id == undefined){
-        paperModel.insertPaper(name, description, qids, function (err, data) {
+        examModel.insertExam(name, description, qids, function (err, data) {
             if (!err) {
                 res.json({
                     success: true,
@@ -151,7 +144,7 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改试卷信息", id);
-        paperModel.updatePaper(id, name, description, qids, function (err, result) {
+        examModel.updateExam(id, name, description, qids, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,
@@ -186,7 +179,7 @@ router.post('/del', function (req, res) {
         });
     }else{
         logger.info("管理员删除试卷信息", id);
-        paperModel.delPaper(id, function (err, result) {
+        examModel.delExam(id, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,

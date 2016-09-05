@@ -9,6 +9,8 @@ var indexRouter = require('./routes/indexRouter.js');
 
 /** user */
 var userPaperRouter = require('./routes/user/paperRouter.js');
+var userExamRouter = require('./routes/user/examRouter.js');
+
 var userQuestionRouter = require('./routes/user/questionRouter.js');
 var userArticleRouter = require('./routes/user/articleRouter.js');
 var userResourceRouter = require('./routes/user/resourceRouter.js');
@@ -53,6 +55,8 @@ module.exports = function (app) {
     app.use('/expert', userExpertRouter);//通用文件上传
     
     app.use('/paper', userPaperRouter);//主页
+    app.use('/exam', userExamRouter);//主页
+    
     app.use('/question', userQuestionRouter);//主页
     
     app.use('/jsll', userJSLLSupportRouter);//主页

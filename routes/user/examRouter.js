@@ -23,13 +23,16 @@ router.get('/index', function (req, res, next) {
 });
 
 router.get('/list', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect(config.redirectPath + 'paper/index');
+    }
     res.render('user/exam/list');
 });
 
 //根据试卷id查询
 router.get('/detail/:id', function (req, res, next) {
     if(!req.session || !req.session.user){
-        return res.redirect(config.redirectPath + 'user/exam/login');
+        return res.redirect(config.redirectPath + 'paper/index');
     }
     var user = req.session.user;
     var id = req.params.id;
