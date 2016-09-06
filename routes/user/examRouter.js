@@ -389,18 +389,18 @@ router.post('/history/detail/:id', function (req, res, next) {
         });
     }
 
-     var id = req.params.id;
-    examModel.getExamHistoryById(id, function (err, result) {
-          if (!err && result) {
-              var history = result;
-              examModel.getExamById(history.pid, function (err, result) {
-                if (!err && result) {
-                    var exam = result;
+    var id = req.params.id;
+    examModel.getExamHistoryById(id, function (err, examHistory) {
+            if (!err && examHistory) {
+              var history = examHistory;
+              examModel.getExamById(history.exam_id, function (err, exam) {
+                if (!err && exam) {
                     questionModel.queryQuestionsByIds(exam.qids, function(err, result){
                         if(err){
+                            logger.error('queryQuestionsByIds', err);
                             res.json({
                                 success: false,
-                                msg: "根据id查询试卷出错"
+                                msg: "网络异常，刷新重试"
                             });
                         }else{
                             exam.questions = result;
@@ -417,18 +417,19 @@ router.post('/history/detail/:id', function (req, res, next) {
                         }
                     });
                 } else {
+                    logger.error('getExamById', err);
                      res.json({
                         success: false,
-                        msg: "根据id查询试卷出错"
+                        msg: "网络异常，刷新重试"
                     });
                 }
             });
-
           } else {
-              res.json({
-                  success: false,
-                  msg: "根据id查询试卷出错"
-              });
+            logger.error('getExamHistoryById', err);
+            res.json({
+                success: false,
+                msg: "网络异常，刷新重试"
+            });
           }
       });
 });
