@@ -46,7 +46,9 @@
       
       <div class="oper">
         <span data-id="${obj.id}" class="view">
-          <a href="exam/detail/${obj.id}" target＝"_blank">开始考试</a>
+          {@if obj.uestatus == 0}<a href="exam/detail/${obj.id}" target＝"_blank">开始考试</a>{@/if}
+          {@if obj.uestatus == 1}<a href="exam/detail/${obj.id}" target＝"_blank">继续答题</a>{@/if}
+          {@if obj.uestatus == 2}<a href="exam/uhistory/${obj.id}"   target＝"_blank">查看成绩</a>{@/if}
         </span>
       </div>
     </div>

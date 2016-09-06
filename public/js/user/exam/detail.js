@@ -41,6 +41,12 @@
 				var $answerPanelIndex = $('#answer_panel').find('.answer-index-panel').eq(index);
 				$answerPanelIndex.addClass('answered');
 				$answerPanelIndex.find('.curr-answer').attr('data-answer', answer).text(answer);
+
+				var scoreVal = 1;
+				if(type != 2){
+					scoreVal = 2;
+				}
+				$('#content_title').text(_this.currQuestion.index + '.' + question.getQType(_this.currQuestion.qtype) + '分值：' + score);
 				// console.log(_this.questionsMap[_this.currQuestion.id]);
 			});
 
@@ -156,16 +162,18 @@
 		},
 		initCounter : function(){
 			var limit = $('#limit_time').val();
-			var secs = Math.floor(limit / 1000);
-			console.log(secs);
+			var secs = Math.floor(limit);
 			var timer = setInterval(function(){
 				if(secs <= 0){
 					_this.commit();
-					util.dialog.infoDialog('考试结束自动提交啦');
-					clearInterval(timer);
+					util.dialog.toastDialog('考试结束自动提交');
+					return clearInterval(timer);
 				}
 				var min = Math.floor(secs / 60);
 				var sec = secs % 60;
+				if(sec < 10){
+					src = '0' + sec;
+				}
 				var str = min + ':' + sec;
 				secs--;
 				$('#timer').text(str);

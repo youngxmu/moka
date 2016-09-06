@@ -7,6 +7,7 @@
 		},
 		initEvent : function(){
 			$('body').on('click', '#exam', function(){
+
 				$.ajax({
 					url : 'auth/user/islogin',
 					type : 'post',
@@ -35,7 +36,8 @@
 			});
 
 			$('body').on('click', '#login_submit', function(){
-		      	$('#ajax_login_form').ajaxSubmit(function(){
+		      	$('#ajax_login_form').ajaxSubmit(function(data){
+		      		// console.log(data);
 		        	window.location.href=  'exam/list';
 		      	});
 		    });

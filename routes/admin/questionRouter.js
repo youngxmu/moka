@@ -174,7 +174,7 @@ router.post('/del', function (req, res) {
 
 
 router.post('/random', function (req, res, next) {
-    questionModel.queryRandQuestions(4, 0, 10, function (err, result) {
+    questionModel.queryRandQuestions(4, 0, 20, function (err, result) {
         if (err || !result || !commonUtils.isArray(result)) {
             logger.error("查找题目出错", err);
             res.json({
@@ -184,7 +184,7 @@ router.post('/random', function (req, res, next) {
         } else {
             var  list = [];
             list = result;
-            questionModel.queryRandQuestions(2, 0, 50, function (err, result2) {
+            questionModel.queryRandQuestions(2, 0, 40, function (err, result2) {
                 if (err || !result || !commonUtils.isArray(result2)) {
                     logger.error("查找题目出错", err);
                     res.json({

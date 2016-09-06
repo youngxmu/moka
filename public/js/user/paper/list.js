@@ -56,7 +56,7 @@
 			});
 
 		 	$('body').on('click', '#login_submit', function(){
-		      	$('#ajax_login_form').ajaxSubmit(function(){
+		      	$('#ajax_login_form').ajaxSubmit(function(data){
 			        if(_this.data.type == 'test'){
 			        	window.location.href=  'paper/detail';
 			        }

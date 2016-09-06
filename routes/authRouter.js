@@ -95,6 +95,7 @@ router.post('/user/login', function (req, res, next) {
     }
 
     password = commonUtils.md5(password);
+    console.log('user logining' + email);
     userModel.queryUserByEmail(email, function (err, result) {
         if (!err && commonUtils.isArray(result) && result.length > 0) {
             var user = result[0];
@@ -116,6 +117,7 @@ router.post('/user/login', function (req, res, next) {
             res.locals.username = user.name;
             //登录成功
             // res.redirect('/moka/index');
+            console.log('user login');
             res.redirect(config.redirectPath +view);
         } else {
             return res.render(errView, {

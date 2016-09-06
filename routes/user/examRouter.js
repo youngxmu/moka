@@ -49,7 +49,7 @@ router.get('/detail/:id', function (req, res, next) {
                     if(err){
                         return res.render('error', {
                             success: false,
-                            msg: "根据id查询试卷出错"
+                            msg: "网络异常，刷新重试"
                         });
                     }
                     if(userexams.length == 0 ){
@@ -57,7 +57,7 @@ router.get('/detail/:id', function (req, res, next) {
                             if(err){
                                 return res.render('error', {
                                     success: false,
-                                    msg: "根据id查询试卷出错"
+                                    msg: "网络异常，刷新重试"
                                 });
                             }else{
                                 exam.limit = 60 * 60;        
@@ -69,9 +69,21 @@ router.get('/detail/:id', function (req, res, next) {
                         var startTime = userexam.start_time;
                         var limit = 60 * 60 - (new Date().getTime() - startTime.getTime()) / 1000;
                         exam.limit = limit;
-                        if(limit <= 0){
+                        console.log(userexam.status);
+                        if(limit <= 0 || userexam.status == 2){
                             exam.isover = true;
-                            return res.render('user/exam/detail', exam);
+                            examModel.updateUserExamStatus(user.id, id, function(err, result){
+                                if(err){
+                                    return res.render('error', {
+                                        success: false,
+                                        msg: "网络异常"
+                                    });
+                                }else{
+                                    return res.redirect(config.redirectPath + 'exam/history/list');
+                                }
+                            });
+                        }else{
+                            return res.render('user/exam/detail', exam);    
                         }
                     }
                 });
@@ -85,161 +97,70 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
-
-router.get('/exam/:id', function (req, res, next) {
-    var id = req.params.id;
-    var startTime = new Date().getTime();
-    var rid = 'exam' +'_'+ req.session.user.id + '_' + id;
-    redisUtils.get(rid, function(err,reply){
-        if(err){
-            res.render('error',{
-                success: false,
-                msg: "根据id查询试卷出错"
-            });
-        }else{
-            if(reply){
-                startTime = reply;
-                var currTime = new Date().getTime();
-                var time = 45 * 60 * 1000;
-                var offset = time - (currTime - startTime);
-                
-                if(time < 0){
-                    return res.render('msg',{
-                        success: false,
-                        msg: "已经参加过考试啦"
-                    });
-                }
-                
-                console.log(offset);
-                req.session.user.startTime = startTime;
-                req.session.user.examid = id;
-                examModel.getExamById(id, function (err, result) {
-                    if (!err && result) {
-                        var exam = result;
-                        questionModel.queryQuestionsByIds(exam.qids, function(err, result){
-                            if(err){
-                                res.render('error',{
-                                    success: false,
-                                    msg: "根据id查询试卷出错"
-                                });
-                            }else{
-                                exam.questions = result;
-                                exam.offset = offset;
-                                res.render('user/exam/exam',exam);
-                            }
-                        });
-                    } else {
-                        res.render('error',{
-                            success: false,
-                            msg: "根据id查询试卷出错"
-                        });
-                    }
-                });
-            }else{
-                var currTime = new Date().getTime();
-                var time = 45 * 60 * 1000;
-                var offset = time - (currTime - startTime);
-                
-                if(time < 0){
-                    return res.render('msg',{
-                        success: false,
-                        msg: "已经参加过考试啦"
-                    });
-                }
-                console.log(offset);
-                redisUtils.set(rid, startTime, function(){
-                    req.session.user.startTime = startTime;
-                    req.session.user.examid = id;
-                    examModel.getExamById(id, function (err, result) {
-                        if (!err && result) {
-                            var exam = result;
-                            questionModel.queryQuestionsByIds(exam.qids, function(err, result){
-                                if(err){
-                                    res.render('error',{
-                                        success: false,
-                                        msg: "根据id查询试卷出错"
-                                    });
-                                }else{
-                                    exam.questions = result;
-                                    exam.offset = offset;
-                                    res.render('user/exam/exam',exam);
-                                }
-                            });
-                        } else {
-                            res.render('error',{
-                                success: false,
-                                msg: "根据id查询试卷出错"
-                            });
-                        }
-                    });
-                });
-            }
-        }
-
-    });
-});
-
-router.get('/history/list', function (req, res, next) {
-    res.render('user/exam/history-list');
-});
-
-//根据试卷id查询
-router.get('/history/detail/:id', function (req, res, next) {
-    var id = req.params.id;
-    examModel.getExamHistoryById(id, function (err, result) {
-        if (!err && result) {
-            var exam = result;
-            res.render('user/exam/history-detail', exam);
-        } else {
-            res.render('error', {
-                success: false,
-                msg: "根据id查询试卷出错"
-            });
-        }
-    });
-});
-
-
 router.post('/list', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.json({success:false,msg:'未登录'});
+    }
+    var user = req.session.user;
     var name = req.body.name;
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
 
-    examModel.queryExamTotalCount(name, function (totalCount) {
-        logger.info("试卷总数:", totalCount);
-        var totalPage = 0;
-        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
-        else totalPage = totalCount / pageSize + 1;
-        totalPage = parseInt(totalPage, 10);
-        var start = pageSize * (pageNo - 1);
+    examModel.queryUserExams(user.id, function(err, uexams){
+        if (err) {
+            return res.json({
+                success: false,
+                msg: "查找试卷出错"
+            });
+        }
+        var uexamMap = {};
+        for(var index in uexams){
+            var uexam = uexams[index];
+            uexamMap[uexam.id] = uexam;
+        }
 
-        logger.info("查找试卷:", start, pageSize);
-        examModel.queryExams(name, start, pageSize, function (err, result) {
-            if (err || !result || !commonUtils.isArray(result)) {
-                logger.error("查找试卷出错", err);
-                res.json({
-                    success: false,
-                    msg: "查找试卷出错"
-                });
-            } else {
-                res.json({
-                    success: true,
-                    msg: "查找试卷成功",
-                    data: {
-                        totalCount: totalCount,
-                        totalPage: totalPage,
-                        currentPage: pageNo,
-                        list: result
+        examModel.queryExamTotalCount(name, function (totalCount) {
+            var totalPage = 0;
+            if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+            else totalPage = totalCount / pageSize + 1;
+            totalPage = parseInt(totalPage, 10);
+            var start = pageSize * (pageNo - 1);
+            examModel.queryExams(name, start, pageSize, function (err, result) {
+                if (err || !result || !commonUtils.isArray(result)) {
+                    res.json({
+                        success: false,
+                        msg: "查找试卷出错"
+                    });
+                } else {
+                    for(var i in result){
+                        var examId = result[i].id;
+                        var status = 0;//用户试卷关系0:未参加，1:正在进行,2:已交卷
+                        if(uexamMap[examId]){
+                            status = uexamMap[examId].status;
+                        }
+                        result[i].uestatus = status;
                     }
-                });
-            }
+                    res.json({
+                        success: true,
+                        msg: "查找试卷成功",
+                        data: {
+                            totalCount: totalCount,
+                            totalPage: totalPage,
+                            currentPage: pageNo,
+                            list: result
+                        }
+                    });
+                }
+            });
         });
     });
 });
 
 router.post('/detail/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.json({success:false,msg:'未登录'});
+    }
     var id = req.params.id;
-    var isAdmin = req.session.user ? true : false;
     if(id == null || id == undefined){
         res.json({
             success: false,
@@ -256,6 +177,13 @@ router.post('/detail/:id', function (req, res, next) {
                             msg: "根据id查询试卷出错"
                         });
                     }else{
+                        var answerArr = [];
+                        for(var index in result){
+                            var question = result[index];
+                            answerArr.push(question.rtanswer+'_'+question.type);
+                            delete result[index].rtanswer;
+                        }
+                        req.session.user.rtAnswers = answerArr.join(',');
                         exam.questions = result;
                         res.json({
                             success: true,
@@ -276,45 +204,71 @@ router.post('/detail/:id', function (req, res, next) {
 
 //创建试卷
 router.post('/commit', function (req, res) {
-    var pid = req.body.id;
-    var answer = req.body.answer;
     var user = req.session.user;
-    console.log(user);
-    var uid = user.id;
     if(!user){
         return res.json({
             success: false,
             msg: "请登录"
         });
     }
+
+    var id = req.body.id;
+    var answer = req.body.answer;
+    var uid = user.id;
     
-    
-    if(pid == null || pid == undefined){
-        res.json({
+    if(id == null || id == undefined){
+        return res.json({
             success: false,
-            msg: "答题失败"
+            msg: "异常参数"
         });
-    }else{
-        if(req.session && req.session.user && req.session.user.examid){
-            var examid = req.session.user.examid;
-            var startTime = req.session.user.startTime;
-            var currTime = new Date().getTime();
-            var offset = currTime - startTime;
-            var time = 45 * 60 * 1000;
-            if(examid == pid && offset > time){
-                return res.json({
-                    success: false,
-                    msg: "考试已结束"
-                });
+    }
+    examModel.queryUserExam(user.id, id, function(err, userexams){
+        if(err || userexams.length == 0){
+            return res.render('error', {
+                success: false,
+                msg: "异常，请刷新页面重试"
+            });
+        }
+        
+        var userexam = userexams[0];
+        var startTime = userexam.start_time;
+        var limit = 60 * 60 - (new Date().getTime() - startTime.getTime()) / 1000;
+        if(userexam.status == 2){
+            return res.json({
+                success: false,
+                msg: "考试已结束"
+            });
+        }
+        var answerArr = req.session.user.rtAnswers.split(',');
+        var userAnswer = answer.split(',');
+        var score = 0;
+        for(var index in answerArr){
+            var strs = answerArr[index].split('_');
+            if(strs[0] == userAnswer[index]){
+                if(strs[1] == 2){
+                    score+=1;
+                }else{
+                    score+=2;
+                }
             }
         }
-        examModel.insertExamHistory(uid, pid, answer, function (err, data) {
+        examModel.insertExamHistory(uid, id, answer, score, function (err, data) {
             if (!err) {
-                res.json({
-                    success: true,
-                    msg: "提交成功",
-                    data : data
+                logger.error('insertExamHistory', err);
+                examModel.updateUserExamStatus(user.id, id, function(err, result){
+                    if(err){
+                        return res.json({
+                            success: false,
+                            msg: "提交失败"
+                        });
+                    }
+                    return res.json({
+                        success: true,
+                        msg: "提交成功",
+                        data : data
+                    });
                 });
+                
             } else {
                 res.json({
                     success: false,
@@ -322,10 +276,58 @@ router.post('/commit', function (req, res) {
                 });
             }
         });
-        
-    }
+    });
 });
 
+
+router.get('/history/list', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect(config.redirectPath + 'paper/index');
+    }
+    res.render('user/exam/history-list');
+});
+
+
+router.get('/uhistory/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect(config.redirectPath + 'paper/index');
+    }
+    var user = req.session.user;
+    var id = req.params.id;
+    examModel.getExamHistoryByUidEid(user.id, id, function (err, result) {
+        if (!err && result) {
+            var exam = result;
+            res.render('user/exam/history-detail', exam);
+        }else {
+            logger.error('getExamHistoryByUidEid', err);
+            res.render('error', {
+                success: false,
+                msg: "根据id查询试卷出错"
+            });
+        }
+    });
+});
+
+//根据试卷id查询
+router.get('/history/detail/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.redirect(config.redirectPath + 'paper/index');
+    }
+    var id = req.params.id;
+    examModel.getExamHistoryById(id, function (err, result) {
+        logger.error('getExamHistoryById', err);
+        if (!err && result) {
+            var exam = result;
+            res.render('user/exam/history-detail', exam);
+        }else {
+            logger.error('getExamHistoryById', err);
+            res.render('error', {
+                success: false,
+                msg: "根据id查询试卷出错"
+            });
+        }
+    });
+});
 
 //根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/history/list', function (req, res, next) {
@@ -380,8 +382,15 @@ router.post('/history/list', function (req, res, next) {
 });
 
 router.post('/history/detail/:id', function (req, res, next) {
+    if(!req.session || !req.session.user){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
+
      var id = req.params.id;
-      examModel.getExamHistoryById(id, function (err, result) {
+    examModel.getExamHistoryById(id, function (err, result) {
           if (!err && result) {
               var history = result;
               examModel.getExamById(history.pid, function (err, result) {
