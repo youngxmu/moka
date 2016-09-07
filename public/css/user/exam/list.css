@@ -17,7 +17,6 @@
 }
 .building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
 
-
 .paper-list-title{font-size: 0;}
 .paper-list-title div{display: inline-block;text-align: center;font-size: 14px;font-weight: bold;
     border-bottom: 1px solid #cccccc;line-height: 2;
@@ -31,5 +30,4 @@
 .paper-list div:nth-child(1){width: 360px;}
 .paper-list div:nth-child(2){width: 460px;}
 .paper-list div:nth-child(3){width: 100px;text-align: center;}
-
 .paper-list .oper span{cursor: pointer;margin-left: 5px;color: blue;}

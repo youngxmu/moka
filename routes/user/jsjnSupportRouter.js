@@ -16,6 +16,10 @@ router.get('/index', function (req, res, next) {
     res.render('user/jsjn/index');
 });
 
+router.get('/sys', function (req, res, next) {
+    res.render('user/jsjn/sys');
+});
+
 
 router.get('/list', function (req, res, next) {
     res.render('user/jsjn/list');

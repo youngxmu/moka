@@ -172,7 +172,7 @@
 				var min = Math.floor(secs / 60);
 				var sec = secs % 60;
 				if(sec < 10){
-					src = '0' + sec;
+					sec = '0' + sec;
 				}
 				var str = min + ':' + sec;
 				secs--;

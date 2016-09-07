@@ -1,5 +1,5 @@
 .bg{
-  background-image: url('../../../img/bg_w7.jpg');
+  background-image: url('../../../img/sky.jpg');
   width: 100%;height: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -23,21 +23,22 @@
 
 
 .index-main .sys-logo{
-  width: 100%;
+  width: 600px;
   height: 120px;
   background-image: url("../../../img/logo.png");
   background-position: center left;
   background-size: auto 120px;
   background-repeat: no-repeat;
   margin: 0 auto;
+  padding-left: 120px;
 }
 
 .index-main .sys-title{
-  width: 750px;
+  width: 480px;
   height: 120px;
   background-image: url("../../../img/jsll_title.png");
   background-position: center left;
-  background-size: auto 120px;
+  background-size: auto 100px;
   background-repeat: no-repeat;
   margin: 0 auto;
   margin-top: 20px;
@@ -53,22 +54,24 @@
 
 .index-main .sys-enter{
   width: 100%;
-  text-align: right;
+  text-align: center;
   margin-top: 60px;
 }
-
-.index-main .sys-enter .btn{
+.index-main .sys-enter .btn{width: 170px;}
+/*.index-main .sys-enter .btn{
   font-size: 20px;
-  background-color: rgba(255,255,255,0.4);
-  color: #121212;
-  line-height: 2;
-  padding: 0 60px 0 60px;
-  border-radius: 5px;
+  background-color: rgba(17, 72, 126,0.6);
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 0;
+  line-height: 50px;
+  border: 2px solid #11487e;
   cursor: pointer;
-}
+}*/
 
 .index-main .sys-enter .btn a{
-    color: #333;
+    color: #f6f6f6;
     text-decoration: none;
 }
 .index-main .sys-enter .btn:hover{

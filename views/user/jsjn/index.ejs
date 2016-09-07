@@ -4,197 +4,261 @@
     <title>军事技能学习</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/jsjn/jsjn.css' >
-    <link rel='stylesheet' href='css/user/jsjn/index.css' >
-    <link rel='stylesheet' href='css/user/jsjn/sub-sys.css' >
-    <link rel='stylesheet' href='css/user/jsjn/ss-sys.css' >
-    <link rel='stylesheet' href='css/user/jsjn/detail-sys.css' >
+    <style type="text/css">
+    .header{
+        display: none;
+    }
+    .container{
+        background: transparent;
+    }
+    </style>
   </head>
   <body>
     <div class="bg">
+        <%- include ../common/header.ejs %>
         <div class="container">
-            <div id="main_sys" class="wrapper main-sys" >
-                <div class="sidebar">
-                  <ul id="menu_bar" class="res-menu"></ul>
-                </div>
-                <div id="menu_content" class="main"></div>
-            </div>
-
-            <div id="sub_sys" class="wrapper sub-sys" >
-                <div class="sidebar">
-                  <ul id="sub_menu_bar" class="res-menu"></ul>
-                </div>
-                <div id="sub_menu_content" class="main"></div>
-                <div class="sub-footer">
-                  <span class="sub-back"></span>
-                  <span class="sub-exit"></span>
+            <div class="index-main" >
+                <div class="sys-logo"> <div class="sys-title"></div></div>
+                <div class="sys-enter">
+                  <div class="btn btn-lg btn-primary btn-shadow"><a href="jsjn/list">进入系统</a></div>
                 </div>
             </div>
-
-            <div id="ss_sys" class="wrapper ss-sys" >
-                <div class="sidebar">
-                  <ul id="ss_menu_bar" class="res-menu"></ul>
-                </div>
-                <div id="ss_menu_content" class="main"></div>
-                <div class="ss-footer">
-                  <span class="ss-back"></span>
-                  <span class="ss-exit"></span>
-                </div>
-            </div>
-
-            <div id="detail_sys" class="wrapper detail-sys" >
-                <div id="detail_menu_bar" class="sidebar">
+            <div class="main" style="display:none;">
+                <div class="login-panel">
+                  <div class="sys-info">
+                    <div class="sys-info-txt">
+                      军事技能资源，图像，文章，课件，视频，都在这里
+                    </div>
+                    <div class="sys-info-img">
+                      <div class="">
+                        <img src="img/jsjn/h.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/l.jpg" class="img-thumbnail">
+                      </div>
+                      <div class="">
+                        <img src="img/jsjn/k.jpg" class="img-thumbnail">
+                      </div>  
+                    </div>
+                  </div>
+                  
+                  <div class="login-bg">
+                    <form method="post" action="auth/user/login">
+                      <h3>登录</h3>
+                      <input type="hidden" name="sysType" value="jsjn">
+                      <input class="form-control" name="email" type="text" placeholder="用户名/邮箱">
+                      <input class="form-control" name="password" type="password" placeholder="密码">
+                      <% if(typeof errmsg != 'undefined'){%>
+                      <div class="alert alert-danger" role="alert"><%= errmsg %></div>
+                      <% } %>
+                      <div class="login-btn-wrapper">
+                        <button type="submit" class="btn btn-primary">登录</button>
+                        <a href="user/register" class="btn btn-primary" role="button">注册</a>
+                      </div>
+                    </form>
+                  </div>
                   
                 </div>
-                <div id="detail_menu_content" class="main"></div>
-                <div class="detail-footer">
-                  <span class="detail-exit"></span>
-                  <span class="detail-page-first"></span>
-                  <span class="detail-page-pre"></span>
-                  <span class="detail-page-next"></span>
-                  <span class="detail-page-last"></span>
-                  <span class="detail-page-go">
-                    <input id="page_no" value="1">
-                  </span>
-                  <span class="detail-back"></span>
-                </div>
             </div>
-
         </div>
     </div>
-    <script type="text/template" id="menu-tpl">
-    {@each list as obj, index}
-    <li data-index="${index}" >
-      <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
-      <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png" >
-    </li>
-    {@/each}
-    </script>
-    <script type="text/template" id="menu-content-tpl">
-      <div class="main-title">
-        {@if top}{@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}{@/if}
-      </div>
-      <div class="main-list">
-        <ul class="main-menu-list">
-          {@each jie as obj, index}
-          <li class="menu-start-list" data-click="${obj.click}" data-type="${sysType}" data-index="${index}">
-            <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
-            <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png">
-          </li>
-          {@/each}
-        </ul>
-      </div>
-    </script>
-
-    <script type="text/template" id="menu-content2-tpl">
-      <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      </div>
-      <div class="main-list">
-        <ul class="main-menu-list menu-h {@if reclass}${reclass}{@/if}" >
-          {@each jie as obj, index}
-          <li class="menu-start-list" data-click="${obj.click}" data-type="${sysType}" data-index="${index}">
-            <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
-            <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png">
-          </li>
-          {@/each}
-        </ul>
-      </div>
-    </script>
-
-    <script type="text/template" id="menu-content3-tpl">
-      <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      </div>
-      <div class="main-list">
-        <ul class="main-menu-list">
-          {@if content}<img style="${content|getImgStyle}" src="jsjn/png/${content}.png">{@/if}
-        </ul>
-      </div>
-      <div class="menu-start" data-click="${click}" ><span>开始学习</span><div>
-    </script>
-
-    <!-- sub-submenu -->
-    <script type="text/template" id="ss-menu-content-tpl">
-      <div class="main-title">
-        {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      </div>
-      <div class="main-list">
-        <ul class="ss-main-menu-list">
-          {@each jie as obj, index}
-          <li data-type="${sysType}" data-index="${index}">
-            <img class="def"    style="${obj.def|getImgStyle}" src="jsjn/png/${obj.def}.png" >
-            <img class="hover"  style="${obj.def|getImgStyle}" src="jsjn/png/${obj.hover}.png">
-          </li>
-          {@/each}
-        </ul>
-      </div>
-    </script>
-
-    <script type="text/template" id="detail-menu-tpl">
-    <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
-      {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      {@each jie as obj, index}
-      <li data-index="${index}" >
-        <img class="def" src="jsjn/png/${obj.def}.png" style="{@if imgStyle}${imgStyle}{@/if}${obj.def|getImgStyle}">
-        <img class="hover" src="jsjn/png/${obj.hover}.png" style="{@if imgStyle}${imgStyle}{@/if}${obj.hover|getImgStyle}">
-        <img class="active" src="jsjn/png/${obj.active}.png" style="{@if imgStyle}${imgStyle}{@/if}${obj.active|getImgStyle}">
-      </li>
-      {@/each}
-    </ul>
-    </script>
-
-    <script type="text/template" id="detail-menu2-tpl">
-    <ul class="res-menu {@if detailMenuStyle}detail${detailMenuStyle}-res-menu{@/if}">
-      {@if top}<img style="${top|getImgStyle}" src="jsjn/png/${top}.png">{@/if}
-      {@each mjie as m, jindex}
-        <ul class="mjie${m.style}">
-        {@if (m.style==2 || m.style==4 ) && m.active}
-          <img style="${m.active|getImgStyle}" src="jsjn/png/${m.active}.png">
-        {@/if}
-        {@each m.menu as obj, mindex}
-          <li data-index="${jindex}-${mindex}" >
-            <img class="def" src="jsjn/png/${obj.def}.png" style="${obj.def|getImgStyle}">
-            <img class="hover" src="jsjn/png/${obj.hover}.png" style="${obj.hover|getImgStyle}">
-            <img class="active" src="jsjn/png/${obj.active}.png" style="${obj.active|getImgStyle}">
-          </li>
-        {@/each}
-        </ul>
-      {@/each}
-    </ul>
-    </script>
+    <script type="text/javascript" src="js/lib/jquery.easing.js"></script>
     
-    <script type="text/template" id="detail-content-tpl">
-      <div class="detail-title">
-        {@if rightTop}<img style="${rightTop|getImgStyle}" src="jsjn/png/${rightTop}.png">{@/if}
-      </div>
-      <div class="detail-main-list">
-        <ul class="content-list">
-          {@each content as obj, index}
-          <li class="content {@if index == 0}current{@/if}" data-index="${index}" >
-            <img class="def" src="jsjn/png/${obj}.png" style="${obj|getImgStyle}">
-          </li>
-          {@/each}
-        </ul>
-      </div>
-    </script>
-
-    <script type="text/javascript" src="js/user/jsjn/nc.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/c1.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/c2.js"></script>
-    <!--<script type="text/javascript" src="js/user/jsjn/c3.js"></script>-->
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c31.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c32.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c33.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c34.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c35.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c36.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/xxrj/c3/c37.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/c4.js"></script>
-    <script type="text/javascript" src="js/user/jsjn/index.js"></script>
     <script>
-        $(function () {
-            moka.user.jsjn.index.init();
+      $(function () {
+
+    //云彩类
+    function Cloud(eParent, iIndex) {
+        this.iIndex = iIndex;
+        this.eParent = eParent;
+        this.sClassName = '';
+        this.arrZIndex = [0, 1, 2, 3];
+        this._init();
+    }
+    Cloud.prototype = {
+        constructor: Cloud,
+        _getClassName: function () {
+            return 'cloud-' + Math.floor(Math.random() * 5);
+        },
+        _getLateTime: function () {
+            return this.iIndex * 1E4;
+        },
+        _getTotalTime: function () {
+            return Math.floor(Math.random() * 5E4);
+        },
+        _init: function () {
+            var _this = this;
+            this.eCloud = $("<div class='cloud'></div>");
+            this.eParent.append(this.eCloud);
+            this._resetAttr();
+            window.setTimeout(function () {
+                _this.move();
+            }, _this._getLateTime());
+        },
+        _resetAttr: function () {
+            var sClassName = this._getClassName()
+            this.eCloud.removeClass(this.sClassName).addClass(sClassName);
+            this.sClassName = sClassName;
+            this.eCloud.css({
+                'left': window.screen.width,
+                'top': Math.floor(Math.random() * 640 - this.eCloud.height() / 2),
+                'z-index': this.arrZIndex[Math.floor(Math.random() * 4)]
+            })
+        },
+        move: function () {
+            var _this = this;
+            _this.eCloud.animate({ 'left': -this.eCloud.width() }, 5E4, 'Linear', function () {
+                _this._resetAttr();
+                _this.move();
+            });
+        }
+    }
+
+    //启动云飘到
+    ; (function () {
+        var iTotal = 5, eTarget = $('#slide_content');
+        while (iTotal--) {
+            new Cloud(eTarget, iTotal);
+        }
+    })();
+
+    //添加步骤
+    function addStepsFn() {
+        $.extend(this, {
+            inScene: function () {
+                this.nextIn();
+            },
+            outScene: function (callback) {
+                callback && (this.outCallback = callback);
+                this.nextOut();
+            },
+            nextIn: function () {
+                this.inSteps[this.iStep]();
+                this.iStep++;
+            },
+            nextOut: function () {
+                this.iStep--;
+                if (this.iStep < 0) {
+                    this.iStep = 0
+                }
+                else {
+                    this.outSteps[this.iStep]();
+                }
+            }
         });
+    }
+    //自定义动画
+    function Animate(animateFn, endCallBack) {
+        this.iTimer = 0;
+        this.animateFn = animateFn;
+        this.iTotal = 120;
+        this.iT = 0;
+        this.endCallBack = endCallBack;
+    }
+    Animate.prototype = {
+        constructor: Animate,
+        stop: function () {
+            this.iT = 0;
+            window.clearTimeout(this.iTimer);
+        },
+        act: function () {
+            var _this = this;
+            this.iTimer = window.setTimeout(function () {
+                _this.iT++
+                if (_this.iT < _this.iTotal) {
+                    if (_this.animateFn(_this.iT)) {
+                        _this.stop();
+                        _this.endCallBack();
+                    } else {
+                        _this.act();
+                    }
+                } else {
+                    _this.stop();
+                    _this.endCallBack();
+                }
+            }, 13);
+        }
+    }
+
+    //场景类
+    var Scene0 = {
+        init: function () {
+            this.eStage = $('#stage_0');
+            this.eComputer = $('#computer');
+            this.eTitleList = $('#title-list-c li');
+            this.eC = $('#slider_0')
+            this.inSteps = [];
+            this.outSteps = [];
+            this.iStep = 0;
+            this.outCallback = null;
+            addStepsFn.call(this);
+            this.iTimer = 0;
+
+            this.setSteps();
+        },
+        stop: function () {
+            this.eStage.stop();
+            this.eComputer.stop();
+            this.eTitleList.stop();
+            window.clearTimeout(this.iTimer);
+        },
+        setSteps: function () {
+            var _this = this;
+            this.inSteps = [
+                function () {
+                    _this.eStage.show();
+                    _this.eC.show();
+                    _this.eStage.removeClass('slider-0-animate').css('opacity', 1).addClass('slider-0-animate').delay(1E3);
+                    _this.iTimer = window.setTimeout(function () {
+                        _this.nextIn();
+                    }, 1.2E3);
+                },
+                function () {
+                    _this.eComputer.stop().show().animate({
+                        left: 280
+                    }, 1E3, 'easeOutBack', function () { _this.nextIn(); });
+                },
+                function () {
+                    var iLen = _this.eTitleList.length, iIndex = 0, eTemp = null;
+                    for (; iIndex < iLen; iIndex++) {
+                        eTemp = _this.eTitleList[iIndex];
+                        $(eTemp).stop().delay(300 * iIndex).show().animate({
+                            left: 0
+                        }, .8E3, 'easeOutBounce');
+                    }
+
+                }
+           ];
+            this.outSteps = [
+                function () {
+                    _this.eStage.stop().css({ 'transform': '' }).animate({
+                        'opacity': 0
+                    }, .3E3, function () { _this.eC.hide(); _this.outCallback && _this.outCallback(); });
+                },
+                function () {
+                    _this.eComputer.stop().show().animate({
+                        left: 1000
+                    }, 1E3, 'easeOutBack', function () { _this.nextOut(); });
+                },
+                function () {
+                    var iLen = _this.eTitleList.length, iIndex = 0, eTemp = null, iCur = 0;
+                    for (; iIndex < iLen; iIndex++) {
+                        eTemp = _this.eTitleList[iIndex];
+                        $(eTemp).stop().delay(100 * iIndex).animate({
+                            left: -160
+                        }, .5E3, 'easeOutBack', function () {
+                            iCur++;
+                            $(this).hide();
+                            if (iCur == iLen) {
+                                _this.nextOut();
+                            }
+                        });
+                    }
+                } ];
+        }
+    }
+  
+});
     </script>
   </body>
 </html>
