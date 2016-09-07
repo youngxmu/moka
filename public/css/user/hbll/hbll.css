@@ -1,5 +1,5 @@
 .bg{
-  background-image: url('../../../img/bg_sunset.jpg');
+  background-image: url('../../../img/cloud.png');
   width: 100%;height: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -68,14 +68,15 @@
   opacity: 0.6;
 }
 
-.sys-info{height: auto}
+.sys-info{height: 320px;}
 
 .login-panel{
-  padding-top: 80px;
+  padding-top: 80px;height: 320px;
 }
 .login-bg{
-  top: 250px;
+  top: 290px;
   right: 0;
+  height: 320px;
   
 }
 .login-bg p:first-child{
@@ -86,3 +87,7 @@
   line-height: 2;
 }
 
+.sys-info-img {
+    height: 320px;
+}
+.sys-info-img img{ height: 320px;}

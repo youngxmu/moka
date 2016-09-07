@@ -1,4 +1,6 @@
-.container{width: 1000px;position: relative;}
+.container{width: 1000px;position: relative;height: 100%;
+  background-color: #C7EDCC;
+}
 /** 主页面 */
 .main{color: #ffffff;padding: 10px;}
 /*.nav{margin-bottom: 15px;}*/
@@ -75,3 +77,5 @@
 .expert-edit .expert-questions dt{vertical-align: top;}
 .expert-edit .expert-questions dd{height: 400px;overflow: auto;}
 .expert-edit .expert-questions .btn-edit-questions{color: blue;cursor: pointer;}
+
+

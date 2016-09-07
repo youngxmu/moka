@@ -16,14 +16,14 @@
 
 
 .index-main .sys-logo{
-  width: 600px;
+  width: 610px;
   height: 120px;
   background-image: url("../../../img/logo.png");
   background-position: center left;
   background-size: auto 120px;
   background-repeat: no-repeat;
   margin: 0 auto;
-  padding-left: 120px;
+  padding-left: 130px;
 }
 
 .index-main .sys-title{

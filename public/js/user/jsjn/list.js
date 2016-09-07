@@ -86,7 +86,7 @@
 			var id = $this.attr('data-id');
 			console.log(id);
 			if(id == 130202){
-				return window.open('jsjn/index');
+				return window.open('jsjn/sys');
 			}
 			$.ajax({
 				url : 'index/info/view/' + id,

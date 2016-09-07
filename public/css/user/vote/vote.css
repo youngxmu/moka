@@ -1,12 +1,16 @@
 .bg{
-  background-image: url('../../../img/data.jpg');
+  background-image: url('../../../img/sky.jpg');
   width: 100%;height: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: auto;
 }
-.container{width: 1000px;background: transparent;
-  background-color: rgba(255,255,255,0.5);
+.container{width: 1000px;
+  height: 100%;
+  overflow: auto;
+  background-size: 100%;
+  /*background: transparent;
+  background-color: rgba(255,255,255,0.5);*/
 }
 
 .index-main{
@@ -14,22 +18,24 @@
 }
 
 
+
 .index-main .sys-logo{
-  width: 100%;
+  width: 610px;
   height: 120px;
   background-image: url("../../../img/logo.png");
   background-position: center left;
   background-size: auto 120px;
   background-repeat: no-repeat;
   margin: 0 auto;
+  padding-left: 130px;
 }
 
 .index-main .sys-title{
-  width: 750px;
+  width: 480px;
   height: 120px;
   background-image: url("../../../img/vote_title.png");
   background-position: center left;
-  background-size: auto 120px;
+  background-size: auto 100px;
   background-repeat: no-repeat;
   margin: 0 auto;
   margin-top: 20px;
@@ -45,27 +51,16 @@
 
 .index-main .sys-enter{
   width: 100%;
-  text-align: right;
+  text-align: center;
   margin-top: 60px;
 }
-
-.index-main .sys-enter .btn{
-  font-size: 20px;
-  background-color: rgba(255,255,255,0.4);
-  color: #121212;
-  line-height: 2;
-  padding: 0 60px 0 60px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
+.index-main .sys-enter .btn{width: 170px;}
 .index-main .sys-enter .btn a{
-    color: #333;
+    color: #f6f6f6;
     text-decoration: none;
 }
 .index-main .sys-enter .btn:hover{
   opacity: 0.6;
 }
 
-.sys-info{height: auto;margin-top: 50px;}
-
+.sys-info{height: auto}

@@ -91,4 +91,6 @@
 .t-preview img{width: 80%;height: auto;}
 .t-preview video{width: 80%;height: auto;}
 
+.panel{height: 100%;overflow: auto;}
+
 

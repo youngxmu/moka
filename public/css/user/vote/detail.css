@@ -1,11 +1,12 @@
 .container{width: 1000px;
-	background-image: url("../../../img/bg-clouds.png");
+	/*background-image: url("../../../img/bg-clouds.png");*/
 	background-color: #4DA5E4;
 	padding: 0;
 }
 .main{
-	width: 940px;
-	margin: 30px;
+	    width: 100%;
+    padding: 30px;
+    height: 100%;
 }
 
 .panel{
