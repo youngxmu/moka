@@ -23,9 +23,11 @@
 			_this.tpl.articleTpl  = juicer($('#article-tpl').html());
 			_this.tpl.topListTpl = juicer($('#top-resource-tpl').html());
 			_this.tpl.resourceTpl = juicer($('#resource-tpl').html());
+			_this.tpl.msgTpl = juicer($('#message-tpl').html());
 			_this.initEditor();
 			_this.initEvent();
 			_this.showEditor(100101);
+			
 		},
 		initEvent : function(){
 			$('#btn_commit').click(_this.commit);
@@ -51,6 +53,8 @@
 
 			$('body').on('click', '.btnup', _this.up);
 			$('body').on('click', '.btndown', _this.down);
+
+			_this.initMsgEvent();
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -62,6 +66,8 @@
 			$('#list_panel').hide();
 			$('#tree_panel').hide();
 			$('#pic_panel').hide();
+			$('#msg_panel').hide();
+			
 			if(type == 1 || type == 2 || type == 3 || type == 6){
 				_this.showEditor(mid);
 				$('#editor_panel').show();
@@ -87,6 +93,10 @@
 				$('#pic_panel').show();
 			}
 
+			if(type == 8){
+				_this.loadMsg();
+				$('#msg_panel').show();
+			}
 		},
 		loadNews : function(){
 			var $panel = $('#news_panel');
@@ -140,9 +150,9 @@
 				},
 				success : function(data){
 					if(data.success){
-						alert('修改成功');
+						util.dialog.infoDialog('修改成功');
 					}else{
-						alert('修改失败');
+						util.dialog.infoDialog('修改失败');
 					}
 				},
 				complete : function(){
@@ -278,7 +288,7 @@
 							if(result.success){
 								_this.searchResource();
 							}else{
-								alert(result.msg);
+								util.dialog.infoDialog(result.msg);
 							}
 							
 						}
@@ -291,6 +301,17 @@
 		initEditor : function(){
 			_this.editor = new Simditor({
 			  	textarea: $('#editor'),
+			  	upload : {
+			    	url: 'upload/img',
+				    params: null,
+				    fileKey: 'upload_file',
+				    connectionCount: 3,
+				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+			  	}
+			});
+
+			_this.msgEditor = new Simditor({
+			  	textarea: $('#msg_editor'),
 			  	upload : {
 			    	url: 'upload/img',
 				    params: null,
@@ -318,7 +339,7 @@
 						if(data.success){
 							_this.editor.setValue(data.data.content);
 						}else{
-							alert(data.msg);
+							util.dialog.infoDialog(data.msg);
 						}
 					}
 				});
@@ -362,11 +383,11 @@
 				},
 				success : function(data){
 					if(data.success){
-						alert('置顶成功');
+						util.dialog.infoDialog('置顶成功');
 						_this.loadTop();
 						_this.loadRes();
 					}else{
-						alert(data.msg);
+						util.dialog.infoDialog(data.msg);
 					}
 				}
 			});
@@ -384,11 +405,96 @@
 				},
 				success : function(data){
 					if(data.success){
-						alert('取消成功');
+						util.dialog.infoDialog('取消成功');
 						_this.loadTop();
 						_this.loadRes();
 					}else{
-						alert(data.msg);
+						util.dialog.infoDialog(data.msg);
+					}
+				}
+			});
+		},
+		initMsgEvent : function(){
+			$('body').on('click', '.msg-list-panel ul li', _this.selectMsg);
+			$('body').on('click', '#btn_add_msg', _this.addMsg);
+			$('body').on('click', '#btn_del_msg', _this.delMsg);
+			$('body').on('click', '#btn_save_msg', _this.saveMsg);
+		},
+		loadMsg : function(){
+			var queryData = {
+				pageNo : 1,
+				pageSize : 7
+			};
+			$.ajax({
+				type : "post",
+				url : 'admin/message/list',
+				data : _this.data.searchData,
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						var html = _this.tpl.msgTpl.render(result.data);
+						$('#msg_list_panel').html(html);
+						_this.data.msgMap = {};
+						for(var index in result.data.list){
+							var message = result.data.list[index];
+							_this.data.msgMap[message.id] = message;
+						}
+					}
+				}
+			});
+		},
+		selectMsg : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id'); 
+			_this.data.msgId = id;
+			$this.addClass('active').siblings('li').removeClass('active');
+			var message = _this.data.msgMap[id];
+			$('#msg_title').val(message.title);
+			_this.msgEditor.setValue(message.content);
+		},
+		addMsg : function(){
+			_this.data.msgId = '';
+			$('#msg_title').val('');
+			_this.msgEditor.setValue('');
+		},
+		delMsg : function(){
+			if(_this.data.msgId){
+				util.dialog.infoDialog('未选中信息');
+			}else{
+				$.ajax({
+					type : "post",
+					url : 'admin/message/del',
+					data : data,
+					success : function(result){
+						if(!result.success){
+							return util.dialog.infoDialog(result.msg);
+						}else{
+							_this.loadMsg();
+							util.dialog.toastDialog('删除成功');
+						}
+					}
+				});
+			}
+		},
+		saveMsg : function(){
+			var data = {
+				title : $('#msg_title').val(),
+				content : _this.msgEditor.getValue()
+			};
+			if(_this.data.msgId){
+				data.id = _this.data.msgId;
+			}
+			$.ajax({
+				type : "post",
+				url : 'admin/message/save',
+				data : data,
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						_this.loadMsg();
+						util.dialog.toastDialog('保存成功');
 					}
 				}
 			});

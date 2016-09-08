@@ -21,7 +21,7 @@ var userExpertRouter = require('./routes/user/expertRouter.js');
 var userJSLLSupportRouter = require('./routes/user/jsllSupportRouter.js');
 var userJSJNSupportRouter = require('./routes/user/jsjnSupportRouter.js');
 var userHBLLSupportRouter = require('./routes/user/hbllRouter.js');
-
+var userMessageRouter = require('./routes/user/messageRouter.js');
 
 /**admin*/
 var adminIndexRouter = require('./routes/admin/indexRouter.js');
@@ -39,12 +39,12 @@ var adminVoteRouter = require('./routes/admin/voteRouter.js');
 var adminJSLLRouter = require('./routes/admin/jsllRouter.js');
 var adminJSJNRouter = require('./routes/admin/jsjnRouter.js');
 var adminHBLLRouter = require('./routes/admin/hbllRouter.js');
-
+var adminMessageRouter = require('./routes/admin/messageRouter.js');
 
 
 module.exports = function (app) {
     app.use('/auth', authRouter);//登录
-    app.use('/index', indexRouter);//主页
+    app.use('/index', indexRouter);
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
 
@@ -54,33 +54,35 @@ module.exports = function (app) {
     app.use('/resource', userResourceRouter);//通用文件上传
     app.use('/expert', userExpertRouter);//通用文件上传
     
-    app.use('/paper', userPaperRouter);//主页
-    app.use('/exam', userExamRouter);//主页
+    app.use('/paper', userPaperRouter);
+    app.use('/exam', userExamRouter);
     
-    app.use('/question', userQuestionRouter);//主页
+    app.use('/question', userQuestionRouter);
     
-    app.use('/jsll', userJSLLSupportRouter);//主页
-    app.use('/jsjn', userJSJNSupportRouter);//主页
-    app.use('/vote', userVoteRouter);//主页
-    app.use('/hbll', userHBLLSupportRouter);//主页
+    app.use('/jsll', userJSLLSupportRouter);
+    app.use('/jsjn', userJSJNSupportRouter);
+    app.use('/vote', userVoteRouter);
+    app.use('/hbll', userHBLLSupportRouter);
+    app.use('/message', userMessageRouter);
 
-
-    app.use('/admin', adminIndexRouter);//主页
-    app.use('/admin/article', adminArticleRouter);//主页
-    app.use('/admin/resource', adminResourceRouter);//主页
+    app.use('/admin', adminIndexRouter);
+    app.use('/admin/article', adminArticleRouter);
+    app.use('/admin/resource', adminResourceRouter);
     
-    app.use('/admin/check', adminCheckRouter);//主页
-    app.use('/admin/user', adminUserRouter);//主页
-    app.use('/admin/question', adminQuestionRouter);//主页
-    app.use('/admin/paper', adminPaperRouter);//主页
-    app.use('/admin/expert', adminExpertRouter);//主页
-    app.use('/admin/vote', adminVoteRouter);//主页
+    app.use('/admin/check', adminCheckRouter);
+    app.use('/admin/user', adminUserRouter);
+    app.use('/admin/question', adminQuestionRouter);
+    app.use('/admin/paper', adminPaperRouter);
+    app.use('/admin/expert', adminExpertRouter);
+    app.use('/admin/vote', adminVoteRouter);
 
-    app.use('/admin/jsll', adminJSLLRouter);//主页
-    app.use('/admin/jsjn', adminJSJNRouter);//主页
-    app.use('/admin/hbll', adminHBLLRouter);//主页
+    app.use('/admin/jsll', adminJSLLRouter);
+    app.use('/admin/jsjn', adminJSJNRouter);
+    app.use('/admin/hbll', adminHBLLRouter);
 
-    app.use('/admin/teacher', adminTeacherRouter);//主页
+    app.use('/admin/teacher', adminTeacherRouter);
+
+    app.use('/admin/message', adminMessageRouter);
 
     
     

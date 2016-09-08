@@ -84,6 +84,14 @@
     {@/each}
     </script>
 
+    <script type="text/template" id="msg_list_tpl">
+    {@each list as res}
+    <li>
+      <a href="index/msg/${res.id}" target="_blank">${res.title}</a>
+    </li>
+    {@/each}
+    </script>
+
     <script type="text/javascript" src="js/index/index.js"></script>
     <script>
       $('#nav_index').addClass('active');

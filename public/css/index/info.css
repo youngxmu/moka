@@ -1,7 +1,7 @@
 .container{
   width: 1000px;
 }
-::-webkit-scrollbar{width:12px;height:12px}
+/*::-webkit-scrollbar{width:12px;height:12px}
 ::-webkit-scrollbar-button:vertical{display:none}
 ::-webkit-scrollbar-track:vertical{background-color:black}
 ::-webkit-scrollbar-track-piece{background: #FDFDFD;}
@@ -55,11 +55,11 @@
    -ms-animation: animate-cloud 20s linear infinite;
    -o-animation: animate-cloud 20s linear infinite;
    animation: animate-cloud 20s linear infinite;
-}
+}*/
 
 .desc-panel{
   margin: 15px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.9);
   padding: 15px;
   line-height: 1.5;
 }

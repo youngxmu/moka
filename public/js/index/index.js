@@ -14,7 +14,7 @@
 		},
 		init : function() {
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
-
+			_this.tpl.msgListTpl = juicer($('#msg_list_tpl').html());
 			_this.initEvent();
 			_this.loadNews();
 			_this.loadInfos();
@@ -101,7 +101,7 @@
 			var $panel = $('#gfjy');
 			var sendData = _this.queryData;
 				sendData.mid = 9;
-			var tpl = _this.tpl.articleListTpl;
+			var tpl = _this.tpl.msgListTpl;
 			var searchUrl = 'index/gfjy';
 			$.ajax({
 				type : 'post',

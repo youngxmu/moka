@@ -10,7 +10,7 @@ var newsModel = require('../models/newsModel.js');
 var indexModel = require('../models/indexModel.js');
 var menuModel = require('../models/menuModel.js');
 var resourceModel = require('../models/resourceModel.js');
-
+var messageModel = require('../models/messageModel.js');
 
 var router = express.Router();
 
@@ -35,18 +35,56 @@ router.post('/news', function (req, res, next) {
 
 
 router.post('/gfjy', function (req, res, next) {
-    articleModel.getArticleByMenu(9, 1, 8,function(err, results){
-        if(err){
-            return res.json({
-                success : false
-            });
-        }else{
-            return res.json({
-                success : true,
-                list : results
-            });
-        }
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+    messageModel.queryMessageTotalCount(function (totalCount) {
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+        messageModel.queryMessageList(start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找出错"
+                });
+            } else {
+                for (var i in result) {
+                    delete result[i].passwd;
+                    delete result[i].im_passwd;
+                    result[i].create_time = new Date(result[i].create_time).getTime();
+                }
+                res.json({
+                    success: true,
+                    msg: "查找成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
     });
+});
+
+//根据id查询
+router.get('/msg/:id', function (req, res, next) {
+    var id = req.params.id;
+    messageModel.getMessageById(id, function (err, msg) {
+        if (!err) {
+            console.log(msg);
+            msg.create_time = new Date(msg.create_time).getTime();
+            msg.title = '国防教育信息';
+            msg.link = 'index';
+            res.render('index/msg', msg);
+        } else {
+            res.render('error');
+        }
+    })
 });
 
 var infoData = {
