@@ -53,3 +53,8 @@
 	white-space: normal;
 	text-align: left;
 }
+
+
+#canvas_question_panel .question-list{
+	display: block;
+}

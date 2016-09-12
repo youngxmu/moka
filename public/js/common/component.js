@@ -164,8 +164,7 @@ var component = {};
 	var _this = null;
 	_this = component.chart = {
 		callback : function(){},
-		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${rtanswer}</div></div>',
-		
+		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatCanvasAnswer}</div>{@/if}</div>',
 		paperId : null,
 		questions : null,
 		historys : null,
@@ -187,7 +186,7 @@ var component = {};
 				_this.callback = options.callback;
 			_this.chartId = options.chartId;
 			
-			var content = '<div id="question_panel" style="display:inline-block;width:400px;float:left;margin-right:30px;"></div><div style="width:300px;height:300px;display:inline-block"><canvas id="canvas" width="400" height="400"></canvas></div>';
+			var content = '<div id="canvas_question_panel" style="display:inline-block;width:400px;float:left;margin-right:30px;"></div><div style="width:300px;height:300px;display:inline-block"><canvas id="canvas" width="400" height="400"></canvas></div>';
         	var d = dialog({
 			    title: '答题统计',
 			    content: content,
@@ -276,7 +275,7 @@ var component = {};
 	 	getQuestionData : function(question){
 	 		var tpl = juicer(_this.questionTpl);
 
-	 		$('#question_panel').html(tpl.render(question));
+	 		$('#canvas_question_panel').html(tpl.render(question));
 	 		var qanswers = question.qanswer.split(',');
 	 		var length = qanswers.length;
 	 		var labels = [];
@@ -324,8 +323,20 @@ var component = {};
 	 		_this.myBar.data.labels = data.labels;
 	 		_this.myBar.data.datasets = data.datasets;
           	_this.myBar.update();
+	 	},
+	 	formatCanvasAnswer : function(answerStr){
+	 		var answerArr = answerStr.split(',');
+			var html = '';
+
+			for(var i in answerArr){
+				var index = parseInt(i) + 1;
+				var word = util.getOption(index);
+				html += '<p>' + word + ':' + answerArr[i] + '</p>';
+			}
+			return html;
 	 	}
 	};
+	juicer.register('formatCanvasAnswer', _this.formatCanvasAnswer);
 }(component));
 
 
@@ -333,8 +344,7 @@ var component = {};
 	var _this = null;
 	_this = component.score = {
 		callback : function(){},
-		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatAnswer}</div>{@/if}<div class="rtanswer">正确答案：${rtanswer}</div></div>',
-		
+		questionTpl : '<div class="question-list"><div class="qbody">${qbody}</div>{@if qtype == 2 || qtype == 3}<div class="qanswer">$${qanswer|formatCanvasAnswer}</div>{@/if}</div>',
 		paperId : null,
 		questions : null,
 		historys : null,
@@ -356,7 +366,7 @@ var component = {};
 				_this.callback = options.callback;
 			_this.chartId = options.chartId;
 			
-			var content = '<div id="question_panel" style="display:inline-block;width:400px;float:left;margin-right:30px;"></div><div style="width:300px;height:300px;display:inline-block"><canvas id="canvas" width="400" height="400"></canvas></div>';
+			var content = '<div id="canvas_question_panel" style="display:inline-block;width:400px;float:left;margin-right:30px;"></div><div style="width:300px;height:300px;display:inline-block"><canvas id="canvas" width="400" height="400"></canvas></div>';
         	var d = dialog({
 			    title: '答题统计',
 			    content: content,
@@ -445,7 +455,7 @@ var component = {};
 	 	getQuestionData : function(question){
 	 		var tpl = juicer(_this.questionTpl);
 
-	 		$('#question_panel').html(tpl.render(question));
+	 		$('#canvas_question_panel').html(tpl.render(question));
 	 		var qanswers = question.qanswer.split(',');
 	 		var length = qanswers.length;
 	 		var labels = [];

@@ -64,7 +64,6 @@
 				}
 			});
 		},
-
 	 	showChart : function(){
 	 		var paperId = _this.pid;
 			var options = {
