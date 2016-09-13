@@ -90,6 +90,9 @@
 					$('#tree_panel').hide();
 					$('#res_panel').show();
 					$('#info_panel').hide();
+					_this.data.searchData.type = '1,6';
+					var $type = $('.type-panel li').first();
+					$type.addClass('active').siblings().removeClass('active');
 					_this.searchResource();
 				}
 			});
@@ -177,9 +180,7 @@
 				});
 			}
 		},
-
 		initTopic : function() {
-			
 			$.ajax({
 				type : "post",
 				cache : false,
@@ -282,7 +283,6 @@
 					async : false,
 					success : function(data){
 						if(data.success){
-
 							$('#content').html(data.data.content);
 							_this.currNode.content = data.data.content;
 

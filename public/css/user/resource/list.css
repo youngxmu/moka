@@ -97,10 +97,10 @@
 
 
 .info-content{}
-.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 50px;color: #f6f6f6;font-size:16px;}
+.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 48px;color: #f6f6f6;font-size:0;}
 .main .res-list:last-child{border-bottom: 0;}
-.main .res-list span{width: 150px;display: inline-block;vertical-align: top;}
-.main .res-list-title span{width: 150px;display: inline-block;vertical-align: top;text-align: center;}
+.main .res-list span{width: 150px;display: inline-block;vertical-align: top;font-size:15px;}
+.main .res-list-title span{width: 150px;display: inline-block;vertical-align: top;text-align: center;font-size:15px;}
 .main .res-list-title span:nth-child(1){width:60px;}
 .main .res-list-title span:nth-child(2){width:450px;}
 .main .res-list-title span:nth-child(3){width:150px;}
@@ -126,62 +126,8 @@
 }
 
 
-
-::-webkit-scrollbar{width:12px;height:12px}
-::-webkit-scrollbar-button:vertical{display:none}
-::-webkit-scrollbar-track:vertical{background-color:black}
-::-webkit-scrollbar-track-piece{background: #FDFDFD;}
-::-webkit-scrollbar-thumb:vertical{background-color:#8E8E8E;border-radius:5px}
-::-webkit-scrollbar-thumb:vertical:hover{background-color:#3B3B3B}
-::-webkit-scrollbar-corner:vertical{background-color:#535353}
-::-webkit-scrollbar-resizer:vertical{background-color:#FF6E00}
-
-
-@-webkit-keyframes animate-cloud {
-  from {
-    background-position: 600px 100%;
-  }
-  to {
-    background-position: 0 100%;
-  }
-}
-@-moz-keyframes animate-cloud {
-  from {
-    background-position: 600px 100%;
-  }
-  to {
-    background-position: 0 100%;
-  }
-}
-@-ms-keyframes animate-cloud {
-  from {
-    background-position: 600px 100%;
-  }
-  to {
-    background-position: 0 100%;
-  }
-}
-@-o-keyframes animate-cloud {
-  from {
-    background-position: 600px 100%;
-  }
-  to {
-    background-position: 0 100%;
-  }
-}
-@-webkit-keyframes stage-0 {from{-webkit-transform:scale(0.01);}to{-webkit-transform:scale(1);}}
-@keyframes stage-0 { from{transform:scale(0.01);}to{transform:scale(1);}}
-@-moz-keyframes stage-0 { from{-moz-transform:scale(0.01);}to{-moz-transform:scale(1);}}
-@-o-keyframes stage-0 { from{-o-transform:scale(0.01);}to{-o-transform:scale(1);}}
-
 .container{
    background-image:url(../../../img/cloud.png);
    background-repeat: repeat-x;
    background-size: 100%;
-   
-   -webkit-animation: animate-cloud 20s linear infinite;
-   -moz-animation: animate-cloud 20s linear infinite;
-   -ms-animation: animate-cloud 20s linear infinite;
-   -o-animation: animate-cloud 20s linear infinite;
-   animation: animate-cloud 20s linear infinite;
 }

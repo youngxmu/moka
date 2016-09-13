@@ -3,7 +3,7 @@
 	padding: 15px 0;
 	_display: inline-block;
 	text-align : center;
-	color:#999999 !important;
+	color:#ffffff !important;
 	padding-top:1px solid #CCCCCC;
 	font-size: 12px;
 }
@@ -30,7 +30,8 @@
 }
 
 #go_pg_num{
-	border: 1px solid #E6E6E6;height: 26px;width: 26px;margin: 0 3px;text-align:center;color:#999999;
+	border: 1px solid #E6E6E6;height: 26px;width: 26px;margin: 0 3px;text-align:center;color:#333333;
+	line-height: 22px;
 }
 
 .pagination2 li {
@@ -45,7 +46,7 @@
 	border: 1px solid #ddd;
 	border-left-width: 0;
 	font-size: 100%;
-	color:#999999;
+	color:#ffffff;
 }
 
 .pagination2 .active a {
@@ -63,7 +64,7 @@
 
 .pagination2 .disabled span,.pagination2 .disabled a,.pagination2 .disabled a:hover
 	{
-	color: #999;
+	color: #ffffff;
 	cursor: default;
 	background-color: transparent;
 }

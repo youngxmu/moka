@@ -1,6 +1,7 @@
 .sub-sys{
 	width: 1024px;
 	height: 768px;
+	/*height: 688px;*/
 	background-image: url(../../../jsjn/00180[1024x768x24BPP].jpg);
 	background-size: 100%;
 	background-repeat: no-repeat;
@@ -9,6 +10,7 @@
 }
 
 .sub-footer{
+	display: none;
 	position: absolute;
 	bottom: 60px;
 	right: 50px;
