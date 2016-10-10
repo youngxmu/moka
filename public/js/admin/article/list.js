@@ -3,6 +3,7 @@
 	_this = P.admin.article.list = {
 		pid : 11,//系统根目录编号
 		searchUrl : 'article/queryArticleByMenu',
+		treeUrl : 'jsll/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -63,7 +64,6 @@
 				_this.showAddArticle();
 			});
 			$('body').on('click', '.oper .del',_this.showDelArticle);
-
 		},
 		initTopic : function(subjectId) {
 			$.ajax({

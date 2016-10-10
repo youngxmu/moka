@@ -13,6 +13,11 @@ router.get('/list', function (req, res, next) {
     res.render('admin/article/list');
 });
 
+
+router.get('/infolist', function (req, res, next) {
+    res.render('admin/article/info-list');
+});
+
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
     if(id == null || id == undefined){
