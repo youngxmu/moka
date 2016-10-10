@@ -15,6 +15,17 @@
 			if(keyword){
 				_this.data.searchData.keyword = keyword;
 				$('#keyword').val(keyword);
+
+				var $this = $('.nav-ul li').last();
+				$this.addClass('active').siblings('li').removeClass('active');
+				$('#menu_panel').show();
+				$('#tree_panel').hide();
+				$('#res_panel').show();
+				$('#info_panel').hide();
+				_this.data.searchData.type = '1,6';
+				var $type = $('.type-panel li').first();
+				$type.addClass('active').siblings().removeClass('active');
+				_this.searchResource();
 			}
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();

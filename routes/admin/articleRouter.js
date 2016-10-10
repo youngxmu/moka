@@ -26,6 +26,8 @@ router.get('/detail/:id', function (req, res, next) {
                 article.update_time = commonUtils.formatDate(new Date(article.update_time));
                 if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
+                console.log(article.menu_id);
+                console.log(article.menuList);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
 
                 var view = 'admin/article/editres';
@@ -51,8 +53,12 @@ router.get('/upload', function (req, res, next) {
     if(menuPath != null && menuPath != ''){
         var menuMap = menuUtils.getMenuMap();
         var menuArr = menuPath.split(',');
-        var lastIndex = menuArr.length - 1;
-        for(var i=lastIndex;i>=0;i--){
+        // var lastIndex = menuArr.length - 1;//逆向
+        // for(var i=lastIndex;i>=0;i--){
+        //     var menu = menuMap[menuArr[i]];
+        //     menuList.push(menu);
+        // }
+        for(var i in menuArr){
             var menu = menuMap[menuArr[i]];
             menuList.push(menu);
         }

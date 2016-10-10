@@ -84,16 +84,19 @@
 	display: inline-block;
 	font-size: 12px;
 	min-height: 500px;
+	height: 692px;
 	border-right: 1px solid #cccccc;
 	vertical-align: top;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 	color: #000000;
 }
 
 .type-panel{}
-.type-panel li{border-bottom: 1px solid #999;
+.type-panel li{
+	border-bottom: 1px solid #999;
 	padding: 10px;
 	cursor: pointer;
+	color: #333;
 }
 
 .type-panel li.active{
@@ -125,21 +128,30 @@
 	margin: 0;
     line-height: 20px;
     text-align: center;
-    color: #f6f6f6;
+    color: #333;
 }
+
+.type-panel li.active p{
+	color: #ffffff;
+}
+.type-panel li:hover p{
+	color: #ffffff;
+}
+
     
 
-.sidebar-tree {width: 209px;
+.sidebar-tree {
 	width: 209px;
     padding: 10px 20px 10px 0;
     display: inline-block;
     font-size: 12px;
     overflow: auto;
     min-height: 500px;
+    height: 692px;
     border-right: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
     margin-left: -1px;
-        vertical-align: top;
+    vertical-align: top;
 }
 
 .editor-area{

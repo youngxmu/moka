@@ -34,10 +34,10 @@ li{list-style-type: none;}
 .h-search-bar{
   position: absolute;
   right: 10px;
-  bottom: 50px;
+  padding-top: 3px;
+  /*bottom: 50px;*/
 }
-
-.h-search-bar input,.h-search-bar button{vertical-align: top;}
+.h-search-bar input,.h-search-bar button{vertical-align: top;display: inline-block;width: auto;}
 /* 头部 */
 .nav-div{background-color: #036; background-image: url(logo-buttom.jpg); background-position:top center;}
 .header .index-row{padding:30px 20px}
@@ -48,7 +48,9 @@ form {margin-right: 1em;}*/
 
 
 .nav {background-color: #11487e;background-image: none;}
-.nav{width:1000px;height:40px;position:relative;margin:0 auto; z-index:99;}
+.nav{width:1000px;height:40px;position:relative;margin:0 auto; z-index:99;
+  background-color: transparent;
+}
 .nav .nav-ul > li{float:left;width:120px;height:40px;text-align: center;}
 .nav .nav-ul > li:hover,.nav .nav-ul > li a:hover{color:#FFF;background:#38C}
 .nav .nav-ul > li a{

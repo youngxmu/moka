@@ -124,3 +124,43 @@ padding-top: 10px;}
 .ico-ppt {background-image: url('../../img/ico/ico-ppt.png');}
 
 
+
+.pagination2 {
+  color: #333 !important;
+}
+.pagination2 a {
+  float: left;
+  padding: 0 8px;
+  line-height: 28px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+  font-size: 100%;
+  color:#333;
+}
+
+
+.pagination2 .disabled span,.pagination2 .disabled a,.pagination2 .disabled a:hover
+  {
+  color: #333;
+  cursor: default;
+  background-color: transparent;
+}
+
+.pagination2 li a {
+  border-width: 1px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  margin-left:5px;
+}
+
+a.page-ellipsis{
+    border: medium none;
+    cursor: default;
+    line-height: 24px;
+    padding: 0 0 4px;
+}
+
+
+

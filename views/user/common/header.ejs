@@ -1,10 +1,17 @@
 <div class="header">
   <div class="top-bar">
       <div class="pull-left">
-        <span class="sys-hlogo"></span><span id="sys_title" class="sys-title">国防教育测评</span>
+        <span class="sys-hlogo"></span><span id="sys_title" class="sys-title"></span>
+      </div>
+      <div class="h-search-bar" style="display:none;">
+        <input id="h_search_key" type="text" class="form-control" placeholder="输入关键字"
+          <% if(typeof keyword != 'undefined') {%>
+          value="<%= keyword %>""
+          <%}%>
+        >
+        <button id="h_btn_search" type="button" class="btn btn-primary">查询</button>
       </div>
       <div class="pull-right">
-        <span id="date-time" data-markup="time"><%= locals.currDate %></span>
         <% if(typeof username != 'undefined'){ %>
           <span id="h_login_panel">
             <a href="javascript:void(0);">欢迎你，<%= username%></a>

@@ -195,14 +195,13 @@
 					}
 					util.dialog.confirmDialog('继续提交',
 						function(){
-							// window.location.href = window.location.href;
+							window.location.href = window.location.href;
 						},
 						function(){
-
 							if(id){
 								window.location.href = 'admin/article/detail/' + id;	
 							}else{
-								// window.location.href = window.location.href;
+								window.location.href = window.location.href;
 							}
 						},
 						'提交成功'

@@ -1,3 +1,10 @@
+.panel-heading{
+	padding: 5px 10px;
+}
+
+.panel-body{
+	padding: 10px;
+}
 .sidebar{width: 100px;display: inline-block;vertical-align: top;
 	height: 100%;
     border-right: 1px solid #cccccc;
@@ -30,7 +37,7 @@
 	height: 100%;
 }
 .question-panel{
-	padding: 10px;
+	/*padding: 10px;*/
 	display: none;
 	/*border-bottom: 1px dashed #cccccc;*/
 	display: block;
@@ -63,7 +70,10 @@
 	color: #ffffff;
 }
 
-.answer-panel{padding: 20px 0; font-size: 0;}
+.answer-panel{
+	/*padding: 20px 0; */
+	font-size: 0;
+}
 .answer-panel .answer-index-panel{
 	height: 61px;
 	width: 35px;
@@ -126,7 +136,7 @@
 }
 
 
-.q-body{height: 100%;padding-bottom: 370px;}
+.q-body{height: 100%;padding-bottom: 300px;}
 .q-list{height: 323px;position: absolute;bottom: 20px;left: 0;padding: 0 20px;}
 .qbody-panel{height: 100%;position: relative;}
 .reset{

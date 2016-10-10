@@ -3,17 +3,18 @@
   <head>
     <title>国防后备力量</title>
     <%- include ../common/meta.ejs %>
-        <link rel='stylesheet' href='css/user/hbll/hbll.css' >
+    <link rel='stylesheet' href='css/user/hbll/hbll.css' >
+    <link rel='stylesheet' href='css/user/hbll/list.css' >
   </head>
   <body>
     <div class="bg">
       <%- include ../common/header.ejs %>
       <div class="container">
-        <div class="sidebar">
+        <div class="sidebar sidebar-tree">
           <div class="tree-opr">
             <a href="javascript:void(0);" class="unfold">展开</a>
           </div>
-          <div style="overflow:auto;min-height:500px;" >
+          <div>
             <ul id="topic_tree" class="ztree"></ul>
           </div>
         </div>

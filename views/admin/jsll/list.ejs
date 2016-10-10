@@ -17,10 +17,20 @@
           <li role="presentation" data-type="3" data-key="资料"><a href="javascript:void(0);">辅助资料</a></li>
           <li role="presentation" data-type="4" data-key="系统帮助"><a href="javascript:void(0);">系统帮助</a></li>
         </ul>
-        <div class="sidebar">
-          <ul id="menu_panel" class="memu-panel"></ul>
-          <ul id="topic_tree" class="ztree" style="display:none;"></ul>
+        <div id="menu_panel" class="sidebar">
+          <ul id="menu_list" class="memu-panel"></ul>
         </div>
+        <div id="tree_panel" class="sidebar" style="display:none;">
+          <div class="tree-opr" style="display:none;">
+            <a href="javascript:void(0);" class="unfold">展开</a>
+            |<a href="javascript:void(0);" class="add">增加</a>
+            |<a href="javascript:void(0);" class="edit">编辑</a>
+            |<a href="javascript:void(0);" class="del">删除</a>
+          </div>
+          <ul id="topic_tree" class="ztree"></ul>
+        </div>
+
+
         <div class="main">
           <div class="info-content" >
             <div id="txt_panel" class="info-content" >
