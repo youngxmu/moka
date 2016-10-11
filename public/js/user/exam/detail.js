@@ -2,6 +2,7 @@
 	var _this = null;
 	_this = P.user.exam.detail = {
 		init : function(){
+			_this.questionUtils = question;
 			_this.initData();
 			_this.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.questionTpl = juicer($('#question-tpl').html());
@@ -42,21 +43,21 @@
 				$answerPanelIndex.addClass('answered');
 				$answerPanelIndex.find('.curr-answer').attr('data-answer', answer).text(answer);
 
-				var scoreVal = 1;
-				if(type != 2){
-					scoreVal = 2;
-				}
-				$('#content_title').text(_this.currQuestion.index + '.' + question.getQType(_this.currQuestion.qtype) + '分值：' + score);
+				
 				// console.log(_this.questionsMap[_this.currQuestion.id]);
 			});
 
 			$('body').on('click', '.answer-panel .answer-index-panel', function(){
-				var type = _this.currQuestion.qtype;
 				var $this = $(this);
 				$this.addClass('selected').siblings('.answer-index-panel').removeClass('selected');
 				var qid = $this.attr('data-id');
 				var question = _this.questionsMap[qid];
 				_this.renderQuestion(question);
+				var scoreVal = 1;
+				if(question.type != 2){
+					scoreVal = 2;
+				}
+				$('#content_title').text(question.index + '.' + _this.questionUtils.getQType(question.qtype) + '分值：' + scoreVal);
 			});
 			
 			$('body').on('click', '#btn_commit', _this.commit);
