@@ -252,5 +252,69 @@ router.post('/updatexx', function(req, res, next) {
     });
 });
 
+
+
+
+router.post('/add', function(req, res, next) {
+    var name = req.body.name;
+    var content = req.body.content;
+    var parent_id = req.body.parent_id;
+    logger.info("增加:admin-id-->", name, parent_id);
+    infoModel.add(name, content, parent_id, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                msg: "添加失败"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "添加成功",
+                data : result
+            });
+        }
+    });
+});
+
+router.post('/update', function(req, res, next) {
+    var name = req.body.name;
+    var content = req.body.content;
+    var id = req.body.id;
+    
+    infoModel.update(id, name, content, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                msg: "修改失败"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "修改成功"
+            });
+        }
+    });
+});
+
+router.post('/del', function(req, res, next) {
+    var id = req.body.id;
+    
+    infoModel.del(id, function (err, result) {
+        if (err) {
+            logger.error("删除出错", err);
+            res.json({
+                success: false,
+                msg: "删除出错"
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: "删除成功"
+            });
+        }
+    });
+});
+
+
 module.exports = router;
 

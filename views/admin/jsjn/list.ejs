@@ -3,9 +3,7 @@
   <head>
     <title>国防军事技能研究资源管理分系统</title>
     <%- include ../common/meta.ejs %>
-    <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
-        <link rel='stylesheet' href='css/admin/jsjn/list.css' >
-    
+    <link rel='stylesheet' href='css/admin/jsjn/list.css' >
   </head>
   <body>
     <%- include ../common/header.ejs %>   
@@ -15,14 +13,12 @@
           <a href="javascript:void(0);">训练组织</a>
         </li>
         <li role="presentation" data-type="2" data-mid="1302"><a href="javascript:void(0);">训练实施</a></li>
-        <li role="presentation" data-type="3" data-mid="1303"><a href="javascript:void(0);">辅助资料</a></li>
+        <!-- <li role="presentation" data-type="3" data-mid="1303"><a href="javascript:void(0);">辅助资料</a></li> -->
       </ul>
 
       <div id="menu_panel" >
         <div class="sidebar">
-          <ul class="res-menu" >
-              
-          </ul>
+          <ul class="res-menu" ></ul>
         </div>
         <div id="editor_box" class="main">
           <textarea id="editor" placeholder="输入文章正文" autofocus><% if(typeof content != 'undefined'){%><%- content %><% } %></textarea>

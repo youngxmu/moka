@@ -173,7 +173,7 @@
 				id : currNode.id
 			};
 			$.ajax({
-				url : 'admin/jsll/updateinfo',
+				url : 'admin/jsll/update',
 				type : 'post',
 				data : postData,
 				success : function(data){
@@ -215,6 +215,92 @@
 				function(){},
 				'确认删除菜单'
 			);
-		}
+		},
+		addMenu : function(){
+			var pmenu = _this.currNode;
+			var parent_id = 10;
+			if(pmenu){
+				parent_id = pmenu.id;
+			}
+
+			var name = $('#info_name').val();
+			var content = '';//$('#info_content').val();
+			if(!name){
+				return false;
+			}
+
+			var node = {
+				parent_id : parent_id,
+				name : name,
+				content : content
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : 'admin/jsll/add',
+				data : node,
+				success : function(result){
+					if(result.success){
+						node.id = result.data.insertId;
+					}
+					// _this.getCurrTree().addNodes(_this.currNode, -1, node, true);
+
+					_this.initTopic();
+				}
+			});
+		},
+		updateMenu : function(){
+			var pmenu = _this.currNode;
+
+			var name = $('#info_name').val();
+			var content = $('#info_content').val();
+			
+			if(!name){
+				return false;
+			}
+
+			var node = {
+				id : pmenu.id,
+				parent_id : pmenu.parent_id,
+				name : name,
+				content : content
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : 'admin/jsll/update',
+				data : node,
+				success : function(result){
+					if(result.success){
+						pmenu.name = name;
+						_this.getCurrTree().updateNode(pmenu);
+						_this.initTopic();
+					}
+					
+				}
+			});
+		},
+		delMenu : function(){
+			var pmenu = _this.currNode;
+			var node = {
+				id : pmenu.id
+			};
+
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : 'admin/jsll/del',
+				data : node,
+				success : function(result){
+					if(result.success){
+						_this.getCurrTree().removeNode(pmenu);
+						_this.initTopic();
+					}
+					
+				}
+			});
+		},
 	};
 }(moka));

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>军事理论教学分系统</title>
+    <title>国防教育资源库</title>
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/admin/article/list.css' >
     <link rel='stylesheet' href='css/admin/jsll/list.css' >
@@ -11,7 +11,7 @@
     <div class="container">
       <ul class="nav nav-tabs">
         <li data-type="1" class="active"><a href="javascript:void(0);">教育资料</a></li>
-        <li data-type="2" ><a href="javascript:void(0);">相关文件</a></li>
+        <li data-type="2" ><a href="admin/article/list">相关文件</a></li>
       </ul>
       <div class="sidebar">
         <div class="tree-opr">
@@ -65,9 +65,10 @@
     <script type="text/template" id="edit_menu_dlg">
     <div class="">
       <p><input id="info_name" placeholder="输入名称" value="${name}" style="line-height:24px;padding: 0 10px;"></p>
-      <p><textarea id="info_content" placeholder="输入内容" style="width:600px;height:400px;">${content}</textarea></p>
+      
     </div>
     </script>
+     <!-- <p><textarea id="info_content" placeholder="输入内容" style="width:600px;height:400px;">${content}</textarea></p> -->
     
     <script type="text/javascript" src="js/admin/article/infoList.js"></script>
     

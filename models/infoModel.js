@@ -60,3 +60,37 @@ exports.delInfo = function (id, callback) {
         }
     );
 };
+
+exports.add = function (name, content, parent_id, callback) {
+    if (!parent_id) {
+        parent_id = 0;
+    }
+
+
+    db.query("insert into info (id, name, content, parent_id) values(uuid(),?,?,?);",
+        [name, content, parent_id],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+
+exports.update = function (id, name, content, callback) {
+    console.log(name +' '+  content+' '+ id);
+    db.query("update info set name = ?, content = ? where id = ?;",
+        [name, content, id],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+exports.del = function (id, callback) {
+    db.query("delete from info where id = ?;",
+        [id],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
