@@ -184,6 +184,16 @@
 		onDel : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');
+			// util.dialog.confirmDialog('确认删除',function(){
+   //              $.ajax({
+			// 		type : 'post',
+			// 		url : 'admin/paper/del',
+			// 		data : {id : id},
+			// 		success : function(result){
+			// 			_this.search();
+			// 		}
+			// 	});
+			// });
 			var d = dialog({
 			    title: '删除试卷',
 			    content: '确认删除',
@@ -194,7 +204,12 @@
 						url : 'admin/paper/del',
 						data : {id : id},
 						success : function(result){
-							_this.search();
+							if(result.success){
+								_this.search();	
+							}else{
+								alert(result.msg);
+							}
+							
 						}
 					});
 			    },

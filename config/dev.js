@@ -9,8 +9,8 @@ module.exports = {
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
 	redirectPath : '/',
-	imgHost: 'http://10.99.13.32:8200',
-	host: 'http://10.99.13.32:8200',
+	imgHost: 'http://localhost:8200',
+	host: 'http://localhost:8200',
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 

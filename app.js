@@ -78,7 +78,7 @@ if(config.env!='devvv'){//开发环境不需要过滤
         if (inWhitelist || (url.indexOf('/index') != -1 && url.indexOf('/admin') == -1)) {//在白名单中，不需要过滤
             next();
         }else{
-            if(req.session &&  req.session.user){//如果存在session则继续
+            if(req.session && req.session.user && url.indexOf('/admin') == -1){//如果存在session则继续
                 res.locals.islogin = true;
                 var name = req.session.user.name;
                 if(!name){
@@ -90,7 +90,7 @@ if(config.env!='devvv'){//开发环境不需要过滤
                 redisUtils.setWithExpire(sid, uid, 15 * 60, function(){
                 });
                 next();
-            }else if(req.session && req.session.admin){//如果存在session则继续
+            }else if(req.session && req.session.admin && url.indexOf('/admin') != -1){//如果存在session则继续
                 res.locals.islogin = true;
                 next();
             }else{

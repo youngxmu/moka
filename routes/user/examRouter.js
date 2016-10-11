@@ -47,6 +47,7 @@ router.get('/detail/:id', function (req, res, next) {
                 var exam = result;
                 examModel.queryUserExam(user.id, id, function(err, userexams){
                     if(err){
+                        logger.error('queryUserExam', err);
                         return res.render('error', {
                             success: false,
                             msg: "网络异常，刷新重试"
@@ -67,19 +68,21 @@ router.get('/detail/:id', function (req, res, next) {
                     }else{
                         var userexam = userexams[0];
                         var startTime = userexam.start_time;
-                        var limit = 60 * 60 - (new Date().getTime() - startTime.getTime()) / 1000;
+                        var limit = 60 * 60 - parseInt((new Date().getTime() - startTime.getTime()) / 1000);
+                        // var limit = 20 - parseInt((new Date().getTime() - startTime.getTime()) / 1000);
                         exam.limit = limit;
-                        console.log(userexam.status);
+                        // console.log(userexam.status);
                         if(limit <= 0 || userexam.status == 2){
                             exam.isover = true;
                             examModel.updateUserExamStatus(user.id, id, function(err, result){
                                 if(err){
+                                    logger.error('updateUserExamStatus', err);
                                     return res.render('error', {
                                         success: false,
                                         msg: "网络异常"
                                     });
                                 }else{
-                                    return res.redirect(config.redirectPath + 'exam/history/list');
+                                    return res.redirect(config.redirectPath + 'exam/uhistory/' + id);
                                 }
                             });
                         }else{
@@ -184,7 +187,7 @@ router.post('/detail/:id', function (req, res, next) {
                             delete result[index].rtanswer;
                         }
                         req.session.user.rtAnswers = answerArr.join(',');
-                        console.log(req.session.user.rtAnswers);
+                        // console.log(req.session.user.rtAnswers);
                         exam.questions = result;
                         res.json({
                             success: true,
@@ -243,6 +246,8 @@ router.post('/commit', function (req, res) {
         var answerArr = req.session.user.rtAnswers.split(',');
         var userAnswer = answer.split(',');
         var score = 0;
+        var rightCount = 0;
+        var errorCount = 0;
         for(var index in answerArr){
             var strs = answerArr[index].split('_');
             if(strs[0] == userAnswer[index]){
@@ -251,11 +256,13 @@ router.post('/commit', function (req, res) {
                 }else{
                     score+=2;
                 }
+                rightCount++;
+            }else{
+                errorCount++;
             }
         }
         examModel.insertExamHistory(uid, id, answer, score, function (err, data) {
             if (!err) {
-                logger.error('insertExamHistory', err);
                 examModel.updateUserExamStatus(user.id, id, function(err, result){
                     if(err){
                         return res.json({
@@ -266,11 +273,15 @@ router.post('/commit', function (req, res) {
                     return res.json({
                         success: true,
                         msg: "提交成功",
-                        data : data
+                        data : {
+                            id : data.insertId,
+                            rightCount : rightCount,
+                            errorCount : errorCount
+                        }
                     });
                 });
-                
             } else {
+                logger.error('insertExamHistory', err);
                 res.json({
                     success: false,
                     msg: "提交失败"
@@ -303,7 +314,7 @@ router.get('/uhistory/:id', function (req, res, next) {
             logger.error('getExamHistoryByUidEid', err);
             res.render('error', {
                 success: false,
-                msg: "根据id查询试卷出错"
+                msg: "没有成绩"
             });
         }
     });

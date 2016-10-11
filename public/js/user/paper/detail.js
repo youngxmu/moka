@@ -128,97 +128,61 @@
 			// 	}
 			// });
 	  //   },
-	  	commit : function(){
-	    	var answerArr = [];
+
+	  	commit : function(options){
 	    	var $spans = $('#answer_panel').find('.answer-index-panel');
 	    	var $answered = $('#answer_panel').find('.answered');
 	    	console.log($spans.length +' ' + $answered.length);
-	    	if($spans.length > $answered.length){
+	    	if($spans.length == $answered.length || (options && options.timeout)){
+	    		_this.submit();
+	    	}else{
 	    		if(window.confirm('还有题目未答,确认提交')){
-	    			$spans.each(function(){
-			    		var qid = $(this).attr('data-id');
-			    		var question = _this.questionsMap[qid];
-			    		var uanswer = question.uanswer;
-			    		
-			    		if(!uanswer){
-			    			uanswer = '未作答';
-			    		}
-			    		answerArr.push(uanswer);
-			    	});
-
-			    	
-			    	$.ajax({
-						url : 'paper/commit',
-						type : 'post',
-						data : {
-							id : _this.pid,
-							answer : answerArr.join(',')
-						},
-						success : function(data){
-							if(data.success){
-								var rtCount = 0;
-								var wrCount = 0;
-								for(var index in answerArr){
-									if(answerArr[index] == _this.questions[index].rtanswer){
-										rtCount++;
-									}else{
-										wrCount++;
-									}
-								}
-								alert('答对' + rtCount +'道,答错' + wrCount + '道');
-								setTimeout(function(){
-									window.location.href = 'paper/history/list/' + data.data.insertId;
-								},1500);
-							}else{
-								alert(data.msg);
-							}
-						}
-					});
+	    			_this.submit();
 	    		}
+	    	}
+	    },
+	    submit : function(){
+	    	var answerArr = [];
+	    	var $spans = $('#answer_panel').find('.answer-index-panel');
+	    	var $answered = $('#answer_panel').find('.answered');
+
+	    	$spans.each(function(){
+	    		var qid = $(this).attr('data-id');
+	    		var question = _this.questionsMap[qid];
+	    		var uanswer = question.uanswer;
 	    		
-    		}else{
-    			$spans.each(function(){
-		    		var qid = $(this).attr('data-id');
-		    		var question = _this.questionsMap[qid];
-			    		var uanswer = question.uanswer;
-			    		
-			    		if(!uanswer){
-			    			uanswer = '未作答';
-			    		}
-			    		answerArr.push(uanswer);		
-		    	});
-
-		    	
-		    	$.ajax({
-					url : 'paper/commit',
-					type : 'post',
-					data : {
-						id : _this.pid,
-						answer : answerArr.join(',')
-					},
-					success : function(data){
-						if(data.success){
-							var rtCount = 0;
-							var wrCount = 0;
-							for(var index in answerArr){
-								if(answerArr[index] == _this.questions[index].rtanswer){
-									rtCount++;
-								}else{
-									wrCount++;
-								}
+	    		if(!uanswer){
+	    			uanswer = '未作答';
+	    		}
+	    		answerArr.push(uanswer);
+	    	});
+	    	$.ajax({
+				url : 'paper/commit',
+				type : 'post',
+				data : {
+					id : _this.pid,
+					answer : answerArr.join(',')
+				},
+				success : function(data){
+					if(data.success){
+						var rtCount = 0;
+						var wrCount = 0;
+						for(var index in answerArr){
+							if(answerArr[index] == _this.questions[index].rtanswer){
+								rtCount++;
+							}else{
+								wrCount++;
 							}
-							alert('答对' + rtCount +'道,答错' + wrCount + '道');
-							setTimeout(function(){
-								window.location.href = 'paper/history/list/' + data.data.insertId;
-							},1500);
-						}else{
-							alert(data.msg);
 						}
+						alert('答对' + rtCount +'道,答错' + wrCount + '道');
+						setTimeout(function(){
+							window.location.href = 'paper/history/detail/' + data.data.insertId;
+						},1500);
+					}else{
+						alert(data.msg);
 					}
-				});
-    		}
-
-	    	
+				}
+			});
 	    },
 		formatAnswer : function(answerStr){
 			var answerArr = answerStr.split(',');
@@ -250,19 +214,23 @@
 		initCounter : function(){
 			var limit = $('#limit_time').val();
 			var secs = Math.floor(limit / 1000);
-			console.log(secs);
 			var timer = setInterval(function(){
 				if(secs <= 0){
-					_this.commit();
+					_this.commit({timeout: true});
 					util.dialog.infoDialog('考试结束自动提交啦');
 					clearInterval(timer);
+					return;
 				}
 				var min = Math.floor(secs / 60);
 				var sec = secs % 60;
 				var str = min + ':' + sec;
 				secs--;
+				if(secs <= 0){
+					str = '00:00';
+				};
 				$('#timer').text(str);
 			}, 1000);
+			timer();
 		}
 	};
 }(moka));

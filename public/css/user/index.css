@@ -1,10 +1,16 @@
 .bg{position: relative;min-width: 1000px;}
-.header{width: 1000px;height: 40px;position: absolute;top: 0;z-index: 1;
+.header{
+	position: fixed;
+	/*position: absolute;*/
+	width: 1000px;height: 40px;top: 0;z-index: 1;
 	left: 0;
 	left: 50%;margin-left: -500px;
 }
 .container{width: 1000px;height: 100%;padding: 40px 0 71px 0 !important;margin:auto;}
-.foot{width: 1000px;height: 71px;position: absolute;bottom: 0;z-index: 1;
+.foot{
+	/*position: absolute;*/
+	position: fixed;
+	width: 1000px;height: 71px;bottom: 0;z-index: 1;
 	/*left: 0;*/
 	left: 50%;margin-left: -500px;
 }

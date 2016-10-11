@@ -73,12 +73,11 @@ router.get('/detail/:id', function (req, res, next) {
         return res.redirect(config.redirectPath + 'paper/list');
     }
     var id = req.params.id;
-    console.log(req.session.user);
     var isAdmin = req.session.user ? true : false;
     var rid = 'test' +'_'+ req.session.user.id + '_' + id;
     var startTime = new Date().getTime();
     var currTime = new Date().getTime();
-    var time = 60 * 60 * 1000;
+    var time = 60 * 1000;//60 * 60 * 1000;
     if(id == null || id == undefined){
         res.render('error', {
             success: false,

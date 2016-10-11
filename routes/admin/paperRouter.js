@@ -164,6 +164,7 @@ router.post('/save', function (req, res) {
 router.post('/del', function (req, res) {
     var id = req.body.id;
     var admin = req.session.admin;
+    console.log(admin);
     if(!admin){
         return res.json({
             success: false,

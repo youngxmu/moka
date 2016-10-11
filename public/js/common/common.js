@@ -85,6 +85,13 @@ var moka = {
 };
 
 var util = {
+	_word : ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'],
+	getOption : function(index){
+		if(index > 0){
+			index = index - 1;
+		}
+		return util._word[index];
+	},
 	formatIndex : function(index){
 		return parseInt(index, 10) + 1;
 	},
