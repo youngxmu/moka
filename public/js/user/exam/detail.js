@@ -92,47 +92,134 @@
 			var index = question.index - 1;
 			// $('#answer_panel').find('span').eq(index).addClass('selected').siblings('span').removeClass('selected');
 		},
-	    commit : function(){
-	    	var answerArr = [];
-	    	var $spans = $('#answer_panel').find('.answer-index-panel');
-	    	var $answered = $('#answer_panel').find('.answered');
-	    	if($spans.length < $answered.length){
-    			alert('还有题目未答');
-    			return;
-    		}
+	  //   commit : function(){
+	  //   	var answerArr = [];
+	  //   	var $spans = $('#answer_panel').find('.answer-index-panel');
+	  //   	var $answered = $('#answer_panel').find('.answered');
+	  //   	if($spans.length < $answered.length){
+   //  			alert('还有题目未答');
+   //  			return;
+   //  		}
 
-	    	$spans.each(function(){
-	    		var qid = $(this).attr('data-id');
-	    		var question = _this.questionsMap[qid];
-	    		answerArr.push(question.answer);		
-	    	});
+	  //   	$spans.each(function(){
+	  //   		var qid = $(this).attr('data-id');
+	  //   		var question = _this.questionsMap[qid];
+	  //   		answerArr.push(question.answer);		
+	  //   	});
 
 	    	
-	    	$.ajax({
-				url : 'exam/commit',
-				type : 'post',
-				data : {
-					id : _this.pid,
-					answer : answerArr.join(',')
-				},
-				success : function(data){
-					if(data.success){
-						var rtCount = 0;
-						var wrCount = 0;
-						console.log(_this.questions.length);
-						for(var index in answerArr){
-							if(answerArr[index] == _this.questions[index].rtanswer){
-								rtCount++;
+	  //   	$.ajax({
+			// 	url : 'exam/commit',
+			// 	type : 'post',
+			// 	data : {
+			// 		id : _this.pid,
+			// 		answer : answerArr.join(',')
+			// 	},
+			// 	success : function(data){
+			// 		if(data.success){
+			// 			var rtCount = 0;
+			// 			var wrCount = 0;
+			// 			console.log(_this.questions.length);
+			// 			for(var index in answerArr){
+			// 				if(answerArr[index] == _this.questions[index].rtanswer){
+			// 					rtCount++;
+			// 				}else{
+			// 					wrCount++;
+			// 				}
+			// 			}
+			// 			alert('答对' + rtCount +'道,答错' + wrCount + '道');
+			// 		}else{
+			// 			alert(data.msg);
+			// 		}
+			// 	}
+			// });
+	  //   },
+	   commit : function(){
+	    	var answerArr = [];
+	    	var $spans = $('#answer_panel').find('span');
+	    	var $answered = $('#answer_panel').find('.answered');
+	    	console.log($spans.length +' ' + $answered.length);
+	    	if($spans.length > $answered.length){
+	    		window.confirm('还有题目未答,确认提交',function(){
+	    			$spans.each(function(){
+			    		var qid = $(this).attr('data-id');
+			    		var question = _this.questionsMap[qid];
+			    		var uanswer = question.uanswer;
+			    		
+			    		if(!uanswer){
+			    			uanswer = '未作答';
+			    		}
+			    		answerArr.push(uanswer);		
+			    	});
+			    	
+			    	$.ajax({
+						url : 'exam/commit',
+						type : 'post',
+						data : {
+							id : _this.pid,
+							answer : answerArr.join(',')
+						},
+						success : function(data){
+							if(data.success){
+								var rtCount = 0;
+								var wrCount = 0;
+								for(var index in answerArr){
+									if(answerArr[index] == _this.questions[index].rtanswer){
+										rtCount++;
+									}else{
+										wrCount++;
+									}
+								}
+								alert('答对' + rtCount +'道,答错' + wrCount + '道');
 							}else{
-								wrCount++;
+								alert(data.msg);
 							}
 						}
-						alert('答对' + rtCount +'道,答错' + wrCount + '道');
-					}else{
-						alert(data.msg);
+					});
+	    		});
+    		}else{
+    			$spans.each(function(){
+		    		var qid = $(this).attr('data-id');
+		    		var question = _this.questionsMap[qid];
+			    		var uanswer = question.uanswer;
+			    		
+			    		if(!uanswer){
+			    			uanswer = '未作答';
+			    		}
+			    		answerArr.push(uanswer);		
+		    	});
+
+		    	
+		    	$.ajax({
+					url : 'exam/commit',
+					type : 'post',
+					data : {
+						id : _this.pid,
+						answer : answerArr.join(',')
+					},
+					success : function(data){
+						if(data.success){
+							var rtCount = 0;
+							var wrCount = 0;
+							for(var index in answerArr){
+								if(answerArr[index] == _this.questions[index].rtanswer){
+									rtCount++;
+								}else{
+									wrCount++;
+								}
+							}
+							alert('答对' + rtCount +'道,答错' + wrCount + '道');
+							setTimeout(function(){
+								window.location.href = 'paper/history/list'
+							},1500);
+						}else{
+							alert(data.msg);
+						}
 					}
-				}
-			});
+				});
+    		}
+
+	    	
 	    },
 		formatAnswer : function(answerStr){
 			var answerArr = answerStr.split(',');

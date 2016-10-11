@@ -180,10 +180,11 @@ router.post('/detail/:id', function (req, res, next) {
                         var answerArr = [];
                         for(var index in result){
                             var question = result[index];
-                            answerArr.push(question.rtanswer+'_'+question.type);
+                            answerArr.push(question.rtanswer+'_'+question.qtype);
                             delete result[index].rtanswer;
                         }
                         req.session.user.rtAnswers = answerArr.join(',');
+                        console.log(req.session.user.rtAnswers);
                         exam.questions = result;
                         res.json({
                             success: true,

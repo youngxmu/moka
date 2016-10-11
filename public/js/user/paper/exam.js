@@ -2,6 +2,7 @@
 	var _this = null;
 	_this = P.user.paper.detail = {
 		init : function(){
+			_this.questionUtils = question;
 			_this.initData();
 			_this.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.questionTpl = juicer($('#question-tpl').html());
@@ -9,21 +10,7 @@
 			_this.answerTpl = juicer($('#answer-tpl').html());
 			_this.initEvent();
 			_this.initQuestions();
-			_this.totalSec = Math.floor($('#offset').val() / 1000);
-			var intval = setInterval(function(){
-				_this.totalSec--;
-				var min = Math.floor(_this.totalSec / 60);
-				var sec = _this.totalSec % 60;
-				if(sec < 10){
-					sec = '0' + sec;
-				}
-				$('#time_count').text(min + ':' + sec);
-				if(_this.totalSec <=0){
-					_this.commit();
-					clearInterval(intval);
-
-				}
-			}, 1000);
+			_this.initCounter();
 		},
 		initData : function(){
 			_this.pid = $('#pid').val();
@@ -49,7 +36,6 @@
 		    		answer += $(this).attr('data-id');
 		    	});
 		    	_this.currQuestion.uanswer = answer;
-		    	console.log(answer);
 		    	_this.questionsMap[_this.currQuestion.id] = _this.currQuestion;
 				var index =  _this.currQuestion.index - 1;
 				$('#answer_panel').find('span').eq(index).addClass('answered');
@@ -212,6 +198,23 @@
 				
 			}
 			return html;
+		},
+		initCounter : function(){
+			var limit = $('#limit_time').val();
+			var secs = Math.floor(limit / 1000);
+			console.log(secs);
+			var timer = setInterval(function(){
+				if(secs <= 0){
+					_this.commit();
+					util.dialog.infoDialog('考试结束自动提交啦');
+					clearInterval(timer);
+				}
+				var min = Math.floor(secs / 60);
+				var sec = secs % 60;
+				var str = min + ':' + sec;
+				secs--;
+				$('#timer').text(str);
+			}, 1000);
 		}
 	};
 }(moka));

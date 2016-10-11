@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.user.paperhistory.list = {
-		searchUrl : 'paperhistory/list',
+		searchUrl : 'paper/history/list',
 		tpl : {
 			paperListTpl : null
 		},
