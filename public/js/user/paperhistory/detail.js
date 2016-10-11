@@ -33,7 +33,7 @@
 		},
 		initQuestions : function(){
 			$.ajax({
-				url : 'paperhistory/detail/' + _this.pid,
+				url : 'paper/history/detail/' + _this.pid,
 				type : 'post',
 				success : function(data){
 					if(data.success){
@@ -98,6 +98,7 @@
 				var word = util.getOption(index);
 				html += '<div class="qanswer" data-answer="'+ word +'"><em class="chk-box"></em><span class="qtext">' + word + '、' + answerArr[i] + '</span></div>';
 			}
+			console.log(answerStr);
 			return html;
 		}
 	};

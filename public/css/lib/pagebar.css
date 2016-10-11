@@ -3,7 +3,7 @@
 	padding: 15px 0;
 	_display: inline-block;
 	text-align : center;
-	color:#ffffff !important;
+	color:#333 !important;
 	padding-top:1px solid #CCCCCC;
 	font-size: 12px;
 }
@@ -46,7 +46,7 @@
 	border: 1px solid #ddd;
 	border-left-width: 0;
 	font-size: 100%;
-	color:#ffffff;
+	color:#333;
 }
 
 .pagination2 .active a {
@@ -64,7 +64,7 @@
 
 .pagination2 .disabled span,.pagination2 .disabled a,.pagination2 .disabled a:hover
 	{
-	color: #ffffff;
+	color: #333;
 	cursor: default;
 	background-color: transparent;
 }

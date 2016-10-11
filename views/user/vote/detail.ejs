@@ -48,7 +48,7 @@
 	        <div class="qbody label label-info">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
 				（多选）
 				{@/if}</div>
-	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.type == 4}
+	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.qtype == 4}
 	          <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}" data-id="${obj.id}">
 	          	$${obj.qanswer|formatAnswer}
 	          </div>
@@ -63,7 +63,7 @@
 				（多选）
 				{@/if}
 			</div>
-	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.type == 4}
+	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.qtype == 4}
 	          <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}" data-id="${obj.id}">
 	          	$${obj.qanswer|formatAnswer}
 	          </div>

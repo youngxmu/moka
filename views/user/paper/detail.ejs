@@ -66,7 +66,7 @@
 	        <div class="qbody">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
 				（多选）
 				{@/if}</div>
-	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.type == 4}
+	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.qtype == 4}
 	          <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}">
 	          	$${obj.qanswer|formatAnswer}
 	          </div>

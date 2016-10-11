@@ -226,7 +226,7 @@ router.get('/exam/:id', function (req, res, next) {
 });
 
 router.get('/history/list', function (req, res, next) {
-    res.render('user/paperhistory/list');
+    res.render('user/paper/history-list');
 });
 
 //根据试卷id查询
@@ -235,7 +235,7 @@ router.get('/history/detail/:id', function (req, res, next) {
     paperModel.getPaperHistoryById(id, function (err, result) {
         if (!err && result) {
             var paper = result;
-            res.render('user/paperhistory/detail', paper);
+            res.render('user/paper/history-detail', paper);
         } else {
             res.render('error', {
                 success: false,

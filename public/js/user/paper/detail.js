@@ -43,6 +43,20 @@
 				$answerPanelIndex.addClass('answered');
 				$answerPanelIndex.find('.curr-answer').attr('data-answer', answer).text(answer);
 				// console.log(_this.questionsMap[_this.currQuestion.id]);
+
+				var $currQSpan = $('.answer-index-panel.selected');
+				var $nextQSpan = $currQSpan.next('.answer-index-panel');
+				if($nextQSpan.length > 0){
+					$nextQSpan.addClass('selected').siblings('.answer-index-panel').removeClass('selected');
+					var qid = $nextQSpan.attr('data-id');
+					var question = _this.questionsMap[qid];
+					_this.renderQuestion(question);
+					var scoreVal = 1;
+					if(question.type != 2){
+						scoreVal = 2;
+					}
+					$('#content_title').text(question.index + '.' + _this.questionUtils.getQType(question.qtype) + '分值：' + scoreVal);
+				}
 			});
 
 			$('body').on('click', '.answer-panel .answer-index-panel', function(){
@@ -73,6 +87,7 @@
 							}
 						}
 						$('#answer_panel').html(_this.answerTpl.render({list:_this.questions}));
+						$('#answer_panel').find('.answer-index-panel').first().addClass('selected');
 					}else{
 						alert(data.msg);
 					}
@@ -86,49 +101,7 @@
 			var index = question.index - 1;
 			// $('#answer_panel').find('span').eq(index).addClass('selected').siblings('span').removeClass('selected');
 		},
-	  //   commit : function(){
-	  //   	var answerArr = [];
-	  //   	var $spans = $('#answer_panel').find('.answer-index-panel');
-	  //   	var $answered = $('#answer_panel').find('.answered');
-	  //   	if($spans.length < $answered.length){
-   //  			alert('还有题目未答');
-   //  			return;
-   //  		}
-
-	  //   	$spans.each(function(){
-	  //   		var qid = $(this).attr('data-id');
-	  //   		var question = _this.questionsMap[qid];
-	  //   		answerArr.push(question.answer);		
-	  //   	});
-
-	    	
-	  //   	$.ajax({
-			// 	url : 'paper/commit',
-			// 	type : 'post',
-			// 	data : {
-			// 		id : _this.pid,
-			// 		answer : answerArr.join(',')
-			// 	},
-			// 	success : function(data){
-			// 		if(data.success){
-			// 			var rtCount = 0;
-			// 			var wrCount = 0;
-			// 			console.log(_this.questions.length);
-			// 			for(var index in answerArr){
-			// 				if(answerArr[index] == _this.questions[index].rtanswer){
-			// 					rtCount++;
-			// 				}else{
-			// 					wrCount++;
-			// 				}
-			// 			}
-			// 			alert('答对' + rtCount +'道,答错' + wrCount + '道');
-			// 		}else{
-			// 			alert(data.msg);
-			// 		}
-			// 	}
-			// });
-	  //   },
-
+	  
 	  	commit : function(options){
 	    	var $spans = $('#answer_panel').find('.answer-index-panel');
 	    	var $answered = $('#answer_panel').find('.answered');
@@ -214,7 +187,7 @@
 		initCounter : function(){
 			var limit = $('#limit_time').val();
 			var secs = Math.floor(limit / 1000);
-			var timer = setInterval(function(){
+			var counter = function(){
 				if(secs <= 0){
 					_this.commit({timeout: true});
 					util.dialog.infoDialog('考试结束自动提交啦');
@@ -229,8 +202,9 @@
 					str = '00:00';
 				};
 				$('#timer').text(str);
-			}, 1000);
-			timer();
+			};
+			var timer = setInterval(counter, 1000);
+			counter();
 		}
 	};
 }(moka));
