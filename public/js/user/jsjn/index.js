@@ -177,11 +177,11 @@
 			
 		},
 		back : function(){
-			// $('#sub_sys').show().siblings('div').hide();
-			$('#main_sys').show().siblings('div').hide();
+			$('#sub_sys').show().siblings('div').hide();
+			// $('#main_sys').show().siblings('div').hide();
 		},
 		exit : function(){
-			$('#main_sys').show().siblings('div').hide();
+			$('#sub_sys').show().siblings('div').hide();
 		}
 	};
 })(moka);
