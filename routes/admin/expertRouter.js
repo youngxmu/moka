@@ -270,7 +270,7 @@ router.get('/result/edit/:id', function (req, res) {
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
-            msg: "根据id查询文章出错"
+            msg: "找不到页面啦！"
         });
     }else{
         articleModel.getArticleById(id, function (err, article) {

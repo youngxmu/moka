@@ -29,7 +29,7 @@ router.get('/info/:id', function (req, res, next) {
         if (err || result.length == 0) {
             res.json({
                 success: false,
-                msg: "根据id查询文章出错"
+                msg: "找不到页面啦！"
             });
         } else {
            res.json({
@@ -53,7 +53,7 @@ router.post('/list', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据id查询文章出错"
+                msg: "找不到页面啦！"
             });
         }
     });
@@ -72,7 +72,7 @@ router.post('/list/:type', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据id查询文章出错"
+                msg: "找不到页面啦！"
             });
         }
     });

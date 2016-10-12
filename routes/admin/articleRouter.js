@@ -23,7 +23,7 @@ router.get('/detail/:id', function (req, res, next) {
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
-            msg: "根据id查询文章出错"
+            msg: "找不到页面啦！"
         });
     }else{
         articleModel.getArticleById(id, function (err, article) {
@@ -90,7 +90,7 @@ router.get('/upload', function (req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });
@@ -288,7 +288,7 @@ router.get('/edit/:id', function(req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });
@@ -335,7 +335,7 @@ router.get('/editres/:id', function(req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });
@@ -382,7 +382,7 @@ router.get('/edit', function(req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });
@@ -430,7 +430,7 @@ router.get('/editres', function(req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });

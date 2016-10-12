@@ -43,7 +43,7 @@ router.post('/list', function (req, res, next) {
         } else {
             res.json({
                 success: false,
-                msg: "根据id查询文章出错"
+                msg: "找不到页面啦！"
             });
         }
     });
@@ -55,7 +55,7 @@ router.get('/info/:id', function (req, res, next) {
         if (err || result.length == 0) {
             res.json({
                 success: false,
-                msg: "根据id查询文章出错"
+                msg: "找不到页面啦！"
             });
         } else {
            res.json({
@@ -72,7 +72,7 @@ router.get('/detail/:id', function (req, res, next) {
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
-            msg: "根据id查询文章出错"
+            msg: "找不到页面啦！"
         });
     }else{
         articleModel.getArticleById(id, function (err, result) {
@@ -95,7 +95,7 @@ router.get('/detail/:id', function (req, res, next) {
             } else {
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });

@@ -146,7 +146,7 @@ router.get('/detail/:id', function (req, res, next) {
     if(id == null || id == undefined){
         res.render('error', {
             success: false,
-            msg: "根据id查询文章出错"
+            msg: "找不到页面啦！"
         });
     }else{
         resourceModel.getResourceById(id, function (err, result) {
@@ -161,7 +161,7 @@ router.get('/detail/:id', function (req, res, next) {
                 logger.error(err);
                 res.render('error', {
                     success: false,
-                    msg: "根据id查询文章出错"
+                    msg: "找不到页面啦！"
                 });
             }
         });
