@@ -110,7 +110,7 @@
 			$('#content').html(item.content);
 		},
 		initTopic : function() {
-			var searchUrl = 'jsjn/list';
+			var searchUrl = 'jsll/info/list';
 			if(_this.type == 2){
 				searchUrl =  'menu/tree/1403';
 			}
@@ -226,11 +226,7 @@
 					_this.currNode = treeNode;
 					var $title = $('#tree_panel .panel-title');
 					var $body = $('#tree_panel .panel-body');
-
-					
 					$title.html(_this.currNode.name);
-					// console.log(_this.currNode.content);
-					console.log(_this.type);
 					if(_this.type == 1){
 						if(_this.currNode.content){
 							if(_this.currNode.content == 'null'){
@@ -239,7 +235,7 @@
 							$body.html('<pre>' + _this.currNode.content + '</pre>');		
 						}else{
 							$.ajax({
-								url : 'jsjn/info/' + _this.currNode.id,
+								url : 'jsll/info/detail/' + _this.currNode.id,
 								type : 'get',
 								async : false,
 								success : function(data){

@@ -3,7 +3,7 @@
 	_this = P.user.resource.list = {
 		pid : 11,
 		searchUrl : 'resource/list',
-		treeUrl : 'jsll/list',
+		treeUrl : 'resource/info/list',
 		data : {
 			searchData : {
 				pageNo : 1,
@@ -256,7 +256,7 @@
 						$('#content').html(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'jsll/info/' + _this.currNode.id,
+							url : 'resource/info/detail/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -289,7 +289,7 @@
 				$('#content').html(_this.currNode.content);		
 			}else{
 				$.ajax({
-					url : 'jsll/info/' + _this.currNode.id,
+					url : 'resource/info/detail/' + _this.currNode.id,
 					type : 'get',
 					async : false,
 					success : function(data){
@@ -308,5 +308,4 @@
 			return _this.topicTree;
 		}
 	};
-	
 }(moka));

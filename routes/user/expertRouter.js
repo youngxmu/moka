@@ -27,7 +27,6 @@ router.post('/list', function (req, res, next) {
     }
     var pageNo = parseInt(req.body.pageNo);
     var pageSize = parseInt(req.body.pageSize);
-    console.log(name);
     expertModel.queryExpertTotalCount(name, function (totalCount) {
         logger.info("专家总数:", totalCount);
         var totalPage = 0;

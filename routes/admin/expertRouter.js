@@ -13,7 +13,6 @@ router.get('/list', function (req, res, next) {
 });
 
 
-//根据”创建渠道“和”是否虚拟“查询专家
 router.post('/list', function (req, res, next) {
     var name = req.body.name;
     var pageNo = parseInt(req.body.pageNo);

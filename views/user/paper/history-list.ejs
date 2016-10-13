@@ -5,7 +5,6 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/paper/paper.css' >
     <link rel='stylesheet' href='css/user/paper/history-list.css' >
-    
   </head>
   <body>
     <div class="bg">
@@ -21,7 +20,6 @@
             <div id="pagebar"></div>
           </div>
         </div>
-        
       </div>
 	  </div>
     <%- include ../common/footer.ejs %>
@@ -30,7 +28,6 @@
     <div class="paper-list-title">
         <div class="name">试卷名称</div>
         <div class="desc">试卷描述</div>
-        
         <div class="oper">操作</div>
     </div>
     {@each list as obj, index}
@@ -55,20 +52,18 @@
         </div>
         <div class="qbody">${obj.qbody}</div>
         {@if obj.qtype == 2}
-          <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
+        <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
-        
     </div>
     {@/each}
     </script>
 
     <script type="text/javascript" src="js/common/question.js"></script>
-    <script type="text/javascript" src="js/user/paperhistory/list.js"></script>
-    
+    <script type="text/javascript" src="js/user/paper/history-list.js"></script>
     <script>
       $(document).ready(function() {
-            moka.user.paperhistory.list.init();
-        });
+        moka.user.paperhistory.list.init();
+      });
     </script>
   </body>
 </html>

@@ -125,44 +125,6 @@ router.get('/detail/:id', function (req, res, next) {
     }
 });
 
-// router.post('/commit', function (req, res) {
-//     var pid = req.body.id;
-//     var answer = req.body.answer;
-//     var user = req.session.user;
-//     var uid = user.id;
-//     if(!user){
-//         return res.json({
-//             success: false,
-//             msg: "请登录"
-//         });
-//     }
-    
-    
-//     if(pid == null || pid == undefined){
-//         res.json({
-//             success: false,
-//             msg: "答题失败"
-//         });
-//     }else{
-//         voteModel.insertVoteHistory(uid, pid, answer, function (err, data) {
-//             if (!err) {
-//                 res.json({
-//                     success: true,
-//                     msg: "提交成功",
-//                     data : data
-//                 });
-//             } else {
-//                 res.json({
-//                     success: false,
-//                     msg: "提交失败"
-//                 });
-//             }
-//         });
-        
-//     }
-
-// });
-
 router.post('/commit', function (req, res) {
     var pid = req.body.pid;
     var qid = req.body.id;
@@ -170,15 +132,6 @@ router.post('/commit', function (req, res) {
     var rtanswer = req.body.rtanswer;
     var user = req.session.user;
     var uid = '0';
-    // var uid = user.id;
-    // if(!user){
-    //     return res.json({
-    //         success: false,
-    //         msg: "请登录"
-    //     });
-    // }
-    
-    
     if(qid == null || qid == undefined){
         res.json({
             success: false,
@@ -199,9 +152,7 @@ router.post('/commit', function (req, res) {
                 });
             }
         });
-        
     }
-
 });
 
 

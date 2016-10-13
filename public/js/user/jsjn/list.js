@@ -22,7 +22,7 @@
 			_this.data.pptTpl = juicer($('#ppt_tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
-			_this.initTopic();
+			// _this.initTopic();
 			_this.changeType({init : true});
 			_this.searchResource();
 		},
@@ -84,7 +84,6 @@
 		showContent : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');
-			console.log(id);
 			if(id == 130202){
 				return window.open('jsjn/sys');
 			}
