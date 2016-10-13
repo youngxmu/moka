@@ -14,9 +14,8 @@
 			_this.loadModules();
 		},
 		initEvent : function(){
-			$('#resource_list').on('click', '.edit', _this.showEditRes);
-			$('body').on('click', '.res-menu button', function(){
-			});
+			$('body').on('click', '.add-key', _this.add);
+			$('body').on('click', '.del-key', _this.del);
 		},
 		loadModules : function(){
 			var $panel = $('.module-container');
@@ -28,73 +27,83 @@
 				},
 				success : function(data){
 					if(data.success){
+						_this.data.moduleMap = {};
 						var list = data.list;
 						for(var index in list){
 							var module = list[index];
 							module.keys = module.keywords.split(',');
+							_this.data.moduleMap[module.id] = module;
 						}
 						$panel.html(_this.tpl.moduleTpl.render({list:list}));	
 					}
 				}
 			});
 		},
-		commit : function(){
-			var $infos = $('.news-edit');
-			var newsList = [];
-			$infos.each(function(i){
-				var index = i+1;
-				var $this = $(this);
-				var news = {
-					title : $this.find('.newstitle').val(),
-					link : $this.find('.link').val(),
-					pic_url : $this.find('.pic_url').val(),
-					index : index
-				}
-				if(news.title && news.link && news.pic_url ){
-					newsList.push(news);	
-				}
+		getKeywords : function(mid){
+			var $spans = $('#key_panel_' + mid).find('span');
+			var keywords = [];
+			$spans.each(function(){
+				keywords.push($(this).attr('data-key'));
 			});
-			var $btn = $('#btn_commit');
-			$.ajax({
-				type : 'post',
-				url : 'admin/setnews',
-				data : {newsStr: JSON.stringify(newsList)},
-				beforeSend : function(){
-					$btn.val('正在提交');
-				},
-				success : function(data){
-					if(data.success){
-						util.dialog.infoDialog('修改成功');
-					}else{
-						util.dialog.infoDialog('修改失败');
-					}
-				},
-				complete : function(){
-					$btn.val('提交');
-				}
-			});
+			return keywords.join(',');
 		},
-		showAddRes : function(){
-			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('admin/article/edit?menuPath=' + menuPath);
-		},
-		showDelRes : function(){
+		add : function(){
 			var id = $(this).attr('data-id');
-			util.dialog.confirmDialog(
-				'确认删除',
+			var $panel = $('#key_panel_' + id);
+			util.dialog.defaultDialog(
+				'<input id="key_name">',
 				function(){
+					var keyName = $('#key_name').val();
+					if(!keyName){
+						return false;
+					}
+
+					var keyHtml = '<div>' + keyName + '<span data-id="' + id + '" data-key="' + keyName + '" class="del-key">×</span></div>'
+					$panel.append(keyHtml);
+					var keywords = _this.getKeywords(id);
 					$.ajax({
 						type : "post",
 						cache : false,
-						url : 'admin/article/del',
-						data : {id:id},
+						url : 'admin/index/updateModule',
+						data : {
+							id:id,
+							keywords : keywords
+						},
 						success : function(result){
 							if(result.success){
-								_this.searchResource();
+								util.dialog.toastDialog('添加成功');
 							}else{
 								util.dialog.infoDialog(result.msg);
 							}
-							
+						}
+					});
+				},
+				function(){},
+				'增加标签'
+			);
+		},
+		del : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			util.dialog.confirmDialog(
+				'确认删除',
+				function(){
+					$this.parent('div').remove();
+					var keywords = _this.getKeywords(id);
+					$.ajax({
+						type : "post",
+						cache : false,
+						url : 'admin/index/updateModule',
+						data : {
+							id:id,
+							keywords : keywords
+						},
+						success : function(result){
+							if(result.success){
+								util.dialog.toastDialog('删除成功');
+							}else{
+								util.dialog.infoDialog(result.msg);
+							}
 						}
 					});
 				},

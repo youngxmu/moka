@@ -21,10 +21,7 @@
               <span class="btn btn-default btn-sm heading-btn">增加</span>
             </div>
             <div class="panel-body detail-article">
-              <div class="key-panel">
-                <div>测试哈哈<span>×</span></div>
-                <div>测试哈哈<span>×</span></div>
-              </div>
+              <div class="key-panel"></div>
             </div>
           </div>
         </div>
@@ -37,12 +34,12 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">${item.name}</h3>
-          <span data-id="${item.id}" class="btn btn-default btn-sm heading-btn">增加</span>
+          <span data-id="${item.id}" class="btn btn-default btn-sm heading-btn add-key">增加</span>
         </div>
         <div class="panel-body detail-article">
-          <div class="key-panel">
+          <div id="key_panel_${item.id}" class="key-panel">
             {@each item.keys as key, index}
-            <div>${key}<span data-key="${key}">×</span></div>
+            <div>${key}<span data-id="${item.id}" data-key="${key}" class="del-key">×</span></div>
             {@/each}
           </div>
         </div>
