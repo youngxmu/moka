@@ -39,7 +39,6 @@ exports.getUp = function (mid, callback) {
     );
 };
 
-
 exports.updateUp = function (mid, aid, callback) {
     db.query("update index_data set aid = ? where mid = ?;",
         [aid, mid],
@@ -48,3 +47,20 @@ exports.updateUp = function (mid, aid, callback) {
         }
     );
 };
+
+
+exports.queryModules = function (callback) {
+    var sql = 'select * from index_module;';
+    var params = [];
+    db.query(sql, params, callback);
+};
+
+exports.updateModule = function (id, keywords, callback) {
+    db.query("update index_module set keywords = ? where id = ?;",
+        [keywords, id],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+

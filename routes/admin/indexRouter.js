@@ -1,14 +1,18 @@
 var express = require('express');
 var config = require("../../config");
 var async = require('async');
-
 var newsModel = require("../../models/newsModel");
+var indexModel = require("../../models/indexModel");
 var logger = require("../../lib/log.js").logger("indexRouter");
 
 var router = express.Router();
 
-router.get('/index', function (req, res, next) {
+router.get('', function (req, res, next) {
     res.render('admin/index');
+});
+
+router.get('/module', function (req, res, next) {
+    res.render('admin/index/module');
 });
 
 router.post('/news', function (req, res, next) {
@@ -57,6 +61,39 @@ router.post('/setnews', function (req, res, next) {
     	}
     });
 });
+
+router.post('/modules', function (req, res, next) {
+    indexModel.queryModules(function(err, results){
+    	if(err){
+    		return res.json({
+    			success : false
+    		});
+    	}else{
+    		return res.json({
+    			success : true,
+    			list : results
+    		});
+    	}
+    });
+});
+
+router.post('/updateModule', function (req, res, next) {
+	var id = req.body.id;
+	var keywords = req.body.keywords;
+    indexModel.updateModule(id, keywords, function(err, results){
+    	if(err){
+    		return res.json({
+    			success : false
+    		});
+    	}else{
+    		return res.json({
+    			success : true,
+    			list : results
+    		});
+    	}
+    });
+});
+
 
 module.exports = router;
 

@@ -65,7 +65,7 @@ module.exports = function (app) {
     app.use('/hbll', userHBLLSupportRouter);
     app.use('/message', userMessageRouter);
 
-    app.use('/admin', adminIndexRouter);
+    app.use('/admin/index', adminIndexRouter);
     app.use('/admin/article', adminArticleRouter);
     app.use('/admin/resource', adminResourceRouter);
     

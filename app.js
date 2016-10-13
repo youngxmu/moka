@@ -48,7 +48,7 @@ if(config.env!='devvv'){//开发环境不需要过滤
         res.locals.currDate = utils.indexDate(new Date());
         res.locals.islogin = true;
 
-   // return next();
+return next();
 
         var requestPath = req.path;//请求的uri
         var inWhitelist = false;

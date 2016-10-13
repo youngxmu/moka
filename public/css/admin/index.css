@@ -41,6 +41,10 @@ ul{margin: 0;padding: 0;}
 
 .nav-tabs{
   font-size: 13px;
+  padding-top: 5px;
+  padding: 0 20px;
+  margin: 0 -20px;
+  
 }
 
 
