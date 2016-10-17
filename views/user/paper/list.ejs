@@ -24,12 +24,6 @@
           <li data-type="history">
             <a href="javascript:void(0);" >考试查询</a>
           </li>
-          <!-- <li data-type="资料">
-            <a href="javascript:void(0);" >学习资料</a>
-          </li> -->
-          <!-- <li data-type="">
-            <a href="paper/examlist" target="_blank" >考试</a>
-          </li> -->
         </ul>
       </div>
       <div class="sidebar">
@@ -83,12 +77,13 @@
 
     <script type="juicer/template" id="question-list-tpl">
     {@each list as obj, index}
-    <div data-id="${obj.id}" class="question-list">
+    <div data-id="${obj.id}" class="question-list" style="float:left;">
         <div class="qbody">${obj.qbody}</div>
         {@if obj.qtype == 2 || obj.qtype == 3}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
-        <div class="rtanswer">正确答案：${obj.rtanswer}</div>
+        <div class="showanswer"><a href="javascript:void(0);">显示答案</a></div>
+        <div class="rtanswer" style="display: none;">正确答案：${obj.rtanswer}</div>
     </div>
     {@/each}
     </script>

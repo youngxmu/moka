@@ -18,6 +18,7 @@
 			pageSize : 10
 		},
 		init : function() {
+			_this.questionUtils = question;
 			_this.tpl.menuTpl = juicer($('#menu_tpl').html());
 			// _this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
 
@@ -60,12 +61,28 @@
 			        if(_this.data.type == 'test'){
 			        	window.location.href=  'paper/detail';
 			        }
-
 			        if(_this.data.type == 'history'){
 			        	window.location.href=  'paper/history/list';
 			        }
 		      	});
 		    });
+
+
+		    $('body').on('click', '.showanswer', function(){
+				var $this = $(this);
+				var $target = $this.siblings('.rtanswer');
+				if($this.hasClass('on')){
+					$target.hide();
+					$this.find('a').text('显示答案');
+					$this.addClass('off').removeClass('on');
+				}else{
+					$target.show();
+					$this.find('a').text('隐藏答案');
+					$this.addClass('on').removeClass('off');
+					
+				}
+			});
+
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -74,9 +91,9 @@
 			if(_this.data.type == ''){
 				return;
 			}
-			if(_this.data.type == '资料'){
-				_this.initTopic();
-			}
+			// if(_this.data.type == '资料'){
+			// 	_this.initTopic();
+			// }
 			if(_this.data.type == '理论'){
 				$('#menu_panel').show();
 				$('#topic_tree').hide();
@@ -154,16 +171,18 @@
 				success : function(result){
 					if(result.success){
 						var html = _this.tpl.questionTypeTpl.render(result.data);
-						console.log(html);
 						$('#topic_tree').html(html);
 						_this.questionMap = {};
 						for(var index in result.data.list){
 							var item = result.data.list[index];
 							_this.questionMap[item.id] = item;
+							console.log(item);
 							if(index == 0){
-								console.log(item);
-								$('#content_title').html(item.title);
-								$('#content').html(item.content);
+								var question = item;
+								var title = util.formatIndex(index) + '&nbsp;' + _this.questionUtils.getQType(question.qtype);
+								var qhtml = _this.tpl.questionListTpl.render({list:[question]});
+								$('#content_title').html(title);
+								$('#content').html(qhtml);
 							}
 						}
 					}else{
@@ -185,8 +204,6 @@
 		initTopic : function() {
 			$('#menu_panel').hide();
 			$('#topic_tree').show();
-			
-			
 			$.ajax({
 				type : "post",
 				cache : false,
@@ -207,8 +224,6 @@
 				if(menu.parent_id != 10){
 					_this.topicNodes.push(menu);	
 				}
-
-				
 			}
 			_this.initTree();
 		},
@@ -249,7 +264,6 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode);
 					$('#content_title').html(_this.currNode.name);
 					if(_this.currNode.content){
 						$('#content').html(_this.currNode.content);		

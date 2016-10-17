@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.index = {
-		infoSearchUrl : 'resource/list',
+		infoSearchUrl : 'index/res/list',
 		tpl : {
 			articleListTpl : null
 		},
@@ -17,9 +17,8 @@
 			_this.tpl.msgListTpl = juicer($('#msg_list_tpl').html());
 			_this.initEvent();
 			_this.loadNews();
-			_this.loadInfos();
 			_this.loadMsg();
-			_this.loadPeople();
+			_this.loadInfos();
 		},
 		initEvent : function(){
 			$('body').on('keydown','#keyword',function(e){
@@ -58,24 +57,37 @@
 				}
 			});
 		},
+		/* 加载通知 */
+		loadMsg : function(){
+			var $panel = $('#gfjy');
+			var sendData = _this.queryData;
+				sendData.mid = 9;
+			var tpl = _this.tpl.msgListTpl;
+			// var searchUrl = 'index/gfjy';
+			var searchUrl = 'index/msgs';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+				}
+			});
+		},
 		loadInfos : function(){
-			var infoDict = {
-				info1 : '战争 日本',
-				info2 : '法规',
-				info3 : '外国',
-				info4 : '武器 装备',
-				info5 : '形势'
-			};
-			for(var key in infoDict){
-				var keyValue = infoDict[key];
-				_this.loadInfo(key, keyValue);
+			for(var i = 1;i<=6;i++){
+				_this.loadInfo(i);
 			}
 		},
-		loadInfo : function(key, keyValue){
+		loadInfo : function(key){
 			var tpl = _this.tpl.articleListTpl;
-			var $panel = $('#' + key);
+			var $panel = $('#info' + key);
 			var sendData = {
-				keyword : keyValue,
+				moduleId : key,
 				pageSize : 7,
 				pageNo : 1
 			}
@@ -94,44 +106,6 @@
 						$panel.html(P.building);
 						return;
 					}
-				}
-			});
-		},
-		loadMsg : function(){
-			var $panel = $('#gfjy');
-			var sendData = _this.queryData;
-				sendData.mid = 9;
-			var tpl = _this.tpl.msgListTpl;
-			var searchUrl = 'index/gfjy';
-			$.ajax({
-				type : 'post',
-				url : searchUrl,
-				data : sendData,
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(result){
-					var data = result.data;
-				    $panel.html(tpl.render(data));
-				}
-			});
-		},
-		loadPeople : function(){
-			var $panel = $('#info6');
-			var sendData = _this.queryData;
-				sendData.mid = 1003;
-			var tpl = _this.tpl.articleListTpl;
-			var searchUrl = 'article/queryArticleByMenu';
-			$.ajax({
-				type : 'post',
-				url : searchUrl,
-				data : sendData,
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(result){
-					var data = result.data;
-				    $panel.html(tpl.render(data));
 				}
 			});
 		},

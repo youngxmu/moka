@@ -277,3 +277,6 @@ process.on('uncaughtException', function(err) {
 
 
 menuUtils.refreshMenu();
+
+var sysUtils = require('./lib/sysUtils.js');
+sysUtils.getDBIndexModules();

@@ -30,10 +30,17 @@ exports.queryUpByIds = function (ids, callback) {
     db.query(sql, params, callback);
 };
 
-exports.getUp = function (mid, callback) {
-    db.query("select * from index_data where mid = ?;",
-        [mid],
-        function (err, result) {
+// exports.getUp = function (mid, callback) {
+//     db.query("select * from index_data where mid = ?;",
+//         [mid],
+//         function (err, result) {
+//             callback(err, result);
+//         }
+//     );
+// };
+
+exports.getUp = function (moduleId, callback) {
+    db.query("select * from index_module where id = ?;", [moduleId], function (err, result) {
             callback(err, result);
         }
     );

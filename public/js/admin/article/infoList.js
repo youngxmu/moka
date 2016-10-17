@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.article.infolist = {
-		searchUrl : 'jsll/list',
+		searchUrl : 'resource/info/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -72,7 +72,9 @@
 			for(var index in list){
 				var menu = list[index];
 				// menu['pId'] = menu.parent_id;
-				_this.topicNodes.push(menu);
+				if(menu.parent_id != 10){
+					_this.topicNodes.push(menu);
+				}
 			}
 			_this.initTree();
 		},
@@ -118,7 +120,7 @@
 						$('#content').val(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'jsll/info/' + _this.currNode.id,
+							url : 'resource/info/detail/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -140,30 +142,6 @@
 			var topicTree = $("#topic_tree");
 			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
 			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
-
-			var node = topicTree.getNodeByParam('id','1000000000000');
-			topicTree.selectNode(node);
-			_this.currNode = node;
-
-			$('#content_title').html(_this.currNode.name);
-			if(_this.currNode.content){
-				$('#content').html(_this.currNode.content);		
-			}else{
-				$.ajax({
-					url : 'jsll/info/' + _this.currNode.id,
-					type : 'get',
-					async : false,
-					success : function(data){
-						if(data.success){
-							$('#content').html(data.data.content);
-							_this.currNode.content = data.data.content;
-
-						}else{
-							$('#content').html('');			
-						}
-					}
-				});
-			}
 		},
 		commitInfo : function() {
 			var currNode = _this.currNode;

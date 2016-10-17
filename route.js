@@ -3,8 +3,14 @@ var config = require("./config");
 var authRouter = require('./routes/authRouter.js');
 var uploadRouter = require('./routes/uploadRouter.js');
 var registerRouter = require('./routes/registerRouter.js');
+
+
 var menuRouter = require('./routes/menuRouter.js');
-var indexRouter = require('./routes/indexRouter.js');
+
+/* index */
+var indexRouter = require('./routes/index/indexRouter.js');
+var indexResRouter = require('./routes/index/resRouter.js');
+
 
 
 /** user */
@@ -44,9 +50,14 @@ var adminMessageRouter = require('./routes/admin/messageRouter.js');
 
 module.exports = function (app) {
     app.use('/auth', authRouter);//登录
-    app.use('/index', indexRouter);
+    
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
+
+    /***index start*/
+    app.use('/index', indexRouter);
+    app.use('/index/res', indexResRouter);
+    /***index end*/
 
 
 
