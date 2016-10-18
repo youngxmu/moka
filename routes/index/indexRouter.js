@@ -197,53 +197,53 @@ router.post('/list/res', function (req, res, next) {
     });
 });
 
-router.post('/res/list', function (req, res, next) {
-    var pageNo = parseInt(req.body.pageNo);
-    var pageSize = parseInt(req.body.pageSize);
-    var moduleId = req.body.moduleId;
-    var moduleMap = sysUtils.getModuleMap();
-    var title = moduleMap[moduleId];
+// router.post('/res/list', function (req, res, next) {
+//     var pageNo = parseInt(req.body.pageNo);
+//     var pageSize = parseInt(req.body.pageSize);
+//     var moduleId = req.body.moduleId;
+//     var moduleMap = sysUtils.getModuleMap();
+//     var title = moduleMap[moduleId];
 
-    var type = req.body.type;
-    if(!type || type == 'undefined'){
-        type = '';
-    }
-    if(!title || title == 'undefined'){
-        title = '';
-    }
-    resourceModel.queryResourceByTitleTotalCount(title, type, function (totalCount) {
-        var totalPage = 0;
-        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
-        else totalPage = totalCount / pageSize + 1;
-        totalPage = parseInt(totalPage, 10);
-        var start = pageSize * (pageNo - 1);
-        resourceModel.queryResourceByTitle(title, type, start, pageSize, function (err, result) {
-            if (err || !result || !commonUtils.isArray(result)) {
-                logger.error("查找文章出错", err);
-                res.json({
-                    success: false,
-                    msg: "查找文章出错"
-                });
-            } else {
-                for (var i in result) {
-                    // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
-                    var date = new Date(result[i].create_time);
-                    result[i].create_time = commonUtils.formatDate(date);
-                }
-                res.json({
-                    success: true,
-                    msg: "查找文章成功",
-                    data: {
-                        totalCount: totalCount,
-                        totalPage: totalPage,
-                        currentPage: pageNo,
-                        list: result
-                    }
-                });
-            }
-        });
-    });
-});
+//     var type = req.body.type;
+//     if(!type || type == 'undefined'){
+//         type = '';
+//     }
+//     if(!title || title == 'undefined'){
+//         title = '';
+//     }
+//     resourceModel.queryResourceByTitleTotalCount(title, type, function (totalCount) {
+//         var totalPage = 0;
+//         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+//         else totalPage = totalCount / pageSize + 1;
+//         totalPage = parseInt(totalPage, 10);
+//         var start = pageSize * (pageNo - 1);
+//         resourceModel.queryResourceByTitle(title, type, start, pageSize, function (err, result) {
+//             if (err || !result || !commonUtils.isArray(result)) {
+//                 logger.error("查找文章出错", err);
+//                 res.json({
+//                     success: false,
+//                     msg: "查找文章出错"
+//                 });
+//             } else {
+//                 for (var i in result) {
+//                     // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+//                     var date = new Date(result[i].create_time);
+//                     result[i].create_time = commonUtils.formatDate(date);
+//                 }
+//                 res.json({
+//                     success: true,
+//                     msg: "查找文章成功",
+//                     data: {
+//                         totalCount: totalCount,
+//                         totalPage: totalPage,
+//                         currentPage: pageNo,
+//                         list: result
+//                     }
+//                 });
+//             }
+//         });
+//     });
+// });
 
 module.exports = router;
 

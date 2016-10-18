@@ -508,3 +508,85 @@ var component = {};
 }(component));
 
 
+(function(component){
+	var _this = null;
+	_this = component.player = {
+		panel : 
+			'<div id="img_fs_panel" >' +
+			'<div class="img-player-fs-mask" ></div>' +
+			'<div class="header-player-fs">'+
+			'<a id="btn_img_player_fs_close" class="btn_round_blue30" href="javascript:void(0);">关闭</a>'+
+			'<a id="btn_img_player_fs_rotate" class="btn_round_blue30" href="javascript:void(0);">旋转</a>'+
+			'</div>'+
+			'<div id="img_player_fs_panel" class="img-player-fs">'+
+	      		'<ul style="text-align:center;padding: 0 5%;width:90%;">'+
+	        	    '<li style="float:none;"><img src="/img/ico/loading.gif"></li>'+
+	    	    '</ul>'+
+	    	    '<div class="page"><span>1</span> / 1</div>'+
+				'<a id="btn_fs_prev" class="page_lf" href="javascript:;"></a>'+
+				'<a id="btn_fs_next" class="page_rt" href="javascript:;"></a>'+
+		  	'</div>'+
+		  	'</div>'
+		,
+		init : function(options){
+			var $target = $('#img_player_fs_panel');
+			if($target.length == 0){
+				$('body').append(_this.panel);
+				$target = $('#img_player_fs_panel');
+			}
+			var $btnPrev = $('#btn_fs_prev'); 
+			var $btnNext = $('#btn_fs_next');
+			var imgList = options.imgList;
+			var totalCount = imgList.length;
+			var currIndex = 1;
+			if(options.currIndex){
+				currIndex = options.currIndex;
+			}
+			if(options.renderCallback){
+				$target.data('renderCallback', options.renderCallback);
+			}
+			
+
+			$target.find('.page').html('<span>1</span> / ' + imgList.length);
+
+			$target.data('imgList', imgList);
+			$target.data('totalCount', totalCount);
+			$target.data('currIndex', currIndex);
+			$target.data('btnPrevId', 'btn_fs_prev');
+			$target.data('btnNextId', 'btn_fs_next');
+
+			$btnPrev.click(function(){_this.prev($target);});
+			$btnNext.click(function(){_this.next($target);});
+
+			$('#btn_img_player_fs_close').click(function(){
+				$('#img_fs_panel').remove();
+			});
+			
+			$('#btn_img_player_fs_rotate').click(function(){
+				var $img = $target.find('img');
+				var className = $img.attr('class');
+
+				if(!className || className == ''){
+					className = 'rotate90';
+				}else{
+					var angle = className.substr(6);
+					angle = parseInt(angle, 10) + 90;
+					if(angle == 360){
+						className = '';
+					}else{
+						className = 'rotate' + angle;
+					}
+				}
+
+				$img.attr('class', className);
+			});
+
+			_this.renderImg($target);
+
+			$target.show();
+			$('#img_fs_panel').show();
+
+		}
+	};
+}(component));
+
