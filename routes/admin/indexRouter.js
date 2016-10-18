@@ -95,5 +95,41 @@ router.post('/updateModule', function (req, res, next) {
 });
 
 
+
+router.post('/info/view/:mid', function (req, res, next) {
+    var mid = req.params.mid;
+    indexModel.queryInfoById(mid, function(err, result){
+        if(err || result.length == 0){
+            res.json({
+                success : false,
+                msg : '不存在'
+            });
+        }else{
+            res.json({
+                success : true,
+                data : result[0]
+            });
+        }
+    });
+});
+
+router.post('/info/save', function (req, res, next) {
+    var mid = req.body.mid;
+    var content = req.body.content;
+    indexModel.updateInfo(mid, content, function(err){
+        if(err){
+            res.json({
+                success : false,
+                msg : '更新失败'
+            });
+        }else{
+            res.json({
+                success : true,
+                msg : '更新成功'
+            });
+        }
+    });
+});
+
 module.exports = router;
 

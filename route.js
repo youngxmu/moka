@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index/indexRouter.js');
 var indexResRouter = require('./routes/index/resRouter.js');
 var indexInfoRouter = require('./routes/index/infoRouter.js');
 var indexScienceRouter = require('./routes/index/scienceRouter.js');
+var indexAboutRouter = require('./routes/index/aboutRouter.js');
 
 
 
@@ -61,6 +62,7 @@ module.exports = function (app) {
     app.use('/index/res', indexResRouter);
     app.use('/index/info', indexInfoRouter);
     app.use('/index/science', indexScienceRouter);
+    app.use('/index/about', indexAboutRouter);
     
     /***index end*/
 

@@ -334,7 +334,7 @@
 			if(data && data.type == 1){
 				$.ajax({
 					type : "post",
-					url : 'index/info/view/' + mid,
+					url : 'admin/index/info/view/' + mid,
 					success : function(data){
 						if(data.success){
 							_this.editor.setValue(data.data.content);
@@ -359,7 +359,7 @@
 				mid : mid
 			};
 			$.ajax({
-				url : 'index/info/save',
+				url : 'admin/index/info/save',
 				type : 'post',
 				data : postData,
 				success : function(data){

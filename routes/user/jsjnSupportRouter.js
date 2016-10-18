@@ -4,6 +4,8 @@ var logger = require("../../lib/log.js").logger("resourceRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
 var articleModel = require("../../models/articleModel.js");
+var indexModel = require("../../models/indexModel.js");
+
 var router = express.Router();
 
 
@@ -62,6 +64,25 @@ router.get('/detail/:id', function (req, res, next) {
         });
     }
 });
+
+
+router.post('/info/view/:mid', function (req, res, next) {
+    var mid = req.params.mid;
+    indexModel.queryInfoById(mid, function(err, result){
+        if(err || result.length == 0){
+            res.json({
+                success : false,
+                msg : '不存在'
+            });
+        }else{
+            res.json({
+                success : true,
+                data : result[0]
+            });
+        }
+    });
+});
+
 
 module.exports = router;
 

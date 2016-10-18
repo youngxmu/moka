@@ -29,3 +29,13 @@
 .ico-txt {background-image: url('../../img/ico/ico-txt.png');}
 .ico-mp3 {background-image: url('../../img/ico/ico-mp3.png');}
 .ico-ppt {background-image: url('../../img/ico/ico-ppt.png');}
+
+.footer2 .gf-info{position: absolute;
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+  font-size: 12px;
+  font-weight: 200;
+  color: #999;
+}
+.footer2 .gf-info p{}
