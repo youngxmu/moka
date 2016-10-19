@@ -1,14 +1,11 @@
 (function(P){
 	var _this = null;
-	_this = P.index.honor = {
-		searchUrl : 'index/about/personal',
+	_this = P.index.science = {
+		searchUrl : 'index/science/list',
 		tpl : {},
 		data : {},
 		init : function() {
-			_this.data.type = $('#type').val();
-			if(_this.data.type == 'u'){
-				_this.searchUrl = 'index/about/org';
-			}
+			_this.data.mid = $('#mid').val();
 			_this.tpl.listTpl = juicer($('#list_tpl').html());
 			_this.tpl.picTpl = juicer($('#pic_tpl').html());
 			_this.initEvent();
@@ -21,22 +18,27 @@
 				var options = {isPreview : false, resourceType : 2};
 			});
 		},
-		loadHonors : function(key, keyValue){
+		loadHonors : function(){
 			var $listPanel = $('#list_panel');
 			var $picPanel = $('#pic_panel');
 			$.ajax({
 				type : 'post',
 				src : _this.searchUrl,
+				data : {
+					moduleId : _this.data.mid
+				},
 				beforeSend : function(){
 					$listPanel.html(util.loadingPanel);
 					$picPanel.html(util.loadingPanel);
 				},
 				success : function(result){
-					if(result.success){
+					if(result.success && result.list.length > 0){
 				    	$listPanel.html(_this.tpl.listTpl.render(result));
 				    	$picPanel.html(_this.tpl.picTpl.render(result));
-
 				    	_this.initPlayer();
+					}else{
+						$listPanel.html(P.building);
+						$picPanel.html('');
 					}
 					
 				}
