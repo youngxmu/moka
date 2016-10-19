@@ -212,8 +212,7 @@ route(app); //加载routes
 //404错，即无匹配请求地址
 app.use(function(req, res, next) {
     if (!req.xhr) {
-        console.log(req.path);
-        if(req.path != 'js/lib/jquery.min.map'){
+        if(req.path.indexOf('js/lib/jquery.min.map') != -1){
             logger.error('common 404');
             res.status(404);
             res.render('error', {
