@@ -27,9 +27,7 @@
 			_this.initEvent();
 			_this.initEditor();
 			_this.showEditor('130101');
-			_this.initTopic();
 			_this.changeType({init: true});
-			// _this.searchResource();
 		},
 		initEvent : function(){
 			$('#resource_list').on('click','.view',function(){
@@ -133,7 +131,7 @@
 			_this.mid = mid;
 			$.ajax({
 				type : "post",
-				url : 'index/info/view/' + mid,
+				url : 'admin/index/info/view/' + mid,
 				success : function(data){
 					if(data.success){
 						_this.editor.setValue(data.data.content);
@@ -152,7 +150,7 @@
 				mid : mid
 			};
 			$.ajax({
-				url : 'index/info/save',
+				url : 'admin/index/info/save',
 				type : 'post',
 				data : postData,
 				success : function(data){
@@ -162,263 +160,6 @@
 					util.dialog.errorDialog('提交失败请重试');
 				}
 			});
-		},
-		initTopic : function() {
-			var searchUrl = 'jsjn/list';
-			if(_this.type == 2){
-				searchUrl =  'menu/tree/1403';
-			}
-			if(_this.type == 3){
-				searchUrl =  'menu/tree/1402';
-			}
-			if(_this.type == 4){
-				searchUrl =  'menu/tree/1401';
-			}
-
-			if(_this.type == 1){
-				$('#txt_panel').show();
-				$('#resource_panel').hide();
-			}else{
-				$('#txt_panel').hide();
-				$('#resource_panel').show();
-			}
-			
-			$.ajax({
-				type : "post",
-				cache : false,
-				url : searchUrl,
-				dataType : 'json',
-				beforeSend : function() {
-					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
-				},
-				success : _this.handleTopic 
-			});
-		},
-		handleTopic : function(data) {
-			_this.topicNodes = [];
-			var list = data.data.list;
-			for(var index in list){
-				var menu = list[index];
-				if(menu.title && !menu.name){
-					menu.name = menu.title;	
-				}
-				// menu['pId'] = menu.parent_id;
-				_this.topicNodes.push(menu);
-			}
-
-			// if(_this.type > 1){
-			// 	var searchUrl = 'article/queryArticleByMenu';
-			// 	var data = _this.data.searchData;
-			// 	if(_this.data.keyword){
-			// 		searchUrl = 'article/queryArticleByTitle';
-			// 	}else{
-			// 		searchUrl = 'article/queryArticleByMenu';
-			// 	}
-
-				
-			// 	if(_this.type == 2){
-			// 		data.mid = 1403;
-			// 	}
-			// 	if(_this.type == 3){
-			// 		data.mid = 1402;
-			// 	}
-			// 	if(_this.type == 4){
-			// 		data.mid = 1401;
-			// 	}
-
-			// 	$.ajax({
-			// 		type : "post",
-			// 		async : false,
-			// 		url : searchUrl,
-			// 		data : data,
-			// 		success : function(result){
-			// 			if(result.success){
-			// 				var list = result.data.list;
-			// 				for(var index in list){
-			// 					var menu = list[index];
-			// 					if(menu.title && !menu.name){
-			// 						menu.name = menu.title;	
-			// 					}
-			// 					menu.parent_id = menu.menu_id;
-			// 					// menu['pId'] = menu.parent_id;
-			// 					_this.topicNodes.push(menu);
-			// 				}
-			// 			}
-			// 		}
-			// 	});
-			// }
-			_this.initTree();
-		},
-		search : function(){
-			$.ajax({
-				type : 'post',
-				url : 'article/queryArticleByMenu',
-				data : _this.queryData,
-				beforeSend : function(){
-					$('#resource_list').html(util.loadingPanel);
-				},
-				success : _this.initPage
-			});
-		},
-		initPage : function(result) {
-			var data = result.data;
-		    $('#resource_list').html(_this.data.resourceTpl.render(data));
-
-			var totalPage = data.totalPage;
-			var totalCount = data.totalCount;
-
-			if(totalCount == 0){
-				$('#resource_list').html(P.building);
-				return;
-			}
-
-		    if (totalPage <= 1) {
-		        $("#pagebar").html('');
-		    }
-		    if (totalPage >= 2) {
-		        $(function() {
-		            $.fn.jpagebar({
-		                renderTo : $("#pagebar"),
-		                totalpage : totalPage,
-		                totalcount : totalCount,
-		                pagebarCssName : 'pagination2',
-		                currentPage: parseInt(data.currentPage),
-		                onClickPage : function(pageNo) {
-		                    $.fn.setCurrentPage(this, pageNo);
-		                    if (_this.instance_papers == null)
-		                    	_this.instance_papers = this;
-		                    _this.queryData.pageNo = parseInt(pageNo),
-		                    $.ajax({
-		                    	url : 'article/queryArticleByMenu',
-		                        type: 'POST',
-		                        data: _this.queryData,
-		                        beforeSend : function(){
-									$('#resource_list').html(util.loadingPanel);
-								},
-		                        success : function(result){
-		                        	if (result != null && result.success) {
-		                        		var data = result.data;
-		                		        $('#resource_list').html(_this.data.resourceTpl.render(data));
-		                		    }
-		                		    else {
-		                		        util.dialog.infoDialog("查询信息失败，请重试。");
-		                		    }
-		                        }
-		                    });
-		                }
-		            });
-		        });
-		    }
-		},
-		setting : {
-			view : {
-				dblClickExpand : false,
-				showLine : true,
-				selectedMulti : false,
-				showIcon : false
-			},
-			data : {
-				simpleData : {
-					enable : true,
-					idKey : "id",// id 自定义
-					pIdKey : "parent_id",// 父节点id 自定义
-					rootPId : 14
-				}
-			},
-			check : {
-				enable : false
-			},
-			callback : {
-				beforeClick : function(treeId, treeNode) {
-					var zTree = _this.getCurrTree();
-					if (treeNode.isParent) {
-						zTree.expandNode(treeNode);
-						return true;
-					} else {
-						return true;
-					}
-				},
-				onClick: function(event,treeId, treeNode) {
-					var zTree = _this.getCurrTree();
-					var nodes = zTree.getCheckedNodes(true);
-					if(_this.currNode && _this.currNode.id == treeNode.id){
-						zTree.cancelSelectedNode(treeNode);
-						_this.currNode = null;
-						return false;
-					}
-					_this.currNode = treeNode;
-					$('#content_title').html(_this.currNode.name);
-					if(_this.type == 1){
-						if(_this.currNode.content){
-							if(_this.currNode.content == 'null'){
-								_this.currNode.content == '';
-							}
-							// $('#content').html('<pre>' + _this.currNode.content + '</pre>');		
-							_this.txt_editor.html(_this.currNode.content);	
-						}else{
-							$.ajax({
-								url : 'jsjn/info/' + _this.currNode.id,
-								type : 'get',
-								async : false,
-								success : function(data){
-									if(data.success){
-										if(data.data.content == 'null'){
-											data.data.content == '';
-										}
-										// $('#content').html('<pre>' + data.data.content + '</pre>');	
-										_this.currNode.content = data.data.content;
-										_this.txt_editor.html(_this.currNode.content);	
-									}else{
-										$('#content').html('');			
-									}
-								}
-							});
-						}
-					}else{
-						_this.queryData = {
-							pageNo : 1,
-							pageSize : 10
-						};
-						_this.queryData.mid = _this.currNode.id;
-						_this.search();
-					}
-
-					// if(_this.type == 2){
-					// 	if( _this.currNode.file_name){
-					// 		$('#content').html(_this.data.picTpl.render(_this.currNode));
-					// 	}else{
-					// 		$('#content').html('');			
-					// 	}
-						
-					// }
-
-					// if(_this.type == 3 ){
-					// 	if( _this.currNode.file_name){
-					// 		$('#content').html(_this.data.videoTpl.render(_this.currNode));
-					// 	}else{
-					// 		$('#content').html('');			
-					// 	}
-					// }
-
-					// if(_this.type == 4 ){
-					// 	if( _this.currNode.file_name){
-					// 		$('#content').html(_this.data.pptTpl.render(_this.currNode));
-					// 	}else{
-					// 		$('#content').html('');			
-					// 	}
-					// }
-					
-					return true;
-				}
-			}
-		},
-		initTree : function() {// 初始化树功能，折叠展开点击事件
-			var topicTree = $("#topic_tree");
-			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
-			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
-		},
-		getCurrTree : function(){
-			return _this.topicTree;
 		},
 		getMenuPath : function(node){
 			var menuArr = [_this.pid];
