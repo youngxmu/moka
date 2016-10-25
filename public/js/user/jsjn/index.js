@@ -119,8 +119,6 @@
 			$('body #ss_sys').on('click', ' .ss-back', _this.back);
 			$('body #ss_sys').on('click', ' .menu-start', _this.onStart);
 			$('body #ss_sys').on('click', ' .menu-start-list', _this.onStart);
-
-			
 		},
 		show : function(options){
 			var cindex = 'c' + (parseInt(options.cindex) + 1);
@@ -215,6 +213,8 @@
 		},
 		show : function(options){
 			$('#detail_sys').addClass('s').removeClass('ss');;
+			$('#detail_page_panel').show();
+			$('#detail_video_panel').hide();
 			var cindex = 'c' + (parseInt(options.cindex) + 1);
 			var jindex = options.subIndex;
 			console.log(cindex);
@@ -317,11 +317,20 @@
 			$('body').on('click', ' #detail_sys.ss .detail2-res-menu li', _this.onSelMenu);
 			$('body').on('click', ' #detail_sys.ss .detail-exit', _this.exit);
 			$('body').on('click', ' #detail_sys.ss .detail-back', _this.back);
+
+			$('body').on('click', ' #detail_sys.ss .detail-video-start', _this.play);
+			$('body').on('click', ' #detail_sys.ss .detail-video-stop', _this.stop);
 		},
 		show : function(options){
 			$('#detail_sys').addClass('ss').removeClass('s');
+			$('#detail_page_panel').show();
+			$('#detail_video_panel').hide();
 			var cindex = options.cindex;
 			var click = options.click;
+			if(cindex == 'c31' && (click == 'lizheng' || click == 'kuali' || click == 'xiaoxi' || click == 'tingzhijianzhuanfa')){
+				$('#detail_page_panel').hide();
+				$('#detail_video_panel').show();
+			}
 			console.log(cindex+' '+ click);
 			console.log(nc.xxrj[cindex].details);
 			_this.menu = nc.xxrj[cindex].details[click].menu;
@@ -338,6 +347,8 @@
 			if(_this.menu.jie){
 				var jie = _this.menu.jie[menuIndex];
 				data.content =  jie.content;
+				data.video =  jie.video;
+				console.log(data);
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
 				html = _this.tpl.detailContentTpl.render(data);
@@ -348,8 +359,9 @@
 				var jIndex = strs[0];
 				var mIndex = strs[1];
 				var jie = _this.menu.mjie[jIndex].menu[mIndex];
-
 				data.content =  jie.content;
+				data.video =  jie.video;
+				console.log(data);
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
 				html = _this.tpl.detailContentTpl.render(data);
@@ -370,6 +382,7 @@
 		},
 		onSelMenu : function(){
 			var $this = $(this);
+			_this.video = $this.attr('data-video');
 			$this.addClass('active').siblings('li').removeClass('active');
 			var menuIndex = $this.attr('data-index');
 			var data = _this.menu;
@@ -428,6 +441,12 @@
 		},
 		exit : function(){
 			$('#main_sys').show().siblings('div').hide();
+		},
+		play : function(){
+
+		},
+		stop : function(){
+			
 		}
 	};
 })(moka);

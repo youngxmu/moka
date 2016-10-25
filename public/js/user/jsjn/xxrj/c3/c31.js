@@ -108,6 +108,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正02.mp4',
 							'content'	: [
 								'00262[381x479x8BPP]'
 							]
@@ -121,6 +122,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01371[218x45x8BPP]',
 							'hover'		: '01370[218x45x8BPP]',
 							'active'	: '01369[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正03.mp4',
 							'content'	: [
 								'01509[722x522x8BPP]'
 							]
@@ -137,6 +139,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01421[218x39x8BPP]',
 							'hover'		: '01420[218x39x8BPP]',
 							'active'	: '01419[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正04.mp4',
 							'content'	: [
 								'01510[722x522x8BPP]'
 							]
@@ -145,14 +148,16 @@ nc.xxrj.c31.details = {
 							'def' 		: '01427[218x39x8BPP]',
 							'hover'		: '01426[218x39x8BPP]',
 							'active'	: '01425[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正05.mp4',
 							'content'	: [
 								'01512[722x522x8BPP]'
 							]
 						},
 						{
-							'def' 		: '01422[218x39x8BPP]',
+							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
-							'active'	: '01424[218x39x8BPP]',
+							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正06.mp4',
 							'content'	: [
 								'01511[722x522x8BPP]'
 							]
@@ -169,6 +174,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01436[218x39x8BPP]',
 							'hover'		: '01435[218x39x8BPP]',
 							'active'	: '01434[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正07.mp4',
 							'content'	: [
 								'01513[722x522x8BPP]'
 							]
@@ -177,6 +183,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01442[218x39x8BPP]',
 							'hover'		: '01441[218x39x8BPP]',
 							'active'	: '01440[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/lizheng/立正08.mp4',
 							'content'	: [
 								'01514[722x522x8BPP]'
 							]

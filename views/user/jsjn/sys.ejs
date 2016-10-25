@@ -48,13 +48,19 @@
                 <div id="detail_menu_content" class="main"></div>
                 <div class="detail-footer">
                   <!-- <span class="detail-exit"></span> -->
-                  <span class="detail-page-first"></span>
-                  <span class="detail-page-pre"></span>
-                  <span class="detail-page-next"></span>
-                  <span class="detail-page-last"></span>
-                  <span class="detail-page-go">
-                    <input id="page_no" value="1">
-                  </span>
+                  <div id="detail_page_panel" style="width:510px;display:inline-block;">
+                    <span class="detail-page-first"></span>
+                    <span class="detail-page-pre"></span>
+                    <span class="detail-page-next"></span>
+                    <span class="detail-page-last"></span>
+                    <span class="detail-page-go">
+                      <input id="page_no" value="1">
+                    </span>
+                  </div>
+                  <div id="detail_video_panel" style="width:510px;display:inline-block;display:none;">
+                    <span class="detail-video-start"></span>
+                    <span class="detail-video-stop"></span>
+                  </div>
                   <span class="detail-back"></span>
                 </div>
             </div>
@@ -170,7 +176,7 @@
       <div class="detail-main-list">
         <ul class="content-list">
           {@each content as obj, index}
-          <li class="content {@if index == 0}current{@/if}" data-index="${index}" >
+          <li class="content {@if index == 0}current{@/if}" data-index="${index}" data-video="${video}" >
             <img class="def" src="jsjn/png/${obj}.png" style="${obj|getImgStyle}">
           </li>
           {@/each}
