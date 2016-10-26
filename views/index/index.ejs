@@ -20,7 +20,7 @@
           <div class="slick-dots"></div>
         </div>
         <div class="ry">
-          <div class="box-title">国防教育信息</div>
+          <div class="box-title">通知公告</div>
           <ul id="gfjy" class="info-panel"></ul>
         </div>
       </div>
@@ -72,7 +72,7 @@
       </div>
     </div>
     <%- include common/footer.ejs %>
-    <script type="text/template" id="news_list_tpl">
+    <script type="text/template" id="news_list_tpl_o">
     {@each list as news}
     <div style="position:relative;">
       <a href="${news.link}" title="${news.title}" target="_blank" >
@@ -80,6 +80,27 @@
       </a>
       <span class="news-title" >${news.title}</span>
     </div>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="news_list_tpl">
+    {@each list as news}
+    <li>
+      <a href="index/news/${news.id}" target="_blank">${news.title}</a>
+    </li>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="pic_list_tpl">
+    {@each list as news}
+    {@if news.cover}
+    <div style="position:relative;">
+      <a href="index/news/${news.id}" title="${news.title}" target="_blank" >
+        <img src="${news.cover}" width="319" height="240">
+      </a>
+      <span class="news-title" >${news.title}</span>
+    </div>
+    {@/if}
     {@/each}
     </script>
 

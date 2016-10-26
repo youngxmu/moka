@@ -63,7 +63,7 @@ exports.updateMessage = function (id, title, author, content, callback) {
 };
 
 exports.delMessage = function (id, callback) {
-    var sql = 'del message where id = ?;';
+    var sql = 'delete from message where id = ?;';
     var params = [id];
     db.query(sql, params, function (err, result) {
         if (!err) {

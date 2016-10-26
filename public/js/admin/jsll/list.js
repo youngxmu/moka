@@ -18,6 +18,9 @@
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.type = 1;
 			_this.initEvent();
+
+			
+			_this.editor = $('#content');
 			_this.txt_editor = $('#txt_editor');
 			_this.data.key = '政策';
 			// _this.search();
@@ -45,6 +48,15 @@
 					_this.commitxx();
 				}
 			});
+
+			$('#btn_txt').on('click', function(){
+				if(_this.data.type == '3'){
+					_this.commitInfo();
+				}else{
+					_this.commitxx();
+				}
+			});
+			
 
 			$('.type-panel').on('click', 'li',function(){
 				var $this = $(this);
@@ -133,6 +145,7 @@
 			var id = $this.attr('data-id');
 			var item = _this.listMap[id];
 			_this.currItem = item;
+			_this.id = id;
 			$('#content').val(item.content);
 		},
 		commitInfo : function() {
@@ -155,7 +168,7 @@
 			});
 		},
 		initTopic : function() {
-			var searchUrl = 'jsjn/list';
+			var searchUrl = 'jsll/info/list';
 			if(_this.type == 2){
 				searchUrl =  'menu/tree/1403';
 			}
@@ -287,6 +300,7 @@
 					}
 					_this.currNode = treeNode;
 					$('#content_title').html(_this.currNode.name);
+					_this.id = _this.currNode.id;
 					if(_this.type == 1){
 						if(_this.currNode.content){
 							if(_this.currNode.content == 'null'){
@@ -296,7 +310,7 @@
 							_this.txt_editor.html(_this.currNode.content);	
 						}else{
 							$.ajax({
-								url : 'jsjn/info/' + _this.currNode.id,
+								url : 'jsll/info/detail/' + _this.currNode.id,
 								type : 'get',
 								async : false,
 								success : function(data){
@@ -400,6 +414,46 @@
 				function(){},
 				'确认删除'
 			);
+		},
+		commitInfo : function() {
+			var mid = _this.id;
+			var content = _this.txt_editor.val();
+			
+			var postData = {
+				content : content,
+				id : mid
+			};
+			$.ajax({
+				url : 'admin/jsll/updateinfo',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
+		},
+		commitxx : function() {
+			var mid = _this.id;
+			var content = _this.editor.val();
+			
+			var postData = {
+				content : content,
+				id : mid
+			};
+			$.ajax({
+				url : 'admin/jsll/updatexx',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
 		}
 	};
 }(moka));

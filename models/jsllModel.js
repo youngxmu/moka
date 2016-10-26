@@ -50,8 +50,10 @@ exports.addInfo = function (name, content, parent_id, mlevel, callback) {
 
 
 exports.updateInfo = function (id, title, content, callback) {
-    db.query("update jsllxx set title = ?, content = ? where id = ?;",
-        [title, content, id],
+    //title = ?, 
+    console.log('updatejsllxx'+ id);
+    db.query("update jsllxx set content = ? where id = ?;",
+        [ content, id],
         function (err, result) {
             callback(err, result);
         }

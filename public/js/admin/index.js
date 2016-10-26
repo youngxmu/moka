@@ -27,7 +27,7 @@
 			_this.initEditor();
 			_this.initEvent();
 			_this.showEditor(100101);
-			
+			// _this.initUploader('/upload/file', 'jpg,png,gif,JPG,PNG,GIF');
 		},
 		initEvent : function(){
 			$('#btn_commit').click(_this.commit);
@@ -43,6 +43,7 @@
 				$('.res-menu li').removeClass('active');
 				$this.addClass('active');
 				_this.data.searchData.mid = $this.attr('data-id');
+				_this.data.searchData.moduleId = $this.attr('data-id');
 				_this.$topPanel = $('#top_list');
 				_this.$panel = $('#resource_list');
 				_this.$pagebar = $('#pagebar');
@@ -55,6 +56,8 @@
 			$('body').on('click', '.btndown', _this.down);
 
 			_this.initMsgEvent();
+
+			_this.initNewsEvent();			
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -66,6 +69,7 @@
 			$('#list_panel').hide();
 			$('#tree_panel').hide();
 			$('#pic_panel').hide();
+			$('#nnn_panel').hide();
 			$('#msg_panel').hide();
 			
 			if(type == 1 || type == 2 || type == 3 || type == 6){
@@ -81,6 +85,8 @@
 				$('#list_panel').show();	
 			}
 			if(type == 5){
+				_this.data.searchData.mid = 1;
+				_this.data.searchData.moduleId = 1;
 				_this.$topPanel = $('#top_list');
 				_this.$panel = $('#resource_list');
 				_this.$pagebar = $('#pagebar');
@@ -88,9 +94,15 @@
 				_this.loadRes();
 				$('#tree_panel').show();
 			}
+			// if(type == 7){
+			// 	_this.loadNews();
+			// 	$('#pic_panel').show();
+			// }
+
 			if(type == 7){
 				_this.loadNews();
-				$('#pic_panel').show();
+				console.log($('#news_panel'));
+				$('#nnn_panel').show();
 			}
 
 			if(type == 8){
@@ -98,32 +110,32 @@
 				$('#msg_panel').show();
 			}
 		},
-		loadNews : function(){
-			var $panel = $('#news_panel');
-			$.ajax({
-				type : 'post',
-				url : 'admin/news',
-				beforeSend : function(){
-					$panel.html(util.loadingPanel);
-				},
-				success : function(data){
-					if(data.success){
-						var list = data.list;
-						var length = list.length;
-						while(length < 5){
-							length++;
-							list.push({
-								title : '',
-								link : '',
-								pic_url : '',
-								index : length
-							});
-						}
-						$panel.html(_this.tpl.newsTpl.render(data));	
-					}
-				}
-			});
-		},
+		// loadNews : function(){
+		// 	var $panel = $('#news_panel');
+		// 	$.ajax({
+		// 		type : 'post',
+		// 		url : 'admin/news',
+		// 		beforeSend : function(){
+		// 			$panel.html(util.loadingPanel);
+		// 		},
+		// 		success : function(data){
+		// 			if(data.success){
+		// 				var list = data.list;
+		// 				var length = list.length;
+		// 				while(length < 5){
+		// 					length++;
+		// 					list.push({
+		// 						title : '',
+		// 						link : '',
+		// 						pic_url : '',
+		// 						index : length
+		// 					});
+		// 				}
+		// 				$panel.html(_this.tpl.newsTpl.render(data));	
+		// 			}
+		// 		}
+		// 	});
+		// },
 		commit : function(){
 			var $infos = $('.news-edit');
 			var newsList = [];
@@ -163,7 +175,7 @@
 		loadTop : function(){
 			$.ajax({
 				type : 'post',
-				url : 'index/list/up',
+				url : 'index/res/up',
 				async : false,
 				data : {mid:_this.data.searchData.mid},
 				beforeSend : function(){
@@ -183,7 +195,7 @@
 		loadRes : function() {
 			$.ajax({
 				type : "post",
-				url : 'index/list/res',
+				url : 'index/res/list',
 				data : _this.data.searchData,
 				beforeSend : function() {
 					_this.$panel.html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
@@ -320,6 +332,17 @@
 				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
 			  	}
 			});
+
+			_this.newsEditor = new Simditor({
+			  	textarea: $('#news_editor'),
+			  	upload : {
+			    	url: 'upload/img',
+				    params: null,
+				    fileKey: 'upload_file',
+				    connectionCount: 3,
+				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+			  	}
+			});
 		},
 		midMap : {
 			'100101' : {type:1},
@@ -415,7 +438,7 @@
 			});
 		},
 		initMsgEvent : function(){
-			$('body').on('click', '.msg-list-panel ul li', _this.selectMsg);
+			$('body').on('click', '#msg_box ul li', _this.selectMsg);
 			$('body').on('click', '#btn_add_msg', _this.addMsg);
 			$('body').on('click', '#btn_del_msg', _this.delMsg);
 			$('body').on('click', '#btn_save_msg', _this.saveMsg);
@@ -459,13 +482,13 @@
 			_this.msgEditor.setValue('');
 		},
 		delMsg : function(){
-			if(_this.data.msgId){
+			if(!_this.data.msgId){
 				util.dialog.infoDialog('未选中信息');
 			}else{
 				$.ajax({
 					type : "post",
 					url : 'admin/message/del',
-					data : data,
+					data : {id:_this.data.msgId},
 					success : function(result){
 						if(!result.success){
 							return util.dialog.infoDialog(result.msg);
@@ -498,6 +521,168 @@
 					}
 				}
 			});
+		},
+
+
+		initNewsEvent : function(){
+			$('body').on('click', '#news_box ul li', _this.selectNews);
+			$('body').on('click', '#btn_add_news', _this.addNews);
+			$('body').on('click', '#btn_del_news', _this.delNews);
+			$('body').on('click', '#btn_save_news', _this.saveNews);
+		},
+		loadNews : function(){
+			var queryData = {
+				pageNo : 1,
+				pageSize : 20
+			};
+			$.ajax({
+				type : "post",
+				url : 'admin/index/news/list',
+				data : _this.data.searchData,
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						var html = _this.tpl.msgTpl.render(result.data);
+						$('#news_list_panel').html(html);
+						_this.data.newsMap = {};
+						for(var index in result.data.list){
+							var message = result.data.list[index];
+							_this.data.newsMap[message.id] = message;
+						}
+					}
+				}
+			});
+		},
+		selectNews : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id'); 
+			_this.data.newsId = id;
+			console.log(_this.data.newsId);
+			$this.addClass('active').siblings('li').removeClass('active');
+			var message = _this.data.newsMap[id];
+			$('#news_title').val(message.title);
+			_this.newsEditor.setValue(message.content);
+		},
+		addNews : function(){
+			_this.data.newsId = '';
+			$('#news_title').val('');
+			_this.newsEditor.setValue('');
+		},
+		delNews : function(){
+			console.log(_this.data.newsId);
+			if(!_this.data.newsId){
+				util.dialog.infoDialog('未选中信息');
+			}else{
+				$.ajax({
+					type : "post",
+					url : 'admin/index/news/del',
+					data : {id : _this.data.newsId},
+					success : function(result){
+						if(!result.success){
+							return util.dialog.infoDialog(result.msg);
+						}else{
+							_this.loadNews();
+							util.dialog.toastDialog('删除成功');
+						}
+					}
+				});
+			}
+		},
+		saveNews : function(){
+			var data = {
+				title : $('#news_title').val(),
+				content : _this.newsEditor.getValue()
+			};
+			var $content = $(data.content);
+			var $imgs = $content.find('img');
+			if($imgs.length > 0){
+				var src = $imgs.first().attr('src');
+				data.cover = src.split('8200')[1];
+			}
+
+			if(_this.data.newsId){
+				data.id = _this.data.newsId;
+			}
+			$.ajax({
+				type : "post",
+				url : 'admin/index/news/save',
+				data : data,
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						_this.loadNews();
+						util.dialog.toastDialog('保存成功');
+					}
+				}
+			});
+		},
+		initUploader : function(uploadSrc, extensions) {// 初始化文件上传控件
+			plupload.addI18n({
+		        'File extension error.' : '文件类型错误',
+		        'File size error.' : '文件大小超出限制'
+		    });
+			_this.fileUploader = new plupload.Uploader({
+				runtimes : 'html5,flash',
+				browse_button : 'btn_upload', // 选择文件按钮ID
+				max_file_size : '100mb', // 文件上传最大值
+				chunks : false,// 不分块上传
+				unique_names : true, // 上传的文件名是否唯一,只有在未进行分块上传时文件名唯一才有效
+				url : uploadSrc,
+				flash_swf_url : 'js/lib/plupload/plupload.flash.swf',// plupload.flash.swf文件所在路径
+				multi_selection : false,
+				filters: [
+				     {title: "允许文件类型", extensions: extensions}
+		        ],
+				init : {
+					FileUploaded : function(up, file, info) {
+						$('#btn_commit').css('disabled', '');// 启用保存按钮
+						$('#btn_upload').text('修改文件');
+						_this.fileUploader.disableBrowse(false);
+						var data = eval('(' + info.response + ')');
+						_this.fileName = data.fileName;
+						if (data.success == false) {
+							util.dialog.infoDialog(data.msg);
+							return;
+						} else {
+							util.dialog.toastDialog('上传成功', 2000, function(){
+								$('#process_bar').hide();
+								$('#process_rate').css('width', '0');
+								$('#process_rate').text('0%');
+							});
+						}
+					},
+					FilesAdded : function(up, file) {
+						$.each(up.files, function (i, file) {
+							if (up.files.length <= 1) {
+					            return;
+					        }
+					        up.removeFile(file);
+						});
+						var orgName = file[0].name.substring(0,file[0].name.lastIndexOf('.')).replace(/[ ]/g,' ');
+						$('#filename').text(orgName).show();
+						_this.fileUploader.start();
+					},
+					BeforeUpload : function(up, file) {
+						_this.fileUploader.disableBrowse(true);
+						$('#btn_commit').css('disabled', 'disabled');// 禁用保存按钮
+					},
+					UploadProgress : function(up, file) {
+						$('#process_bar').show();
+						$('#process_rate').css('width', file.percent + '%');
+						$('#process_rate').text(file.percent + '%');
+					},
+					Error : function(up, err) {
+						$('#loading').hide();
+						_this.fileUploader.disableBrowse(false);
+						up.refresh(); // Reposition Flash/Silverlight
+						// util.checkStatus(err);
+					} 
+				}
+			});
+			_this.fileUploader.init();
 		}
+		
 	};
 }(moka));

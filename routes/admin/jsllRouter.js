@@ -236,7 +236,7 @@ router.post('/updatexx', function(req, res, next) {
     var title = req.body.title;
     var content = req.body.content;
     var id = req.body.id;
-    
+    console.log('updatexx');
     jsllModel.updateInfo(id, title, content, function (err, result) {
         if (err) {
             res.json({

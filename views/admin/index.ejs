@@ -13,11 +13,10 @@
           <a href="javascript:void(0);">中心简介</a>
         </li>
         <li role="presentation" data-type="2" data-mid="100102"><a href="javascript:void(0);">研究队伍</a></li>
-        <li role="presentation" data-type="3" data-mid="1002"><a href="javascript:void(0);">管理机构</a></li>
-        <li role="presentation" data-type="4" data-mid="100406"><a href="javascript:void(0);">学术成果</a></li>
+        <!-- <li role="presentation" data-type="4" data-mid="100406"><a href="javascript:void(0);">学术成果</a></li> -->
         <li role="presentation" data-type="5" data-mid="100401"><a href="javascript:void(0);">数字资源</a></li>
-        <li role="presentation" data-type="6" data-mid="1005"><a href="javascript:void(0);">关于我们</a></li>
-        <li role="presentation" data-type="7" data-mid=""><a href="javascript:void(0);">图片新闻</a></li>
+        <!-- <li role="presentation" data-type="6" data-mid="1005"><a href="javascript:void(0);">关于我们</a></li> -->
+        <li role="presentation" data-type="7" data-mid=""><a href="javascript:void(0);">国防动态</a></li>
         <li role="presentation" data-type="8" data-mid=""><a href="javascript:void(0);">国防信息</a></li>
       </ul>
 
@@ -42,12 +41,12 @@
       <div id="tree_panel" style="display:none;">
         <div class="sidebar">
           <ul class="res-menu" >
-              <li><button type="button" class="btn btn-primary active" data-id="100401">国防历史</button></li>
-              <li><button type="button" class="btn btn-primary" data-id="100402">国防法规</button></li>
-              <li><button type="button" class="btn btn-primary" data-id="100403">外国军事</button></li>
-              <li><button type="button" class="btn btn-primary" data-id="100404">武器装备</button></li>
-              <li><button type="button" class="btn btn-primary" data-id="100405">国防形势</button></li>
-              <li><button type="button" class="btn btn-primary" data-id="1003">英模人物</button></li>
+              <li><button type="button" class="btn btn-primary active" data-id="1">国防历史</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="2">国防法规</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="3">国防力量</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="4">国防战略</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="5">国防建设</button></li>
+              <li><button type="button" class="btn btn-primary" data-id="6">世界军事</button></li>
           </ul>
         </div>
         <div id="list_box" class="main">
@@ -65,8 +64,25 @@
           <span id="btn_commit" class="btn-commit">提交</span>
         </div>  
       </div>
+      <div id="nnn_panel" class="msg-panel " style="display:none;">
+        <div id="news_box" class="msg-list-panel">
+          <div class="msg-oper">
+            <span id="btn_add_news" class="btn btn-default">添加</span>
+            <span id="btn_del_news" class="btn btn-default">删除</span>
+          </div>
+          <ul id="news_list_panel" ></ul>
+        </div>
+        <div id="news_content_panel" class="msg-content-panel">
+          <div class="msg-title"><label>标题</label><input id="news_title" placeholder="输入标题"></div>
+          <div class="msg-title"><label>封面</label><span id="btn_upload_news" class="btn btn-primary">上传封面</span></div>
+          <textarea id="news_editor" placeholder="输入文章正文" style="height:500px;" ></textarea>
+          <div class="btn-wrapper" style="font-size:14px;">
+            <span id="btn_save_news" class="btn btn-primary">保存</span>
+          </div>  
+        </div>
+      </div>
     	<div id="msg_panel" class="msg-panel " style="display:none;">
-        <div class="msg-list-panel">
+        <div id="msg_box" class="msg-list-panel">
           <div class="msg-oper">
             <span id="btn_add_msg" class="btn btn-default">添加</span>
             <span id="btn_del_msg" class="btn btn-default">删除</span>

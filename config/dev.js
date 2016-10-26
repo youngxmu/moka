@@ -9,8 +9,8 @@ module.exports = {
 	uploadDir: path.resolve(__dirname, '..', 'public/uploads'),
 	uploadFileDir: path.resolve(__dirname, '..', 'public/uploads/file'),
 	redirectPath : '/',
-	imgHost: 'http://10.99.13.32:8200',
-	host: 'http://10.99.13.32:8200',
+	imgHost: 'http://192.168.2.231:8200',
+	host: 'http://192.168.2.231:8200',
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 
@@ -30,7 +30,7 @@ module.exports = {
 
 
 	//redis config
-	"redis": {"address": "115.28.47.35", "port": "16379", "passwd": "mokaredispass!@$%67493jf3443"},
+	"redis": {"address": "127.0.0.1", "port": "6379", "passwd": "Hs1JlTXOGsDRtq8UH"},
 	"redis_tel_validate_prefix": "tel_val:",//用于注册时临时存在与注册手机匹配的随机数的key前缀
 	"redis_session_prefix": "user_session:",//redis里用于保存用户(用户/模特)Session的key的前缀
 	"token_secret": "generated_token_secret",//用于生成“授权token”的secret
@@ -39,37 +39,24 @@ module.exports = {
 	//不需要过滤是否登陆状态的白名单
 	"whitelist": [
 		"/",
+		"/index",
+		"/index/news",
+		"/index/gfjy",
+		"/index/jsll",
+		"/index/jsjn",
+		"/index/llks",
+
+		"/resource/list",
+		
 		"/out/insertModelFromOut",
 		"/auth/login",
+		"/auth/admin/login",
+		"/auth/user/login",
+		"/user/register",
+
+		"/article/queryArticleByMenu",
 		"/version"
 	],
-
-
-	//七牛配置
-	qiniu: {
-		ak: "gWR1Ww60qmiFuu9hao1hRdKrDkcNxE7x-l11cVDV",
-		sk: "t-sYZ4Cf5x1V97cmVbAeqIokK8JwkfQBcSYYea7Q",
-		bucket: "moka-test",
-		domain: "7u2pey.com1.z0.glb.clouddn.com"
-	},
-
-	sms:{
-		apikey:"51c1bb1657d7ecc16f6e26b2a640281d"
-	},
-
-	easemob:{
-		org_name:"feton",
-		app_name:"weimo",
-		client_id: "YXA69t7vQMSpEeS9U7Hvr0Eqtg",
-		client_secret: "YXA6E2zSoYHRnjE8dj-Rr3peMFwZeeQ"
-	},
-
-	jpush:{
-		AppKey:"e92c1d6d2bbeb7d03032e875",
-		MasterSecret:"2453db2990def69af795558c",
-
-		systemAlbum:"test_system_album" //用于系统福利的推送key
-	},
 
 	md5Salt: "moka_salt", //在接到模特、宅男注册时的passwd后，以此作为盐生成数据库中的密码
 

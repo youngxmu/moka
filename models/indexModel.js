@@ -47,7 +47,7 @@ exports.getUp = function (moduleId, callback) {
 };
 
 exports.updateUp = function (mid, aid, callback) {
-    db.query("update index_data set aid = ? where mid = ?;",
+    db.query("update index_module set aids = ? where id = ?;",
         [aid, mid],
         function (err, result) {
             callback(err, result);

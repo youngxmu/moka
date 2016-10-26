@@ -15,6 +15,10 @@
 		init : function() {
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.tpl.msgListTpl = juicer($('#msg_list_tpl').html());
+
+			_this.tpl.newsListTpl = juicer($('#news_list_tpl').html());
+			_this.tpl.picListTpl = juicer($('#pic_list_tpl').html());
+
 			_this.initEvent();
 			_this.loadNews();
 			_this.loadMsg();
@@ -35,18 +39,19 @@
 		},
 		loadNews : function(){
 			var $panel = $('#pic');
+			var $gfjydt = $('#gfjydt');
 			$.ajax({
 				type : 'post',
 				url : 'index/news',
 				beforeSend : function(){
 					$panel.html(util.loadingPanel);
+					$gfjydt.html(util.loadingPanel);
 				},
-				success : function(data){
-					if(data.success){
-						var list = data.list;
-						var length = list.length;
-						var tpl = juicer($('#news_list_tpl').html());
-						$panel.html(tpl.render(data));
+				success : function(result){
+					if(result.success){
+						var data = result.data;
+						$panel.html(_this.tpl.picListTpl.render(data));
+						$gfjydt.html(_this.tpl.newsListTpl.render(data));
 						$('.pic-panel').slick({
 							autoplay : true,
 							dots : true,

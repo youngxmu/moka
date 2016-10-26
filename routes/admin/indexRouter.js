@@ -1,11 +1,117 @@
 var express = require('express');
 var config = require("../../config");
 var async = require('async');
+var commonUtils = require("../../lib/utils");
 var newsModel = require("../../models/newsModel");
 var indexModel = require("../../models/indexModel");
 var logger = require("../../lib/log.js").logger("indexRouter");
 
 var router = express.Router();
+
+router.post('/setup', function (req, res, next) {
+    var mid = req.body.mid;
+    var res_id = req.body.res_id;
+    var map = {
+        '1003'   : '英模人物',
+        '100401' : '历史',
+        '100402' : '法规',
+        '100403' : '外国',
+        '100404' : '武器 装备',
+        '100405' : '形势',
+        '100406' : '历史'
+    }
+    indexModel.getUp(mid, function (err, result) {
+        if (err || !result || result.length == 0) {
+            logger.error("置顶出错", err);
+            res.json({
+                success: false,
+                msg: "置顶出错"
+            });
+        } else {
+            var aid = res_id;
+            var aids = [];
+            if(result[0].aid && result[0].aid.length > 0){
+                aid = result[0].aid;
+                aids = aid.split(',');
+            }
+            if(aids.length >=7 ){
+                return res.json({
+                    success: false,
+                    msg: "最多只能置顶7个"
+                });
+            }
+            aids.push(res_id);
+            indexModel.updateUp(mid, aids.join(','), function (err, result) {
+                if (err) {
+                    logger.error("置顶出错", err);
+                    res.json({
+                        success: false,
+                        msg: "置顶出错"
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        msg: "置顶成功"
+                    });
+                }
+            });
+        }
+    });
+});
+
+//根据”创建渠道“和”是否虚拟“查询文章
+router.post('/setdown', function (req, res, next) {
+    var mid = req.body.mid;
+    var res_id = req.body.res_id;
+    var map = {
+        '1003'   : '英模人物',
+        '100401' : '历史',
+        '100402' : '法规',
+        '100403' : '外国',
+        '100404' : '武器 装备',
+        '100405' : '形势',
+        '100406' : '历史'
+    }
+    indexModel.getUp(mid, function (err, result) {
+        if (err || !result || result.length == 0) {
+            res.json({
+                success: false,
+                msg: "取消置顶出错"
+            });
+        } else {
+
+            var aid = result[0].aid;
+            var aids = aid.split(',');
+            if(aids.length == 0 ){
+                return res.json({
+                    success: false,
+                    msg: "出错啦，请刷新页面"
+                });
+            }
+            var arr = [];
+            for(var index in aids){
+                if(aids[index] != res_id){
+                    arr.push(aids[index]);
+                }
+            }
+            indexModel.updateUp(mid, arr.join(','), function (err, result) {
+                if (err) {
+                    logger.error("取消置顶出错", err);
+                    res.json({
+                        success: false,
+                        msg: "取消置顶出错"
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        msg: "取消置顶成功"
+                    });
+                }
+            });
+        }
+    });
+});
+
 
 router.get('', function (req, res, next) {
     res.render('admin/index');
@@ -13,6 +119,10 @@ router.get('', function (req, res, next) {
 
 router.get('/module', function (req, res, next) {
     res.render('admin/index/module');
+});
+
+router.get('/news', function (req, res, next) {
+    res.render('admin/index/news');
 });
 
 router.post('/news', function (req, res, next) {
@@ -130,6 +240,98 @@ router.post('/info/save', function (req, res, next) {
         }
     });
 });
+
+
+
+router.post('/news/save', function (req, res, next) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var content = req.body.content;
+    var cover = req.body.cover;
+    if(!id){
+        newsModel.insert(title, content, cover, function(err){
+            if(err){
+                res.json({
+                    success : false,
+                    msg : '更新失败'
+                });
+            }else{
+                res.json({
+                    success : true,
+                    msg : '更新成功'
+                });
+            }
+        });
+    }else{
+        newsModel.update(id, title, content, cover, function(err){
+            if(err){
+                res.json({
+                    success : false,
+                    msg : '更新失败'
+                });
+            }else{
+                res.json({
+                    success : true,
+                    msg : '更新成功'
+                });
+            }
+        });
+    }
+});
+router.post('/news/del', function (req, res, next) {
+    var id = req.body.id;
+    newsModel.del(id, function(err){
+        if(err){
+            res.json({
+                success : false,
+                msg : '删除失败'
+            });
+        }else{
+            res.json({
+                success : true,
+                msg : '删除成功'
+            });
+        }
+    });
+});
+
+router.post('/news/list', function (req, res, next) {
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+
+    newsModel.queryNewsTotalCount(function (totalCount) {
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+        newsModel.queryNews(start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找出错", err);
+                return res.json({
+                    success: false,
+                    msg: "查找出错"
+                });
+            } else {
+                for (var i in result) {
+                    console.log(new Date(result[i].create_time));
+                    // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                }
+                res.json({
+                    success: true,
+                    msg: "查找文章成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
+
 
 module.exports = router;
 
