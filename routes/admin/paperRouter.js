@@ -198,6 +198,96 @@ router.post('/del', function (req, res) {
 });
 
 
+var officegen = require('officegen');
+var fs = require('fs');
+var path = require('path');
+var docx = officegen ( 'docx' );
+var async = require('async');
+var qTypeMap = {
+    1 : '填空题',
+    2 : '选择题',
+    3 : '多项选择题',
+    4 : '判断题'
+};
+var _word = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
+var getOption = function(index){
+    if(index > 0){
+        index = index - 1;
+    }
+    return _word[index];
+};
+var getQType = function(qtype){
+    var typeName = qTypeMap[qtype];
+    if(!typeName){
+        typeName = '其它';
+    }
+    return typeName;
+};
+router.get('/doc/:id', function (req, res, next) {
+    var id = req.params.id;
+    var isAdmin = req.session.admin ? true : false;
+    if(isAdmin){
+        res.render('error', {
+            success: false,
+            msg: "没有权限"
+        });  
+    }
+    if(id == null || id == undefined){
+        res.render('error', {
+            success: false,
+            msg: "根据id查询试卷出错"
+        });
+    }else{
+        examModel.getExamById(id, function (err, result) {
+            if (!err && result) {
+                var exam = result;
+                questionModel.queryQuestionsByIds(exam.qids, function(err, result){
+                    if(err){
+                        res.json({
+                            success: false,
+                            msg: "根据id查询试卷出错"
+                        });
+                    }else{
+                        var answerArr = [];
+                        var pObj = null;
+                        for(var index in result){
+                            var question = result[index];
+                            var findex = parseInt(index) + 1;
+                            pObj = docx.createP();
+                            pObj.addText(findex + '.' + question.qbody + '（' + getQType(question.qtype) + '）');
+                            console.log(findex + '.' + question.qbody + '（' + getQType(question.qtype) + '）');
+                            var answerArr = question.qanswer.split(',');
+                            for(var i in answerArr){
+                                var aindex = parseInt(i) + 1;
+                                var word = getOption(aindex);
+                                pObj = docx.createP();
+                                pObj.addText(word + '.' + answerArr[i]);
+                                console.log(word + '.' + answerArr[i]);
+                            }
+                        }
+                        var out = fs.createWriteStream ( 'out.docx' );// 文件写入
+                        out.on ( 'error', function ( err ) {
+                            console.log ( err );
+                        });
+                        var result = docx.generate (out);// 服务端生成word
+                        res.writeHead ( 200, {
+                            "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+                            'Content-disposition': 'attachment; filename=out.docx'
+                        });
+                        docx.generate (res);// 客户端导出word
+                    }
+                });
+            } else {
+                res.render('error', {
+                    success: false,
+                    msg: "根据id查询试卷出错"
+                });
+            }
+        });
+    }
+});
+
+
 
 module.exports = router;
 

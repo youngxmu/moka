@@ -327,10 +327,10 @@
 			$('#detail_video_panel').hide();
 			var cindex = options.cindex;
 			var click = options.click;
-			if(cindex == 'c31' && (click == 'lizheng' || click == 'kuali' || click == 'xiaoxi' || click == 'tingzhijianzhuanfa')){
-				$('#detail_page_panel').hide();
-				$('#detail_video_panel').show();
-			}
+			// if(cindex == 'c31' && (click == 'lizheng' || click == 'kuali' || click == 'xiaoxi' || click == 'tingzhijianzhuanfa')){
+			// 	$('#detail_page_panel').hide();
+			// 	$('#detail_video_panel').show();
+			// }
 			console.log(cindex+' '+ click);
 			console.log(nc.xxrj[cindex].details);
 			_this.menu = nc.xxrj[cindex].details[click].menu;
@@ -383,6 +383,7 @@
 		onSelMenu : function(){
 			var $this = $(this);
 			_this.video = $this.attr('data-video');
+			console.log($this);
 			$this.addClass('active').siblings('li').removeClass('active');
 			var menuIndex = $this.attr('data-index');
 			var data = _this.menu;
@@ -390,6 +391,14 @@
 			if(_this.menu.jie){
 				var jie = _this.menu.jie[menuIndex];
 				data.content =  jie.content;
+				_this.video = jie.video;
+				if(_this.video){
+					$('#detail_page_panel').hide();
+					$('#detail_video_panel').show();
+				}else{
+					$('#detail_page_panel').show();
+					$('#detail_video_panel').hide();
+				}
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
 				html = _this.tpl.detailContentTpl.render(data);
@@ -402,8 +411,17 @@
 				var jie = _this.menu.mjie[jIndex].menu[mIndex];
 
 				data.content =  jie.content;
+				_this.video = jie.video;
+				if(_this.video){
+					$('#detail_page_panel').hide();
+					$('#detail_video_panel').show();
+				}else{
+					$('#detail_page_panel').show();
+					$('#detail_video_panel').hide();
+				}
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
+
 				html = _this.tpl.detailContentTpl.render(data);
 			}
 			$('#detail_menu_content').html(html);
@@ -443,10 +461,14 @@
 			$('#main_sys').show().siblings('div').hide();
 		},
 		play : function(){
-
+			var $this = $(this);
+			console.log($this);
+			console.log(_this.video);
+			var html = '<video src="' + _this.video + '" autoplay=autoplay controls=controls ></video>';
+			$('#video_panel').html(html).show();
 		},
 		stop : function(){
-			
+			$('#video_panel').html('').hide();
 		}
 	};
 })(moka);
