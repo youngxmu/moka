@@ -17,11 +17,22 @@
 		},
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
-			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
 			_this.initTopic();
-			_this.searchResource();
+			_this.initEditor();
+		},
+		initEditor : function(){
+			_this.editor = new Simditor({
+			  	textarea: $('#editor'),
+			  	upload : {
+			    	url: 'upload/img',
+				    params: null,
+				    fileKey: 'upload_file',
+				    connectionCount: 3,
+				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+			  	}
+			});
 		},
 		initEvent : function(){
 			$('#resource_list').on('click','.view',function(){
@@ -96,97 +107,6 @@
 			}
 			_this.initTree();
 		},
-		searchResource : function() {
-			var data = _this.data.searchData;
-			if(_this.data.searchData.keyword){
-				_this.searchUrl = 'article/queryArticleByTitle';
-			}else{
-				_this.searchUrl = 'article/queryArticleByMenu';
-			}
-
-			if(!_this.data.searchData.mid){
-				_this.data.searchData.mid = _this.pid;
-			}
-			$.ajax({
-				type : "post",
-				url : _this.searchUrl,
-				data : data,
-				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-				},
-				success : _this.initPageResource
-			});
-		},
-		initPageResource : function(data) {
-			if (!data.success) {
-				util.dialog.infoDialog('查询出错');
-				return;
-			}
-	
-			_this.data.resourceList = {};
-			for ( var index in data.list) {
-				var resource = data.list[index];
-				_this.data.resourceList[resource.id] = resource;
-			}
-			data = data.data;
-			var totalPage = data.totalPage;
-			var totalcount = data.totalCount;
-			var html = _this.data.resourceTpl.render(data);
-			if(totalcount == 0){
-				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
-			}
-			$('#resource_list').html(html);
-			
-			if (totalPage <= 1) {
-				$("#pagebar").html('');
-			}
-			if (totalPage >= 2) {
-				$(function() {
-					$.fn.jpagebar({
-						renderTo : $("#pagebar"),
-						totalpage : totalPage,
-						totalcount : totalcount,
-						pagebarCssName : 'pagination2',
-						currentPage : data.currentPage,
-						onClickPage : function(pageNo) {
-							$.fn.setCurrentPage(this, pageNo);
-							_this.data.searchData.pageNo = pageNo;
-							if (_this.instance_resource == null)
-								_this.instance_resource = this;
-							var data = _this.data.searchData;
-							$.ajax({
-								type : "post",
-								url : _this.searchUrl,
-								data : data,
-								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
-								},
-								success : function(data){
-									if (!data.success) {
-										util.dialog.infoDialog('查询出错');
-										return;
-									}
-							
-									_this.data.resourceList = {};
-									for ( var index in data.list) {
-										var resource = data.list[index];
-										_this.data.resourceList[resource.id] = resource;
-									}
-									data = data.data;
-									var totalPage = data.totalPage;
-									var totalcount = data.totalCount;
-									var html = _this.data.resourceTpl.render(data);
-									if(totalcount == 0){
-										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
-									}
-									$('#resource_list').html(html);
-								}
-							});
-						}
-					});
-				});
-			}
-		},
 		setting : {
 			view : {
 				dblClickExpand : false,
@@ -226,7 +146,6 @@
 					_this.currNode = treeNode;
 					_this.data.searchData.mid = treeNode.id;
 					_this.data.searchData.pageNo = 1;
-					_this.searchResource();
 					return true;
 				}
 			}

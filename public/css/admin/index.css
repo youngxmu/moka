@@ -29,7 +29,7 @@ ul{margin: 0;padding: 0;}
 .page-header .nav .list a{float:left;display:block;width:120px;height:80px;text-align:center;font:normal 16px/80px microsoft yahei; text-decoration:none;
   color: #333;
 }
-.page-header .nav .list a:hover{color:#FFA304;}  
+.page-header .nav .list a:hover,.page-header .nav .list a.current{color:#FFA304;}  
 
 .page-header .nav-sub{height: 50px;line-height: 50px;background-color: #268de1;color: #ffffff;
   font-size: 18px;
@@ -44,7 +44,6 @@ ul{margin: 0;padding: 0;}
   padding-top: 5px;
   padding: 0 20px;
   margin: 0 -20px;
-  
 }
 
 
