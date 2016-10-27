@@ -51,9 +51,9 @@
 					var qid = $nextQSpan.attr('data-id');
 					var question = _this.questionsMap[qid];
 					_this.renderQuestion(question);
-					var scoreVal = 1;
-					if(question.type != 2){
-						scoreVal = 2;
+					var scoreVal = 2;
+					if(question.type == 4){
+						scoreVal = 1;
 					}
 					$('#content_title').text(question.index + '.' + _this.questionUtils.getQType(question.qtype) + '分值：' + scoreVal);
 				}

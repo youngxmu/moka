@@ -45,7 +45,8 @@ module.exports = {
 		"/index/jsll",
 		"/index/jsjn",
 		"/index/llks",
-
+		"/upload/img",
+		"/upload/file",
 		"/resource/list",
 		
 		"/out/insertModelFromOut",

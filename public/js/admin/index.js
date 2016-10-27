@@ -26,6 +26,7 @@
 			_this.tpl.msgTpl = juicer($('#message-tpl').html());
 			_this.initEditor();
 			_this.initEvent();
+			_this.data.searchData.mid = 100101;
 			_this.showEditor(100101);
 			// _this.initUploader('/upload/file', 'jpg,png,gif,JPG,PNG,GIF');
 		},

@@ -251,7 +251,7 @@ router.post('/commit', function (req, res) {
         for(var index in answerArr){
             var strs = answerArr[index].split('_');
             if(strs[0] == userAnswer[index]){
-                if(strs[1] == 2){
+                if(strs[1] == 4){
                     score+=1;
                 }else{
                     score+=2;
@@ -274,7 +274,7 @@ router.post('/commit', function (req, res) {
                         success: true,
                         msg: "提交成功",
                         data : {
-                            id : data.insertId,
+                            id : id,
                             rightCount : rightCount,
                             errorCount : errorCount
                         }

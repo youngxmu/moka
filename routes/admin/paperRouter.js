@@ -226,8 +226,8 @@ var getQType = function(qtype){
 router.get('/doc/:id', function (req, res, next) {
     var id = req.params.id;
     var isAdmin = req.session.admin ? true : false;
-    if(isAdmin){
-        res.render('error', {
+    if(!isAdmin){
+        return res.render('error', {
             success: false,
             msg: "没有权限"
         });  
@@ -255,14 +255,12 @@ router.get('/doc/:id', function (req, res, next) {
                             var findex = parseInt(index) + 1;
                             pObj = docx.createP();
                             pObj.addText(findex + '.' + question.qbody + '（' + getQType(question.qtype) + '）');
-                            console.log(findex + '.' + question.qbody + '（' + getQType(question.qtype) + '）');
                             var answerArr = question.qanswer.split(',');
                             for(var i in answerArr){
                                 var aindex = parseInt(i) + 1;
                                 var word = getOption(aindex);
                                 pObj = docx.createP();
                                 pObj.addText(word + '.' + answerArr[i]);
-                                console.log(word + '.' + answerArr[i]);
                             }
                         }
                         var out = fs.createWriteStream ( 'out.docx' );// 文件写入
@@ -272,7 +270,7 @@ router.get('/doc/:id', function (req, res, next) {
                         var result = docx.generate (out);// 服务端生成word
                         res.writeHead ( 200, {
                             "Content-Type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-                            'Content-disposition': 'attachment; filename=out.docx'
+                            'Content-disposition': 'attachment; filename=' + exam.name + '.docx'
                         });
                         docx.generate (res);// 客户端导出word
                     }

@@ -25,7 +25,10 @@
 		      	<div class="main">
 			      	<div class="panel panel-primary">
 			          <div class="panel-heading">
-			            <h3 id="content_title" class="panel-title"><%= name %></h3>
+			            <h3 id="content_title" class="panel-title">
+			            	<%= name %>
+			            	<span class="exam-info">得分：<%= score %></span>
+			            </h3>
 			          </div>
 			          <div class="panel-body detail-article">
 			            <div id="question_panel" class="question-panel" style="font-size:14px;"></div>
@@ -38,9 +41,10 @@
 	    <script type="juicer/template" id="question-list-tpl">
 	    {@each list as obj, index}
 	    <div class="question-list" style="font-size:14px;">
-	        <div class="qbody">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
-				（多选）
-				{@/if}</div>
+	        <div class="qbody">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}（多选）{@/if}
+	        	{@if obj.qtype == 4}（分值：1分）{@/if}
+	        	{@if obj.qtype != 4}（分值：2分）{@/if}
+			</div>
 	        {@if obj.qtype == 2 || obj.qtype == 3 || obj.qtype == 4}
 	          <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}">
 	          	$${obj.qanswer|formatAnswer}

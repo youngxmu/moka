@@ -30,7 +30,7 @@ var dict = {
     5 : '研究报告'
 }
 router.get('/list', function (req, res, next) {
-    res.render('index/science');
+    res.render('index/science-desc');
 });
 
 router.get('/list/:moduleId', function (req, res, next) {
