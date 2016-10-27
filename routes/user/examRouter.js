@@ -119,7 +119,7 @@ router.post('/list', function (req, res, next) {
         var uexamMap = {};
         for(var index in uexams){
             var uexam = uexams[index];
-            uexamMap[uexam.id] = uexam;
+            uexamMap[uexam.exam_id] = uexam;
         }
 
         examModel.queryExamTotalCount(name, function (totalCount) {
