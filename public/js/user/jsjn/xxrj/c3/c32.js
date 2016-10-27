@@ -55,26 +55,70 @@ nc.xxrj.c32.details = {
 					'def' 		: '00070[218x39x8BPP]',
 					'hover'		: '00071[218x39x8BPP]',
 					'active'	: '00072[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '00073[300x240x8BPP]',
+							left : 59,
+							top :  112,
+						},
+						{
+							src : '00074[300x240x8BPP]',
+							left : 254,
+							top :  112,
+						}
+					],
 					'content'	: [
-						'00075[381x479x8BPP]',
-						'00073[300x240x8BPP]',
-						'00074[300x240x8BPP]'
-					]
-				},
-				{
-					'def' 		: '00053[218x39x8BPP]',
-					'hover'		: '00054[218x39x8BPP]',
-					'active'	: '00055[218x39x8BPP]',
-					'content'	: [
-						'00056[381x479x8BPP]'
+						'00075[381x479x8BPP]'
 					]
 				},
 				{
 					'def' 		: '00076[218x39x8BPP]',
 					'hover'		: '00077[218x39x8BPP]',
 					'active'	: '00078[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10018[300x240x24BPP]',
+							left : 59,
+							top :  112,
+						},
+						{
+							src : '10019[300x240x24BPP]',
+							left : 254,
+							top :  112,
+						},
+						{
+							src : '10020[300x240x24BPP]',
+							left : 259,
+							top :  149,
+						},
+						{
+							src : '10021[300x240x24BPP]',
+							left : 34,
+							top :  187,
+						},
+						{
+							src : '10022[300x240x24BPP]',
+							left : 134,
+							top :  187,
+						}
+					],
 					'content'	: [
 						'00079[381x479x8BPP]'
+					]
+				},
+				{
+					'def' 		: '00053[218x39x8BPP]',
+					'hover'		: '00054[218x39x8BPP]',
+					'active'	: '00055[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10018[300x240x24BPP]',
+							left : 59,
+							top :  112,
+						}
+					],
+					'content'	: [
+						'00056[381x479x8BPP]'
 					]
 				},
 				{

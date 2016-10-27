@@ -315,11 +315,19 @@
 		},
 		initEvent : function(){
 			$('body').on('click', ' #detail_sys.ss .detail2-res-menu li', _this.onSelMenu);
+			$('body').on('click', ' #detail_sys.ss .detail-page-pre',  _this.pre);
+			$('body').on('click', ' #detail_sys.ss .detail-page-next', _this.next);
+			$('body').on('click', ' #detail_sys.ss .detail-page-first',  _this.first);
+			$('body').on('click', ' #detail_sys.ss .detail-page-last', _this.last);
+			$('body').on('click', ' #detail_sys.ss .detail-exit', _this.exit);
+			$('body').on('click', ' #detail_sys.ss .detail-back', _this.back);
 			$('body').on('click', ' #detail_sys.ss .detail-exit', _this.exit);
 			$('body').on('click', ' #detail_sys.ss .detail-back', _this.back);
 
 			$('body').on('click', ' #detail_sys.ss .detail-video-start', _this.play);
 			$('body').on('click', ' #detail_sys.ss .detail-video-stop', _this.stop);
+
+			$('body').on('click', ' #detail_sys .pic-btn-panel span', _this.showPic);
 		},
 		show : function(options){
 			$('#detail_sys').addClass('ss').removeClass('s');
@@ -348,6 +356,7 @@
 				var jie = _this.menu.jie[menuIndex];
 				data.content =  jie.content;
 				data.video =  jie.video;
+				data.pics =  jie.pics;
 				console.log(data);
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
@@ -361,6 +370,7 @@
 				var jie = _this.menu.mjie[jIndex].menu[mIndex];
 				data.content =  jie.content;
 				data.video =  jie.video;
+				data.pics =  jie.pics;
 				console.log(data);
 				_this.page.pageNo = 1;
 				_this.page.totalCount = data.content.length;
@@ -392,6 +402,7 @@
 				var jie = _this.menu.jie[menuIndex];
 				data.content =  jie.content;
 				_this.video = jie.video;
+				data.pics =  jie.pics;
 				if(_this.video){
 					$('#detail_page_panel').hide();
 					$('#detail_video_panel').show();
@@ -412,6 +423,7 @@
 
 				data.content =  jie.content;
 				_this.video = jie.video;
+				data.pics =  jie.pics;
 				if(_this.video){
 					$('#detail_page_panel').hide();
 					$('#detail_video_panel').show();
@@ -469,6 +481,13 @@
 		},
 		stop : function(){
 			$('#video_panel').html('').hide();
+		},
+		showPic : function(){
+			var $this = $(this);
+			var index = $this.attr('data-index');
+			var $targetPic = $('.pic-list li').eq(index);
+			$this.addClass('current').siblings('span').removeClass('current');
+			$targetPic.addClass('current').siblings('li').removeClass('current');
 		}
 	};
 })(moka);
@@ -477,4 +496,4 @@ moka.user.jsjn.index.xxrj.sub.init();
 moka.user.jsjn.index.xxrj.detail.init();
 moka.user.jsjn.index.xxrj.ssdetail.init();
 // moka.user.jsjn.index.xxrj.sub.show({cindex:2,subIndex:5});
-// moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});
+moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});

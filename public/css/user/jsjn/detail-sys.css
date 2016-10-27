@@ -166,6 +166,7 @@
 */
 .detail-main-list .content-list .content{
 	display: none;
+	position: relative;
 }
 
 .detail-main-list .content-list .content.current{
@@ -243,3 +244,39 @@
 
 #detail_page_panel{display: inline-block;text-align: center;}
 #detail_video_panel{display: inline-block;text-align: center;}
+
+.pic-btn-panel{
+	position: absolute;
+	width: 479px;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+.pic-btn-panel span{
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	background-image: url(../../../jsjn/png/00014[33x33x8BPP].png);
+	background-size: 33px 33px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.pic-btn-panel span.current,.pic-btn-panel span:hover{
+	background-image: url(../../../jsjn/png/00015[33x33x8BPP].png);
+}
+
+.pic-list{
+	position: absolute;
+    width: 320px;
+    height: 400px;
+    right: 20px;
+    top: 60px;
+	
+}
+.pic-list li{display: none;}
+.pic-list li.current{display: block;}
+.pic-list img{
+	width: 100%;
+	height: auto;
+}

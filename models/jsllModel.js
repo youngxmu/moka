@@ -24,7 +24,7 @@ exports.queryInfos = function (callback) {
 };
 
 exports.queryInfosByType = function (type, callback) {
-    var sql = 'select id,title,content from jsllxx where type = ?; ';
+    var sql = 'select * from jsllxx where type = ?; ';
     var params = [type];
     db.query(sql, params, callback);
 };

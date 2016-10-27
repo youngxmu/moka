@@ -72,6 +72,24 @@ router.get('/info/detail/:id', function (req, res, next) {
     });
 });
 
+router.post('/info/plist', function (req, res, next) {
+    jsllModel.queryLInfos(function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: true,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: "找不到页面啦！"
+            });
+        }
+    });
+});
+
 
 module.exports = router;
 

@@ -118,3 +118,12 @@
 .tree-panel .main{width: 700px;padding: 10px 5px;}
 .tree-panel .type-panel li p {color: #333;}
 .tree-panel .type-panel li.active p {color: #ffffff;}
+
+
+
+.p-tree-panel{height: 100%;background-color: rgba(255,255,255, 0.7);}
+.p-tree-panel .sidebar-tree{width:220px}
+/*.tree-panel .main{width: 700px;padding: 10px 5px;}*/
+.tree-panel .type-panel li p {color: #333;}
+.tree-panel .type-panel li.active p {color: #ffffff;}
+

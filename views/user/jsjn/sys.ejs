@@ -47,6 +47,7 @@
                   
                 </div>
                 <div id="detail_menu_content" class="main">
+
                 </div>
                 <div class="detail-footer">
                   <!-- <span class="detail-exit"></span> -->
@@ -180,6 +181,18 @@
           {@each content as obj, index}
           <li class="content {@if index == 0}current{@/if}" data-index="${index}" data-video="${video}" >
             <img class="def" src="jsjn/png/${obj}.png" style="${obj|getImgStyle}">
+          </li>
+          {@/each}
+        </ul>
+        <div class="pic-btn-panel">
+          {@each pics as item, index}
+          <span data-index="${index}" style="left:${item.left}px;top:${item.top}px;"></span>
+          {@/each}
+        </div>
+        <ul class="pic-list">
+          {@each pics as item, index}
+          <li class="pic-item {@if index == 0}current{@/if}" >
+            <img class="def" src="jsjn/png/${item.src}.png" style="${obj|getImgStyle}">
           </li>
           {@/each}
         </ul>
