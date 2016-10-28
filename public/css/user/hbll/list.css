@@ -22,7 +22,7 @@
 .tree-opr a{
 	float: left;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 12px;
 	height: 28px;
 	line-height: 28px;
 	padding: 0 10px;
@@ -41,7 +41,7 @@
 
     
 .main{
-	width: 920px;
+	width: 790px;
 	display: inline-block;vertical-align: top;
 	padding: 10px 20px;
 	font-size:14px;color:#333;
@@ -75,7 +75,7 @@
 
 
 .sidebar-tree{
-	width: 209px;
+	width: 210px;
 }
 
 .main-tree{

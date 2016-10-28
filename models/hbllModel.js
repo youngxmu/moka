@@ -4,7 +4,7 @@ var commonUtils = require("../lib/utils.js");
 
 exports.query = function (mid, callback) {
     var sql = 'select * from hbll where mid = ?; ';
-    var params = [id];
+    var params = [mid];
     db.query(sql, params, callback);
 };
 

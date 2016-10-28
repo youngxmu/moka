@@ -30,3 +30,5 @@
 .paper-edit .paper-questions dt{vertical-align: top;}
 .paper-edit .paper-questions dd{height: 400px;overflow: auto;}
 .paper-edit .paper-questions .btn-edit-questions{color: blue;cursor: pointer;}
+
+table thead td{color: #ffffff;}

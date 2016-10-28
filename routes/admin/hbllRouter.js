@@ -130,7 +130,7 @@ router.get('/list', function (req, res, next) {
 // });
 
 
-router.post('/detail/:id', function (req, res, next) {
+router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
     if(id == null || id == undefined){
         res.json({
@@ -141,7 +141,7 @@ router.post('/detail/:id', function (req, res, next) {
         hbllModel.query(id, function (err, result) {
             if (!err && result) {
                 res.json({
-                    success: false,
+                    success: true,
                     data: result[0]
                 });
             } else {
@@ -158,29 +158,39 @@ router.post('/detail/:id', function (req, res, next) {
 router.post('/save', function (req, res) {
     var id = req.body.mid;
     var content = req.body.content;//明文
-    if(id == null || id == undefined){
-        hbllModel.query(id, function (err, result) {
-            if(err){
-                return res.json({
-                    success: false,
-                    msg: '网络异常请重试'
-                });
-            }
-            if (result.length == 0) {
-                hbllModel.insert(id, content, function (err, result) {
-                    res.json({
-                        success: true
+    hbllModel.query(id, function (err, result) {
+        if(err){
+            return res.json({
+                success: false,
+                msg: '网络异常请重试'
+            });
+        }
+        if (result.length == 0) {
+            hbllModel.insert(id, content, function (err, result) {
+                if(err){
+                    return res.json({
+                        success: false,
+                        msg: '网络异常请重试'
                     });
+                }
+                res.json({
+                    success: true
                 });
-            } else {
-                hbllModel.update(id, content, function (err, result) {
-                    res.json({
-                        success: true
+            });
+        } else {
+            hbllModel.update(id, content, function (err, result) {
+                if(err){
+                    return res.json({
+                        success: false,
+                        msg: '网络异常请重试'
                     });
+                }
+                res.json({
+                    success: true
                 });
-            }
-        });
-    }
+            });
+        }
+    });
 });
 
 module.exports = router;

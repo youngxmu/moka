@@ -35,12 +35,6 @@
 			});
 		},
 		initEvent : function(){
-			$('#resource_list').on('click','.view',function(){
-				var id = $(this).attr('data-id');
-				var data = _this.data.resourceList[id];
-				var options = {isPreview : false, resourceType : 2};
-			});
-			
 			$('.tree-opr').on('click', '.unfold',function(){
 				var zTree = _this.getCurrTree();
 				zTree.expandAll(true);
@@ -68,22 +62,7 @@
 				_this.showDelMenuDlg();
 			});
 
-			$('.resource-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddArticle();
-			});
-			$('body').on('keydown','#keyword',function(e){
-		        var event = window.event || e;
-		        if(event.keyCode == 13){
-		          	_this.data.searchData.keyword = $('#keyword').val();
-					_this.searchResource();
-		        }
-		    });
-			$('#btn_search').click(function(){
-				_this.data.searchData.keyword = $('#keyword').val();
-				_this.searchResource();
-			});
-			$('body').on('click', '.oper .del',_this.showDelArticle);
+			$('#btn_save').click(_this.save);
 		},
 		initTopic : function() {
 			$.ajax({
@@ -144,11 +123,16 @@
 						return false;
 					}
 					_this.currNode = treeNode;
+					_this.mid = treeNode.id
 					$.ajax({
-						url : 'admin/hbll/detail/' + treeNode.id,
+						url : 'admin/hbll/detail/' + _this.mid,
 						success : function(result){
 							if(result.success){
-								
+								if(result.data){
+									_this.editor.setValue(result.data.content);
+								}else{
+									_this.editor.setValue('');
+								}
 							}
 						}
 					});
@@ -287,6 +271,33 @@
 				node = node.getParentNode();
 			}
 			return menuArr.join(',');
+		},
+
+		save : function(){
+			if(_this.commiting){
+				return util.dialog.toastDialog('正在提交，请稍后');
+			}
+			_this.commiting = true;
+			$.ajax({
+				url : 'admin/hbll/save',
+				type : 'post',
+				data : {
+					mid : _this.mid,
+					content : _this.editor.getValue()
+				},
+				success : function(result){
+					if(result.success){
+						return util.dialog.toastDialog('修改成功');
+					}else{
+						return util.dialog.toastDialog('修改失败，请重试');
+					}
+				},
+				complete : function(){
+					_this.commiting = false;
+				}
+
+			});
+
 		}
 	};
 }(moka));

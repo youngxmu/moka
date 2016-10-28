@@ -104,8 +104,21 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode.content);
-					$('#content').html(_this.currNode.content);
+					_this.mid = treeNode.id;
+					$('#content_title').html(_this.currNode.name);
+					$.ajax({
+						url : 'admin/hbll/detail/' + _this.mid,
+						success : function(result){
+							if(result.success){
+								if(result.data){
+									$('#content').html(result.data.content);
+								}else{
+									$('#content').html('');
+								}
+							}
+						}
+					});
+					
 					return true;
 				}
 			}
