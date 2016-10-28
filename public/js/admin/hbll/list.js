@@ -144,8 +144,15 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					_this.data.searchData.mid = treeNode.id;
-					_this.data.searchData.pageNo = 1;
+					$.ajax({
+						url : 'admin/hbll/detail/' + treeNode.id,
+						success : function(result){
+							if(result.success){
+								
+							}
+						}
+					});
+
 					return true;
 				}
 			}
@@ -280,34 +287,6 @@
 				node = node.getParentNode();
 			}
 			return menuArr.join(',');
-		},
-		showAddArticle : function(){
-			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('admin/article/upload?menuPath=' + menuPath);
-		},
-		showDelArticle : function(){
-			var id = $(this).attr('data-id');
-			util.dialog.confirmDialog(
-				'确认删除',
-				function(){
-					$.ajax({
-						type : "post",
-						cache : false,
-						url : 'admin/article/del',
-						data : {id:id},
-						success : function(result){
-							if(result.success){
-								_this.searchResource();
-							}else{
-								alert(result.msg);
-							}
-							
-						}
-					});
-				},
-				function(){},
-				'确认删除'
-			);
 		}
 	};
 }(moka));
