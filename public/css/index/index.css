@@ -122,6 +122,18 @@ display: block;white-space: nowrap;}
 	height:27px;line-height:27px;border-bottom:3px solid #333;
 }
 
+.main .index-row .box-title a{
+  display: inline-block;
+  color: #f6f6f6;
+  float: right;
+  margin-right: 10px;
+  font-size: 12px;
+  /*height:27px;line-height:27px;border-bottom:3px solid #333;*/
+}
+.main .index-row .box-title a:hover{
+  opacity: 0.7;
+}
+
 .main .index-row .info-panel li{line-height: 30px;height: 30px; border-bottom: 1px dashed #cccccc;padding: 0 10px;color: #333;cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
