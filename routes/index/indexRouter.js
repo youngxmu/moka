@@ -122,8 +122,6 @@ router.post('/setdown', function (req, res, next) {
     });
 });
 
-
-
 router.get('', function (req, res, next) {
     res.render('index/index');
 });

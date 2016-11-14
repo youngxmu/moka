@@ -338,4 +338,9 @@ width: 960px;margin: auto;
 
 .msg-content-panel .btn-wrapper{text-align: right;}
 
+#team_content_panel .simditor{height: 300px;overflow: auto;}
 
+.avatar-team img{
+  height: 100%;
+  width: auto;
+}

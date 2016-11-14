@@ -3,7 +3,7 @@ var config = require('../config');
 var path = require('path');
 var logger =  require('../lib/log.js').logger('viewRouter');
 var router = express.Router();
-var ppt2png = require('ppt2png');
+// var ppt2png = require('ppt2png');
 
 router.post('/ppt', function(req, res) {
 	var path = req.body.path;

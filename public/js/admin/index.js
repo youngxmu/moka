@@ -24,10 +24,12 @@
 			_this.tpl.topListTpl = juicer($('#top-resource-tpl').html());
 			_this.tpl.resourceTpl = juicer($('#resource-tpl').html());
 			_this.tpl.msgTpl = juicer($('#message-tpl').html());
+			_this.tpl.teamTpl = juicer($('#team-tpl').html());
 			_this.initEditor();
 			_this.initEvent();
 			_this.data.searchData.mid = 100101;
 			_this.showEditor(100101);
+
 			// _this.initUploader('/upload/file', 'jpg,png,gif,JPG,PNG,GIF');
 		},
 		initEvent : function(){
@@ -57,8 +59,9 @@
 			$('body').on('click', '.btndown', _this.down);
 
 			_this.initMsgEvent();
-
-			_this.initNewsEvent();			
+			_this.initNewsEvent();
+			_this.initTeamEvent();			
+			
 		},
 		changeType : function(){
 			var $this = $(this);
@@ -72,8 +75,9 @@
 			$('#pic_panel').hide();
 			$('#nnn_panel').hide();
 			$('#msg_panel').hide();
+			$('#team_panel').hide();
 			console.log(type + ' ' + mid);
-			if(type == 1 || type == 2 || type == 3 || type == 4 || type == 6){
+			if(type == 1 || type == 4 || type == 3  || type == 6){//|| type == 2
 				_this.showEditor(mid);
 				$('#editor_panel').show();
 			}
@@ -85,6 +89,12 @@
 			// 	_this.loadRes();
 			// 	$('#list_panel').show();	
 			// }
+
+			if(type == 2){
+				_this.loadTeam();
+				$('#team_panel').show();
+			}
+
 			if(type == 5){
 				_this.data.searchData.mid = 1;
 				_this.data.searchData.moduleId = 1;
@@ -344,6 +354,18 @@
 				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
 			  	}
 			});
+			// _this.teamEditor = $('#team_editor'); 
+			_this.teamEditor = new Simditor({
+				toolbar : false,
+			  	textarea: $('#team_editor'),
+			  	upload : {
+			    	url: 'upload/img',
+				    params: null,
+				    fileKey: 'upload_file',
+				    connectionCount: 3,
+				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+			  	}
+			});
 		},
 		midMap : {
 			'100101' : {type:1},
@@ -439,6 +461,8 @@
 				}
 			});
 		},
+
+		//msg start
 		initMsgEvent : function(){
 			$('body').on('click', '#msg_box ul li', _this.selectMsg);
 			$('body').on('click', '#btn_add_msg', _this.addMsg);
@@ -525,7 +549,7 @@
 			});
 		},
 
-
+		//news start
 		initNewsEvent : function(){
 			$('body').on('click', '#news_box ul li', _this.selectNews);
 			$('body').on('click', '#btn_add_news', _this.addNews);
@@ -684,7 +708,167 @@
 				}
 			});
 			_this.fileUploader.init();
+		},
+
+
+
+		initTeamEvent : function(){
+			$('body').on('click', '#team_box ul li', _this.selectTeam);
+			$('body').on('click', '#btn_add_team', _this.addTeam);
+			$('body').on('click', '#btn_del_team', _this.delTeam);
+			$('body').on('click', '#btn_save_team', _this.saveTeam);
+			_this.initTeamUploader('/upload/img', 'jpg,png,gif,JPG,PNG,GIF');
+			// _this.initUploader('/upload/file', 'jpg,png,gif,JPG,PNG,GIF');
+		},
+		loadTeam : function(){
+			$.ajax({
+				type : "post",
+				url : 'admin/index/team/list',
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						var html = _this.tpl.teamTpl.render(result.data);
+						$('#team_list_panel').html(html);
+						_this.data.teamMap = {};
+						for(var index in result.data.list){
+							var message = result.data.list[index];
+							_this.data.teamMap[message.id] = message;
+						}
+					}
+				}
+			});
+		},
+		selectTeam : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id'); 
+			_this.data.teamId = id;
+			console.log(_this.data.teamId);
+			$this.addClass('active').siblings('li').removeClass('active');
+			var message = _this.data.teamMap[id];
+			$('#team_title').val(message.name);
+			_this.teamEditor.setValue(message.info);
+			if(message.avatar){
+				$('#team_avatar').val(message.avatar);
+				$('#avatar_team').html('<img src="' + message.avatar + '">');
+			}else{
+				$('#team_avatar').val('');
+				$('#avatar_team').html('');
+			}
+		},
+		addTeam : function(){
+			_this.data.teamId = '';
+			$('#team_title').val('');
+			$('#team_avatar').val('');
+			$('#avatar_team').html('');
+			_this.teamEditor.setValue('');
+		},
+		delTeam : function(){
+			console.log(_this.data.teamId);
+			if(!_this.data.teamId){
+				util.dialog.infoDialog('未选中信息');
+			}else{
+				$.ajax({
+					type : "post",
+					url : 'admin/index/team/del',
+					data : {id : _this.data.teamId},
+					success : function(result){
+						if(!result.success){
+							return util.dialog.infoDialog(result.msg);
+						}else{
+							_this.loadTeam();
+							util.dialog.toastDialog('删除成功');
+						}
+					}
+				});
+			}
+		},
+		saveTeam : function(){
+			var avatar = $('#team_avatar').val();
+			var desc = _this.teamEditor.getValue();
+			var data = {
+				name : $('#team_title').val(),
+				avatar : avatar,
+				desc : desc
+			};
+			if(_this.data.teamId){
+				data.id = _this.data.teamId;
+			}
+			$.ajax({
+				type : "post",
+				url : 'admin/index/team/save',
+				data : data,
+				success : function(result){
+					if(!result.success){
+						return util.dialog.infoDialog(result.msg);
+					}else{
+						_this.loadTeam();
+						util.dialog.toastDialog('保存成功');
+					}
+				}
+			});
+		},
+		initTeamUploader : function(uploadSrc, extensions) {// 初始化文件上传控件
+			plupload.addI18n({
+		        'File extension error.' : '文件类型错误',
+		        'File size error.' : '文件大小超出限制'
+		    });
+			_this.teamUploader = new plupload.Uploader({
+				runtimes : 'html5,flash',
+				browse_button : 'btn_upload_team', // 选择文件按钮ID
+				max_file_size : '100mb', // 文件上传最大值
+				chunks : false,// 不分块上传
+				unique_names : true, // 上传的文件名是否唯一,只有在未进行分块上传时文件名唯一才有效
+				url : uploadSrc,
+				flash_swf_url : 'js/lib/plupload/plupload.flash.swf',// plupload.flash.swf文件所在路径
+				multi_selection : false,
+				filters: [
+				     {title: "允许文件类型", extensions: extensions}
+		        ],
+				init : {
+					FileUploaded : function(up, file, info) {
+						_this.teamUploader.disableBrowse(false);
+						var data = eval('(' + info.response + ')');
+						_this.fileName = data.fileName;
+						$('#team_avatar').val(_this.fileName);
+						$('#avatar_team').html('<img src="' + data.file_path + '">');
+						if (data.success == false) {
+							util.dialog.infoDialog(data.msg);
+							return;
+						} else {
+							util.dialog.toastDialog('上传成功', 2000, function(){
+								$('#process_bar').hide();
+								$('#process_rate').css('width', '0');
+								$('#process_rate').text('0%');
+							});
+						}
+					},
+					FilesAdded : function(up, file) {
+						$.each(up.files, function (i, file) {
+							if (up.files.length <= 1) {
+					            return;
+					        }
+					        up.removeFile(file);
+						});
+						_this.teamUploader.start();
+					},
+					BeforeUpload : function(up, file) {
+						_this.teamUploader.disableBrowse(true);
+					},
+					UploadProgress : function(up, file) {
+						$('#process_bar').show();
+						$('#process_rate').css('width', file.percent + '%');
+						$('#process_rate').text(file.percent + '%');
+					},
+					Error : function(up, err) {
+						$('#loading').hide();
+						_this.teamUploader.disableBrowse(false);
+						up.refresh(); // Reposition Flash/Silverlight
+						// util.checkStatus(err);
+					} 
+				}
+			});
+			_this.teamUploader.init();
 		}
-		
 	};
 }(moka));

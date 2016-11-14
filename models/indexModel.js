@@ -71,3 +71,46 @@ exports.updateModule = function (id, keywords, callback) {
     );
 };
 
+
+exports.queryTeamer = function (callback) {
+    db.query("select * from index_teamer;", [], function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+exports.insertTeamer = function (name, desc, avatar, callback) {
+    db.query("insert into index_teamer(name, info, avatar) values (?,?,?);",
+        [name, desc, avatar],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+exports.updateTeamer = function (id, name, desc, avatar, callback) {
+    var sql = 'update index_teamer set ' ;
+    sql += ' name=? ';
+    sql += ' ,info=? ';
+    sql += ' ,avatar=? ';
+    sql += 'where id = ?;';
+    var params = [];
+    params.push(name);
+    params.push(desc);
+    params.push(avatar);
+    params.push(id);
+    db.query(sql, params, function (err, result) {
+            callback(err, result);
+        }
+    );
+};
+
+exports.delTeamer = function (id, callback) {
+    var sql = 'delete from index_teamer where id = ?;';
+    var params = [];
+    params.push(id);
+    db.query(sql, params, function (err, result) {
+            callback(err, result);
+        }
+    );
+};

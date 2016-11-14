@@ -204,8 +204,6 @@ router.post('/updateModule', function (req, res, next) {
     });
 });
 
-
-
 router.post('/info/view/:mid', function (req, res, next) {
     var mid = req.params.mid;
     indexModel.queryInfoById(mid, function(err, result){
@@ -240,8 +238,6 @@ router.post('/info/save', function (req, res, next) {
         }
     });
 });
-
-
 
 router.post('/news/save', function (req, res, next) {
     var id = req.body.id;
@@ -278,6 +274,7 @@ router.post('/news/save', function (req, res, next) {
         });
     }
 });
+
 router.post('/news/del', function (req, res, next) {
     var id = req.body.id;
     newsModel.del(id, function(err){
@@ -332,6 +329,79 @@ router.post('/news/list', function (req, res, next) {
     });
 });
 
+
+router.post('/team/list', function (req, res, next) {
+    indexModel.queryTeamer(function (err, teamers) {
+        if(err){
+            return res.json({
+                success: false,
+                msg: "查找出错"
+            });
+        }
+        return res.json({
+            success: true,
+            data : {
+                list : teamers
+            }
+        });
+    });
+});
+
+router.post('/team/save', function (req, res, next) {
+    var id = req.body.id;
+    var name = req.body.name;
+    var desc = req.body.desc;
+    var avatar = req.body.avatar;
+    if(avatar){
+        avatar = avatar.replace('\/', '\\');
+    }
+    if(!id){
+        indexModel.insertTeamer(name, desc, avatar, function(err){
+            if(err){
+                res.json({
+                    success : false,
+                    msg : '更新失败'
+                });
+            }else{
+                res.json({
+                    success : true,
+                    msg : '更新成功'
+                });
+            }
+        });
+    }else{
+        indexModel.updateTeamer(id, name, desc, avatar, function(err){
+            if(err){
+                res.json({
+                    success : false,
+                    msg : '更新失败'
+                });
+            }else{
+                res.json({
+                    success : true,
+                    msg : '更新成功'
+                });
+            }
+        });
+    }
+});
+
+router.post('/team/del', function (req, res, next) {
+    var id = req.body.id;
+    indexModel.delTeamer(id, function(err){
+        if(err){
+            res.json({
+                success : false,
+                msg : '刪除失败'
+            });
+        }else{
+            res.json({
+                success : true,
+                msg : '刪除成功'
+            });
+        }
+    });
+});
 
 module.exports = router;
 
