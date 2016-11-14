@@ -23,7 +23,19 @@ router.get('/list', function (req, res, next) {
     if(!keyword || keyword == 'undefined'){
         keyword = '';
     }
+    res.render('user/resource/search',{
+        keyword : keyword
+    });
+});
+
+router.get('/list/:type', function (req, res, next) {
+    var type = req.params.type;
+    var keyword = req.query.keyword;
+    if(!keyword || keyword == 'undefined'){
+        keyword = '';
+    }
     res.render('user/resource/list',{
+        type : type,
         keyword : keyword
     });
 });

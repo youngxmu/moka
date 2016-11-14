@@ -4,7 +4,7 @@ var authRouter = require('./routes/authRouter.js');
 var uploadRouter = require('./routes/uploadRouter.js');
 var registerRouter = require('./routes/registerRouter.js');
 
-
+var viewRouter = require('./routes/viewRouter.js');
 var menuRouter = require('./routes/menuRouter.js');
 
 /* index */
@@ -56,7 +56,8 @@ module.exports = function (app) {
     
     app.use('/user', registerRouter);//通用文件上传
     app.use('/menu', menuRouter);//通用文件上传
-
+    app.use('/view', viewRouter);//通用文件上传
+    
     /***index start*/
     app.use('/index', indexRouter);
     app.use('/index/res', indexResRouter);

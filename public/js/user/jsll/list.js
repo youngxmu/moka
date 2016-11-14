@@ -20,12 +20,51 @@
 			_this.data.pptTpl = juicer($('#ppt_tpl').html());
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
-			_this.type = 1;
-			_this.data.type = '政策';
-			_this.search();
+
+			$('#main_panel').hide();
+			$('#p_tree_panel').hide();
+			$('#tree_panel').hide();
+			// if(_this.data.type == '资料'){
+				
+			// 	_this.initTopic();
+			// }else if(_this.data.type == '理论'){
+				
+			// 	_this.initPTopic();
+			// }else{
+				
+			// 	_this.search();
+			// }
+
+			var type = $('#type').val();
+			if(type == 'outline'){
+				_this.type = 1;
+				_this.data.type = '政策';	
+				$('#main_panel').show();
+				_this.search();
+			}else{
+				if(type == 'tbook'){
+					_this.type = 2;
+					_this.data.type = '理论';	
+					$('#p_tree_panel').show();
+					_this.initPTopic();
+				}
+				if(type == 'tplan'){
+					_this.type = 1;
+					_this.data.type = '资料';	
+					$('#tree_panel').show();
+					_this.initTopic();
+				}
+				if(type == 'ppt'){
+					_this.type = 4;
+					_this.data.type = '课件';	
+					$('#tree_panel').show();
+					_this.initTopic();
+				}
+				
+			}
 		},
 		initEvent : function(){
-			$('.nav-ul').on('click', 'li', _this.changeType);
+			// $('.nav-ul').on('click', 'li', _this.changeType);
 			$('#menu_panel').on('click', 'li', _this.showContent);
 
 			$('.tree-opr').on('click', '.unfold',function(){
@@ -54,12 +93,25 @@
 			});
 
 
-			$('.type-panel').on('click', 'li',function(){
+			// $('.type-panel').on('click', 'li',function(){
+			// 	var $this = $(this);
+			// 	$this.addClass('active').siblings().removeClass('active');
+			// 	_this.type = $this.attr('data-type');
+			// 	console.log(_this.type);
+			// 	_this.initTopic();
+			// });
+			$('body').on('click', '.view-ppt',function(){
 				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				_this.type = $this.attr('data-type');
-				console.log(_this.type);
-				_this.initTopic();
+				var path = $this.attr('data-path');
+				// alert(path);
+				$.ajax({
+					url : 'view/ppt',
+					type: 'post',
+					data: {path:path},
+					success : function(result){
+						console.log(result);
+					}
+				});
 			});
 		},
 		changeType : function(){
@@ -273,7 +325,7 @@
 							$body.html('');
 						}
 					}
-
+					console.log(_this.currNode);
 					if(_this.type == 4 ){
 						if( _this.currNode.file_name){
 							$body.html(_this.data.pptTpl.render(_this.currNode));

@@ -72,19 +72,19 @@
 			$('#pic_panel').hide();
 			$('#nnn_panel').hide();
 			$('#msg_panel').hide();
-			
-			if(type == 1 || type == 2 || type == 3 || type == 6){
+			console.log(type + ' ' + mid);
+			if(type == 1 || type == 2 || type == 3 || type == 4 || type == 6){
 				_this.showEditor(mid);
 				$('#editor_panel').show();
 			}
-			if(type == 4){
-				_this.$topPanel = $('#s_top_list');
-				_this.$panel = $('#s_resource_list');
-				_this.$pagebar = $('#s_pagebar');
-				_this.loadTop();
-				_this.loadRes();
-				$('#list_panel').show();	
-			}
+			// if(type == 4){
+			// 	_this.$topPanel = $('#s_top_list');
+			// 	_this.$panel = $('#s_resource_list');
+			// 	_this.$pagebar = $('#s_pagebar');
+			// 	_this.loadTop();
+			// 	_this.loadRes();
+			// 	$('#list_panel').show();	
+			// }
 			if(type == 5){
 				_this.data.searchData.mid = 1;
 				_this.data.searchData.moduleId = 1;
@@ -348,6 +348,7 @@
 		midMap : {
 			'100101' : {type:1},
 			'100102' : {type:1},
+			'100104' : {type:1},
 			'1002'   : {type:1},
 			'1005'   : {type:1},
 			'1003'   : {type:2,smid:100301}

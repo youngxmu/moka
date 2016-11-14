@@ -25,6 +25,11 @@ router.get('/list', function (req, res, next) {
     res.render('user/jsjn/list');
 });
 
+router.get('/list/:type', function (req, res, next) {
+    var type = req.params.type;
+    res.render('user/jsjn/list', {type: type});
+});
+
 router.get('/res', function (req, res, next) {
     res.render('user/jsjn/res');
 });

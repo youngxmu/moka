@@ -84,7 +84,8 @@
 }
     
 .main{
-	width: 920px;
+	/*width: 920px;*/
+	width: 1000px;
 	display: inline-block;vertical-align: top;
 	padding: 10px 20px;
 	font-size:14px;color:#333;

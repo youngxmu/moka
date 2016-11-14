@@ -336,6 +336,7 @@ router.post('/queryArticleByMenu', function (req, res, next) {
                     result[i].create_time = commonUtils.formatDate(date);
                     var article = result[i];
                     article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                    article.org_path = article.file_name;
                     if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                     article.menuList = menuUtils.getMenuPathList(article.menu_id);
                     article.file_type = commonUtils.getFileTypeName(article.file_name);

@@ -18,6 +18,11 @@ router.get('/list', function (req, res, next) {
     res.render('user/jsll/list');
 });
 
+router.get('/list/:type', function (req, res, next) {
+    var type = req.params.type;
+    res.render('user/jsll/list', {type: type});
+});
+
 router.post('/list/:type', function (req, res, next) {
     var type = req.params.type;
     jsllModel.queryInfosByType(type, function (err, result) {
