@@ -32,6 +32,13 @@
 						for(var index in list){
 							var module = list[index];
 							module.keys = module.keywords.split(',');
+							if(!module.upkeywords){
+								module.upkeywords = '';
+								module.upkeys = [];
+							}else{
+								module.upkeys = module.upkeywords.split(',');
+							}
+							
 							_this.data.moduleMap[module.id] = module;
 						}
 						$panel.html(_this.tpl.moduleTpl.render({list:list}));	
@@ -39,8 +46,11 @@
 				}
 			});
 		},
-		getKeywords : function(mid){
-			var $spans = $('#key_panel_' + mid).find('span');
+		getKeywords : function(mid, type){
+			var $spans = $('#key_panel_' + mid).find('.del-key');
+			if(type == 1){
+				$spans = $('#upkey_panel_' + mid).find('.del-key');
+			}
 			var keywords = [];
 			$spans.each(function(){
 				keywords.push($(this).attr('data-key'));
@@ -48,8 +58,14 @@
 			return keywords.join(',');
 		},
 		add : function(){
-			var id = $(this).attr('data-id');
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			var type = $this.attr('data-t');
 			var $panel = $('#key_panel_' + id);
+			
+			if(type == 1){
+				$panel = $('#upkey_panel_' + id);
+			}
 			util.dialog.defaultDialog(
 				'<input id="key_name">',
 				function(){
@@ -58,16 +74,17 @@
 						return false;
 					}
 
-					var keyHtml = '<div>' + keyName + '<span data-id="' + id + '" data-key="' + keyName + '" class="del-key">×</span></div>'
+					var keyHtml = '<div>' + keyName + '<span data-id="' + id + '" data-t="'+ type +'" data-key="' + keyName + '" class="del-key">×</span></div>'
 					$panel.append(keyHtml);
-					var keywords = _this.getKeywords(id);
+					var keywords = _this.getKeywords(id,type);
 					$.ajax({
 						type : "post",
 						cache : false,
 						url : 'admin/index/updateModule',
 						data : {
 							id:id,
-							keywords : keywords
+							keywords : keywords,
+							type : type
 						},
 						success : function(result){
 							if(result.success){
@@ -85,18 +102,20 @@
 		del : function(){
 			var $this = $(this);
 			var id = $this.attr('data-id');
+			var type = $this.attr('data-t');
 			util.dialog.confirmDialog(
 				'确认删除',
 				function(){
 					$this.parent('div').remove();
-					var keywords = _this.getKeywords(id);
+					var keywords = _this.getKeywords(id, type);
 					$.ajax({
 						type : "post",
 						cache : false,
 						url : 'admin/index/updateModule',
 						data : {
 							id:id,
-							keywords : keywords
+							keywords : keywords,
+							type : type
 						},
 						success : function(result){
 							if(result.success){

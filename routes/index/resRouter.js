@@ -84,6 +84,8 @@ router.post('/list', function (req, res, next) {
     var moduleId = req.body.moduleId;
     var moduleMap = sysUtils.getModuleMap();
     var title = moduleMap[moduleId];
+    var module = moduleMap[moduleId];
+    
     console.log(moduleMap);
     console.log(title);
 
@@ -95,13 +97,13 @@ router.post('/list', function (req, res, next) {
         title = '';
     }
 
-    resourceModel.queryResourceByTitleTotalCount(title, type, function (totalCount) {
+    resourceModel.queryResourceByModuleTotalCount(module, type, function (totalCount) {
         var totalPage = 0;
         if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
         else totalPage = totalCount / pageSize + 1;
         totalPage = parseInt(totalPage, 10);
         var start = pageSize * (pageNo - 1);
-        resourceModel.queryResourceByTitle(title, type, start, pageSize, function (err, result) {
+        resourceModel.queryResourceByModule(module, type, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找文章出错", err);
                 res.json({

@@ -62,13 +62,14 @@ exports.queryModules = function (callback) {
     db.query(sql, params, callback);
 };
 
-exports.updateModule = function (id, keywords, callback) {
-    db.query("update index_module set keywords = ? where id = ?;",
-        [keywords, id],
-        function (err, result) {
-            callback(err, result);
-        }
-    );
+exports.updateModule = function (id, keywords, type,  callback) {
+    var sql = 'update index_module set keywords = ? where id = ?;';
+    if(type == 1){
+        sql = 'update index_module set upkeywords = ? where id = ?;';
+    }
+    db.query(sql, [keywords, id], function (err, result) {
+        callback(err, result);
+    });
 };
 
 

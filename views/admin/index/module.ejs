@@ -34,13 +34,24 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">${item.name}</h3>
-          <span data-id="${item.id}" class="btn btn-default btn-sm heading-btn add-key">增加</span>
+          
+        </div>
+        <div class="panel-body detail-article" style="border-bottom:1px solid #cccccc;">
+          <div id="upkey_panel_${item.id}" class="key-panel">
+            <span class="label" >置顶字</span>
+            {@each item.upkeys as key, index}
+            <div>${key}<span data-id="${item.id}" data-key="${key}" data-t="1" class="del-key">×</span></div>
+            {@/each}
+            <span data-id="${item.id}" data-t="1" class="btn btn-default btn-sm heading-btn add-key">增加</span>
+          </div>
         </div>
         <div class="panel-body detail-article">
           <div id="key_panel_${item.id}" class="key-panel">
+            <span class="label" >关键字</span>
             {@each item.keys as key, index}
-            <div>${key}<span data-id="${item.id}" data-key="${key}" class="del-key">×</span></div>
+            <div>${key}<span data-id="${item.id}" data-key="${key}" data-t="2" class="del-key">×</span></div>
             {@/each}
+            <span data-id="${item.id}" data-t="2" class="btn btn-default btn-sm heading-btn add-key">增加</span>
           </div>
         </div>
       </div>

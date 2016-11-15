@@ -190,7 +190,8 @@ router.post('/modules', function (req, res, next) {
 router.post('/updateModule', function (req, res, next) {
 	var id = req.body.id;
 	var keywords = req.body.keywords;
-    indexModel.updateModule(id, keywords, function(err, results){
+    var type = req.body.type;
+    indexModel.updateModule(id, keywords, type, function(err, results){
     	if(err){
     		return res.json({
     			success : false
