@@ -272,7 +272,7 @@
     height: 400px;
     right: 20px;
     top: 60px;
-	
+	line-height: 400px;
 }
 .pic-list li{display: none;}
 .pic-list li.current{display: block;}

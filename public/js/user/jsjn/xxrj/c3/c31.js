@@ -109,6 +109,23 @@ nc.xxrj.c31.details = {
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
 							'video'		: '/uploads/jsjn/s/c31/lizheng/立正02.mp4',
+							'pics'		: [
+								{
+									src : '10212[300x240x24BPP]',
+									left : 55,
+									top :  113,
+								},
+								{
+									src : '10213[300x240x24BPP]',
+									left : 34,
+									top :  258,
+								},
+								{
+									src : '10214[300x240x24BPP]',
+									left : 273,
+									top :  329,
+								}
+							],
 							'content'	: [
 								'00262[381x479x8BPP]'
 							]

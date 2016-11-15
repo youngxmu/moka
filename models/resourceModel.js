@@ -178,11 +178,17 @@ exports.queryResourceByModule = function (module, type, start, pageSize, callbac
         var uparr = module.upkeywords.split(',');
         var length = uparr.length;
         if(length > 0){
-            // sql = 'select r.*, (case when title like "%' +  + '%") from resource r where 1 = 1 ';
+            sql = 'select r.*, ';
+            sql += '(0';
+            for(var i=0;i<length;i++){
+                sql += '+(CASE WHEN title LIKE "%'+ uparr[i] +'%" THEN '+ (length-i) +' ELSE 0 END) ';    
+            }
+            sql += ') as rate ';
+            sql += 'from resource r where 1 = 1 ';
         }
     }
     
-    if(title){
+    if(module){
         // module.keywords = module.keywords.replace(/,/g,' ');
         var keyArr = module.keywords.split(',');
         if(keyArr.length > 1){
@@ -197,14 +203,14 @@ exports.queryResourceByModule = function (module, type, start, pageSize, callbac
             }
             sql += ' ) ';
         }else{
-            sql += ' and title like "%' + title + '%" ';    
+            sql += ' and title like "%' + module.keywords + '%" ';    
         }
     }
     if(type){
         sql += ' and content_type in (?) ';
         params.push(type);
     }
-    sql += 'order by create_time desc limit ?,?;';
+    sql += 'order by rate desc, create_time desc limit ?,?;';
     console.log(sql);
     params.push(start);
     params.push(pageSize);
@@ -214,8 +220,8 @@ exports.queryResourceByModule = function (module, type, start, pageSize, callbac
 exports.queryResourceByModuleTotalCount = function (module, type, callback) {
     var params = [];
     var sql = 'select count(id) as count from resource where 1 = 1 ';
-    if(title){
-        var keyArr = title.split(' ');
+     if(module){
+        var keyArr = module.keywords.split(',');
         if(keyArr.length > 1){
             sql += ' and ( ';
             for(var index in keyArr){
@@ -228,7 +234,7 @@ exports.queryResourceByModuleTotalCount = function (module, type, callback) {
             }
             sql += ' ) ';
         }else{
-            sql += ' and title like "%' + title + '%" ';    
+            sql += ' and title like "%' + module.keywords + '%" ';    
         }
     }
     if(type){

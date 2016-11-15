@@ -86,8 +86,8 @@ router.post('/list', function (req, res, next) {
     var title = moduleMap[moduleId];
     var module = moduleMap[moduleId];
     
-    console.log(moduleMap);
-    console.log(title);
+    // console.log(moduleMap);
+    // console.log(title);
 
     var type = req.body.type;
     if(!type || type == 'undefined'){

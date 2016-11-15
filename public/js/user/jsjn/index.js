@@ -321,8 +321,6 @@
 			$('body').on('click', ' #detail_sys.ss .detail-page-last', _this.last);
 			$('body').on('click', ' #detail_sys.ss .detail-exit', _this.exit);
 			$('body').on('click', ' #detail_sys.ss .detail-back', _this.back);
-			$('body').on('click', ' #detail_sys.ss .detail-exit', _this.exit);
-			$('body').on('click', ' #detail_sys.ss .detail-back', _this.back);
 
 			$('body').on('click', ' #detail_sys.ss .detail-video-start', _this.play);
 			$('body').on('click', ' #detail_sys.ss .detail-video-stop', _this.stop);
@@ -330,6 +328,10 @@
 			$('body').on('click', ' #detail_sys .pic-btn-panel span', _this.showPic);
 		},
 		show : function(options){
+			setTimeout(function(){
+				$('#sub_sys').hide();
+				$('#detail_sys').show();
+			},1000);
 			$('#detail_sys').addClass('ss').removeClass('s');
 			$('#detail_page_panel').show();
 			$('#detail_video_panel').hide();
@@ -391,6 +393,7 @@
 			$('#detail_menu_bar').html(html);
 		},
 		onSelMenu : function(){
+			_this.stop();
 			var $this = $(this);
 			_this.video = $this.attr('data-video');
 			console.log($this);
@@ -467,9 +470,11 @@
 			}
 		},
 		back : function(){
+			_this.stop();
 			$('#ss_sys').show().siblings('div').hide();
 		},
 		exit : function(){
+			_this.stop();
 			$('#main_sys').show().siblings('div').hide();
 		},
 		play : function(){
@@ -496,4 +501,5 @@ moka.user.jsjn.index.xxrj.sub.init();
 moka.user.jsjn.index.xxrj.detail.init();
 moka.user.jsjn.index.xxrj.ssdetail.init();
 // moka.user.jsjn.index.xxrj.sub.show({cindex:2,subIndex:5});
-moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});
+// moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});
+moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c31',click:'lizheng'});

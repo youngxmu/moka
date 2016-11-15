@@ -2,6 +2,7 @@ var express = require('express');
 var config = require("../../config");
 var async = require('async');
 var commonUtils = require("../../lib/utils");
+var sysUtils = require('../../lib/sysUtils.js');
 var newsModel = require("../../models/newsModel");
 var indexModel = require("../../models/indexModel");
 var logger = require("../../lib/log.js").logger("indexRouter");
@@ -186,7 +187,6 @@ router.post('/modules', function (req, res, next) {
     	}
     });
 });
-
 router.post('/updateModule', function (req, res, next) {
 	var id = req.body.id;
 	var keywords = req.body.keywords;
@@ -197,6 +197,7 @@ router.post('/updateModule', function (req, res, next) {
     			success : false
     		});
     	}else{
+            sysUtils.getDBIndexModules();
     		return res.json({
     			success : true,
     			list : results
