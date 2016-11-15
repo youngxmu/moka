@@ -11,8 +11,8 @@ module.exports = {
 	redirectPath : '/',
 	// imgHost: 'http://192.168.2.231:8200',
 	// host: 'http://192.168.2.231:8200',
-	imgHost: 'http://localhost:8200',
-	host: 'http://localhost:8200',
+	imgHost: 'http://10.99.13.32:8200',
+	host: 'http://10.99.13.32:8200',
 	env: 'dev',
 	logfile: path.resolve(__dirname, '..', 'logs/access.log'),
 	sessionSecret: 'session_secret_random_seed',
@@ -20,7 +20,7 @@ module.exports = {
 	//mysql config
 	host: "127.0.0.1",
 	user: "root",
-	password: "root",
+	password: "",
 	database: "moka",
 	enableDBLog: true,
 

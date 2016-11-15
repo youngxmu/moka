@@ -246,10 +246,15 @@ display: block;white-space: nowrap;}
   top: 10px;
   width: 70px;
   height: 108px;
-  background-image: url('../../img/index/label.png');
+  /*background-image: url('../../img/index/label.png');
   background-size: 50px 108px;
   background-position: center center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
+  -webkit-writing-mode: vertical-lr;
+  font-size: 26px;
+  /*font-weight: 700;*/
+  font-family: 'sans-serif','\5FAE\8F6F\96C5\9ED1';
+  color: #f6f6f6;
 }
 
 .system-panel .system-box{
@@ -262,18 +267,53 @@ display: block;white-space: nowrap;}
   display: block;
   height: 54px;
   line-height: 54px;
-  
   text-align: justify;
   width: 100%;
 }
 
 .system-panel .system-box .system-row li{
   display: inline-block;
-  width: 25%;
+  /*width: 25%;*/
+  width: 33.33%;
   font-size: 26px;
   margin:0;
   float: left;
   text-align: center;
+  font-family: 'sans-serif','\5FAE\8F6F\96C5\9ED1';
+  color: #f6f6f6;
+  position: relative;
+/*  height: 54px;
+  width: 54px;*/
+ /* background-image: url('../../img/exam.png');
+  background-size: 50px 50px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  display: inline-block;*/
+}
+
+.system-panel .system-box .system-row li i{
+  position: absolute;
+  height: 54px;
+  width: 54px;
+  background-image: url('../../img/logo.png');
+  background-size: 50px 50px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: none;
+  /*vertical-align: top;*/
+  /*margin-right: 5px;*/
+  top: 0;
+  left: 10px;
+  /*float: left;*/
+}
+
+.system-panel .system-box .system-row li:hover i{
+  display: inline-block;
+  animation:rotate 1.5s infinite ease-in-out;
+}
+
+.system-panel .system-box .system-row li:hover a{
+  opacity: 0.8;
 }
 .system-panel .system-box .system-row li a{color: #ffffff}
 .system-panel .system-box .system-row:first-child li{
@@ -306,6 +346,8 @@ display: block;white-space: nowrap;}
     height: 50px;
     /*background-color: #222222;*/
     color: #FF1177;
+    background-color: transparent;
+    z-index: 99;
     /*font-family: Monoton;*/
     /*text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;*/
         /*text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);*/
@@ -322,4 +364,83 @@ display: block;white-space: nowrap;}
 .milky ul li{
   width: 100%;
   display: inline-block;
+}
+
+.canv{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 360px;
+  height: 50px;
+}
+
+
+
+
+.star-bg{
+  top: 15px;
+  right: 20px;
+  width: 360px;
+  height: 50px;
+  overflow: hidden;
+  background-color: #000000;
+  position: absolute;
+  z-index: 1;
+}
+.star{
+  background-image: url("../../img/star.png");
+  background-size: 100% 100%;
+  background-position: center center;
+  -webkit-animation:pop 1s infinite ease-in-out;
+  position: absolute;
+    /*animation:pop 1s infinite ease-in-out;*/
+}
+.s3{
+  width: 8px;
+  height: 8px;
+}
+
+.s2{
+  width: 6px;
+  height: 6px;
+}
+
+.s1{
+  width: 4px;
+  height: 4px;
+}
+.a11{
+  animation:rotate 2s infinite ease-in-out;
+}
+.a12{
+  animation:rotate 3s infinite ease-in-out;
+}
+.a21{
+  animation:pop 1s infinite ease-in-out;
+}
+.a22{
+  animation:pop 2s infinite ease-in-out;
+}
+@keyframes rotate{
+  0%{
+    transform: rotateY(0);
+  }
+  50%{
+    transform: rotateY(180deg);
+  }
+  100%{
+    transform: rotateY(360deg);
+  }
+}
+
+@-webkit-keyframes pop{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(2);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
