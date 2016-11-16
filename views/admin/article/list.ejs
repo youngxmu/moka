@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>国防教育资源库</title>
     <%- include ../common/meta.ejs %>
+    <title>国防教育资源库</title>
     <link rel='stylesheet' href='css/admin/article/list.css' >
   </head>
   <body>
@@ -18,7 +18,6 @@
           |<a href="javascript:void(0);" class="add">增加</a>
           |<a href="javascript:void(0);" class="edit">编辑</a>
           |<a href="javascript:void(0);" class="del">删除</a>
-          
         </div>
         <div style="overflow:auto;min-height:500px;" >
           <ul id="topic_tree" class="ztree"></ul>
@@ -82,15 +81,14 @@
     </div>
     {@/each}
     </script>
-
     <%- include ../common/menu-tpl.ejs %>
-
     
     <script type="text/javascript" src="js/admin/article/list.js"></script>
     <script>
       $(document).ready(function() {
-            moka.admin.article.list.init();
-        });
+        $('#navfouce .resource').addClass('current');
+        moka.admin.article.list.init();
+      });
     </script>
   </body>
 </html>

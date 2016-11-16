@@ -143,7 +143,6 @@ router.get('', function (req, res, next) {
 // });
 router.get('/news/:id', function (req, res, next) {
     var id = req.params.id;
-    console.log(id);
     newsModel.queryNewsById(id, function (err, result) {
         if (err || !result || !commonUtils.isArray(result)) {
             return res.render('error', {
@@ -153,7 +152,6 @@ router.get('/news/:id', function (req, res, next) {
             for (var i in result) {
                 result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time));
             }
-            console.log(result);
             res.render('user/resource/detail-txt', result[0]);
         }
     });
@@ -179,7 +177,7 @@ router.post('/news', function (req, res, next) {
                 });
             } else {
                 for (var i in result) {
-                    // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                    result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time));
                 }
                 res.json({
                     success: true,
@@ -216,9 +214,7 @@ router.post('/msgs', function (req, res, next) {
                 });
             } else {
                 for (var i in result) {
-                    delete result[i].passwd;
-                    delete result[i].im_passwd;
-                    result[i].create_time = new Date(result[i].create_time).getTime();
+                    result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time));//.getTime();
                 }
                 res.json({
                     success: true,
@@ -405,6 +401,15 @@ router.post('/list/res', function (req, res, next) {
 //         });
 //     });
 // });
+
+
+router.get('/mlist', function (req, res, next) {
+    res.render('index/msg-list');
+});
+
+router.get('/nlist', function (req, res, next) {
+    res.render('index/news-list');
+});
 
 module.exports = router;
 

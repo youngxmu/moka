@@ -100,7 +100,7 @@ router.get('/upload', function (req, res, next) {
 
 /** 待审核列表 */
 router.get('/uneval', function(req, res, next) {
-    var id = req.params.id;
+    // var id = req.params.id;
     res.render('admin/article/uneval');
 });
 

@@ -18,6 +18,13 @@ router.get('/list', function (req, res, next) {
     res.render('user/expert/list');
 });
 
+router.get('/list/:type', function (req, res, next) {
+    var type = req.params.type;
+    res.render('user/expert/list',{
+        type : type
+    });
+});
+
 
 //根据”创建渠道“和”是否虚拟“查询专家
 router.post('/list', function (req, res, next) {

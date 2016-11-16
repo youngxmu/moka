@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.article.uneval = {
-		searchUrl : 'article/uneval',
+		searchUrl : 'admin/article/uneval',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],

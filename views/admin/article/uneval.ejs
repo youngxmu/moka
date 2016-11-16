@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>后台管理</title>
     <%- include ../common/meta.ejs %>
-        <link rel='stylesheet' href='css/resource/list.css' >
-    
+    <title>后台管理</title>
+    <link rel='stylesheet' href='css/admin/article/list.css' >
   </head>
   <body>
     <%- include ../common/header.ejs %>   
@@ -15,7 +14,6 @@
           |<a href="javascript:void(0);" class="add">增加</a>
           |<a href="javascript:void(0);" class="edit">编辑</a>
           |<a href="javascript:void(0);" class="del">删除</a>
-          
         </div>
         <div style="overflow:auto;min-height:500px;" >
           <ul id="topic_tree" class="ztree"></ul>

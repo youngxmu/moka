@@ -5,6 +5,10 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/jsjn/jsjn.css' >
     <link rel='stylesheet' href='css/user/jsjn/list.css' >
+    <style type="text/css">
+      .nav-ul li{display: none;}
+      .nav-ul li.index, .nav-ul li.active{display: inline-block;}
+    </style>
   </head>
   <body>
     <input id="type" type="hidden" value="<%= type %>">

@@ -6,8 +6,8 @@ var router = express.Router();
 var ppt2png = require('ppt2png');
 var unoconv = require('unoconv');
 
-var office2pdf = require('office2pdf'),
-  generatePdf = office2pdf.generatePdf;
+// var office2pdf = require('office2pdf'),
+//   generatePdf = office2pdf.generatePdf;
  
 
 router.post('/ppt', function(req, res) {
@@ -20,7 +20,7 @@ router.post('/ppt', function(req, res) {
 	imgPath= path.replace(/\//g,'\\');
 	console.log(path);console.log(imgPath);
 	generatePdf(path, function(err, result) {
-  console.log(result);
+  // console.log(result);
 });
 	// ppt2png(path, imgPath, function(err,result){
 	//     if(err) {

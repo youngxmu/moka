@@ -53,6 +53,16 @@ router.post('/up', function (req, res, next) {
             });
         } else {
             var ids = result[0].aids;
+            console.log(ids);
+            if(!ids || ids == ''){
+                return res.json({
+                    success: true,
+                    msg: "查找文章成功",
+                    data: {
+                        list: []
+                    }
+                });
+            }
             indexModel.queryUpByIds(ids, function (err, result) {
                 if (err || !result || !commonUtils.isArray(result)) {
                     logger.error("查找文章出错", err);

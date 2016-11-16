@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>国防军事技能研究资源管理分系统</title>
     <%- include ../common/meta.ejs %>
+    <title>军事技能教学</title>
     <link rel='stylesheet' href='css/admin/jsjn/list.css' >
   </head>
   <body>
@@ -144,7 +144,8 @@
     
     <script>
       $(document).ready(function() {
-          moka.admin.jsjn.list.init();
+        $('#navfouce .jsjn').addClass('current');
+        moka.admin.jsjn.list.init();
       });
     </script>
   </body>

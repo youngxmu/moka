@@ -5,6 +5,10 @@ var commonUtils = require("../../lib/utils.js");
 var newsModel = require('../../models/newsModel.js');
 var router = express.Router();
 
+router.get('/list', function (req, res, next) {
+    // res.render('index/science-desc');
+    res.render('index/news-list');
+});
 
 // /** 获取新闻 */
 // router.post('/news', function (req, res, next) {

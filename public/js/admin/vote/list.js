@@ -18,7 +18,7 @@
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
 			_this.search();
-			component.chart.init();
+			// component.chart.init();
 			P.admin.question.import.init();
 		},
 		initEvent : function(){

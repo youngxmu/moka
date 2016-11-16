@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>军事理论教学分系统</title>
     <%- include ../common/meta.ejs %>
+    <title>军事理论教学</title>
     <link rel='stylesheet' href='css/admin/jsjn/list.css' >
     <link rel='stylesheet' href='css/admin/jsll/list.css' >
   </head>
@@ -16,7 +16,7 @@
           </li>
           <li role="presentation" data-type="2" data-key="理论"><a href="javascript:void(0);">军训理论</a></li>
           <li role="presentation" data-type="3" data-key="资料"><a href="javascript:void(0);">辅助资料</a></li>
-          <li role="presentation" data-type="4" data-key="系统帮助"><a href="javascript:void(0);">系统帮助</a></li>
+          <li role="presentation" data-type="4" data-key="系统帮助" style="display:none;"><a href="javascript:void(0);">系统帮助</a></li>
         </ul>
         <div id="menu_panel" >
           <div class="sidebar">
@@ -148,7 +148,8 @@
     
     <script>
       $(document).ready(function() {
-          moka.admin.jsll.list.init();
+        $('#navfouce .jsll').addClass('current');
+        moka.admin.jsll.list.init();
       });
     </script>
   </body>

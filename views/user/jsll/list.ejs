@@ -5,6 +5,10 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/jsll/jsll.css' >
     <link rel='stylesheet' href='css/user/jsll/list.css' >
+    <style type="text/css">
+      .nav-ul li{display: none;}
+      .nav-ul li.index, .nav-ul li.active{display: inline-block;}
+    </style>
   </head>
   <body>
     <input id="type" type="hidden" value="<%= type %>">
@@ -13,8 +17,8 @@
       <div class="container">
         <div class="nav tnav">
           <ul class="nav-ul">
-            <li>
-              <a href="jsll/index" >首页</a>
+            <li class="index">
+              <a href="jsll/index">首页</a>
             </li>
             <li data-type="政策" class="outline">
               <a href="jsll/list/outline" >教学大纲</a>
@@ -164,7 +168,7 @@
     <script type="text/template" id="ppt_tpl">
     <div class="pic_preview">
       <p>
-        <span data-path="${org_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
+        <span style="display:none;" data-path="${org_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
         <a href="${file_name}" class="btn btn-success btn-lg" role="button">下载到本地</a>
       </p>
     </div>

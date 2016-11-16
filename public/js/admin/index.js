@@ -400,6 +400,19 @@
 				mid = data.smid;
 			}
 			var content = _this.editor.getValue();
+			console.log(content);
+			var $content = $('<div>' + content + '</div>');
+			$content.find('img').each(function(){
+				var $img = $(this);
+				var src = $img.attr('src');
+				if(src.indexOf('8200') != -1){
+					src = src.split('8200')[1];
+					$img.attr('src', src);
+				}
+			});
+			content = $content.html();
+			// console.log($content.outerHtml());
+			console.log(content);
 			
 			var postData = {
 				content : content,

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>师资力量</title>
     <%- include ../common/meta.ejs %>
+    <title>师资力量</title>
     <link rel='stylesheet' href='css/user/expert/expert.css' >
     <link rel='stylesheet' href='css/user/expert/list.css' >
-    
+    <style type="text/css">
+      .nav-ul li{display: none;}
+      .nav-ul li.index, .nav-ul li.active{display: inline-block;}
+    </style>
   </head>
   <body>
+    <input id="type" type="hidden" value="<%= type %>">
     <div class="bg">
       <%- include ../common/header.ejs %>
       <div class="container" style="padding:0;">
@@ -23,11 +27,11 @@
             <li class="index">
               <a href="expert/index">首页</a>
             </li>
-            <li target="list_panel" class="active">
-              <a href="javascript:void(0);">基本搜索</a>
+            <li target="list_panel" class="base">
+              <a href="expert/list/base">基本搜索</a>
             </li>
-            <li target="type_panel">
-              <a href="javascript:void(0);" >分类搜索</a>
+            <li target="type_panel" class="type">
+              <a href="expert/list/type" >分类搜索</a>
             </li>
           </ul>
         </div>
@@ -69,7 +73,9 @@
       <div class="name">${obj.tel}</div>
       <div class="desc">${obj.address}</div>
       <div class="oper">
-        <span data-id="${obj.id}" ><a class="btn btn-info" href="expert/detail/${obj.id}" target="_blank">查看</a></span>
+        <span data-id="${obj.id}" >
+          <a class="btn btn-info" href="expert/detail/${obj.id}" >查看</a>
+        </span>
       </div>
     </div>
     {@/each}
@@ -117,7 +123,9 @@
     
     <script>
       $(document).ready(function() {
-            moka.user.expert.list.init();
+          var type = $('#type').val();
+          $('.nav-ul .' + type).addClass('active');
+          moka.user.expert.list.init();
         });
     </script>
   </body>

@@ -5,11 +5,22 @@
     <%- include ../common/meta.ejs %>
     <link rel='stylesheet' href='css/user/vote/vote.css' >
     <link rel='stylesheet' href='css/user/vote/list.css' >
+    <style type="text/css">
+      .nav-ul li{display: none;}
+      .nav-ul li.index, .nav-ul li.active{display: inline-block;}
+    </style>
   </head>
   <body>
     <div class="bg">
       <%- include ../common/header.ejs %>
     	<div class="container">
+        <div class="nav tnav">
+          <ul class="nav-ul">
+            <li class="index">
+              <a href="vote/index" >首页</a>
+            </li>
+          </ul>
+        </div>
         <div class="main">
           <table class="table table-striped" style="font-size:14px;">
             <thead>

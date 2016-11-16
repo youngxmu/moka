@@ -16,6 +16,11 @@ var messageModel = require('../../models/messageModel.js');
 
 var router = express.Router();
 
+router.get('/list', function (req, res, next) {
+    // res.render('index/science-desc');
+    res.render('index/msg-list');
+});
+
 /**  **/
 router.post('/msgs', function (req, res, next) {
     var pageNo = parseInt(req.body.pageNo);

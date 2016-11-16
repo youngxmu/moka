@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>国防师资力量</title>
     <%- include ../common/meta.ejs %>
+    <title>国防师资力量</title>
     <link rel='stylesheet' href='css/user/expert/expert.css' >
     <style type="text/css">
     .header{
@@ -12,7 +12,6 @@
       height: 100%;
       background: transparent;
     }
-    
     </style>
   </head>
   <body>
@@ -21,9 +20,27 @@
       <div class="container">
         <div class="index-main" >
           <div class="sys-logo"><div class="sys-title"></div></div>
-          <div class="sys-enter">
-            <a href="expert/list"><div class="btn btn-lg btn-primary btn-shadow">进入系统</div></a>
+          <div class="sys-panel">
+              <a href="expert/list/base">
+                <div class="sys-info">
+                    <div class="sys-info-img">
+                        <img src="img/paper/study.png" class="img-thumbnail">
+                    </div>
+                    <div class="sys-info-txt">基本搜索</div>
+                </div>
+              </a>
+              <a href="expert/list/type">
+                <div class="sys-info">
+                    <div class="sys-info-img">
+                      <img src="img/paper/exam.png" class="img-thumbnail">
+                    </div>
+                    <div class="sys-info-txt">分类搜索</div>
+                </div>
+              </a>
           </div>
+          <!-- <div class="sys-enter">
+            <a href="expert/list"><div class="btn btn-lg btn-primary btn-shadow">进入系统</div></a>
+          </div> -->
         </div>
         <div class="main" style="display:none;">
           <div class="login-panel">

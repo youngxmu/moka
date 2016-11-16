@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>试题库</title>
     <%- include ../common/meta.ejs %>
+    <title>学习考试管理</title>
     <link rel='stylesheet' href='css/admin/question/import.css' >
     <link rel='stylesheet' href='css/admin/paper/list.css' >
-    
   </head>
   <body>
     <%- include ../common/header.ejs %>
@@ -84,8 +83,9 @@
     
     <script>
       $(document).ready(function() {
-            moka.admin.paper.list.init();
-        });
+        $('#navfouce .paper').addClass('current');
+        moka.admin.paper.list.init();
+      });
     </script>
   </body>
 </html>

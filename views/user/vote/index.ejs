@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>国防教育测评</title>
     <%- include ../common/meta.ejs %>
+    <title>国防教育测评</title>
     <link rel='stylesheet' href='css/user/vote/vote.css' >
     <style type="text/css">
     .header{
@@ -14,7 +14,6 @@
         height: 100%;
     }
     </style>
-
   </head>
   <body>
     <div class="bg">
@@ -22,8 +21,18 @@
         <div class="container">
             <div class="index-main" >
                 <div class="sys-logo"> <div class="sys-title"></div></div>
-                <div class="sys-enter">
+                <!-- <div class="sys-enter">
                     <a href="vote/list"><div class="btn btn-lg btn-primary btn-shadow">进入系统</div></a>
+                </div> -->
+                <div class="sys-panel">
+                    <a href="vote/list">
+                      <div class="sys-info">
+                          <div class="sys-info-img">
+                              <img src="img/resource/data.png" class="img-thumbnail">
+                          </div>
+                          <div class="sys-info-txt">进入测评</div>
+                      </div>
+                    </a>
                 </div>
                 <!-- <div class="sys-info">
                     <div class="jumbotron">

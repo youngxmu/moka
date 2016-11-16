@@ -13,32 +13,52 @@
 			pageSize : 10
 		},
 		init : function() {
+			_this.type = $('#type').val();
 			_this.tpl.expertListTpl = juicer($('#expert-list-tpl').html());
 			_this.initEvent();
-			_this.search();
+
+			var $this = $('.' + _this.type);
+			$this.addClass('active').siblings().removeClass('active');
+			var target = $this.attr('target');
+			var $target = $('#' + target);
+			$('#list_panel').hide();
+			$('#type_panel').hide();
+			$target.show();
+			_this.queryData = {
+				pageNo : 1,
+				pageSize : 10
+			};
+			$('#expert_list').html('');
+			$('#pagebar').html('');
+			if(target == 'list_panel'){
+				_this.searchUrl = 'expert/list';
+				_this.search();
+			}else{
+				_this.searchUrl = 'expert/job';
+			}
 		},
 		initEvent : function(){
-			$('#nav_tabs').on('click', 'li', function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				var target = $this.attr('target');
-				var $target = $('#' + target);
-				$('#list_panel').hide();
-				$('#type_panel').hide();
-				$target.show();
-				_this.queryData = {
-					pageNo : 1,
-					pageSize : 10
-				};
-				$('#expert_list').html('');
-				$('#pagebar').html('');
-				if(target == 'list_panel'){
-					_this.searchUrl = 'expert/list';
-					_this.search();
-				}else{
-					_this.searchUrl = 'expert/job';
-				}
-			});
+			// $('#nav_tabs').on('click', 'li', function(){
+			// 	var $this = $(this);
+			// 	$this.addClass('active').siblings().removeClass('active');
+			// 	var target = $this.attr('target');
+			// 	var $target = $('#' + target);
+			// 	$('#list_panel').hide();
+			// 	$('#type_panel').hide();
+			// 	$target.show();
+			// 	_this.queryData = {
+			// 		pageNo : 1,
+			// 		pageSize : 10
+			// 	};
+			// 	$('#expert_list').html('');
+			// 	$('#pagebar').html('');
+			// 	if(target == 'list_panel'){
+			// 		_this.searchUrl = 'expert/list';
+			// 		_this.search();
+			// 	}else{
+			// 		_this.searchUrl = 'expert/job';
+			// 	}
+			// });
 			$('#btn_search').on('click', function(){
 				var $this = $(this);
 				_this.queryData.name = $('#search_key').val();
