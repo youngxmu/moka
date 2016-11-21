@@ -502,4 +502,4 @@ moka.user.jsjn.index.xxrj.detail.init();
 moka.user.jsjn.index.xxrj.ssdetail.init();
 // moka.user.jsjn.index.xxrj.sub.show({cindex:2,subIndex:5});
 // moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c32',click:'sxybx'});
-moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c31',click:'lizheng'});
+moka.user.jsjn.index.xxrj.ssdetail.show({cindex:'c34',click:'xieqiang'});

@@ -183,12 +183,13 @@
             <img class="def" src="jsjn/png/${obj}.png" style="${obj|getImgStyle}">
           </li>
           {@/each}
+          <div class="pic-btn-panel">
+            {@each pics as item, index}
+            <span data-index="${index}" style="left:${item.left}px;top:${item.top}px;"></span>
+            {@/each}
+          </div>
         </ul>
-        <div class="pic-btn-panel">
-          {@each pics as item, index}
-          <span data-index="${index}" style="left:${item.left}px;top:${item.top}px;"></span>
-          {@/each}
-        </div>
+        
         <ul class="pic-list">
           {@each pics as item, index}
           <li class="pic-item {@if index == 0}current{@/if}" >

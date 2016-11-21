@@ -164,6 +164,9 @@
 /*
 	详情页面
 */
+.detail-main-list{
+	max-height: 495px;overflow: auto;
+}
 .detail-main-list .content-list .content{
 	display: none;
 	position: relative;
@@ -216,7 +219,9 @@
 }
 .detail-sys .sidebar ul.res-menu ul.mjie3 li img{margin: 0;}
 
-.content-list{max-height: 495px;overflow: auto;}
+.content-list{
+	position: relative;
+}
 
 
 
@@ -279,4 +284,8 @@
 .pic-list img{
 	width: 100%;
 	height: auto;
+}
+
+#detail_menu_content{
+	padding: 0 0 20px 0;
 }

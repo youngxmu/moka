@@ -221,6 +221,23 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10227[300x240x8BPP]',
+									left : 34,
+									top :  94,
+								},
+								{
+									src : '10228[300x240x8BPP]',
+									left : 280,
+									top :  163,
+								},
+								{
+									src : '10229[300x240x8BPP]',
+									left : 232,
+									top :  238,
+								}
+							],
 							'content'	: [
 								'00267[381x479x8BPP]'
 							]
@@ -326,6 +343,18 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10209[300x240x8BPP]',
+									left : 34,
+									top :  94,
+								},
+								{
+									src : '10210[300x240x8BPP]',
+									left : 160,
+									top :  201,
+								}
+							],
 							'content'	: [
 								'00261[381x479x8BPP]'
 							]
@@ -415,6 +444,23 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10184[300x240x8BPP]',
+									left : 258,
+									top :  45,
+								},
+								{
+									src : '10185[300x240x8BPP]',
+									left : 258,
+									top :  163,
+								},
+								{
+									src : '10186[300x240x8BPP]',
+									left : 258,
+									top :  288,
+								}
+							],
 							'content'	: [
 								'00255[381x479x8BPP]'
 							]
@@ -520,6 +566,38 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10238[300x240x8BPP]',
+									left : 34,
+									top :  94,
+								},
+								{
+									src : '10239[300x240x8BPP]',
+									left : 342,
+									top :  72,
+								},
+								{
+									src : '10240[300x240x8BPP]',
+									left : 203,
+									top :  124,
+								},
+								{
+									src : '10241[300x240x8BPP]',
+									left : 205,
+									top :  177,
+								},
+								{
+									src : '10242[300x240x8BPP]',
+									left : 56,
+									top :  280,
+								},
+								{
+									src : '10243[300x240x8BPP]',
+									left : 249,
+									top :  364,
+								}
+							],
 							'content'	: [
 								'00270[381x479x8BPP]'
 							]
@@ -625,6 +703,23 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10220[300x240x8BPP]',
+									left : 161,
+									top :  33,
+								},
+								{
+									src : '10221[300x240x8BPP]',
+									left : 121,
+									top :  87,
+								},
+								{
+									src : '10222[300x240x8BPP]',
+									left : 122,
+									top :  234,
+								}
+							],
 							'content'	: [
 								'00265[381x479x8BPP]'
 							]
@@ -730,6 +825,23 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							// 'pics'		: [
+							// 	{
+							// 		src : '10220[300x240x8BPP]',
+							// 		left : 161,
+							// 		top :  33,
+							// 	},
+							// 	{
+							// 		src : '10221[300x240x8BPP]',
+							// 		left : 121,
+							// 		top :  87,
+							// 	},
+							// 	{
+							// 		src : '10222[300x240x8BPP]',
+							// 		left : 122,
+							// 		top :  234,
+							// 	}
+							// ],
 							'content'	: [
 								// '00255[381x479x8BPP]'
 							]
@@ -861,6 +973,18 @@ nc.xxrj.c31.details = {
 							'def' 		: '01412[218x39x8BPP]',
 							'hover'		: '01411[218x39x8BPP]',
 							'active'	: '01410[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '10231[300x240x8BPP]',
+									left : 304,
+									top :  92,
+								},
+								{
+									src : '10232[300x240x8BPP]',
+									left : 15,
+									top :  199,
+								}
+							],
 							'content'	: [
 								'00268[381x479x8BPP]'
 							]
@@ -878,6 +1002,13 @@ nc.xxrj.c31.details = {
 							'def' 		: '01412[218x39x8BPP]',
 							'hover'		: '01411[218x39x8BPP]',
 							'active'	: '01410[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '10255[300x240x8BPP]',
+									left : 109,
+									top :  128,
+								}
+							],
 							'content'	: [
 								'00266[381x479x8BPP]'
 							]
@@ -895,6 +1026,18 @@ nc.xxrj.c31.details = {
 							'def' 		: '01412[218x39x8BPP]',
 							'hover'		: '01411[218x39x8BPP]',
 							'active'	: '01410[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '10191[300x240x8BPP]',
+									left : 86,
+									top :  163,
+								},
+								{
+									src : '10192[300x240x8BPP]',
+									left : 87,
+									top :  202,
+								}
+							],
 							'content'	: [
 								'00257[381x479x8BPP]'
 							]
@@ -919,6 +1062,23 @@ nc.xxrj.c31.details = {
 							'def' 		: '01409[218x39x8BPP]',
 							'hover'		: '01408[218x39x8BPP]',
 							'active'	: '01407[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '10200[300x240x8BPP]',
+									left : 84,
+									top :  127,
+								},
+								{
+									src : '10201[300x240x8BPP]',
+									left : 336,
+									top :  164,
+								},
+								{
+									src : '10202[300x240x8BPP]',
+									left : 59,
+									top :  236,
+								}
+							],
 							'content'	: [
 								'00254[381x479x8BPP]'
 							]
@@ -935,6 +1095,18 @@ nc.xxrj.c31.details = {
 							'def' 		: '01415[218x39x8BPP]',
 							'hover'		: '01414[218x39x8BPP]',
 							'active'	: '01413[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '10188[300x240x8BPP]',
+									left : 9,
+									top :  164,
+								},
+								{
+									src : '10189[300x240x8BPP]',
+									left : 58,
+									top :  235,
+								}
+							],
 							'content'	: [
 								'00256[381x479x8BPP]'
 							]
@@ -993,6 +1165,18 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'pics'		: [
+								{
+									src : '10216[300x240x8BPP]',
+									left : 156,
+									top :  92,
+								},
+								{
+									src : '10217[300x240x8BPP]',
+									left : 131,
+									top :  129,
+								}
+							],
 							'content'	: [
 								'00263[381x479x8BPP]'
 							]

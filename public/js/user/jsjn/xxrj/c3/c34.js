@@ -3,7 +3,7 @@ nc.xxrj.c34 = {
 		{
 			// 'def' 		: '',
 			'def' 		: '00734[208x56x8BPP]',
-			'hover'		: '00734[208x56x8BPP]',
+			'hover'		: '00735[208x56x8BPP]',
 			'content'	: {
 				style 	: 3,
 				content	: '00682[602x241x8BPP]',
@@ -60,6 +60,33 @@ nc.xxrj.c34.details = {
 					'def' 		: '00735[218x45x8BPP]',
 					'hover'		: '00736[218x45x8BPP]',
 					'active'	: '00737[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00377[300x240x8BPP]',
+							left : 38,
+							top :  87
+						},
+						{
+							src : '00378[300x240x8BPP]',
+							left : 210,
+							top :  123
+						},
+						{
+							src : '00379[300x240x8BPP]',
+							left : 89,
+							top :  158
+						},
+						{
+							src : '00380[300x240x8BPP]',
+							left : 65,
+							top :  194
+						},
+						{
+							src : '00381[300x240x8BPP]',
+							left : 65,
+							top :  230
+						}
+					],
 					'content'	: [
 						'00686[381x479x8BPP]',
 						'00381[300x240x8BPP]'
@@ -69,6 +96,28 @@ nc.xxrj.c34.details = {
 					'def' 		: '00738[218x45x8BPP]',
 					'hover'		: '00739[218x45x8BPP]',
 					'active'	: '00740[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00388[300x240x8BPP]',
+							left : 38,
+							top :  87
+						},
+						{
+							src : '00389[300x240x8BPP]',
+							left : 237,
+							top :  87
+						},
+						{
+							src : '00390[300x240x8BPP]',
+							left : 18,
+							top :  122
+						},
+						{
+							src : '00391[300x240x8BPP]',
+							left : 18,
+							top :  159
+						}
+					],
 					'content'	: [
 						'00688[381x479x8BPP]',
 						'00390[300x240x8BPP]'
@@ -78,6 +127,33 @@ nc.xxrj.c34.details = {
 					'def' 		: '00744[218x45x8BPP]',
 					'hover'		: '00745[218x45x8BPP]',
 					'active'	: '00746[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00402[300x240x8BPP]',
+							left : 38,
+							top :  87
+						},
+						{
+							src : '00403[300x240x8BPP]',
+							left : 210,
+							top :  123
+						},
+						{
+							src : '00404[300x240x8BPP]',
+							left : 89,
+							top :  158
+						},
+						{
+							src : '00405[300x240x8BPP]',
+							left : 65,
+							top :  194
+						},
+						{
+							src : '00406[300x240x8BPP]',
+							left : 65,
+							top :  230
+						}
+					],
 					'content'	: [
 						'00692[381x479x8BPP]'
 					]

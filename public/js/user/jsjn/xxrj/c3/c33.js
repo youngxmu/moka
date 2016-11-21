@@ -147,7 +147,7 @@ nc.xxrj.c33.details = {
 						{
 							'def' 		: '00992[218x39x8BPP]',
 							'hover'		: '00993[218x39x8BPP]',
-							'active'	: '00984[218x39x8BPP]',
+							'active'	: '00994[218x39x8BPP]',
 							'content'	: [
 								'01025[381x1000x8BPP]',
 								'01026[300x240x8BPP]',
@@ -226,6 +226,38 @@ nc.xxrj.c33.details = {
 							'def' 		: '00940[218x39x8BPP]',
 							'hover'		: '00941[218x39x8BPP]',
 							'active'	: '00942[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '00953[300x240x8BPP]',
+									left : 48,
+									top :  115,
+								},
+								{
+									src : '00954[300x240x8BPP]',
+									left : 5,
+									top :  146,
+								},
+								{
+									src : '00955[300x240x8BPP]',
+									left : 210,
+									top :  204,
+								},
+								{
+									src : '00956[300x240x8BPP]',
+									left : 126,
+									top :  265,
+								},
+								{
+									src : '00957[300x240x8BPP]',
+									left : 167,
+									top :  325,
+								},
+								{
+									src : '00958[300x240x8BPP]',
+									left : 310,
+									top :  516,
+								}
+							],
 							'content'	: [
 								'00952[381x700x8BPP]',
 								'00953[300x240x8BPP]',
@@ -240,6 +272,48 @@ nc.xxrj.c33.details = {
 							'def' 		: '00934[218x39x8BPP]',
 							'hover'		: '00935[218x39x8BPP]',
 							'active'	: '00936[218x39x8BPP]',
+							'pics'		: [
+								{
+									src : '00944[300x240x8BPP]',
+									left : 220,
+									top :  308,
+								},
+								{
+									src : '00945[300x240x8BPP]',
+									left : 74,
+									top :  413,
+								},
+								{
+									src : '00946[300x240x8BPP]',
+									left : 261,
+									top :  550,
+								},
+								{
+									src : '00947[300x240x8BPP]',
+									left : 178,
+									top :  738,
+								},
+								{
+									src : '00948[300x240x8BPP]',
+									left : 14,
+									top :  879,
+								},
+								{
+									src : '00949[300x240x8BPP]',
+									left : 344,
+									top :  1093,
+								},
+								{
+									src : '00950[300x240x8BPP]',
+									left : 14,
+									top :  1149,
+								},
+								{
+									src : '00951[300x240x8BPP]',
+									left : 77,
+									top :  1177,
+								}
+							],
 							'content'	: [
 								'00943[381x1300x8BPP]',
 								'00944[300x240x8BPP]',

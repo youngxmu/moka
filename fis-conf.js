@@ -27,7 +27,7 @@ fis.config.merge({
                 useStandard : true
             },
             {
-                reg : /\/(logs|test|node_modules)\//i,
+                reg : /\/(logs|test|node_modules|public)\//i,
                 release : false
             },
             {
@@ -59,13 +59,13 @@ fis.config.merge({
             }
         ],
         node69 : [
-            {
-                receiver : 'http://xmdx.dev.cnhubei.com/node/receiver',
-                from : '/public',
-                to : '/young/node/moka/public',
-                exclude : '/public/uploads/**',
-                subOnly : true
-            },
+            // {
+            //     receiver : 'http://xmdx.dev.cnhubei.com/node/receiver',
+            //     from : '/public',
+            //     to : '/young/node/moka/public',
+            //     exclude : '/public/uploads/**',
+            //     subOnly : true
+            // },
             {
                 receiver : 'http://xmdx.dev.cnhubei.com/node/receiver',
                 include : ['/config/*.js'],
