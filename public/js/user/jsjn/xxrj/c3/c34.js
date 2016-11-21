@@ -135,23 +135,23 @@ nc.xxrj.c34.details = {
 						},
 						{
 							src : '00403[300x240x8BPP]',
-							left : 210,
-							top :  123
+							left : 261,
+							top :  87
 						},
 						{
 							src : '00404[300x240x8BPP]',
-							left : 89,
-							top :  158
+							left : 288,
+							top :  122
 						},
 						{
 							src : '00405[300x240x8BPP]',
-							left : 65,
+							left : 89,
 							top :  194
 						},
 						{
 							src : '00406[300x240x8BPP]',
-							left : 65,
-							top :  230
+							left : 311,
+							top :  194
 						}
 					],
 					'content'	: [
@@ -161,6 +161,43 @@ nc.xxrj.c34.details = {
 					'def' 		: '00741[218x45x8BPP]',
 					'hover'		: '00742[218x45x8BPP]',
 					'active'	: '00743[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00393[300x240x8BPP]',
+							left : 38,
+							top :  87
+						},
+						{
+							src : '00394[300x240x8BPP]',
+							left : 188,
+							top :  87
+						},
+						{
+							src : '00395[300x240x8BPP]',
+							left : 188,
+							top :  158
+						},
+						{
+							src : '00396[300x240x8BPP]',
+							left : 114,
+							top :  194
+						},
+						{
+							src : '00397[300x240x8BPP]',
+							left : 388,
+							top :  194
+						},
+						{
+							src : '00398[300x240x8BPP]',
+							left : 237,
+							top :  230
+						},
+						{
+							src : '00399[300x240x8BPP]',
+							left : 90,
+							top :  266
+						}
+					],
 					'content'	: [
 						'00690[381x479x8BPP]',
 						'00393[300x240x8BPP]'
@@ -178,7 +215,7 @@ nc.xxrj.c34.details = {
 					'hover'		: '00711[218x45x8BPP]',
 					'active'	: '00712[218x45x8BPP]',
 					'content'	: [
-						'00687[381x479x8BPP]',
+						'00687[381x530x8BPP]',
 						'00383[300x240x8BPP]'
 					]
 				},
@@ -186,6 +223,38 @@ nc.xxrj.c34.details = {
 					'def' 		: '00713[218x45x8BPP]',
 					'hover'		: '00714[218x45x8BPP]',
 					'active'	: '00715[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00382[300x240x8BPP]',
+							left : 139,
+							top :  131
+						},
+						{
+							src : '00383[300x240x8BPP]',
+							left : 310,
+							top :  167
+						},
+						{
+							src : '00384[300x240x8BPP]',
+							left : 139,
+							top :  203
+						},
+						{
+							src : '00385[300x240x8BPP]',
+							left : 212,
+							top :  238
+						},
+						{
+							src : '00386[300x240x8BPP]',
+							left : 90,
+							top :  296
+						},
+						{
+							src : '00387[300x240x8BPP]',
+							left : 163,
+							top :  311
+						}
+					],
 					'content'	: [
 						'00694[381x479x8BPP]',
 						'00409[300x240x8BPP]'
@@ -210,6 +279,18 @@ nc.xxrj.c34.details = {
 					'def' 		: '00757[218x45x8BPP]',
 					'hover'		: '00758[218x45x8BPP]',
 					'active'	: '00759[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00395[300x240x8BPP]',
+							left : 186,
+							top :  183
+						},
+						{
+							src : '00396[300x240x8BPP]',
+							left : 15,
+							top :  245
+						}
+					],
 					'content'	: [
 						'00696[381x479x8BPP]',
 						'00417[300x240x8BPP]'
@@ -254,6 +335,28 @@ nc.xxrj.c34.details = {
 					'def' 		: '00699[218x45x8BPP]',
 					'hover'		: '00700[218x45x8BPP]',
 					'active'	: '00701[218x45x8BPP]',
+					'pics'		: [
+						{
+							src : '00370[300x240x8BPP]',
+							left : 139,
+							top :  131
+						},
+						{
+							src : '00371[300x240x8BPP]',
+							left : 310,
+							top :  167
+						},
+						{
+							src : '00372[300x240x8BPP]',
+							left : 139,
+							top :  203
+						},
+						{
+							src : '00373[300x240x8BPP]',
+							left : 212,
+							top :  238
+						}
+					],
 					'content'	: ['00684[381x479x8BPP]','00370[300x240x8BPP]']
 				},
 				{
