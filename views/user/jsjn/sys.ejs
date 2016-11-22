@@ -181,13 +181,16 @@
           {@each content as obj, index}
           <li class="content {@if index == 0}current{@/if}" data-index="${index}" data-video="${video}" >
             <img class="def" src="jsjn/png/${obj}.png" style="${obj|getImgStyle}">
+
+            {@if index == 0}
+            <div class="pic-btn-panel">
+              {@each pics as item, index}
+              <span data-index="${index}" style="left:${item.left}px;top:${item.top}px;"></span>
+              {@/each}
+            </div>
+            {@/if}
           </li>
           {@/each}
-          <div class="pic-btn-panel">
-            {@each pics as item, index}
-            <span data-index="${index}" style="left:${item.left}px;top:${item.top}px;"></span>
-            {@/each}
-          </div>
         </ul>
         
         <ul class="pic-list">

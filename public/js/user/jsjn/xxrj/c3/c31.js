@@ -100,6 +100,7 @@ nc.xxrj.c31.details = {
 		content : '01506[722x522x8BPP]',
 		menu : {
 			top : '01464[225x60x8BPP]',//c1
+			'video'		: '/uploads/jsjn/s/c31/lizheng/立正01.mp4',
 			mjie : [
 				{
 					style : 3,
@@ -112,18 +113,18 @@ nc.xxrj.c31.details = {
 							'pics'		: [
 								{
 									src : '10212[300x240x24BPP]',
-									left : 55,
-									top :  113,
+									left : 34,
+									top :  94,
 								},
 								{
 									src : '10213[300x240x24BPP]',
-									left : 34,
-									top :  258,
+									left : 13,
+									top :  237,
 								},
 								{
 									src : '10214[300x240x24BPP]',
-									left : 273,
-									top :  329,
+									left : 253,
+									top :  309,
 								}
 							],
 							'content'	: [
@@ -213,6 +214,7 @@ nc.xxrj.c31.details = {
 	'kuali' : {
 		menu : {
 			top : '01467[225x60x8BPP]',//c1
+			'video'		: '/uploads/jsjn/s/c31/kuali/跨立01.mp4',
 			mjie : [
 				{
 					style : 3,
@@ -221,6 +223,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立02.mp4',
 							'pics'		: [
 								{
 									src : '10227[300x240x8BPP]',
@@ -251,6 +254,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01371[218x45x8BPP]',
 							'hover'		: '01370[218x45x8BPP]',
 							'active'	: '01369[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立03.mp4',
 							'content'	: [
 								'01545[722x522x8BPP]'
 							]
@@ -267,6 +271,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01421[218x39x8BPP]',
 							'hover'		: '01420[218x39x8BPP]',
 							'active'	: '01419[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立04.mp4',
 							'content'	: [
 								'01546[722x522x8BPP]'
 							]
@@ -275,6 +280,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01427[218x39x8BPP]',
 							'hover'		: '01426[218x39x8BPP]',
 							'active'	: '01425[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立05.mp4',
 							'content'	: [
 								'01548[722x522x8BPP]'
 							]
@@ -283,6 +289,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
 							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立06.mp4',
 							'content'	: [
 								'01547[722x522x8BPP]'
 							]
@@ -291,6 +298,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
 							'active'	: '01431[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立07.mp4',
 							'content'	: [
 								'01549[722x522x8BPP]'
 							]
@@ -307,6 +315,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01436[218x39x8BPP]',
 							'hover'		: '01435[218x39x8BPP]',
 							'active'	: '01434[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立08.mp4',
 							'content'	: [
 								'01550[722x522x8BPP]'
 							]
@@ -315,6 +324,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01442[218x39x8BPP]',
 							'hover'		: '01441[218x39x8BPP]',
 							'active'	: '01440[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立09.mp4',
 							'content'	: [
 								'01552[722x522x8BPP]'
 							]
@@ -323,6 +333,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
 							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/kuali/跨立10.mp4',
 							'content'	: [
 								'01551[722x522x8BPP]'
 							]
@@ -335,6 +346,7 @@ nc.xxrj.c31.details = {
 	'xiaoxi' : {
 		menu : {
 			top : '01463[225x60x8BPP]',//c1
+			'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息01.mp4',
 			mjie : [
 				{
 					style : 3,
@@ -355,6 +367,7 @@ nc.xxrj.c31.details = {
 									top :  201,
 								}
 							],
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息02.mp4',
 							'content'	: [
 								'00261[381x479x8BPP]'
 							]
@@ -368,6 +381,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01371[218x45x8BPP]',
 							'hover'		: '01370[218x45x8BPP]',
 							'active'	: '01369[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息03.mp4',
 							'content'	: [
 								'01500[722x522x8BPP]'
 							]
@@ -384,6 +398,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01421[218x39x8BPP]',
 							'hover'		: '01420[218x39x8BPP]',
 							'active'	: '01419[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息04.mp4',
 							'content'	: [
 								'01501[722x522x8BPP]'
 							]
@@ -392,6 +407,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01427[218x39x8BPP]',
 							'hover'		: '01426[218x39x8BPP]',
 							'active'	: '01425[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息05.mp4',
 							'content'	: [
 								'01503[722x522x8BPP]'
 							]
@@ -400,6 +416,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
 							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息06.mp4',
 							'content'	: [
 								'01502[722x522x8BPP]'
 							]
@@ -416,6 +433,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01436[218x39x8BPP]',
 							'hover'		: '01435[218x39x8BPP]',
 							'active'	: '01434[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息07.mp4',
 							'content'	: [
 								'01504[722x522x8BPP]'
 							]
@@ -424,6 +442,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01442[218x39x8BPP]',
 							'hover'		: '01441[218x39x8BPP]',
 							'active'	: '01440[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/xiaoxi/稍息08.mp4',
 							'content'	: [
 								'01505[722x522x8BPP]'
 							]
@@ -435,7 +454,8 @@ nc.xxrj.c31.details = {
 	},
 	'tingzhijianzhuanfa' : {
 		menu : {
-			top : '01464[225x60x8BPP]',//c1
+			top : '01458[225x60x8BPP]',//c1
+			'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法01.mp4',
 			mjie : [
 				{
 					style : 3,
@@ -444,6 +464,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法02.mp4',
 							'pics'		: [
 								{
 									src : '10184[300x240x8BPP]',
@@ -474,6 +495,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01371[218x45x8BPP]',
 							'hover'		: '01370[218x45x8BPP]',
 							'active'	: '01369[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法07.mp4',
 							'content'	: [
 								'01360[722x522x8BPP]'
 							]
@@ -490,6 +512,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01421[218x39x8BPP]',
 							'hover'		: '01420[218x39x8BPP]',
 							'active'	: '01419[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法08.mp4',
 							'content'	: [
 								'01361[722x522x8BPP]'
 							]
@@ -498,6 +521,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01427[218x39x8BPP]',
 							'hover'		: '01426[218x39x8BPP]',
 							'active'	: '01425[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法09.mp4',
 							'content'	: [
 								'01363[722x522x8BPP]'
 							]
@@ -506,6 +530,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
 							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法10.mp4',
 							'content'	: [
 								'01362[722x522x8BPP]'
 							]
@@ -514,6 +539,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
 							'active'	: '01431[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法11.mp4',
 							'content'	: [
 								'01365[722x522x8BPP]'
 							]
@@ -522,6 +548,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01430[218x39x8BPP]',
 							'hover'		: '01429[218x39x8BPP]',
 							'active'	: '01428[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法12.mp4',
 							'content'	: [
 								'01364[722x522x8BPP]'
 							]
@@ -538,6 +565,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01436[218x39x8BPP]',
 							'hover'		: '01435[218x39x8BPP]',
 							'active'	: '01434[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法13.mp4',
 							'content'	: [
 								'01366[722x522x8BPP]'
 							]
@@ -546,6 +574,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01442[218x39x8BPP]',
 							'hover'		: '01441[218x39x8BPP]',
 							'active'	: '01440[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/tingzhijianzhuanfa/转法14.mp4',
 							'content'	: [
 								'01367[722x522x8BPP]'
 							]
@@ -558,6 +587,7 @@ nc.xxrj.c31.details = {
 	'qibu' : {
 		menu : {
 			top : '01469[225x60x8BPP]',//c1
+			'video'		: '/uploads/jsjn/s/c31/qibu/齐步01.mp4',
 			mjie : [
 				{
 					style : 3,
@@ -566,11 +596,12 @@ nc.xxrj.c31.details = {
 							'def' 		: '01374[218x45x8BPP]',
 							'hover'		: '01373[218x45x8BPP]',
 							'active'	: '01372[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步02.mp4',
 							'pics'		: [
 								{
 									src : '10238[300x240x8BPP]',
 									left : 34,
-									top :  94,
+									top :  46,
 								},
 								{
 									src : '10239[300x240x8BPP]',
@@ -611,6 +642,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01371[218x45x8BPP]',
 							'hover'		: '01370[218x45x8BPP]',
 							'active'	: '01369[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步03.mp4',
 							'content'	: [
 								'01360[722x522x8BPP]'
 							]
@@ -627,6 +659,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01421[218x39x8BPP]',
 							'hover'		: '01420[218x39x8BPP]',
 							'active'	: '01419[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步04.mp4',
 							'content'	: [
 								'01563[722x522x8BPP]'
 							]
@@ -635,6 +668,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01427[218x39x8BPP]',
 							'hover'		: '01426[218x39x8BPP]',
 							'active'	: '01425[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步05.mp4',
 							'content'	: [
 								'01565[722x522x8BPP]'
 							]
@@ -643,6 +677,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01424[218x39x8BPP]',
 							'hover'		: '01423[218x39x8BPP]',
 							'active'	: '01422[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步06.mp4',
 							'content'	: [
 								'01564[722x522x8BPP]'
 							]
@@ -651,6 +686,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01433[218x39x8BPP]',
 							'hover'		: '01432[218x39x8BPP]',
 							'active'	: '01431[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步07.mp4',
 							'content'	: [
 								'01566[722x522x8BPP]'
 							]
@@ -667,6 +703,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01436[218x39x8BPP]',
 							'hover'		: '01435[218x39x8BPP]',
 							'active'	: '01434[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步08.mp4',
 							'content'	: [
 								'01567[722x522x8BPP]'
 							]
@@ -675,6 +712,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01442[218x39x8BPP]',
 							'hover'		: '01441[218x39x8BPP]',
 							'active'	: '01440[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步09.mp4',
 							'content'	: [
 								'01568[722x522x8BPP]'
 							]
@@ -683,6 +721,7 @@ nc.xxrj.c31.details = {
 							'def' 		: '01439[218x39x8BPP]',
 							'hover'		: '01438[218x39x8BPP]',
 							'active'	: '01437[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c31/qibu/齐步连贯练习.mp4',
 							'content'	: [
 								'01541[722x522x8BPP]'
 							]
@@ -1054,9 +1093,9 @@ nc.xxrj.c31.details = {
 			mjie : [
 				{
 					style : 4,
-					'def' 		: '01383[218x45x8BPP]',
-					'hover'		: '01382[218x45x8BPP]',
-					'active'	: '01381[218x45x8BPP]',
+					'def' 		: '01372[218x45x8BPP]',
+					'hover'		: '01373[218x45x8BPP]',
+					'active'	: '01374[218x45x8BPP]',
 					menu : [
 						{
 							'def' 		: '01409[218x39x8BPP]',
@@ -1128,9 +1167,9 @@ nc.xxrj.c31.details = {
 				},
 				{
 					style : 4,
-					'def' 		: '01383[218x45x8BPP]',
+					'def' 		: '01381[218x45x8BPP]',
 					'hover'		: '01382[218x45x8BPP]',
-					'active'	: '01381[218x45x8BPP]',
+					'active'	: '01383[218x45x8BPP]',
 					menu : [
 						{
 							'def' 		: '01421[218x39x8BPP]',
@@ -1198,9 +1237,9 @@ nc.xxrj.c31.details = {
 				},
 				{
 					style : 4,
-					'def' 		: '01383[218x45x8BPP]',
+					'def' 		: '01381[218x45x8BPP]',
 					'hover'		: '01382[218x45x8BPP]',
-					'active'	: '01381[218x45x8BPP]',
+					'active'	: '01383[218x45x8BPP]',
 					menu : [
 						{
 							'def' 		: '01421[218x39x8BPP]',
@@ -1222,9 +1261,9 @@ nc.xxrj.c31.details = {
 				},
 				{
 					style : 4,
-					'def' 		: '01386[218x45x8BPP]',
+					'def' 		: '01384[218x45x8BPP]',
 					'hover'		: '01385[218x45x8BPP]',
-					'active'	: '01384[218x45x8BPP]',
+					'active'	: '01386[218x45x8BPP]',
 					menu : [
 						{
 							'def' 		: '01436[218x39x8BPP]',
@@ -1247,115 +1286,4 @@ nc.xxrj.c31.details = {
 			]
 		}
 	}
-	// ,
-	// 'tuomao' : {
-	// 	content : '01519[722x522x8BPP]',
-	// 	menu : {
-	// 		top : '01465[225x60x8BPP]',//c1
-	// 		mjie : [
-	// 			{
-	// 				style : 4,
-	// 				'def' 		: '01374[218x45x8BPP]',
-	// 				'hover'		: '01373[218x45x8BPP]',
-	// 				'active'	: '01372[218x45x8BPP]',
-	// 				menu : [
-	// 					{
-	// 						'def' 		: '01418[218x39x8BPP]',
-	// 						'hover'		: '01417[218x39x8BPP]',
-	// 						'active'	: '01416[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'00258[381x479x8BPP]'
-	// 						]
-	// 					},
-	// 					{
-	// 						'def' 		: '01457[218x39x8BPP]',
-	// 						'hover'		: '01456[218x39x8BPP]',
-	// 						'active'	: '01455[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'00269[381x479x8BPP]'
-	// 						]
-	// 					},
-	// 					{
-	// 						'def' 		: '01454[218x39x8BPP]',
-	// 						'hover'		: '01453[218x39x8BPP]',
-	// 						'active'	: '01452[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'00264[381x479x8BPP]'
-	// 						]
-	// 					}
-	// 				]
-	// 			},
-	// 			{
-	// 				style : 3,
-	// 				menu : [
-	// 					{
-	// 						'def' 		: '01371[218x45x8BPP]',
-	// 						'hover'		: '01370[218x45x8BPP]',
-	// 						'active'	: '01369[218x45x8BPP]',
-	// 						'content'	: [
-	// 							'01398[722x522x8BPP]'
-	// 						]
-	// 					}
-	// 				]
-	// 			},
-	// 			{
-	// 				style : 4,
-	// 				'def' 		: '01383[218x45x8BPP]',
-	// 				'hover'		: '01382[218x45x8BPP]',
-	// 				'active'	: '01381[218x45x8BPP]',
-	// 				menu : [
-	// 					{
-	// 						'def' 		: '01421[218x39x8BPP]',
-	// 						'hover'		: '01420[218x39x8BPP]',
-	// 						'active'	: '01419[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'01399[722x522x8BPP]'
-	// 						]
-	// 					},
-	// 					{
-	// 						'def' 		: '01427[218x39x8BPP]',
-	// 						'hover'		: '01426[218x39x8BPP]',
-	// 						'active'	: '01425[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'01400[722x522x8BPP]'
-	// 						]
-	// 					}
-	// 				]
-	// 			},
-	// 			{
-	// 				style : 4,
-	// 				'def' 		: '01386[218x45x8BPP]',
-	// 				'hover'		: '01385[218x45x8BPP]',
-	// 				'active'	: '01384[218x45x8BPP]',
-	// 				menu : [
-	// 					{
-	// 						'def' 		: '01436[218x39x8BPP]',
-	// 						'hover'		: '01435[218x39x8BPP]',
-	// 						'active'	: '01434[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'01401[722x522x8BPP]'
-	// 						]
-	// 					},
-	// 					{
-	// 						'def' 		: '01442[218x39x8BPP]',
-	// 						'hover'		: '01441[218x39x8BPP]',
-	// 						'active'	: '01440[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'01403[722x522x8BPP]'
-	// 						]
-	// 					},
-	// 					{
-	// 						'def' 		: '01424[218x39x8BPP]',
-	// 						'hover'		: '01423[218x39x8BPP]',
-	// 						'active'	: '01422[218x39x8BPP]',
-	// 						'content'	: [
-	// 							'01402[722x522x8BPP]'
-	// 						]
-	// 					}
-	// 				]
-	// 			}
-	// 		]
-	// 	}
-	// }
-	//,
 }

@@ -52,103 +52,183 @@ nc.xxrj.c32.details = {
 			imgStyle : 'margin-left:-26px;',
 			jie : [
 				{
-					'def' 		: '00070[218x39x8BPP]',
+					'def' 		: '00072[218x39x8BPP]',
 					'hover'		: '00071[218x39x8BPP]',
-					'active'	: '00072[218x39x8BPP]',
+					'active'	: '00070[218x39x8BPP]',
 					'pics'		: [
 						{
-							src : '00073[300x240x8BPP]',
-							left : 59,
-							top :  112,
+							src : '10073[300x240x8BPP]',
+							left : 41,
+							top :  94
 						},
 						{
-							src : '00074[300x240x8BPP]',
-							left : 254,
-							top :  112,
+							src : '10074[300x240x8BPP]',
+							left : 236,
+							top :  94
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/拳.mp4',
 					'content'	: [
 						'00075[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00076[218x39x8BPP]',
+					'def' 		: '00078[218x39x8BPP]',
 					'hover'		: '00077[218x39x8BPP]',
-					'active'	: '00078[218x39x8BPP]',
+					'active'	: '00076[218x39x8BPP]',
 					'pics'		: [
 						{
 							src : '10018[300x240x24BPP]',
-							left : 59,
-							top :  112,
+							left : 41,
+							top :  94
 						},
 						{
 							src : '10019[300x240x24BPP]',
-							left : 254,
-							top :  112,
+							left : 236,
+							top :  94
 						},
 						{
 							src : '10020[300x240x24BPP]',
-							left : 259,
-							top :  149,
+							left : 240,
+							top :  130
 						},
 						{
 							src : '10021[300x240x24BPP]',
-							left : 34,
-							top :  187,
+							left : 16,
+							top :  169
 						},
 						{
 							src : '10022[300x240x24BPP]',
-							left : 134,
-							top :  187,
+							left : 116,
+							top :  169
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/掌.mp4',
 					'content'	: [
 						'00079[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00053[218x39x8BPP]',
+					'def' 		: '00055[218x39x8BPP]',
 					'hover'		: '00054[218x39x8BPP]',
-					'active'	: '00055[218x39x8BPP]',
+					'active'	: '00053[218x39x8BPP]',
 					'pics'		: [
 						{
 							src : '10018[300x240x24BPP]',
-							left : 59,
-							top :  112,
+							left : 41,
+							top :  96
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/勾.mp4',
 					'content'	: [
 						'00056[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00250[218x39x8BPP]',
+					'def' 		: '00252[218x39x8BPP]',
 					'hover'		: '00251[218x39x8BPP]',
-					'active'	: '00252[218x39x8BPP]',
+					'active'	: '00250[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10155[300x240x24BPP]',
+							left : 41,
+							top :  94
+						},
+						{
+							src : '10156[300x240x24BPP]',
+							left : 236,
+							top :  94
+						},
+						{
+							src : '10157[300x240x24BPP]',
+							left : 240,
+							top :  130
+						},
+						{
+							src : '10158[300x240x24BPP]',
+							left : 16,
+							top :  169
+						}
+					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/马步.mp4',
 					'content'	: [
 						'00253[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00057[218x39x8BPP]',
+					'def' 		: '00059[218x39x8BPP]',
 					'hover'		: '00058[218x39x8BPP]',
-					'active'	: '00059[218x39x8BPP]',
+					'active'	: '00057[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10013[300x240x24BPP]',
+							left : 41,
+							top :  94
+						},
+						{
+							src : '10014[300x240x24BPP]',
+							left : 236,
+							top :  94
+						},
+						{
+							src : '10015[300x240x24BPP]',
+							left : 240,
+							top :  130
+						}
+					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/弓步.mp4',
 					'content'	: [
 						'00060[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00231[218x39x8BPP]',
+					'def' 		: '00233[218x39x8BPP]',
 					'hover'		: '00232[218x39x8BPP]',
-					'active'	: '00233[218x39x8BPP]',
+					'active'	: '00231[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10152[300x240x24BPP]',
+							left : 41,
+							top :  94
+						},
+						{
+							src : '10153[300x240x24BPP]',
+							left : 236,
+							top :  94
+						}
+					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/仆步.mp4',
 					'content'	: [
 						'00234[381x479x8BPP]'
 					]
 				},
 				{
-					'def' 		: '00043[218x39x8BPP]',
+					'def' 		: '00045[218x39x8BPP]',
 					'hover'		: '00044[218x39x8BPP]',
-					'active'	: '00045[218x39x8BPP]',
+					'active'	: '00043[218x39x8BPP]',
+					'pics'		: [
+						{
+							src : '10007[300x240x24BPP]',
+							left : 41,
+							top :  94
+						},
+						{
+							src : '10008[300x240x24BPP]',
+							left : 236,
+							top :  94
+						},
+						{
+							src : '10009[300x240x24BPP]',
+							left : 240,
+							top :  130
+						},
+						{
+							src : '10010[300x240x24BPP]',
+							left : 16,
+							top :  169
+						}
+					],
+					'video'		: '/uploads/jsjn/s/c32/sxybx/虚步.mp4',
 					'content'	: [
 						'00046[381x479x8BPP]'
 					]
