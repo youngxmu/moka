@@ -136,18 +136,18 @@ nc.xxrj.c32.details = {
 						},
 						{
 							src : '10156[300x240x24BPP]',
-							left : 236,
-							top :  94
+							left : 110,
+							top :  166
 						},
 						{
 							src : '10157[300x240x24BPP]',
-							left : 240,
-							top :  130
+							left : 12,
+							top :  201
 						},
 						{
 							src : '10158[300x240x24BPP]',
-							left : 16,
-							top :  169
+							left : 89,
+							top :  272
 						}
 					],
 					'video'		: '/uploads/jsjn/s/c32/sxybx/马步.mp4',
@@ -167,13 +167,13 @@ nc.xxrj.c32.details = {
 						},
 						{
 							src : '10014[300x240x24BPP]',
-							left : 236,
-							top :  94
+							left : 13,
+							top :  127
 						},
 						{
 							src : '10015[300x240x24BPP]',
-							left : 240,
-							top :  130
+							left : 138,
+							top :  203
 						}
 					],
 					'video'		: '/uploads/jsjn/s/c32/sxybx/弓步.mp4',
@@ -193,8 +193,8 @@ nc.xxrj.c32.details = {
 						},
 						{
 							src : '10153[300x240x24BPP]',
-							left : 236,
-							top :  94
+							left : 13,
+							top :  202
 						}
 					],
 					'video'		: '/uploads/jsjn/s/c32/sxybx/仆步.mp4',
@@ -214,18 +214,18 @@ nc.xxrj.c32.details = {
 						},
 						{
 							src : '10008[300x240x24BPP]',
-							left : 236,
-							top :  94
+							left : 255,
+							top :  128
 						},
 						{
 							src : '10009[300x240x24BPP]',
-							left : 240,
-							top :  130
+							left : 111,
+							top :  167
 						},
 						{
 							src : '10010[300x240x24BPP]',
-							left : 16,
-							top :  169
+							left : 147,
+							top :  237
 						}
 					],
 					'video'		: '/uploads/jsjn/s/c32/sxybx/虚步.mp4',
@@ -245,17 +245,19 @@ nc.xxrj.c32.details = {
 					style : 1,
 					menu : [
 						{
-							'def' 		: '00247[130x39x8BPP]',
+							'def' 		: '00249[130x39x8BPP]',
 							'hover'		: '00248[130x39x8BPP]',
-							'active'	: '00249[130x39x8BPP]',
+							'active'	: '00247[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套预备姿势.mp4',
 							'content'	: [
 								'00160[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00228[130x39x8BPP]',
+							'def' 		: '00230[130x39x8BPP]',
 							'hover'		: '00229[130x39x8BPP]',
-							'active'	: '00230[130x39x8BPP]',
+							'active'	: '00228[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套结束姿势.mp4',
 							'content'	: [
 								'00143[381x479x8BPP]'
 							]
@@ -270,65 +272,73 @@ nc.xxrj.c32.details = {
 					'active'	: '00139[218x45x8BPP]',
 					menu : [
 						{
-							'def' 		: '00089[130x39x8BPP]',
+							'def' 		: '00091[130x39x8BPP]',
 							'hover' 	:'00090[130x39x8BPP]',
-							'active'	: '00091[130x39x8BPP]',
+							'active'	: '00089[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套1.mp4',
 							'content'	: [
 								'00144[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00101[130x39x8BPP]',
+							'def' 		: '00103[130x39x8BPP]',
 							'hover'		: '00102[130x39x8BPP]',
-							'active'	: '00103[130x39x8BPP]',
+							'active'	: '00101[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套2.mp4',
 							'content'	: [
 								'00148[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00095[130x39x8BPP]',
+							'def' 		: '00097[130x39x8BPP]',
 							'hover'		: '00096[130x39x8BPP]',
-							'active'	: '00097[130x39x8BPP]',
+							'active'	: '00095[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套3.mp4',
 							'content'	: [
 								'00146[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00134[130x39x8BPP]',
+							'def' 		: '00136[130x39x8BPP]',
 							'hover'		: '00135[130x39x8BPP]',
-							'active'	: '00136[130x39x8BPP]',
+							'active'	: '00134[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套4.mp4',
 							'content'	: [
 								'00159[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00104[130x39x8BPP]',
+							'def' 		: '00106[130x39x8BPP]',
 							'hover'		: '00105[130x39x8BPP]',
-							'active'	: '00106[130x39x8BPP]',
+							'active'	: '00104[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套5.mp4',
 							'content'	: [
 								'00149[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00110[130x39x8BPP]',
+							'def' 		: '00112[130x39x8BPP]',
 							'hover'		: '00111[130x39x8BPP]',
-							'active'	: '00112[130x39x8BPP]',
+							'active'	: '00110[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套6.mp4',
 							'content'	: [
 								'00151[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00092[130x39x8BPP]',
+							'def' 		: '00094[130x39x8BPP]',
 							'hover'		: '00093[130x39x8BPP]',
-							'active'	: '00094[130x39x8BPP]',
+							'active'	: '00092[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套7.mp4',
 							'content'	: [
 								'00145[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00107[130x39x8BPP]',
+							'def' 		: '00109[130x39x8BPP]',
 							'hover'		: '00108[130x39x8BPP]',
-							'active'	: '00109[130x39x8BPP]',
+							'active'	: '00107[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套8.mp4',
 							'content'	: [
 								'00150[381x479x8BPP]'
 							]
@@ -342,65 +352,73 @@ nc.xxrj.c32.details = {
 					'active'	: '00142[218x45x8BPP]',
 					menu : [
 						{//第二段
-							'def' 		: '00098[130x39x8BPP]',
+							'def' 		: '00100[130x39x8BPP]',
 							'hover'		: '00099[130x39x8BPP]',
-							'active'	: '00100[130x39x8BPP]',
+							'active'	: '00098[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套9.mp4',
 							'content'	: [
 								'00147[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00113[130x39x8BPP]',
+							'def' 		: '00115[130x39x8BPP]',
 							'hover'		: '00114[130x39x8BPP]',
-							'active'	: '00115[130x39x8BPP]',
+							'active'	: '00113[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套10.mp4',
 							'content'	: [
 								'00158[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00116[130x39x8BPP]',
+							'def' 		: '00118[130x39x8BPP]',
 							'hover'		: '00117[130x39x8BPP]',
-							'active'	: '00118[130x39x8BPP]',
+							'active'	: '00116[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套11.mp4',
 							'content'	: [
 								'00152[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00122[130x39x8BPP]',
+							'def' 		: '00124[130x39x8BPP]',
 							'hover'		: '00123[130x39x8BPP]',
-							'active'	: '00124[130x39x8BPP]',
+							'active'	: '00122[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套12.mp4',
 							'content'	: [
 								'00154[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00119[130x39x8BPP]',
+							'def' 		: '00121[130x39x8BPP]',
 							'hover'		: '00120[130x39x8BPP]',
-							'active'	: '00121[130x39x8BPP]',
+							'active'	: '00119[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套13.mp4',
 							'content'	: [
 								'00153[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00131[130x39x8BPP]',
+							'def' 		: '00133[130x39x8BPP]',
 							'hover'		: '00132[130x39x8BPP]',
-							'active'	: '00133[130x39x8BPP]',
+							'active'	: '00131[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套14.mp4',
 							'content'	: [
 								'00157[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00125[130x39x8BPP]',
+							'def' 		: '00127[130x39x8BPP]',
 							'hover'		: '00126[130x39x8BPP]',
-							'active'	: '00127[130x39x8BPP]',
+							'active'	: '00125[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套15.mp4',
 							'content'	: [
 								'00155[381x479x8BPP]'
 							]
 						},
 						{
-							'def' 		: '00128[130x39x8BPP]',
+							'def' 		: '00130[130x39x8BPP]',
 							'hover'		: '00129[130x39x8BPP]',
-							'active'	: '00130[130x39x8BPP]',
+							'active'	: '00128[130x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套16.mp4',
 							'content'	: [
 								'00156[381x479x8BPP]'
 							]
@@ -411,9 +429,10 @@ nc.xxrj.c32.details = {
 					style : 3,
 					menu : [
 						{
-							'def'   	: '00238[218x45x8BPP]',
+							'def'   	: '00240[218x45x8BPP]',
 							'hover'		: '00239[218x45x8BPP]',
-							'active'	: '00240[218x45x8BPP]',
+							'active'	: '00238[218x45x8BPP]',
+							'video'		: '/uploads/jsjn/s/c32/jtq1/一套连贯有解说.mp4',
 							'content'	: [
 								'00069[731x510x8BPP]'
 							]
