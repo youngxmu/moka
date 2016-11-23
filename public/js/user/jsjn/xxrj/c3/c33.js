@@ -48,6 +48,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01004[218x39x8BPP]',
 							'hover'		: '01005[218x39x8BPP]',
 							'active'	: '01006[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/战斗性能.mp4',
 							'content'	: [
 								'01049[700x500x8BPP]'
 							]
@@ -56,6 +57,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '00989[218x39x8BPP]',
 							'hover'		: '00990[218x39x8BPP]',
 							'active'	: '00991[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/主要诸元.mp4',
 							'content'	: [
 								'01043[700x500x8BPP]'
 							]
@@ -73,6 +75,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '00995[218x39x8BPP]',
 							'hover'		: '00996[218x39x8BPP]',
 							'active'	: '00997[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/刺刀枪管.mp4',
 							'content'	: [
 								'01044[680x500x8BPP]',
 								'01045[680x500x8BPP]',
@@ -83,6 +86,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01019[218x39x8BPP]',
 							'hover'		: '01020[218x39x8BPP]',
 							'active'	: '01021[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/瞄准装置.mp4',
 							'content'	: [
 								'01054[700x500x8BPP]'
 							]
@@ -92,6 +96,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01001[218x39x8BPP]',
 							'hover'		: '01002[218x39x8BPP]',
 							'active'	: '01003[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/导气装置.mp4',
 							'content'	: [
 								'01048[700x500x8BPP]'
 							]
@@ -100,6 +105,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01010[218x39x8BPP]',
 							'hover'		: '01011[218x39x8BPP]',
 							'active'	: '01012[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/机匣枪机.mp4',
 							'content'	: [
 								'01051[700x500x8BPP]'
 							]
@@ -108,6 +114,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '00998[218x39x8BPP]',
 							'hover'		: '00999[218x39x8BPP]',
 							'active'	: '01000[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/复进簧击发机.mp4',
 							'content'	: [
 								'01047[700x500x8BPP]'
 							]
@@ -116,6 +123,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01007[218x39x8BPP]',
 							'hover'		: '01008[218x39x8BPP]',
 							'active'	: '01009[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/弹匣枪托.mp4',
 							'content'	: [
 								'01050[700x500x8BPP]'
 							]
@@ -124,6 +132,7 @@ nc.xxrj.c33.details = {
 							'def' 		: '01013[218x39x8BPP]',
 							'hover'		: '01014[218x39x8BPP]',
 							'active'	: '01015[218x39x8BPP]',
+							'video'		: '/uploads/jsjn/s/c33/changshi/枪托副品.mp4',
 							'content'	: [
 								'01052[700x500x8BPP]'
 							]

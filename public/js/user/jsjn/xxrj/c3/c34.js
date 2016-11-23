@@ -87,6 +87,7 @@ nc.xxrj.c34.details = {
 							top :  230
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c34/xieqiang/单手擎枪.mp4',
 					'content'	: [
 						'00686[381x479x8BPP]',
 						'00381[300x240x8BPP]'
@@ -118,6 +119,7 @@ nc.xxrj.c34.details = {
 							top :  159
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c34/xieqiang/双手擎枪.mp4',
 					'content'	: [
 						'00688[381x479x8BPP]',
 						'00390[300x240x8BPP]'
@@ -154,6 +156,7 @@ nc.xxrj.c34.details = {
 							top :  194
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c34/xieqiang/端枪.mp4',
 					'content'	: [
 						'00692[381x479x8BPP]'
 					]
@@ -198,6 +201,7 @@ nc.xxrj.c34.details = {
 							top :  266
 						}
 					],
+					'video'		: '/uploads/jsjn/s/c34/xieqiang/提枪.mp4',
 					'content'	: [
 						'00690[381x479x8BPP]',
 						'00393[300x240x8BPP]'
