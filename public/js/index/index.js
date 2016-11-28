@@ -38,7 +38,7 @@
 			});
 		},
 		loadNews : function(){
-			var $panel = $('#pic');
+			var $panel = $('#KinSlideshow');
 			var $gfjydt = $('#gfjydt');
 			$.ajax({
 				type : 'post',
@@ -52,12 +52,25 @@
 						var data = result.data;
 						$panel.html(_this.tpl.picListTpl.render(data));
 						$gfjydt.html(_this.tpl.newsListTpl.render(data));
-						$('.pic-panel').slick({
-							autoplay : true,
-							dots : true,
-							dotsClass : 'slick-dots'
-						});
-							
+						// $('.pic-panel').slick({
+						// 	autoplay : true,
+						// 	dots : true,
+						// 	dotsClass : 'slick-dots'
+						// });
+					 	$(function(){
+					        $("#KinSlideshow").KinSlideshow({
+					                moveStyle:"left", 		//设置切换方向为向下 [默认向左切换]
+					                intervalTime:3,   		//设置间隔时间为8秒  [默认为5秒]
+					                mouseEvent:"mouseover",	//设置鼠标事件为“鼠标滑过切换”  [默认鼠标点击时切换]
+									isHasTitleBar:true,
+									isHasTitleFont:true,
+					                titleFont:{TitleFont_size:14,TitleFont_color:"#FF0000"}//设置标题文字大小为14px，颜色：#FF0000
+					        });
+					    })
+						
+						
+						
+						// $('.menu ul li:eq(0)').css('background', 'none');
 					}
 				}
 			});

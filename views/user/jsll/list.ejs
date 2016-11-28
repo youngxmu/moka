@@ -166,11 +166,12 @@
     </script>
 
     <script type="text/template" id="ppt_tpl">
-    <div class="pic_preview">
+    <div class="ppt-preview">
       <p>
-        <span style="display:none;" data-path="${org_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
+        <span  data-path="${org_path}" data-view="${view_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
         <a href="${file_name}" class="btn btn-success btn-lg" role="button">下载到本地</a>
       </p>
+      <div id="ppt_pdf" class="ppt-view-panel" style="width:650px;height:400px;"></div>
     </div>
     </script>
     

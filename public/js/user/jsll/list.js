@@ -104,12 +104,21 @@
 				var $this = $(this);
 				var path = $this.attr('data-path');
 				// alert(path);
+				var dlg = null;
 				$.ajax({
 					url : 'view/ppt',
 					type: 'post',
 					data: {path:path},
+					beforeSend : function(){
+						dlg = util.dialog.infoDialog('正在处理，首次预览可能需要一段时间处理');
+					},
 					success : function(result){
-						console.log(result);
+						if(dlg){
+							dlg.close();
+						}
+						if(result.src){
+							PDFObject.embed(result.src, "#ppt_pdf");
+						}
 					}
 				});
 			});
@@ -164,6 +173,7 @@
 
 			$('#content_title').html(item.title);
 			$('#content').html(item.content);
+
 		},
 		initTopic : function() {
 			var searchUrl = 'jsll/info/list';
@@ -333,6 +343,13 @@
 							$body.html('');			
 						}
 					}
+
+					// if(_this.type == 0 ){
+						console.log(_this.currNode.view_name);
+						if(_this.currNode.view_name){
+							PDFObject.embed('uploads/'+ _this.currNode.view_name, "#ppt_pdf");
+						}
+					// }
 					
 					return true;
 				}
@@ -346,13 +363,6 @@
 		getCurrTree : function(){
 			return _this.topicTree;
 		},
-
-
-
-
-
-
-
 		initPTopic : function() {
 			var searchUrl = 'jsll/list/理论';
 			$.ajax({
@@ -455,11 +465,6 @@
 		getCurrPTree : function(){
 			return _this.topicTree;
 		},
-
-
-
-
-
 		getMenuPath : function(node){
 			var menuArr = [];
 			var level = 0;

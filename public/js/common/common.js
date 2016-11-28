@@ -162,6 +162,7 @@ var util = {
 			    }
 			});
 			dd.showModal();
+			return dd;
 		},
 		errorDialog : function(msg){
 			var d = dialog({

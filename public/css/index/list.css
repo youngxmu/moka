@@ -11,7 +11,7 @@
    
 .main{padding: 10px 20px;}
 .info-content{}
-.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #f6f6f6;}
+.main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;color: #f6f6f6;font-size: 0;}
 .main .res-list:last-child{border-bottom: 0;}
 .main .res-list span{width: 150px;display: inline-block;vertical-align: top;
 	font-size: 15px;
