@@ -1,5 +1,7 @@
 .bg{
-  background-image: url('../../../img/sky.jpg');
+  /*background-image: url('../../../img/sky.jpg');*/
+  background-image: url('../../../img/index/jslljx-bg.jpg');
+  
   width: 100%;height: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;

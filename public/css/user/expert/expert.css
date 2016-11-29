@@ -1,7 +1,8 @@
 .building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
 .bg{
   /*background-image: url('../../../img/bg_shine.jpg');*/
-  background-image: url('../../../img/sky.jpg');
+  /*background-image: url('../../../img/sky.jpg');*/
+  background-image: url('../../../img/index/gfszll-bg.jpg');
   width: 100%;height: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
