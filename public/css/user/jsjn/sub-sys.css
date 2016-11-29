@@ -10,7 +10,7 @@
 }
 
 .sub-footer{
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	bottom: 60px;
 	right: 50px;

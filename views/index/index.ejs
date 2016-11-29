@@ -30,7 +30,7 @@
           </div>
           <div class="news-conten">
             <div class="main-li">
-              <table class="li-table"></table>
+              <table id="vote_panel" class="li-table"></table>
             </div>
           </div>
         </div>
@@ -178,14 +178,17 @@
     {@/each}
     </script>
 
+
+
+
     <script type="text/template" id="news_list_tpl">
-    {@each list as news}
+    {@each list as res}
     <tr class="newTitle">
       <td>
         <div>
           <img src="img/index/ico.jpg"/>
-          <a href="index/news/${news.id}" target="_blank">${news.title}</a>
-          <span>2016-07-01</span>
+          <a href="index/news/${res.id}" target="_blank">${res.title}</a>
+          <span>${res.create_time|midDateFormat}</span>
         </div>
       </td>
     </tr>
@@ -218,7 +221,21 @@
         <div>
           <img src="img/index/ico.jpg"/>
           <a href="index/msg/${res.id}" target="_blank">${res.title}</a>
-          <span>2016-07-01</span>
+          <span>${res.create_time|midDateFormat}</span>
+        </div>
+      </td>
+    </tr>
+    {@/each}
+    </script>
+
+    <script type="text/template" id="vote_list_tpl">
+    {@each list as res}
+    <tr class="liTitle">
+      <td>
+        <div>
+          <img src="img/index/ico.jpg"/>
+          <a href="vote/detail/${res.id}" target="_blank">${res.name}</a>
+          <span>${res.create_time|midDateFormat}</span>
         </div>
       </td>
     </tr>
@@ -232,7 +249,7 @@
         <div>
           <img src="img/index/ico.jpg"/>
           <a href="index/msg/${res.id}" target="_blank">${res.title}</a>
-          <span>2016-07-01</span>
+          <span>${res.create_time|midDateFormat}</span>
         </div>
       </td>
     </tr>

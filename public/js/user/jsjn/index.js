@@ -96,7 +96,8 @@
 			$('#main_sys').show().siblings('div').hide();
 		},
 		exit : function(){
-			$('#main_sys').show().siblings('div').hide();
+			window.location.href = "jsjn/list/impl";
+			// $('#main_sys').show().siblings('div').hide();
 		}
 	};
 })(moka);

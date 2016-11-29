@@ -168,7 +168,9 @@
     <script type="text/template" id="ppt_tpl">
     <div class="ppt-preview">
       <p>
+        {@if view_path && view_path != '' }
         <span  data-path="${org_path}" data-view="${view_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
+        {@/if}
         <a href="${file_name}" class="btn btn-success btn-lg" role="button">下载到本地</a>
       </p>
       <div id="ppt_pdf" class="ppt-view-panel" style="width:650px;height:400px;"></div>

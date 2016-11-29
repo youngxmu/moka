@@ -128,7 +128,23 @@ var util = {
 			var CurrentDate = Year + '-' + Month + '-' + Day + ' ' + Hour + ':' + Minute + ':' + Second;
 
 			return CurrentDate;
-		}
+		},
+		midFormat : function(longTime){
+			var date = new Date(longTime);
+
+			var Year= date.getFullYear();//ie火狐下都可以 
+			var Month= date.getMonth()+1; 
+			var Day = date.getDate(); 
+
+			if (Month < 10 ) { 
+				Month = "0" + Month; 
+			} 
+			if (Day < 10 ) { 
+				Day = "0" + Day; 
+			}
+			var CurrentDate = Year + '-' + Month + '-' + Day;
+			return CurrentDate;
+		},
 	},
 	dialog : {
 		toastDialog : function(msg, timeout, callback){
@@ -242,6 +258,7 @@ var util = {
 };
 
 juicer.register('dateFormat', util.date.format);
+juicer.register('midDateFormat', util.date.midFormat);
 juicer.register('formatIndex', util.formatIndex);
 juicer.register('getFileType', util.getFileType);
 juicer.register('getTypeName', util.getTypeName);

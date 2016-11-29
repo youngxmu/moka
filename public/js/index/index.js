@@ -15,6 +15,7 @@
 		init : function() {
 			_this.tpl.articleListTpl = juicer($('#article_list_tpl').html());
 			_this.tpl.msgListTpl = juicer($('#msg_list_tpl').html());
+			_this.tpl.voteListTpl = juicer($('#vote_list_tpl').html());
 
 			_this.tpl.newsListTpl = juicer($('#news_list_tpl').html());
 			_this.tpl.picListTpl = juicer($('#pic_list_tpl').html());
@@ -22,6 +23,8 @@
 			_this.initEvent();
 			_this.loadNews();
 			_this.loadMsg();
+			_this.loadVote();
+			
 			_this.loadInfos();
 		},
 		initEvent : function(){
@@ -83,6 +86,25 @@
 			var tpl = _this.tpl.msgListTpl;
 			// var searchUrl = 'index/gfjy';
 			var searchUrl = 'index/msgs';
+			$.ajax({
+				type : 'post',
+				url : searchUrl,
+				data : sendData,
+				beforeSend : function(){
+					$panel.html(util.loadingPanel);
+				},
+				success : function(result){
+					var data = result.data;
+				    $panel.html(tpl.render(data));
+				}
+			});
+		},
+		/* 加载通知 */
+		loadVote : function(){
+			var $panel = $('#vote_panel');
+			var sendData = _this.queryData;
+			var tpl = _this.tpl.voteListTpl;
+			var searchUrl = 'vote/list';
 			$.ajax({
 				type : 'post',
 				url : searchUrl,
