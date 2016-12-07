@@ -102,13 +102,17 @@
 			// });
 			$('body').on('click', '.view-ppt',function(){
 				var $this = $(this);
+				var id = $this.attr('data-id');
 				var path = $this.attr('data-path');
 				// alert(path);
 				var dlg = null;
 				$.ajax({
 					url : 'view/ppt',
 					type: 'post',
-					data: {path:path},
+					data: {
+						id: id,
+						path:path
+					},
 					beforeSend : function(){
 						dlg = util.dialog.infoDialog('正在处理，首次预览可能需要一段时间处理');
 					},
@@ -117,7 +121,7 @@
 							dlg.close();
 						}
 						if(result.src){
-							PDFObject.embed(result.src, "#ppt_pdf");
+							PDFObject.embed('uploads/' + result.src, "#ppt_pdf");
 						}
 					}
 				});
