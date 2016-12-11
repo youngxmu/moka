@@ -25,6 +25,10 @@ exports.queryInfos = function (callback) {
 
 exports.queryInfosByType = function (type, callback) {
     var sql = 'select * from jsjnxx where type != "教案" order by index_no; ';
+    if(type == '教案'){
+        sql = 'select * from jsjnxx where type = "教案" order by index_no; ';
+    }
+    
     var params = [type];
     db.query(sql, params, callback);
 };

@@ -72,13 +72,11 @@
 			}
 
 			$this.addClass('active').siblings().removeClass('active');
+			_this.type = $this.attr('data-type');
 			_this.data.type = $this.attr('data-type');
 			_this.data.key = $this.attr('data-key');
-			if(_this.data.key == '资料'){
-				$('#menu_panel').hide();
-				$('#tree_panel').show();
-				_this.initTopic();
-			}else{
+
+			if(_this.data.type == 1){
 				$('#menu_panel').show();
 				$('#tree_panel').hide();
 				$.ajax({
@@ -103,6 +101,24 @@
 						}
 					}
 				});
+			}else{
+				$('#menu_panel').hide();
+				$('#tree_panel').show();
+				if(_this.type == 2){
+					$('#p_tree_panel').show();
+					_this.data.type = '理论';
+					// _this.initPTopic();
+					_this.initTopic();
+				}
+				if(_this.type == 3){
+					_this.data.type = '资料';
+					_this.initTopic();
+				}
+				if(_this.type == 4){
+					_this.data.type = '课件';
+					_this.initTopic();
+				}
+					
 			}
 		},
 		// search : function(){
@@ -170,7 +186,8 @@
 		initTopic : function() {
 			var searchUrl = 'jsll/info/list';
 			if(_this.type == 2){
-				searchUrl =  'menu/tree/1403';
+				searchUrl =  'jsll/list/理论';//jsll/tree/1403';
+
 			}
 			if(_this.type == 3){
 				searchUrl =  'menu/tree/1402';

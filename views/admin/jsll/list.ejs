@@ -12,11 +12,20 @@
       <div class="fpanel">
         <ul class="nav nav-tabs sub-nav" style="margin-top:15px;">
           <li role="presentation" data-type="1" data-key="政策" class="active">
-            <a href="javascript:void(0);">军训规定</a>
+            <a href="javascript:void(0);">教学大纲</a>
           </li>
-          <li role="presentation" data-type="2" data-key="理论"><a href="javascript:void(0);">军训理论</a></li>
+          <li role="presentation" data-type="2" data-key="教材">
+            <a href="javascript:void(0);">教材</a>
+          </li>
+          <li role="presentation" data-type="3" data-key="资料">
+            <a href="javascript:void(0);">教案</a>
+          </li>
+          <li role="presentation" data-type="4" data-key="课件">
+            <a href="javascript:void(0);">课件</a>
+          </li>
+         <!--  <li role="presentation" data-type="2" data-key="理论"><a href="javascript:void(0);">军训理论</a></li>
           <li role="presentation" data-type="3" data-key="资料"><a href="javascript:void(0);">辅助资料</a></li>
-          <li role="presentation" data-type="4" data-key="系统帮助" style="display:none;"><a href="javascript:void(0);">系统帮助</a></li>
+          <li role="presentation" data-type="4" data-key="系统帮助" style="display:none;"><a href="javascript:void(0);">系统帮助</a></li> -->
         </ul>
         <div id="menu_panel" >
           <div class="sidebar">
@@ -33,16 +42,31 @@
             </div>
           </div>
         </div>
-        <!-- <div id="tree_panel" class="sidebar" style="display:none;">
-          <div class="tree-opr" style="display:none;">
-            <a href="javascript:void(0);" class="unfold">展开</a>
-            |<a href="javascript:void(0);" class="add">增加</a>
-            |<a href="javascript:void(0);" class="edit">编辑</a>
-            |<a href="javascript:void(0);" class="del">删除</a>
-          </div>
-          <ul id="topic_tree" class="ztree"></ul>
-        </div> -->
         <div id="tree_panel" style="display:none;">
+          <div class="sidebar" >
+            <div class="tree-opr" style="display:none;">
+              <a href="javascript:void(0);" class="unfold">展开</a>
+              |<a href="javascript:void(0);" class="add">增加</a>
+              |<a href="javascript:void(0);" class="edit">编辑</a>
+              |<a href="javascript:void(0);" class="del">删除</a>
+            </div>
+            <ul id="topic_tree" class="ztree"></ul>
+            
+          </div>
+          <div class="main" style="width:690px;" >
+              <div id="txt_panel" class="info-content" >
+                <textarea class="editor-area" id="txt_editor" placeholder="输入文章正文" autofocus></textarea>
+                <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
+                  <span id="btn_txt" class="btn btn-primary">提交</span>
+                </div>
+              </div>
+              <div id="resource_panel" style="display:none;">
+                <div id="resource_list"></div>
+                <div id="pagebar"></div>
+              </div>
+            </div>
+        </div>
+       <!--  <div id="tree_panel" style="display:none;">
           <div class="sidebar-menu">
             <ul class="type-panel">
               <li class="active" data-type="1">
@@ -78,7 +102,7 @@
               <div id="pagebar"></div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <script type="text/template" id="resource-tpl">
