@@ -5,8 +5,6 @@ var logger =  require('../lib/log.js').logger('viewRouter');
 var router = express.Router();
 var ppt2png = require('ppt2png');
 var unoconv = require('unoconv');
-var office2pdf = require('office2pdf'),
-  generatePdf = office2pdf.generatePdf;
 
 
 // router.post('/ppt', function(req, res) {
