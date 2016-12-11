@@ -18,7 +18,7 @@
         <div class="nav tnav">
           <ul class="nav-ul">
             <li class="index">
-              <a href="jsll/index">首页</a>
+              <a href="jsll/index">系统首页</a>
             </li>
             <li data-type="政策" class="outline">
               <a href="jsll/list/outline" >教学大纲</a>
@@ -168,8 +168,8 @@
     <script type="text/template" id="ppt_tpl">
     <div class="ppt-preview">
       <p>
-        {@if view_path && view_path != '' }
-        <span  data-path="${org_path}" data-view="${view_path}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
+        {@if view_name == null }
+        <span data-id="${id}" data-path="${org_path}" data-view="${view_name}" class="btn btn-success btn-lg view-ppt" role="button">预览</span>
         {@/if}
         <a href="${file_name}" class="btn btn-success btn-lg" role="button">下载到本地</a>
       </p>

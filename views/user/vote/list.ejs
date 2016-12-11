@@ -17,7 +17,7 @@
         <div class="nav tnav">
           <ul class="nav-ul">
             <li class="index">
-              <a href="vote/index" >首页</a>
+              <a href="vote/index" >系统首页</a>
             </li>
           </ul>
         </div>
@@ -27,8 +27,8 @@
               <tr>
                 <td class="">名称</td>
                 <td class="">描述</td>
-                <td class="">时间</td>
-                <td class="">操作</td>
+                <td class="" style="width:100px;text-align:center;">时间</td>
+                <td class="" style="width:150px;text-align:center;">操作</td>
               </tr>
             </thead>
             <tbody id="paper_list"></tbody>
@@ -45,7 +45,7 @@
     <tr >
       <td class="name">${obj.name}</td>
       <td class="desc">${obj.description}</td>
-      <td class="desc">${obj.create_time}</td>
+      <td class="desc">${obj.create_time|midDateFormat}</td>
       <td class="oper">
         <span data-id="${obj.id}" class="">
           <a href="vote/detail/${obj.id}">参与测评</a>

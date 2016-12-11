@@ -19,10 +19,13 @@
         <div class="nav tnav">
           <ul class="nav-ul">
             <li class="index">
-              <a href="resource/index" >首页</a>
+              <a href="resource/index" >系统首页</a>
             </li>
             <li class="txt">
               <a href="resource/list/txt" >文字</a>
+            </li>
+            <li class="other">
+              <a href="resource/list/other" >其他</a>
             </li>
             <li class="pic">
               <a href="resource/list/pic" >图片</a>
@@ -35,7 +38,7 @@
             </li>
           </ul>
         </div>
-        <%if(type == 'txt'){%>
+        <%if(type == 'txt' || type == 'other'){%>
           <div id="tree_panel" class="sidebar sidebar-tree" >
             <ul id="topic_tree" class="ztree"></ul>
           </div>
@@ -110,6 +113,12 @@
       $(document).ready(function() {
         var type = $('#type').val();
         $('.nav-ul .' + type).addClass('active');
+        if(type == 'txt'){
+          $('.nav-ul .other').show();
+        }
+        if(type == 'other'){
+          $('.nav-ul .txt').show();
+        }
         moka.user.resource.list.init();
       });
     </script>

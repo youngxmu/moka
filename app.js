@@ -27,9 +27,10 @@ app.set('view engine', config.viewEngine);
 //     level: "auto"
 // }));
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser());
-app.use(bodyParser.json({limit: '5000kb'}));
-// app.use(bodyParser.urlencoded({limit: '5000kb', extended: true}));
+
 app.use(methodOverride());
 app.use(cookie); //须在expressSession前使用cookieParser
 var sessionStore = new expressSession.MemoryStore();
@@ -50,7 +51,7 @@ if(config.env!='devvv'){//开发环境不需要过滤
         res.locals.currDate = utils.indexDate(new Date());
         res.locals.islogin = true;
 
-return next();
+//return next();
 
         var requestPath = req.path;//请求的uri
         var inWhitelist = false;
@@ -215,7 +216,7 @@ route(app); //加载routes
 app.use(function(req, res, next) {
     if (!req.xhr) {
         if(req.path.indexOf('js/lib/jquery.min.map') != -1){
-            logger.error('common 404');
+            // logger.error('common 404');
             res.status(404);
             res.render('error', {
                 msg: "404 未找到"

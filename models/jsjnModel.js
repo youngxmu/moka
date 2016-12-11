@@ -24,14 +24,14 @@ exports.queryInfos = function (callback) {
 };
 
 exports.queryInfosByType = function (type, callback) {
-    var sql = 'select id,title,content from jsjnxx where type = ?; ';
+    var sql = 'select * from jsjnxx where type != "教案" order by index_no; ';
     var params = [type];
     db.query(sql, params, callback);
 };
 
 
 
-exports.addInfo = function (name, content, parent_id, mlevel, callback) {
+exports.addInfo = function (title, content, parent_id, mlevel, callback) {
     if (!parent_id) {
         parent_id = 0;
     }

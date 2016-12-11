@@ -91,7 +91,7 @@ body{ background:#a4cce5;}
 .four-div{margin-right:20px;}
 .four > .four-div:last-child{margin-right: 0;}
 .listTitle{ background:url(../../img/index/title2.jpg) no-repeat; width:320px;height:40px;}
-.listTitle p{ color:#fff; font-family:"方正大标宋简体",; font-size:16px; position:relative;top:15px;left:25px;}
+.listTitle p{ color:#fff; font-family:"方正大标宋简体"; font-size:16px; position:relative;top:15px;left:25px;}
 .div-liststyle{border:1px solid #b5d8fe;width:318px;   border-top:none; height:280px;}
 
 .div-four{ width:290px; height:290px; padding:15px;}

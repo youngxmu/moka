@@ -301,3 +301,18 @@ exports.delResource = function (id, callback) {
         }
     });
 };
+
+
+
+//编辑、修改文章个人信息
+
+exports.updateViewName = function (id, view_name, callback) {
+    var sql = 'update article set view_name=?';
+    var params = [];
+    params.push(view_name);
+    sql += ' where id = ?;';
+    params.push(id);
+    db.query(sql, params, function (err, result) {
+        callback(err);
+    });
+};

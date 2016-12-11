@@ -21,8 +21,6 @@ router.get('/list', function (req, res, next) {
     res.render('user/vote/list');
 });
 
-
-//根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/list', function (req, res, next) {
     var name = req.body.name;
     var pageNo = parseInt(req.body.pageNo);

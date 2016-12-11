@@ -4,6 +4,7 @@ var logger = require("../../lib/log.js").logger("jsjnRouter");
 var commonUtils = require("../../lib/utils.js");
 var menuUtils = require("../../lib/menuUtils.js");
 var articleModel = require("../../models/articleModel.js");
+var jsjnModel = require("../../models/jsjnModel.js");
 var indexModel = require("../../models/indexModel");
 var router = express.Router();
 
@@ -66,8 +67,8 @@ router.post('/save', function (req, res) {
     var fileName = req.body.fileName;//明文
     var description = req.body.description;//明文
     var type = commonUtils.getFileType(fileName);
-    var user = req.session.user;
-    if(!user){
+    var admin = req.session.admin;
+    if(!admin){
         return res.json({
             success: false,
             msg: "请登录"
@@ -75,10 +76,10 @@ router.post('/save', function (req, res) {
     }
     
     if(id == null || id == undefined){
-        articleModel.insertArticle(title, author, content, 1, mid, user.id, fileName, type, description,function (err, data) {
+        jsjnModel.addInfo(title, content, 0, 0, function (err, data) {
             if (!err && data) {
                 var res_id = data.insertId;
-                var sys_type = 'article';
+                var sys_type = 'jsjnxx';
                 content_type = type;
                 articleModel.insertResource(res_id,sys_type,title,content_type, function(err){
                     if(err){
@@ -102,10 +103,10 @@ router.post('/save', function (req, res) {
         });
     }else{
         logger.info("管理员修改文章信息", id);
-        articleModel.updateArticle(id, title, author, content, 1, mid,  user.id, fileName, type,description, function (err, result) {
+        jsjnModel.updateInfo(id, title, content, function (err, result) {
             if (!err) {
                 var res_id = id;
-                var sys_type = 'article';
+                var sys_type = 'jsjnxx';
                 content_type = type;
                 articleModel.updateResource(res_id,sys_type,title,content_type, function(err){
                     if(err){

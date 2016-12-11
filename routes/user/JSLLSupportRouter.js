@@ -2,7 +2,7 @@ var express = require('express');
 var config = require("../../config");
 var logger = require("../../lib/log.js").logger("resourceRouter");
 var commonUtils = require("../../lib/utils.js");
-var infoModel = require("../../models/jsjnModel.js");
+var jsjnModel = require("../../models/jsjnModel.js");
 var jsllModel = require("../../models/jsllModel.js");
 var router = express.Router();
 
@@ -43,7 +43,45 @@ router.post('/list/:type', function (req, res, next) {
 });
 
 router.post('/info/list', function (req, res, next) {
-    infoModel.queryInfos(function (err, result) {
+    jsjnModel.queryInfos(function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: true,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: "找不到页面啦！"
+            });
+        }
+    });
+});
+
+router.post('/info/list/tplan', function (req, res, next) {
+    var type = '教案';
+    jsjnModel.queryInfosByType(type, function (err, result) {
+        if (!err && result) {
+            res.json({
+                success: true,
+                data: {
+                    list : result
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: "找不到页面啦！"
+            });
+        }
+    });
+});
+
+router.post('/info/list/other', function (req, res, next) {
+    var type = '其它';
+    jsjnModel.queryInfosByType(type, function (err, result) {
         if (!err && result) {
             res.json({
                 success: true,
@@ -62,7 +100,7 @@ router.post('/info/list', function (req, res, next) {
 
 router.get('/info/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    infoModel.queryInfoById(id, function (err, result) {
+    jsjnModel.queryInfoById(id, function (err, result) {
         if (err || result.length == 0) {
             res.json({
                 success: false,

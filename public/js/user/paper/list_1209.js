@@ -3,7 +3,6 @@
 	_this = P.user.paper.list = {
 		// searchUrl : 'paper/list',
 		searchUrl : 'jsll/list',
-		txtUrl : 'resource/info/list',
 		topicTree : null,
 		topicNodes : null,
 		topicData : [],
@@ -26,12 +25,10 @@
 			
 			_this.tpl.questionTypeTpl = juicer($('#question-type-tpl').html());
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
+			
 			_this.initEvent();
 			_this.data.type = '理论';
-			$('#menu_panel').hide();
-				$('#topic_tree').show();
-				_this.initTopic();
-			// _this.search();
+			_this.search();
 			// _this.search();
 		},
 		initEvent : function(){
@@ -98,10 +95,9 @@
 			// 	_this.initTopic();
 			// }
 			if(_this.data.type == '理论'){
-				$('#menu_panel').hide();
-				$('#topic_tree').show();
-				_this.initTopic();
-				// _this.search();
+				$('#menu_panel').show();
+				$('#topic_tree').hide();
+				_this.search();
 			}
 
 			if(_this.data.type == '题库'){
@@ -211,7 +207,7 @@
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : _this.txtUrl,
+				url : _this.searchUrl,
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -268,13 +264,12 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode.id);
 					$('#content_title').html(_this.currNode.name);
 					if(_this.currNode.content){
 						$('#content').html(_this.currNode.content);		
 					}else{
 						$.ajax({
-							url : 'resource/info/detail/' + _this.currNode.id,
+							url : 'jsll/info/' + _this.currNode.id,
 							type : 'get',
 							async : false,
 							success : function(data){
@@ -297,8 +292,6 @@
 			var topicTree = $("#topic_tree");
 			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
 			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
-			var node = topicTree.getNodeByParam('id','10008');
-			topicTree.removeNode(node);
 		},
 		getCurrTree : function(){
 			return _this.topicTree;
