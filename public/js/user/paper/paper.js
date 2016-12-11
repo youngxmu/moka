@@ -6,6 +6,17 @@
 			_this.initEvent();
 		},
 		initEvent : function(){
+
+		 	$('body').on('keydown','#ajax_login_form',function(e){
+		        var event = window.event || e;
+		        if(event.keyCode == 13){
+		           $('#ajax_login_form').ajaxSubmit(function(data){
+			      		// console.log(data);
+			        	window.location.href=  'exam/list';
+			      	});
+		        }
+		    });
+
 			$('body').on('click', '#exam', function(){
 
 				$.ajax({

@@ -420,9 +420,8 @@ router.post('/save', function (req, res) {
         articleModel.updateArticle(id, title, author, content, 1, mid,  admin.id, fileName, type,description, function (err, result) {
             if (!err) {
                 var res_id = id;
-                var sys_type = 'article';
                 content_type = type;
-                articleModel.updateResource(res_id,sys_type,title,content_type, function(err){
+                articleModel.updateResource(res_id,null,title,content_type, function(err){
                     if(err){
                         return res.json({
                             success: false,

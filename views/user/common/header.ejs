@@ -97,6 +97,7 @@
         content: $('#dlg-login-tpl').html()
     });
     dd.showModal();
+    $('#user_email').focus();
   };
   var showAdminLogin = function(){
     var dd = dialog({
@@ -104,6 +105,8 @@
         content: $('#dlg-admin-tpl').html()
     });
     dd.showModal();
+    $('#username').focus();
+    
   };
   $(document).ready(function() {
     var url = window.location.href;
@@ -138,5 +141,16 @@
       var keyword = $('#h_search_key').val();
       window.location.href = 'resource/list?keyword=' + keyword;
     });
+
+   
+
+    $('body').on('keydown','#ajax_admin_form',function(e){
+        console.log(1);
+        var event = window.event || e;
+        if(event.keyCode == 13){
+            $('#ajax_admin_form')[0].submit();
+        }
+    });
+
   });
 </script>

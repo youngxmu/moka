@@ -62,11 +62,14 @@ var getViewAndData = function(resource, callback){
     var id = resource.res_id;
     var type = resource.sys_type;
     var contentType = resource.content_type;
-
     if(type == 'article'){
         articleModel.getArticleById(id, function (err, article) {
             if(!err){
-                article.update_time = commonUtils.formatDate(new Date(article.update_time));
+                console.log(id);
+                console.log(article);
+                if(article.update_time){
+                    article.update_time = commonUtils.formatDate(new Date(article.update_time));    
+                }
                 if(article.file_name){article.file_name = config.imgHost + '/uploads/' + article.file_name;}
                 article.menuList = menuUtils.getMenuPathList(article.menu_id);
                 article.file_type = commonUtils.getFileTypeName(article.file_name);
@@ -77,6 +80,7 @@ var getViewAndData = function(resource, callback){
                 }
                 data = article;
             }
+            data.sys_type = 'article';
             callback(view,data);
         });
     }
@@ -91,6 +95,7 @@ var getViewAndData = function(resource, callback){
                 }
                 data = article[0];
             }
+            data.sys_type = 'jsjnxx';
             callback(view,data);
         });
     }

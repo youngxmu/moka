@@ -32,7 +32,11 @@
 			_this.initEvent();
 			if(_this.type == 'txt'){
 				_this.data.searchData.type = '1,6';
+				_this.treeUrl = 'resource/info/list';
 				_this.initTopic();	
+			}else if(_this.type == 'other'){
+				_this.treeUrl = 'jsll/info/list/other';
+				_this.initTopic();
 			}else{
 				if(_this.type == 'pic'){
 					_this.data.searchData.type = '3';	
@@ -219,6 +223,12 @@
 			for(var index in list){
 				var menu = list[index];
 				// menu['pId'] = menu.parent_id;
+				if(menu.title && !menu.name){
+					menu.name = menu.title;	
+				}
+				if( menu.name == '其它'){
+					continue;
+				}
 				if(menu.parent_id != 10){
 					_this.topicNodes.push(menu);
 				}
@@ -262,7 +272,7 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode);
+					console.log(_this.currNode.id);
 					$('#content_title').html(_this.currNode.name);
 					if(_this.currNode.content){
 						$('#content').html(_this.currNode.content);		
@@ -292,7 +302,8 @@
 			topicTree = $.fn.zTree.init(topicTree, _this.setting, _this.topicNodes);
 			_this.topicTree = $.fn.zTree.getZTreeObj("topic_tree");
 
-			// var node = topicTree.getNodeByParam('id','1000000000000');
+			var node = topicTree.getNodeByParam('id','10008');
+			topicTree.removeNode(node);
 			// topicTree.selectNode(node);
 			// _this.currNode = node;
 

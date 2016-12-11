@@ -1,6 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.article.edit = {
+		editUrl : 'admin/article/save',
 		articleId : null,
 		editor : null,
 		tpl : {
@@ -11,6 +12,8 @@
 		},
 		init : function() {
 			_this.articleId = $('#article_id').val();
+			_this.sysType = $('#sys_type').val();
+			_this.editUrl = 'admin/jsjn/save';
 			_this.tpl.menuListTpl = juicer($('#menu_list_tpl').html());
 			var $span = $('.u-select-p').find('span');
 			if($span.length == 0){
@@ -19,7 +22,6 @@
 			}else{
 				_this.mid = $span.last().attr('data-id');
 			}
-			console.log(_this.mid);
 			_this.initEvent();
 			_this.initEditor();
 		},
@@ -98,7 +100,6 @@
 			var content = _this.editor.getValue();
 			var title = $('#title').val();
 			var author = $('#author').val();
-			var url = 'admin/article/save';
 			
 			var postData = {
 				title : title,
@@ -112,7 +113,7 @@
 			}
 
 			$.ajax({
-				url : url,
+				url : _this.editUrl,
 				type : 'post',
 				data : postData,
 				success : function(result){
@@ -121,21 +122,17 @@
 						return;
 					}
 
-					var id = result.data.insertId;
-					if(!id){
-						id = _this.articleId;
-					}
 					util.dialog.confirmDialog('继续提交',
 						function(){
 							// window.location.href = window.location.href;
 						},
 						function(){
-
-							if(id){
-								window.location.href = 'admin/article/detail/' + id;	
-							}else{
-								// window.location.href = window.location.href;
-							}
+							window.location.href = window.location.href;
+							// if(id){
+							// 	window.location.href = 'admin/article/detail/' + id;	
+							// }else{
+							// 	// window.location.href = window.location.href;
+							// }
 						},
 						'提交成功'
 					);

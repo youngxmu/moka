@@ -1,6 +1,8 @@
 (function(P){
 	var _this = null;
 	_this = P.user.vote.list = {
+		empty : '<tr colspan="4"><td colspan="4" style="line-height:28px;padding:15px 0;text-align: center;">当前条件没有搜索到数据</td></tr>',
+		loadingPanel : '<tr><td colspan="4" style="line-height:28px;padding:15px 0;text-align: center;"><span style="display:inline-block;font-size:15px;color:#999999;"><img src="img/loading.gif" style="float:left;margin-right:15px;">正在加载...</span></td></tr>',
 		searchUrl : 'vote/list',
 		tpl : {
 			paperListTpl : null
@@ -9,14 +11,23 @@
 			paperMap : {}
 		},
 		queryData : {
+			name : '',
 			pageNo : 1,
 			pageSize : 10
 		},
 		init : function() {
+			$('.h-search-bar').show();
 			_this.tpl.paperListTpl = juicer($('#paper-list-tpl').html());
 			_this.tpl.questionListTpl = juicer($('#question-list-tpl').html());
 			_this.initEvent();
 			_this.search();
+
+			$('#h_btn_search').unbind('click');
+			$('#h_btn_search').click(function(){
+		      var name = $('#h_search_key').val();
+		      _this.queryData.name = name;
+		      _this.search();
+		    });
 		},
 		initEvent : function(){
 			$('.nav').on('click', 'span', function(){
@@ -28,13 +39,6 @@
 
 				// _this.search();
 			});
-			$('#s_q_type').on('change', function(){
-				var $this = $(this);
-				_this.queryData.qtype = $this.val();
-				_this.search();
-			});
-
-			$('#btn_commit').on('click', _this.commit);
 			$('body').on('click', '.oper .view', _this.onView);
 		},
 		onView : function(){
@@ -51,7 +55,7 @@
 				url : _this.searchUrl,
 				data : _this.queryData,
 				beforeSend : function(){
-					$('#paper_list').html(util.loadingPanel);
+					$('#paper_list').html(_this.loadingPanel);
 				},
 				success : _this.initPage
 			});
@@ -73,7 +77,7 @@
 			var totalCount = data.totalCount;
 
 			if(totalCount == 0){
-				$('#paper_list').html(P.building);
+				$('#paper_list').html(_this.empty);
 				return;
 			}
 
@@ -100,7 +104,7 @@
 		                        type: 'POST',
 		                        data: _this.queryData,
 		                        beforeSend : function(){
-									$('#paper_list').html(util.loadingPanel);
+									$('#paper_list').html(_this.loadingPanel);
 								},
 		                        success : function(result){
 		                        	if (result != null && result.success) {

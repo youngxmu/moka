@@ -6,8 +6,8 @@ var commonUtils = require("../lib/utils.js");
 exports.queryVotes = function (name, start, pageSize, callback) {
     var sql = 'select * from vote where status = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
     }
 
     sql += ' limit ?,?;';
@@ -20,8 +20,8 @@ exports.queryVotes = function (name, start, pageSize, callback) {
 exports.queryVoteTotalCount = function (name, callback) {
     var sql = 'select count(id) as count from vote where status = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
     }
 
     db.query(sql, params, function (err, result) {
@@ -38,8 +38,8 @@ exports.queryVoteTotalCount = function (name, callback) {
 exports.getVotes = function (name, start, pageSize, callback) {
     var sql = 'select * from vote where 1 = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
     }
 
     sql += ' limit ?,?;';
@@ -52,8 +52,8 @@ exports.getVotes = function (name, start, pageSize, callback) {
 exports.getVoteTotalCount = function (name, callback) {
     var sql = 'select count(id) as count from vote where 1 = 1 ';
     var params = [];
-    if (name || name == 0) {
-        sql += ' and name like %' + name + '% ';
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
     }
 
     db.query(sql, params, function (err, result) {
