@@ -17,6 +17,11 @@
   
 }
 
+.list-main{
+  width: 100%;
+  padding: 0;
+}
+
 .main .res-list{border-bottom: 1px dashed #cccccc;font-size: 0;line-height: 40px;height: 40px;}
 .main .res-list:last-child{border-bottom: 0;}
 .main .res-list span{width: 150px;display: inline-block;font-size: 12px;vertical-align: top;}
@@ -55,4 +60,14 @@
   font-size: 12px;vertical-align: top;
 }
 
+.list-main .res-list-title span:nth-child(1){width:50px;}
+.list-main .res-list-title span:nth-child(2){width:480px;}
+.list-main .res-list-title span:nth-child(3){width:100px;}
+.list-main .res-list-title span:nth-child(4){width:200px;}
+.list-main .res-list-title span:nth-child(5){width:80px;}
 
+.list-main .res-list span:nth-child(1){width:50px;}
+.list-main .res-list span:nth-child(2){width:480px;}
+.list-main .res-list span:nth-child(3){width:100px;}
+.list-main .res-list span:nth-child(4){width:200px;}
+.list-main .res-list span:nth-child(5){width:80px;}

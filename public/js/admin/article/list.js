@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.article.list = {
-		pid : 11,//系统根目录编号
+		pid : 1102,//系统根目录编号
 		searchUrl : 'article/queryArticleByMenu',
 		treeUrl : 'jsll/list',
 		topicTree : null,
@@ -22,7 +22,7 @@
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.initEvent();
-			_this.initTopic();
+			// _this.initTopic();
 			_this.searchResource();
 		},
 		initEvent : function(){
@@ -64,12 +64,33 @@
 				_this.showAddArticle();
 			});
 			$('body').on('click', '.oper .del',_this.showDelArticle);
+
+			$('body').on('click', '.nav-tabs li', function(){
+				var $this = $(this);
+				$this.addClass('active').siblings('li').removeClass('active');
+				var pid = $this.attr('data-id');
+				var type = $this.attr('data-type');
+				_this.pid = pid;
+				console.log(pid);
+				if(type < 4){
+					$('#list_panel').show();
+					$('#tree_panel').hide();
+					_this.searchResource();
+				}else{
+					$('#list_panel').hide();
+					$('#tree_panel').show();
+					_this.initTopic();
+				}
+			});
+
+			
 		},
 		initTopic : function(subjectId) {
 			$.ajax({
 				type : "post",
 				cache : false,
-				url : 'menu/tree/' + _this.pid,
+				// url : 'menu/tree/' + _this.pid,
+				url : 'resource/info/list',
 				dataType : 'json',
 				beforeSend : function() {
 					$('#topic_tree').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><div style="color:#999999;display:inline-block;font-size:12px;margin-left:5px;vertical-align:bottom;">载入中...</div></div>');
@@ -82,6 +103,9 @@
 			var list = data.data.list;
 			for(var index in list){
 				var menu = list[index];
+				if(menu.id == 100){
+					continue;
+				}
 				menu['pId'] = menu.parent_id;
 				_this.topicNodes.push(menu);
 			}
@@ -94,15 +118,13 @@
 			// 	_this.searchUrl = 'article/queryArticleByMenu';
 			// }
 
-			if(!_this.data.searchData.mid){
-				_this.data.searchData.mid = _this.pid;
-			}
+			_this.data.searchData.mid = _this.pid;
 			$.ajax({
 				type : "post",
 				url : _this.searchUrl,
 				data : _this.data.searchData,
 				beforeSend : function() {
-					$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+					$('#article_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 				},
 				success : _this.initPageResource
 			});
@@ -125,7 +147,7 @@
 			if(totalcount == 0){
 				html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 			}
-			$('#resource_list').html(html);
+			$('#article_list').html(html);
 			
 			if (totalPage <= 1) {
 				$("#pagebar").html('');
@@ -149,7 +171,7 @@
 								url : _this.searchUrl,
 								data : data,
 								beforeSend : function() {
-									$('#resource_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
+									$('#article_list').html('<div style="text-align:center;margin-top:20px;"><img src="img/loading.gif"><span style="color:#999999;display:inline-block;font-size:14px;margin-left:5px;vertical-align:bottom;">正在载入，请等待...</span></div>');
 								},
 								success : function(data){
 									if (!data.success) {
@@ -169,7 +191,7 @@
 									if(totalcount == 0){
 										html = '<div style="line-height:30px;background:#FFEBE5;padding-left:12px;">当前条件下搜索，获得约0条结果!</div>';
 									}
-									$('#resource_list').html(html);
+									$('#article_list').html(html);
 								}
 							});
 						}
@@ -214,9 +236,32 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					_this.data.searchData.mid = treeNode.id;
-					_this.data.searchData.pageNo = 1;
-					_this.searchResource();
+					console.log(_this.currNode);
+					if(_this.currNode.content){
+						if(_this.currNode.content == 'null'){
+							_this.currNode.content == '';
+						}
+						// $('#content').html('<pre>' + _this.currNode.content + '</pre>');		
+						$('#content').html(_this.currNode.content);	
+					}else{
+						$.ajax({
+							url : 'resource/info/detail/' + _this.currNode.id,
+							type : 'get',
+							async : false,
+							success : function(data){
+								if(data.success){
+									if(data.data.content == 'null'){
+										data.data.content == '';
+									}
+									// $('#content').html('<pre>' + data.data.content + '</pre>');	
+									_this.currNode.content = data.data.content;
+									$('#content').html(_this.currNode.content);	
+								}else{
+									$('#content').html('');			
+								}
+							}
+						});
+					}
 					return true;
 				}
 			}
