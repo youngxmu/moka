@@ -4,6 +4,12 @@
   background-repeat: no-repeat;
   width: 1000px;
   margin:0 auto;
+  position: absolute; 
+  left:50%;
+  margin-left: -500px;
+  top: 0;
+  height: 160px;
+  z-index: 2;
 }
 
 .top-bar{height:40px;line-height:40px;overflow:hidden;font-size:14px;color:#f6f6f6; padding:0 15px;width:auto;}
@@ -13,7 +19,6 @@
 
 /* 头部 */
 .nav-div{background-color: #036; background-image: url(logo-buttom.jpg); background-position:top center;}
-.header{position: relative;}
 .header .index-row{padding:30px 20px}
 .header .search{margin:40px 0 0 0;float:right}
 .header input{float:left;border:none;padding:10px 6px;height:12px;background:#F2F6F8;outline:0;width:180px}
@@ -118,31 +123,19 @@ display: block;white-space: nowrap;}
   width: 100%;
 }
 
-.main .index-row .sys-list li{line-height: 30px;height: 30px; border-bottom: 1px solid #cccccc;padding: 0 10px;color: #333;cursor: pointer;
-  padding-left: 50px;position: relative;
-
-}
-.main .index-row .sys-list li .ico{
-  background-image: url("../../img/logo.png");
-  background-position: center;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  left: 10px;
-  top: 0;
-}
-.main .index-row .sys-list li a{color: #333;width: 100%;text-align: left;}
-.main .index-row .sys-list li:hover{opacity: 0.7;}
-.main .index-row .sys-list li:last-child{border-bottom: 0;}
-
 .container{
-  min-height: 100%;
-  height: auto;
-  /*padding-top: 180px;*/
+  height: 100%;
+  padding-top: 160px;
+  position: relative;
+  font-size: 0;
+}
+
+.fpanel{
+  height: 100%;
+  padding-top: 55px;
   position: relative;
 }
+
 
 /** 导航 */
 .page-header .nav_menu{ width:100%; height:80px; }
@@ -166,9 +159,15 @@ display: block;white-space: nowrap;}
   padding-top: 5px;
   padding: 0 20px;
   margin: 0 -20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 40px;
+  z-index: 1;
 }
 
-
+.sub-nav{margin-top: 15px;}
 
 /** 顶部logo，搜索 */
 .banner{height: 100px;line-height: 100px;
@@ -466,3 +465,28 @@ width: 960px;margin: auto;
   height: 100%;
   width: auto;
 }
+
+
+
+/**  new commen***/
+.editor-title{height: 40px;margin-bottom: 10px;font-size: 0;}
+.editor-title label{display: inline-block;line-height: 40px;vertical-align: top;text-align: left;
+  width: 40px;font-size: 14px;float: left;
+}
+.editor-title input{width: 720px;border: 1px solid #cccccc;line-height: 40px;vertical-align: top;font-size: 14px;
+  padding: 0 10px;
+}
+.editor-area{
+    width: 100%;
+    min-height: 600px;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid #cccccc;
+    line-height: 1.5;
+}
+
+.fpanel>div{
+  height: 100%;
+}
+
+.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}

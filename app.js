@@ -126,7 +126,7 @@ if(config.env!='devvv'){//开发环境不需要过滤
                         //   title = '国防师资力量';
                         // }
                         // res.locals.systitle = title;
-                        if(url.indexOf('/resource/') != -1 || url.indexOf('/menu/') != -1){
+                        if(url.indexOf('/resource/') != -1 || url.indexOf('/menu/') != -1 || url.indexOf('/view/') != -1){
                             return next();//res.redirect("/resource/index");
                         }
                         if(url.indexOf('/vote/') != -1 || url.indexOf('/article/') != -1){

@@ -1,5 +1,5 @@
 .container{width: 1000px;}
-.sub-nav {
+/*.sub-nav {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -7,12 +7,7 @@
 	height: 40px;
 	z-index: 1;
 }
-
-.fpanel{
-	height: 100%;
-	padding-top: 55px;
-	position: relative;
-}
+*/
 
 .sidebar {
 	width: 209px;

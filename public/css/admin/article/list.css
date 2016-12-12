@@ -1,7 +1,9 @@
-.container{font-size: 0}
-.sidebar {width: 179px;border-right: 1px solid #cccccc;
+.sidebar {width: 179px;
+  border-right: 1px solid #cccccc;
   padding: 10px 0;
   display: inline-block;
+  height: 100%;
+  overflow: auto;
 }
 .sidebar .tree-opr{
   line-height: 24px;font-size: 0;
@@ -12,9 +14,9 @@
   font-size: 12px;vertical-align: top;
 }
 
-.main{width: 780px;display: inline-block;vertical-align: top;
+.main{
+  width: 780px;display: inline-block;vertical-align: top;
   padding: 10px 0 20px 20px;
-  
 }
 
 .list-main{

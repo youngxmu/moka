@@ -1,9 +1,10 @@
-.container{width: 1000px;font-size: 0;}
-.sidebar {width: 209px;
+.sidebar {
+	width: 209px;
 	padding: 10px 20px 10px 0;
 	display: inline-block;
 	border-right: 1px solid #cccccc;
-	font-size: 13px;
+	font-size: 14px;
+	height: 100%;
 }
 .res-menu li{
   margin-top: 15px;
@@ -27,13 +28,17 @@
     font-size: 12px;
 }
 
-.main{width: 690px;display: inline-block;vertical-align: top;
+.main{
+	width: 740px;display: inline-block;vertical-align: top;
 	padding: 20px 0 20px 20px;
 	font-size:14px;color:#333;
 	border-left: 1px solid #cccccc;
 	min-height: 500px;
 	margin-left: -1px;
-	font-size: 13px;
+	font-size: 14px;
+	height: 100%;
+	padding-bottom: 60px;
+	position: relative;
 }
 
 .main .res-list{border-bottom: 1px dashed #cccccc;line-height: 40px;}
@@ -160,4 +165,29 @@
 	font-size: 14px;
 	padding: 5px 10px;
 	line-height: 1.5;
+}
+
+.btn-wrapper{
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.simditor{
+	padding-top:40px ;
+	height: 100%;
+}
+.simditor-wrapper{
+	height: 100%;
+}
+.simditor-toolbar{
+	position: absolute;
+	top: -40px !important;
+}
+
+.simditor-body{
+	height: 100%;
+	overflow: auto;
 }

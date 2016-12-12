@@ -1,31 +1,20 @@
 /** 主页面 */
-.main{font-size: 0;}
-.top-bar{font-size: 14px;padding: 10px 0 ;}
-.top-bar select{border: 1px solid #cccccc;
-  line-height: 30px;padding: 0 10px;
-  height: 30px;
-  cursor: pointer;
+.tool-bar{
+	position: absolute;
+	top: 0;
+	right: 10px;
 }
-.top-bar span{border: 1px solid #cccccc;
-  line-height: 30px;padding: 0 10px;
-  cursor: pointer;
-  margin-right: 10px;
-  display: inline-block;
-}
-
-.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
-
-.paper-list-title{}
-.paper-list-title div{display: inline-block;text-align: center;font-size: 14px;}
+.paper-list-title{line-height: 30px;}
+.paper-list-title div{display: inline-block;text-align: left;font-size: 14px;font-weight: bold;}
 .paper-list-title div:nth-child(1){width: 360px;}
-.paper-list-title div:nth-child(2){width: 500px;}
-.paper-list-title div:nth-child(3){width: 100px;}
+.paper-list-title div:nth-child(2){width: 450px;}
+.paper-list-title div:nth-child(3){width: 150px;text-align: center;}
 .paper-list{line-height: 30px;border-bottom: 1px dashed #cccccc;}
 .paper-list:last-child{border:none;}
 .paper-list div{display: inline-block;text-align: left;font-size: 14px;}
 .paper-list div:nth-child(1){width: 360px;}
 .paper-list div:nth-child(2){width: 450px;}
-.paper-list div:nth-child(3){width: 150px;}
+.paper-list div:nth-child(3){width: 150px;text-align: center;}
 
 .paper-list .oper span{cursor: pointer;margin-left: 5px;color: #00B7FF;}
 
@@ -35,7 +24,7 @@
 .paper-edit dt,.paper-edit dd{display: inline-block;}
 .paper-edit dt {width: 80px;}
 .paper-edit dd {width: 700px;}
-.paper-edit dd input{width: 400px;border: 1px solid #cccccc;height: 30px;padding: 0 10px;}
+.paper-edit dd input{width: 100%;border: 1px solid #cccccc;height: 30px;padding: 0 10px;}
 
 .paper-edit .paper-questions dt{vertical-align: top;}
 .paper-edit .paper-questions dd{height: 400px;overflow: auto;}

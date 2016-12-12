@@ -43,7 +43,6 @@ exports.addInfo = function (name, content, parent_id, mlevel, callback) {
 
 
 exports.updateInfo = function (id, name, content, callback) {
-    // name = ?, 
     db.query("update info set content = ? where id = ?;",
         [content, id],
         function (err, result) {

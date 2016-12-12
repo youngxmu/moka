@@ -23,15 +23,6 @@
 			P.admin.question.import.init();
 		},
 		initEvent : function(){
-			$('.nav').on('click', 'span', function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				var mid = $this.attr('data-id');
-				_this.initView(mid);
-				// _this.queryData.mid = $this.attr('data-id');
-
-				// _this.search();
-			});
 			$('#s_q_type').on('change', function(){
 				var $this = $(this);
 				_this.queryData.qtype = $this.val();

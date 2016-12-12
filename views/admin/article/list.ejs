@@ -8,49 +8,55 @@
   <body>
     <%- include ../common/header.ejs %>
   	<div class="container">
-      <ul class="nav nav-tabs">
-        <!-- <li data-type="1" ><a href="admin/article/infolist">教育资料</a></li>
-        <li data-type="2" class="active" ><a href="javascript:void(0);">相关文件</a></li> -->
-        <li data-type="1" data-id="1102" class="active" ><a href="javascript:void(0);">视频</a></li>
-        <li data-type="2" data-id="1103" ><a href="javascript:void(0);">照片</a></li>
-        <li data-type="3" data-id="1101" ><a href="javascript:void(0);">课件</a></li>
-        <li data-type="4" data-id="1104" ><a href="javascript:void(0);">文字</a></li>
-      </ul>
-      <div id="tree_panel" style="display:none;">
-        <div class="sidebar">
-          <div class="tree-opr">
-            <a href="javascript:void(0);" class="unfold">展开</a>
-            |<a href="javascript:void(0);" class="add">增加</a>
-            |<a href="javascript:void(0);" class="edit">编辑</a>
-            |<a href="javascript:void(0);" class="del">删除</a>
-          </div>
-          <div style="overflow:auto;min-height:500px;" >
-            <ul id="topic_tree" class="ztree"></ul>
-            <ul id="series_tree" class="ztree" style="display:none;"></ul>
-          </div>
-        </div>
-        <div class="main">
-            <div class="resource-opr">
-              <a href="javascript:void(0);" class="add">增加</a>
+      <div class="fpanel">
+        <ul class="nav nav-tabs sub-nav">
+          <!-- <li data-type="1" ><a href="admin/article/infolist">教育资料</a></li>
+          <li data-type="2" class="active" ><a href="javascript:void(0);">相关文件</a></li> -->
+          <li data-type="1" data-id="1102" class="active" ><a href="javascript:void(0);">视频</a></li>
+          <li data-type="2" data-id="1103" ><a href="javascript:void(0);">照片</a></li>
+          <li data-type="3" data-id="1101" ><a href="javascript:void(0);">课件</a></li>
+          <li data-type="4" data-id="1104" ><a href="javascript:void(0);">文字</a></li>
+        </ul>
+        <div id="tree_panel" style="display:none;">
+          <div class="sidebar">
+           <!--  <div class="tree-opr">
+              <a href="javascript:void(0);" class="unfold">展开</a>
+              |<a href="javascript:void(0);" class="add">增加</a>
+              |<a href="javascript:void(0);" class="edit">编辑</a>
+              |<a href="javascript:void(0);" class="del">删除</a>
+            </div> -->
+            <div style="overflow:auto;min-height:500px;" >
+              <ul id="topic_tree" class="ztree"></ul>
+              <ul id="series_tree" class="ztree" style="display:none;"></ul>
             </div>
-            <div class="info-content" >
+          </div>
+          <div class="main">
+              <!-- <div class="resource-opr">
+                <a href="javascript:void(0);" class="add">增加</a>
+              </div> -->
               <div class="info-content" >
-                <textarea class="editor-area" id="content" placeholder="输入文章正文" autofocus></textarea>
-                <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
-                  <span id="btn_commit" class="btn btn-primary">提交</span>
+                <div class="info-content" >
+                  <div class="editor-title">
+                    <label>名称</label>
+                    <input  id="txt_title" value="">
+                  </div>
+                  <textarea class="editor-area" id="content" placeholder="输入文章正文" autofocus></textarea>
+                  <div class="btn-wrapper" style="font-size:14px;margin-top: 15px;text-align:right;">
+                    <span id="btn_commit" class="btn btn-primary">提交</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-      </div>
+        </div>
 
-      <div id="list_panel" >
-        <div class="main list-main">
-          <div class="resource-opr">
-            <a href="javascript:void(0);" class="add">增加</a>
+        <div id="list_panel" >
+          <div class="main list-main">
+            <div class="resource-opr">
+              <a href="javascript:void(0);" class="add">增加</a>
+            </div>
+            <div id="article_list"></div>
+            <div id="pagebar"></div>
           </div>
-          <div id="article_list"></div>
-          <div id="pagebar"></div>
         </div>
       </div>
 	  </div>

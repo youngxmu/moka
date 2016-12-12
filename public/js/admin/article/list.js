@@ -21,6 +21,7 @@
 			$('#hd_menu_resource').addClass('current');
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
+			_this.txt_editor = $('#content');
 			_this.initEvent();
 			// _this.initTopic();
 			_this.searchResource();
@@ -82,7 +83,7 @@
 					_this.initTopic();
 				}
 			});
-
+			$('#btn_commit').on('click', _this.commitInfo);
 			
 		},
 		initTopic : function(subjectId) {
@@ -236,7 +237,7 @@
 						return false;
 					}
 					_this.currNode = treeNode;
-					console.log(_this.currNode);
+					$('#txt_title').val(_this.currNode.name);
 					if(_this.currNode.content){
 						if(_this.currNode.content == 'null'){
 							_this.currNode.content == '';
@@ -428,6 +429,27 @@
 				function(){},
 				'确认删除'
 			);
+		},
+		commitInfo : function() {
+			var id = _this.currNode.id
+			var name = $('#txt_title').val();
+			var content = _this.txt_editor.val();
+			
+			var postData = {
+				content : content,
+				id : id
+			};
+			$.ajax({
+				url : 'admin/jsll/updateinfo',
+				type : 'post',
+				data : postData,
+				success : function(data){
+					util.dialog.infoDialog('提交成功');
+				},
+				error : function(){
+					util.dialog.errorDialog('提交失败请重试');
+				}
+			});
 		}
 	};
 }(moka));

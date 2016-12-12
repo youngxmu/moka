@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>国防教育测评</title>
     <%- include ../common/meta.ejs %>
+    <title>国防教育测评</title>
     <link rel='stylesheet' href='css/admin/question/import.css' >
     <link rel='stylesheet' href='css/admin/vote/list.css' >
   </head>
   <body>
     <%- include ../common/header.ejs%>   
   	<div class="container">
-      <div class="main">
-        <div class="top-bar">
-          <span id="btn_add" >新的测评</span>
-        </div>
-        <div>
-          <table class="table table-striped" style="font-size:14px;">
-            <thead>
-              <tr>
-                <td class="">名称</td>
-                <td class="">描述</td>
-                <td class="">状态</td>
-                <td class="">时间</td>
-                <td class="">操作</td>
-              </tr>
-            </thead>
-            <tbody id="paper_list"></tbody>
-          </table>
+      <div class="fpanel">
+        <ul class="nav nav-tabs sub-nav">
+          <li data-type="1" class="active">
+            <a href="javascript:void(0);">当前测评</a>
+          </li>
+          <li data-type="2" >
+            <a href="javascript:void(0);">历史测评</a>
+          </li>
+          <div class="tool-bar">
+            <span id="btn_add"    class="btn btn-primary">创建测评</span>
+          </div>
+        </ul>
+        <div class="main">
+          <div>
+            <table class="table table-striped" style="font-size:14px;">
+              <thead>
+                <tr>
+                  <th class="">名称</th>
+                  <th class="">描述</th>
+                  <th class="">状态</th>
+                  <th class="">时间</th>
+                  <th class="">操作</th>
+                </tr>
+              </thead>
+              <tbody id="paper_list"></tbody>
+            </table>
 
+          </div>
+          <div id="pagebar"></div>
         </div>
-        <div id="pagebar"></div>
       </div>
 	  </div>
 
