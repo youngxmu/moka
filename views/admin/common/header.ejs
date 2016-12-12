@@ -1,4 +1,33 @@
-<!-- style="display:none;" -->
+<div class="header">
+  <div class="top-bar" style="display:none;">
+      <div class="pull-right">
+        <span data-markup="time"></span>
+        <div class="pull-left"><span id="date-time" data-markup="time"><%= currDate %></span></div>
+      </div>
+  </div>
+  <h1 class="logo">
+    <a href="index">
+      <div class="logo-title"></div>
+    </a>
+    <div class="curr-time"><span id="date-time" data-markup="time"><%= currDate %></span></div>
+  </h1>
+</div>
+
+
+<div class="header-nav">
+  <ul id="navfouce" class="nav-ul">
+    <li class="index"><a href="admin/index"          >首 页</a></li>
+    <li class="resource"><a href="admin/article/list"  >国防教育资源</a></li>
+    <li class="jsll"><a href="admin/jsll/list"    >军事理论教学</a></li>
+    <li class="jsjn"><a href="admin/jsjn/list"    >军事技能教学</a></li>
+    <li class="paper"><a href="admin/paper/list"   >学习考试管理</a></li>
+    <li class="hbll"><a href="admin/hbll/list"   >国防后备力量</a></li>
+    <li class="vote"><a href="admin/vote/list"    >国防教育测评</a></li>
+    <li class="expert"><a href="admin/expert/list"  >师资力量</a></li>
+    <div class="clears"></div>
+  </ul>
+</div>
+<!-- style="display:none;" 
 <div class="page-header" >
     <div class="nav_menu">
         <div class="nav">
@@ -40,6 +69,7 @@
       </div>
     </div>
 </div>
+-->
 <script type="juicer/template" id="dlg-login-tpl">
   <div class="login_bg">
     <div style="position:absolute;left:20px;top:20px;" class="login-logo"></div>

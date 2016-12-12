@@ -77,7 +77,6 @@
 
 			$('body').on('change', '#question_type', function(){
 				var $this = $(this);
-				console.log($this.val());
 				if($this.val() == 2 || $this.val() == 3){
 					$('.question-option').show();
 				}else{
@@ -300,7 +299,6 @@
 			for(var i in answerArr){
 				var index = parseInt(i) + 1;
 				var word = util.getOption(index);
-				console.log(word + ' ' +answerArr[i]);
 				html += '<p>' + word + ':' + answerArr[i] + '</p>';
 			}
 			return html;

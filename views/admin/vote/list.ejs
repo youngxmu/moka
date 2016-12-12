@@ -57,19 +57,19 @@
     <script type="juicer/template" id="dlg-edit-paper-tpl">
     <div class="paper-edit">
       <dl>
-        <dt>试卷名称</dt>
+        <dt>测评标题</dt>
         <dd>
           <input id="paper_name" value="${name}">
         </dd>
       </dl>
       <dl>
-        <dt>试卷描述</dt>
+        <dt>测评说明</dt>
         <dd>
           <input id="paper_desc" value="${description}">
         </dd>
       </dl>
       <dl id="paper_questions" class="paper-questions">
-        <dt>试卷题目<div data-id="${id}" class="btn-edit-questions">编辑题目</div></dt>
+        <dt>测评题目<div data-id="${id}" class="btn-edit-questions">编辑题目</div></dt>
         <dd>
           {@include questionListTpl, questionListData}
         </dd>

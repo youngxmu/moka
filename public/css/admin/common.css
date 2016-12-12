@@ -8,6 +8,8 @@ body {
 a {color: #00B7FF;text-decoration:none;}
 em{font-style: normal;}
 li{list-style-type: none;}
+ul{margin: 0;padding: 0;}
+
 /** main  */
 .container{width:1000px;padding: 0 20px;margin:auto;background: #ffffff;min-height: 480px;}
 .title{font-size: 16px;height: 30px;line-height:30px;padding-bottom:10px;margin-bottom:10px;border-bottom: 1px solid #DDDDDD;font-weight: bold;
