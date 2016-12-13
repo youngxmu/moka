@@ -36,7 +36,7 @@ exports.queryVoteTotalCount = function (name, callback) {
 
 
 exports.getVotes = function (name, start, pageSize, callback) {
-    var sql = 'select * from vote where 1 = 1 ';
+    var sql = 'select * from vote where status = 1 ';
     var params = [];
     if (name && name !='') {
         sql += ' and name like "%' + name + '%" ';
@@ -48,9 +48,38 @@ exports.getVotes = function (name, start, pageSize, callback) {
     db.query(sql, params, callback);
 };
 
-//根据“是否虚拟”“创建来源”查找试卷总数
 exports.getVoteTotalCount = function (name, callback) {
-    var sql = 'select count(id) as count from vote where 1 = 1 ';
+    var sql = 'select count(id) as count from vote where status = 1 ';
+    var params = [];
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
+    }
+
+    db.query(sql, params, function (err, result) {
+        if (!err && result && result[0]) {
+            callback(result[0].count);
+        } else {
+            logger.error("查找试卷总数出错", err);
+            callback(0);
+        }
+    });
+};
+
+exports.getOutVotes = function (name, start, pageSize, callback) {
+    var sql = 'select * from vote where status = 0 ';
+    var params = [];
+    if (name && name !='') {
+        sql += ' and name like "%' + name + '%" ';
+    }
+
+    sql += ' limit ?,?;';
+    params.push(start);
+    params.push(pageSize);
+    db.query(sql, params, callback);
+};
+
+exports.getOutVoteTotalCount = function (name, callback) {
+    var sql = 'select count(id) as count from vote where status = 0 ';
     var params = [];
     if (name && name !='') {
         sql += ' and name like "%' + name + '%" ';

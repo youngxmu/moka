@@ -22,15 +22,6 @@
 			P.admin.question.import.init();
 		},
 		initEvent : function(){
-			$('.nav').on('click', 'span', function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				var mid = $this.attr('data-id');
-				_this.initView(mid);
-				// _this.queryData.mid = $this.attr('data-id');
-
-				// _this.search();
-			});
 			$('#s_q_type').on('change', function(){
 				var $this = $(this);
 				_this.queryData.qtype = $this.val();
@@ -49,11 +40,31 @@
 			$('body').on('click', '.oper .del', _this.onDel);
 
 			$('body').on('click', '.paper-questions .btn-edit-questions', _this.onEditQuestions);
+
+			$('body').on('click', '.nav-tabs li', function(){
+				var $this = $(this);
+				$this.addClass('active').siblings('li').removeClass('active');
+				if($this.attr('data-type') == 1){
+					_this.searchUrl = 'admin/vote/list';
+				}else{
+					_this.searchUrl = 'admin/vote/outlist';
+				}
+				_this.queryData = {
+					pageNo : 1,
+					pageSize : 10
+				};
+				_this.search();
+			});
+			
 		},
 		onAdd : function(){
+			var paper = {
+				questionListTpl : $('#question-list-tpl').html(),
+				questionListData : {list:[]}
+			}
 			var d = dialog({
 			    title: '新建测评',
-			    content: _this.tpl.dlgEditPaperTpl.render(),
+			    content: _this.tpl.dlgEditPaperTpl.render(paper),
 			    okValue : '确定',
 			    ok : function(){
 					var paper = {};

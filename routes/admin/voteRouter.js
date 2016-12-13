@@ -13,8 +13,6 @@ router.get('/list', function (req, res, next) {
     res.render('admin/vote/list');
 });
 
-
-//根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/list', function (req, res, next) {
     var name = req.body.name;
     var pageNo = parseInt(req.body.pageNo);
@@ -30,6 +28,46 @@ router.post('/list', function (req, res, next) {
 
         logger.info("查找试卷:", start, pageSize);
         voteModel.getVotes(name, start, pageSize, function (err, result) {
+            if (err || !result || !commonUtils.isArray(result)) {
+                logger.error("查找试卷出错", err);
+                res.json({
+                    success: false,
+                    msg: "查找试卷出错"
+                });
+            } else {
+                for(var index in result){
+                    result[index].create_time = commonUtils.formatDate(new Date(result[index].create_time));
+                }
+                res.json({
+                    success: true,
+                    msg: "查找试卷成功",
+                    data: {
+                        totalCount: totalCount,
+                        totalPage: totalPage,
+                        currentPage: pageNo,
+                        list: result
+                    }
+                });
+            }
+        });
+    });
+});
+
+router.post('/outlist', function (req, res, next) {
+    var name = req.body.name;
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+
+    voteModel.getOutVoteTotalCount(name, function (totalCount) {
+        logger.info("试卷总数:", totalCount);
+        var totalPage = 0;
+        if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+        else totalPage = totalCount / pageSize + 1;
+        totalPage = parseInt(totalPage, 10);
+        var start = pageSize * (pageNo - 1);
+
+        logger.info("查找试卷:", start, pageSize);
+        voteModel.getOutVotes(name, start, pageSize, function (err, result) {
             if (err || !result || !commonUtils.isArray(result)) {
                 logger.error("查找试卷出错", err);
                 res.json({
