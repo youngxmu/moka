@@ -85,7 +85,6 @@
         </dl>
         <div class="dlg-bottom-btn">
           <span data-id="${id}" class="btn-add-questions btn btn-primary">添加题目</span>
-          <span data-id="${id}" class="btn-edit-questions btn btn-primary">选择题目</span>
         </div>
       </div>
     </script>
@@ -93,9 +92,11 @@
     <script type="juicer/template" id="question-list-tpl">
       {@each list as obj, index}
       <div data-id="${obj.id}" class="question-list {@if index == 0}active{@/if}" >
-          <div class="qbody label label-info">${index|formatIndex}.${obj.qbody}{@if obj.qtype == 3}
-        （多选）
-        {@/if}</div>
+          <div class="qbody vote-qbody">
+            ${index|formatIndex}.${obj.qbody}
+            {@if obj.qtype == 3}（多选）{@/if}
+            <span data-id="${obj.id}" class="btn-edit-questions">编辑</span>
+          </div>
           {@if obj.qtype == 2 || obj.qtype == 3 || obj.type == 4}
             <div class="qanswer-panel {@if obj.qtype == 3}m{@else}s{@/if}" data-type="${obj.qtype}" data-id="${obj.id}">
               $${obj.qanswer|formatAnswer}
@@ -112,6 +113,42 @@
           <div class="qanswer">$${qanswer|formatAnswer}</div>
         {@/if}
         <div class="rtanswer">正确答案：${rtanswer}</div>
+    </div>
+    </script>
+
+    <script type="juicer/template" id="dlg-edit-question-tpl">
+    <div class="question-edit">
+      <dl>
+        <dt>题目类型：</dt>
+        <dd>
+          <select id="question_type">
+            <option value="1">填空题</option>
+            <option value="2">选择题</option>
+            <option value="3">多项选择题</option>
+          </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>题干</dt>
+        <dd>
+          <textarea id="question_body">${qbody}</textarea>
+        </dd>
+      </dl>
+      <dl class="question-option">
+        <dt>选项</dt>
+        <dd class="option-panel">
+          <p><em>A</em>:<input></p>
+          <p><em>B</em>:<input></p>
+        </dd>
+        <span class="btn-op add">＋</span>
+        <span class="btn-op del disabled">－</span>
+      </dl>
+      <dl>
+        <dt>答案</dt>
+        <dd>
+          <textarea id="question_rtanswer">${rtanswer}</textarea>
+        </dd>
+      </dl>
     </div>
     </script>
 

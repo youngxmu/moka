@@ -12,8 +12,6 @@ router.get('/list', function (req, res, next) {
     res.render('admin/question/list');
 });
 
-
-//根据”创建渠道“和”是否虚拟“查询题目
 router.post('/list', function (req, res, next) {
     var qtype = req.body.qtype;
     if(qtype == 0){
@@ -57,9 +55,30 @@ router.post('/list', function (req, res, next) {
 //根据题目id查询
 router.get('/detail/:id', function (req, res, next) {
     var id = req.params.id;
-    var isAdmin = req.session.admin ? true : false;
+    questionModel.getQuestionById(id, function (err, result) {
+        if (!err && result) {
+            var question = result;
+            question.isAdmin = isAdmin;
+            question.update_time = commonUtils.formatDate(new Date(question.update_time));
+            question.file_name = config.imgHost + '/uploads/' + question.file_name;
+            question.menuList = menuUtils.getMenuPathList(question.menu_id);
+            question.file_type = commonUtils.getFileTypeName(question.file_name);
+            res.render('admin/question/detail', question);
+        } else {
+            res.render('error', {
+                success: false,
+                msg: "根据id查询题目出错"
+            });
+        }
+    });
+});
+
+//根据题目id查询
+router.post('/detail/:id', function (req, res, next) {
+    
+    var id = req.params.id;
     if(id == null || id == undefined){
-        res.render('error', {
+        res.json({
             success: false,
             msg: "根据id查询题目出错"
         });
@@ -67,14 +86,12 @@ router.get('/detail/:id', function (req, res, next) {
         questionModel.getQuestionById(id, function (err, result) {
             if (!err && result) {
                 var question = result;
-                question.isAdmin = isAdmin;
-                question.update_time = commonUtils.formatDate(new Date(question.update_time));
-                question.file_name = config.imgHost + '/uploads/' + question.file_name;
-                question.menuList = menuUtils.getMenuPathList(question.menu_id);
-                question.file_type = commonUtils.getFileTypeName(question.file_name);
-                res.render('admin/question/detail', question);
+                res.json({
+                    success:true,
+                    question : question
+                });
             } else {
-                res.render('error', {
+                res.json({
                     success: false,
                     msg: "根据id查询题目出错"
                 });
@@ -82,7 +99,6 @@ router.get('/detail/:id', function (req, res, next) {
         });
     }
 });
-
 
 
 //创建题目
@@ -135,7 +151,8 @@ router.post('/save', function (req, res) {
         });
     }
 });
-//创建题目
+
+//删除题目
 router.post('/del', function (req, res) {
     var id = req.body.id;
     var admin = req.session.admin;
@@ -171,8 +188,6 @@ router.post('/del', function (req, res) {
     }
 });
 
-
-
 router.post('/random', function (req, res, next) {
     questionModel.queryRandQuestions(4, 0, 20, function (err, result) {
         if (err || !result || !commonUtils.isArray(result)) {
@@ -207,6 +222,58 @@ router.post('/random', function (req, res, next) {
         }
     });
 });
+
+//测评问题
+router.post('/vote/save', function (req, res) {
+    var id = req.body.id;
+    var qbody = req.body.qbody;
+    var qtype = req.body.qtype;
+    var qanswer = req.body.qanswer;//明文
+    var rtanswer = req.body.rtanswer;//明文
+    var type = 2;//resource
+    var admin = req.session.admin;
+    if(!admin){
+        return res.json({
+            success: false,
+            msg: "请登录"
+        });
+    }
+    
+    
+    if(id == null || id == undefined){
+        questionModel.insertVoteQuestion(qbody, qtype, qanswer, rtanswer, function (err, data) {
+            if (!err) {
+                res.json({
+                    success: true,
+                    msg: "创建成功",
+                    data : data
+                });
+            } else {
+                res.json({
+                    success: false,
+                    msg: "创建失败"
+                });
+            }
+        });
+    }else{
+        logger.info("管理员修改题目信息", id);
+        questionModel.updateQuestion(id, qbody, qtype, qanswer, rtanswer, function (err, result) {
+            if (!err) {
+                res.json({
+                    success: true,
+                    msg: "修改题目信息成功"
+                });
+            } else {
+                logger.error("修改题目个人信息发生错误", err);
+                res.json({
+                    success: false,
+                    msg: "修改题目个人信息失败"
+                });
+            }
+        });
+    }
+});
+
 
 module.exports = router;
 

@@ -130,4 +130,14 @@ exports.delQuestion = function (id, callback) {
     });
 };
 
-
+exports.insertVoteQuestion = function (qbody, qtype, qanswer, rtanswer, callback) {
+    var sql = 'insert into question ( ';
+    sql += 'qbody, qtype, qanswer, rtanswer, type, create_time) ';
+    sql += 'values(?,?,?,?,?,?);';
+    db.query(sql,
+        [qbody, qtype, qanswer, rtanswer, 2, new Date()],
+        function (err, result) {
+            callback(err, result);
+        }
+    );
+};

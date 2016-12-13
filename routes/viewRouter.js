@@ -5,7 +5,7 @@ var articleModel = require('../models/articleModel.js');
 var logger =  require('../lib/log.js').logger('viewRouter');
 var router = express.Router();
 var exec = require('child_process').exec;
-
+var fs=require("fs");
 router.post('/ppt', function(req, res) {
 	var path = req.body.path;
 	var id = req.body.id;
@@ -399,62 +399,6 @@ var arr = [
 	['216','gsjyzy/file/2016-05-12_doc_289.doc']
 ];
 
-arr = [
-	['7169','jsjn/课件/军事高技术/激光武器.ppt'],
-	['7170','jsjn/课件/军事高技术/电子战与指挥自动.ppt'],
-	['7171','jsjn/课件/军事高技术/精确制导技术.ppt'],
-	['7172','jsjn/课件/军事高技术/精确制导技术及应用.ppt'],
-	['7173','jsjn/课件/军事高技术/隐身技术及应用.ppt'],
-	['7174','jsjn/课件/军事高技术/雷达干扰原理.ppt'],
-	['7175','jsjn/课件/军事高技术/高技术与新军事变革.ppt'],
-	['7176','jsjn/课件/军事高技术/高技术在军事上的应用 (2).PPT'],
-	['7177','jsjn/课件/军事高技术/高技术在军事上的应用.ppt'],
-	['7178','jsjn/课件/军事高技术/高技术战争 (2).ppt'],
-	['7179','jsjn/课件/军事高技术/高技术战争.ppt'],
-	['7180','jsjn/课件/信息化战争/信息化战争 (2).ppt'],
-	['7181','jsjn/课件/信息化战争/信息化战争 (3).ppt'],
-	['7182','jsjn/课件/信息化战争/信息化战争.ppt'],
-	['7183','jsjn/课件/信息化战争/信息化战争与国防建设.ppt'],
-	['7184','jsjn/课件/信息化战争/信息化战争与现代国防.ppt'],
-	['7185','jsjn/课件/信息化战争/信息化战争概述.ppt'],
-	['7186','jsjn/课件/信息化战争/信息化战争的特征与发展趋势.ppt'],
-	['7187','jsjn/课件/信息化战争/高技术战争.ppt'],
-	['7188','jsjn/课件/相关课件/2012国际形势的回顾与展望.ppt'],
-	['7189','jsjn/课件/相关课件/世界军事形势与反台独军事斗争准备.ppt'],
-	['7190','jsjn/课件/相关课件/中国南沙群岛安全问题凸显.ppt'],
-	['7191','jsjn/课件/相关课件/中国南海、东海海权之争.ppt'],
-	['7192','jsjn/课件/相关课件/中国航母----辽宁舰.ppt'],
-	['7193','jsjn/课件/相关课件/中菲黄岩岛问题.ppt'],
-	['7194','jsjn/课件/相关课件/争议地区.ppt'],
-	['7195','jsjn/课件/相关课件/关于战争观的几个问题.ppt'],
-	['7196','jsjn/课件/相关课件/军事高技术的发展与国防观念的更新.PPT'],
-	['7197','jsjn/课件/相关课件/国际国内形势政策分析.ppt'],
-	['7198','jsjn/课件/相关课件/坦克.ppt'],
-	['7199','jsjn/课件/相关课件/孙子兵法及应用.ppt'],
-	['7200','jsjn/课件/相关课件/我国的钓鱼岛问题-2013年4月.ppt'],
-	['7201','jsjn/课件/相关课件/战机.ppt'],
-	['7202','jsjn/课件/相关课件/新世纪新阶段我军历史使命.ppt'],
-	['7203','jsjn/课件/相关课件/枪械.ppt'],
-	['7204','jsjn/课件/相关课件/核武器.ppt'],
-	['7205','jsjn/课件/相关课件/毛泽东战略战术.ppt'],
-	['7206','jsjn/课件/相关课件/海洋权益问题.ppt'],
-	['7207','jsjn/课件/相关课件/火炮.ppt'],
-	['7208','jsjn/课件/相关课件/航天科普知识.ppt'],
-	['7209','jsjn/课件/相关课件/舰艇.ppt'],
-	['7210','jsjn/课件/相关课件/隐形战斗机.ppt'],
-	['7211','jsjn/课件/相关课件/雷达卫星.ppt'],
-	['7212','jsjn/课件/教学指导/军事科学概论.ppt'],
-	['7213','jsjn/课件/教学指导/军事课教学大纲解读.ppt'],
-	['7214','jsjn/课件/教学指导/多媒体教材界面设计.ppt'],
-	['7215','jsjn/课件/教学指导/怎样上好军事课.ppt'],
-	['7216','jsjn/课件/教学指导/教学原理和方法.PPT'],
-	['7217','jsjn/课件/教学指导/普通高校军事理论课教学.ppt'],
-	['7218','jsjn/课件/教学指导/邓小平新时期军队建设思想的教学.ppt'],
-	['7219','jsjn/课件/教学辅助/1764个透明水晶图标素材.ppt'],
-	['7220','jsjn/课件/教学辅助/300个精美3D图标.ppt'],
-	['7221','jsjn/课件/教学辅助/PPT制作十大内功.pptx'],
-	['7222','jsjn/课件/教学辅助/PPT图片创意七招.pptx']
-];
 var length = arr.length;
 router.get('/batch', function(req, res) {
 	console.log('start');
@@ -482,30 +426,61 @@ var batch = function(cursor){
 	// 			cursor++;
 	// 			batch(cursor);
 	// 		}else{
-				var index = path.lastIndexOf('.');
-				var pdfPath = path.substr(0,index) + '.pdf';
-				var srcPath = pdfPath;
-				path = config.uploadDir + '/' + path;
-				pdfPath = config.uploadDir + '/' + pdfPath;
-				path= path.replace(/\//g,'\\');
-				pdfPath= pdfPath.replace(/\//g,'\\');
+	// 			var index = path.lastIndexOf('.');
+	// 			var pdfPath = path.substr(0,index) + '.pdf';
+	// 			var srcPath = pdfPath;
+	// 			path = config.uploadDir + '/' + path;
+	// 			pdfPath = config.uploadDir + '/' + pdfPath;
+	// 			path= path.replace(/\//g,'\\');
+	// 			pdfPath= pdfPath.replace(/\//g,'\\');
 				
-				var cmd = 'java -jar d://pptUtils.jar "' + path + '" "'+ pdfPath +'"';
-				console.log(cmd);
-				exec(cmd, [], function(re){
-					articleModel.updateViewName(id, srcPath, function(err){
-						if(err){
-							logger.error(err, 'update error');
-						}else{
-							console.log(id + ' is completed！');
-						}
-						cursor++;
-						batch(cursor);
-					});
-				})
+	// 			var cmd = 'java -jar d://pptUtils.jar "' + path + '" "'+ pdfPath +'"';
+	// 			console.log(cmd);
+	// 			exec(cmd, [], function(re){
+	// 				articleModel.updateViewName(id, srcPath, function(err){
+	// 					if(err){
+	// 						logger.error(err, 'update error');
+	// 					}else{
+	// 						console.log(id + ' is completed！');
+	// 					}
+	// 					cursor++;
+	// 					batch(cursor);
+	// 				});
+	// 			})
 	// 		}
 	// 	}
 	// });
+
+	var index = path.lastIndexOf('.');
+	var pdfPath = path.substr(0,index) + '.pdf';
+	var srcPath = pdfPath;
+	path = config.uploadDir + '/' + path;
+	pdfPath = config.uploadDir + '/' + pdfPath;
+	path= path.replace(/\//g,'\\');
+	pdfPath= pdfPath.replace(/\//g,'\\');
+
+	fs.exists(pdfPath,function(exists){
+	  	if(exists){
+	  		console.log(pdfPath + ' is exsited！');
+	     	cursor++;
+	     	batch(cursor);
+	  	}
+     	if(!exists){
+    		var cmd = 'java -jar d://pptUtils.jar "' + path + '" "'+ pdfPath +'"';
+			console.log(cmd);
+			exec(cmd, [], function(re){
+				articleModel.updateViewName(id, srcPath, function(err){
+					if(err){
+						logger.error(err, 'update error');
+					}else{
+						console.log(id + ' is completed！');
+					}
+					cursor++;
+					batch(cursor);
+				});
+			})
+     	}
+  	});
 };
 
 
