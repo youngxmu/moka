@@ -75,10 +75,10 @@ form {margin-right: 1em;}
 
 .header-nav {background-color: #11487e;background-image: none;}
 .header-nav{width:1000px;height:40px;position:relative;margin:0 auto; z-index:99;}
-.header-nav .nav-ul > li{float:left;width:120px;height:40px;text-align: center;}
+.header-nav .nav-ul > li{float:left;width:100px;height:40px;text-align: center;}
 .header-nav .nav-ul > li:hover,.nav .nav-ul > li a:hover{color:#FFF;background:#38C}
 .header-nav .nav-ul > li a{
-  text-align:center;font:normal 16px microsoft yahei; text-decoration:none;
+  text-align:center;font:normal 14px microsoft yahei; text-decoration:none;
   color: #f6f6f6;
   height: 40px;line-height: 40px;
 display: block;white-space: nowrap;}

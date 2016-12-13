@@ -1,6 +1,8 @@
-.nav-tabs{
-    margin: 10px -20px 10px -20px;
-    padding: 0 20px;
+.container{font-size: 14px;}
+.tool-bar{
+	position: absolute;
+	top: 0;
+	right: 10px;
 }
 /** 查询区域 */
 .search-panel{line-height: 34px;}
@@ -8,7 +10,7 @@
 .search-panel dl dt, .search-panel dl dd{display: inline-block;}
 .search-panel dl dt{text-align: right;}
 .search-panel dl dd{margin:0 10px 0 5px;}
-.search-panel dl dd input{width:120px;border: 1px solid #cccccc;padding:0 5px;line-height: 34px;}
+.search-panel dl dd input{width:100px;border: 1px solid #cccccc;padding:0 5px;line-height: 34px;}
 .search-panel dl dd select{border: 1px solid #cccccc;line-height: 32px;height:34px;}
 
 /** tab area */

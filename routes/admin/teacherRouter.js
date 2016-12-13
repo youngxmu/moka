@@ -78,7 +78,7 @@ router.post('/save', function (req, res) {
     password = commonUtils.md5(password);//加盐生成真实入库密码
     console.log(username);
     if(!id){
-        adminModel.insert(name, password, username, tel, type, function (err, data) {
+        adminModel.insert(name, password, username, tel, type, 1 , function (err, data) {
             if (!err) {
                 res.json({
                     success: true,

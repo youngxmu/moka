@@ -31,10 +31,12 @@
 			_this.data.resourceTpl = juicer($('#resource-tpl').html());
 			_this.initEvent();
 			if(_this.type == 'txt'){
+				$('#info_panel').show();
 				_this.data.searchData.type = '1,6';
 				_this.treeUrl = 'resource/info/list';
 				_this.initTopic();	
 			}else if(_this.type == 'other'){
+				$('#info_panel').show();
 				_this.treeUrl = 'jsll/info/list/other';
 				_this.initTopic();
 			}else{

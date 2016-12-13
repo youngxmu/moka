@@ -8,40 +8,45 @@
   <body>
     <%- include ../common/header.ejs %>
   	<div class="container">
-        <ul class="nav nav-tabs">
-            <li data-type="1" class="active" ><a href="admin/teacher/list">教师管理</a></li>
-            <li data-type="2" ><a href="admin/user/list">学员管理</a></li>
-        </ul>
-    	<div class="search-panel" >
-    		<dl>
-    			<dt>姓名</dt><dd><input id="user_name" ></dd>
-    			<dt>手机</dt><dd><input id="user_tel" ></dd>
-    			<dd>
-    				<span id="btn_search" class="btn btn-primary" >查询</span>
-    			</dd>
-                <span id="btn_add_user" class="btn btn-default" style="float:right;">添加</span>
-    		</dl>
-    	</div>
-		<div class="oper-panel" ></div>
-
-    	<div class="list-table" >
-    		<table>
-    			<thead>
-    				<tr>
-                        <th>序号</th>
-                        <th>账号</th>
-    					<th>姓名</th>
-    					<th>手机</th>
-                        <th>权限</th>
-    					<th>创建时间</th>
-    					<th style="width:80px;">操作</th>
-    				</tr>
-    			</thead>
-    			<tbody id="user_list"></tbody>
-    		</table>
-    		<div id="pagebar"></div>
-    	</div>
-
+        <div class="fpanel">
+            <ul class="nav nav-tabs sub-nav">
+                <li data-type="1" class="active" ><a href="admin/teacher/list">教师管理</a></li>
+                <li data-type="2" ><a href="admin/user/list">学员管理</a></li>
+                <div class="tool-bar">
+                    <div class="search-panel" >
+                        <dl>
+                            <dt>ID</dt><dd><input id="user_id" ></dd>
+                            <dt>姓名</dt><dd><input id="user_name" ></dd>
+                            <dt>手机</dt><dd><input id="user_tel" ></dd>
+                            <dt>邮箱</dt><dd><input id="user_email" ></dd>
+                            <dd>
+                                <span id="btn_search" class="btn btn-primary" >查询</span>
+                            </dd>
+                            <dd>
+                                <span id="btn_add_user" class="btn btn-primary" >添加教师</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </ul>
+        	<div class="list-table" >
+        		<table>
+        			<thead>
+        				<tr>
+                            <th>序号</th>
+                            <th>账号</th>
+        					<th>姓名</th>
+        					<th>手机</th>
+                            <th>权限</th>
+        					<th>创建时间</th>
+        					<th style="width:80px;">操作</th>
+        				</tr>
+        			</thead>
+        			<tbody id="user_list"></tbody>
+        		</table>
+        		<div id="pagebar"></div>
+        	</div>
+        </div>
 	</div>
 
 	<script type="text/juicer" id="user_list_tpl">

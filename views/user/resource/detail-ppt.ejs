@@ -35,6 +35,7 @@
               <label>资源链接</label>
               <span class="text"><a href="<%= file_name %>" download class="download"><%- title %></a></span>
             </div>
+            <div id="ppt_pdf" data-view="<%=view_name%>" class="ppt-view-panel" style="width:650px;height:400px;"></div>
             <div class="t-input">
               <label>所属栏目</label>
               <div class="u-select-p">
@@ -56,6 +57,10 @@
     <script type="text/javascript">
       $(document).ready(function(){
         moka.user.resource.detail.init();
+        var view_name = $('#ppt_pdf').attr('data-view');
+        if(view_name && view_name!= ''){
+          PDFObject.embed('uploads/'+ view_name, "#ppt_pdf");
+        }
       });
     </script>
   </body>
