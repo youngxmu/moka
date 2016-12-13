@@ -4,7 +4,8 @@
 	top: 0;
 	right: 10px;
 }
-.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
+.nav-ul li{display: none;}
+.nav-ul li.index, .nav-ul li.active{display: inline-block;}
 .oper span{cursor: pointer;margin-left: 5px;color: blue;}
 
 .paper-list-title{}
@@ -21,14 +22,20 @@
 
 .paper-list .oper span{cursor: pointer;margin-left: 5px;color: #00B7FF;}
 
-.paper-edit{width: 800px;}
+.paper-edit{width: 800px;position: relative;}
 .paper-edit dl,.paper-edit dt,.paper-edit dd{margin: 0;padding: 0;}
 .paper-edit dl{line-height: 40px;}
 .paper-edit dt,.paper-edit dd{display: inline-block;}
 .paper-edit dt {width: 80px;}
 .paper-edit dd {width: 700px;}
-.paper-edit dd input{width: 400px;border: 1px solid #cccccc;height: 30px;padding: 0 10px;}
+.paper-edit dd input{width: 100%;border: 1px solid #cccccc;height: 30px;padding: 0 10px;}
 
 .paper-edit .paper-questions dt{vertical-align: top;}
 .paper-edit .paper-questions dd{height: 400px;overflow: auto;}
-.paper-edit .paper-questions .btn-edit-questions{color: blue;cursor: pointer;}
+/*.paper-edit .paper-questions .btn-edit-questions{color: blue;cursor: pointer;}*/
+
+.dlg-bottom-btn{
+	position: absolute;
+	bottom: -56px;
+	left: 0;
+}

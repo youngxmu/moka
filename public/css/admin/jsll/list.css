@@ -1,14 +1,3 @@
-.container{width: 1000px;}
-/*.sub-nav {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 40px;
-	z-index: 1;
-}
-*/
-
 .sidebar {
 	width: 209px;
     padding: 10px 20px 10px 0;
@@ -49,13 +38,14 @@
 
 .sidebar .ztree{width: 100%;overflow: auto;}
 
-.main{width: 730px;display: inline-block;vertical-align: top;
+.main{
+	width: 750px;display: inline-block;vertical-align: top;
 	padding: 20px 0 20px 20px;
 	font-size:14px;color:#333;
-	/*border-left: 1px solid #cccccc;*/
-	min-height: 500px;
-	/*margin-left: -1px;*/
+	height: 100%;
+	padding-bottom: 60px;
 }
+
 .submenu{
 	background: #ffffff none repeat scroll 0 0;
     margin: auto;
@@ -71,11 +61,12 @@
 
 .info-content{
 	line-height: 1.5;
+	height: 100%;
 }
 
 .editor-area{
 	width: 100%;
-	min-height: 600px;
+	height: 100%;
 	font-size: 14px;
 	padding: 5px 10px;
 	line-height: 1.5;
