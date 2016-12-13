@@ -1,60 +1,14 @@
-/**{box-sizing: content-box;}*/
-.main{position: relative;}
-.crumb {
-    color: #008186;
-    font-size: 14px;
-    line-height: 30px;
-}
-
-
-/** 导航 */
-/*.nav{height: 50px;line-height: 50px;background-color: #268de1;color: #ffffff;
-  font-size: 18px;
-  width: 960px;margin: auto;padding: 0 20px;
-}
-.nav span{text-align: center;margin-right: 20px;display: inline-block;cursor: pointer;padding: 0 10px;}
-.nav span.active{background-color: #f8f8f8;color: #000000;};
-.nav span:hover{opacity: 0.8;}*/
-
-
-/** 主页面 */
 .main{font-size: 0;}
-.top-bar{font-size: 14px;padding: 10px 0 ;}
-.top-bar select{border: 1px solid #cccccc;
+.tool-bar{
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+.tool-bar select{border: 1px solid #cccccc;
   line-height: 30px;padding: 0 10px;
   height: 30px;
   cursor: pointer;
 }
-.top-bar span{border: 1px solid #cccccc;
-  line-height: 30px;padding: 0 10px;
-  cursor: pointer;
-  margin-left: 10px;
-  display: inline-block;
-}
-
-/**/
-.main .onep{width: 100%;font-size: 14px;display: inline-block;*display: inline;
-  vertical-align: top;
-}
-
-
-.main .onep .onep-list{margin: 0;padding: 0;padding: 0 10px;}
-.main .onep .onep-list li{line-height: 40px;border-bottom: 1px dashed #cccccc;font-size: 0;
-  
-}
-.main .onep .onep-list li:last-child{border-bottom: 0;}
-.main .onep .onep-list li a{width: 780px;margin-right: 10px;overflow: hidden;text-overflow: ellipsis;
-  font-size: 14px;color: #000000;
-  display: inline-block;*display: inline;
-  white-space: nowrap;vertical-align: top;
-}
-.main .onep .onep-list li span{width: 150px;font-size: 14px;color: #999999;
-  display: inline-block;*display: inline;
-  vertical-align: top;
-}
-
-
-.building{width: 100%;margin-top: 150px; text-align: center; font-size: 18px;color: #cccccc;}
 
 .question-list{font-size: 14px;line-height: 30px;border: 1px solid #cccccc;margin-bottom: 10px;}
 .question-list > div{
@@ -88,7 +42,7 @@
 .question-edit dl dd{display: inline-block;margin: 0;}
 .question-edit dl dd select{border: 1px solid #cccccc;width: 100px;}
 .question-edit dl dd textarea{border: 1px solid #cccccc;width: 500px;resize:vertical;}
-.question-edit .question-option{position: relative;display: none;}
+.question-edit .question-option{position: relative;}
 .question-edit .question-option p{margin: 0 0 5px 0;}
 .question-edit .question-option input{ width: 420px;margin-left:5px;border: 1px solid #cccccc;line-height: 30px;
   padding: 0 5px;

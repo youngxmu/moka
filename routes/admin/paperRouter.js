@@ -13,6 +13,10 @@ router.get('/list', function (req, res, next) {
     res.render('admin/paper/list');
 });
 
+router.get('/jsll', function (req, res, next) {
+    res.render('admin/paper/jsll');
+});
+
 
 //根据”创建渠道“和”是否虚拟“查询试卷
 router.post('/list', function (req, res, next) {

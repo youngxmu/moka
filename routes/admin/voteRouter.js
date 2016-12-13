@@ -261,7 +261,7 @@ router.post('/status', function (req, res) {
             msg: "修改失败"
         });
     }else{
-        voteModel.updateVote(id, status, function (err, result) {
+        voteModel.updateVoteStatus(id, status, function (err, result) {
             if (!err) {
                 res.json({
                     success: true,

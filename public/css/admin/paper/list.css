@@ -28,4 +28,23 @@
 
 .paper-edit .paper-questions dt{vertical-align: top;}
 .paper-edit .paper-questions dd{height: 400px;overflow: auto;}
-.paper-edit .paper-questions .btn-edit-questions{color: blue;cursor: pointer;}
+
+.qtype{
+	position: relative;
+}
+.btn-edit-questions{
+	position: absolute;
+	right: 10px;
+	top: 0;display: inline-block;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.btn-edit-questions:hover{
+	opacity: 0.8;
+}
+
+.dlg-bottom-btn{
+	position: absolute;
+	bottom: -54px;
+}

@@ -19,15 +19,6 @@
 			_this.search();
 		},
 		initEvent : function(){
-			$('.nav').on('click', 'span', function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				var mid = $this.attr('data-id');
-				_this.initView(mid);
-				// _this.queryData.mid = $this.attr('data-id');
-
-				// _this.search();
-			});
 			$('#s_q_type').on('change', function(){
 				var $this = $(this);
 				_this.queryData.qtype = $this.val();
@@ -242,14 +233,15 @@
 			var totalPage = data.totalPage;
 			var totalCount = data.totalCount;
 
+			if (totalPage <= 1) {
+		        $("#pagebar").html('');
+		    }
 			if(totalCount == 0){
 				$('#question_list').html(P.building);
 				return;
 			}
 
-		    if (totalPage <= 1) {
-		        $("#pagebar").html('');
-		    }
+		    
 		    if (totalPage >= 2) {
 		        $(function() {
 		            $.fn.jpagebar({

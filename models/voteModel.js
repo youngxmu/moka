@@ -144,7 +144,7 @@ exports.updateVote = function (id, name, description, qids, callback) {
 
 
 //编辑、修改试卷个人信息
-exports.updateVote = function (id, status, callback) {
+exports.updateVoteStatus = function (id, status, callback) {
     var sql = 'update vote set status = ? ';
     var params = [];
     sql += ' where id = ?;';
