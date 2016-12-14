@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.admin.index = {
-		searchUrl : 'index/list/res',
+		searchUrl : 'index/res/list',
 		pid : 10,//系统根目录编号
 		tpl : {
 			articleTpl : null,
