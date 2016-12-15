@@ -85,11 +85,13 @@ body{ background:#a4cce5;}
 .three{ padding-bottom:14px; width:1000px; height:90px;}
 .hengfu{ width:100%; height:90px; background:url(../../img/index/hengfu.jpg) no-repeat;}
 
+/**{box-sizing:content-box;}*/
 /*第四部分*//*第五部分*/
 .four{ width:1000px; height:320px; margin-bottom:15px; clear:both;}
 .four-div,.four-div-right{ width:320px; height:320px;  background:#fff; float:left; }
 .four-div{margin-right:20px;}
 .four > .four-div:last-child{margin-right: 0;}
+.four > .four-div.last{margin-right: 0;}
 .listTitle{ background:url(../../img/index/title2.jpg) no-repeat; width:320px;height:40px;}
 .listTitle p{ color:#fff; font-family:"方正大标宋简体"; font-size:16px; position:relative;top:15px;left:25px;}
 .div-liststyle{border:1px solid #b5d8fe;width:318px;   border-top:none; height:280px;}

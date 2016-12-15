@@ -75,7 +75,7 @@
 			console.log(id);
 			if(id == 130202){
 				// return window.open('jsjn/sys');
-				return window.location.href = 'jsjn/sys';
+				return;// window.location.href = 'jsjn/sys';
 			}
 			$.ajax({
 				url : 'jsjn/info/view/' + id,

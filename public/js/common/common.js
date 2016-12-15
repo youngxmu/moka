@@ -100,6 +100,7 @@ var util = {
 			+ '</div>',
 	date : {
 		format : function(longTime){
+			console.log(longTime);
 			var date = new Date(longTime);
 
 			var Year= date.getFullYear();//ie火狐下都可以 
@@ -131,20 +132,30 @@ var util = {
 		},
 		midFormat : function(longTime){
 			var date = new Date(longTime);
+			if(date == 'NaN'){
+				if(longTime.indexOf('T') != -1){
+					date = longTime.split('T')[0];
+				}else{
+					date = longTime.split(' ')[0];
+				}
+				
+			}else{
+				var Year= date.getFullYear();//ie火狐下都可以 
+				var Month= date.getMonth()+1; 
+				var Day = date.getDate(); 
 
-			var Year= date.getFullYear();//ie火狐下都可以 
-			var Month= date.getMonth()+1; 
-			var Day = date.getDate(); 
-
-			if (Month < 10 ) { 
-				Month = "0" + Month; 
-			} 
-			if (Day < 10 ) { 
-				Day = "0" + Day; 
+				if (Month < 10 ) { 
+					Month = "0" + Month; 
+				} 
+				if (Day < 10 ) { 
+					Day = "0" + Day; 
+				}
+				date = Year + '-' + Month + '-' + Day;
 			}
-			var CurrentDate = Year + '-' + Month + '-' + Day;
-			return CurrentDate;
-		},
+
+			
+			return date;
+		}
 	},
 	dialog : {
 		toastDialog : function(msg, timeout, callback){
