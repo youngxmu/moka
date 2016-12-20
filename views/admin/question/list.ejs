@@ -25,6 +25,7 @@
               <option value="1">填空题</option>
               <option value="2">选择题</option>
               <option value="3">多项选择题</option>
+              <option value="4">判断题</option>
             </select>
             <span id="btn_add" class="btn btn-primary" >添加题目</span>
           </div>
@@ -48,7 +49,7 @@
           </div>
         </div>
         <div class="qbody">${obj.qbody}</div>
-        {@if obj.qtype == 2}
+        {@if obj.qtype != 1}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
         <div class="rtanswer">正确答案：${obj.rtanswer}</div>
@@ -62,9 +63,10 @@
         <dt>题目类型：</dt>
         <dd>
           <select id="question_type">
-            <option value="1">填空题</option>
             <option value="2">选择题</option>
             <option value="3">多项选择题</option>
+            <option value="4">判断题</option>
+            <option value="1">填空题</option>
           </select>
         </dd>
       </dl>
@@ -91,8 +93,6 @@
       </dl>
     </div>
     </script>
-
-
     
     <script type="text/javascript" src="js/common/question.js"></script>
     <script type="text/javascript" src="js/admin/question/list.js"></script>

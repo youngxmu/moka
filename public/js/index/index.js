@@ -1,7 +1,7 @@
 (function(P){
 	var _this = null;
 	_this = P.index = {
-		infoSearchUrl : 'index/res/list',
+		infoSearchUrl : 'index/res/indexlist',
 		tpl : {
 			articleListTpl : null
 		},

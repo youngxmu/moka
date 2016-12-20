@@ -166,7 +166,7 @@
 		searchQuestions : function(){
 			var queryData = {
 				pageNo : 1,
-				pageSize: 1000
+				pageSize: 2000
 			};
 			$.ajax({
 				url : 'question/list',

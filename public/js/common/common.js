@@ -131,15 +131,13 @@ var util = {
 			return CurrentDate;
 		},
 		midFormat : function(longTime){
-			var date = new Date(longTime);
-			if(date == 'NaN'){
-				if(longTime.indexOf('T') != -1){
-					date = longTime.split('T')[0];
-				}else{
-					date = longTime.split(' ')[0];
-				}
-				
+			var date = '';
+			if(longTime.indexOf('T') != -1){
+				date = longTime.split('T')[0];
+			}else if (longTime.indexOf(' ') != -1){
+				date = longTime.split(' ')[0];
 			}else{
+				date = new Date(longTime);
 				var Year= date.getFullYear();//ie火狐下都可以 
 				var Month= date.getMonth()+1; 
 				var Day = date.getDate(); 
@@ -152,8 +150,6 @@ var util = {
 				}
 				date = Year + '-' + Month + '-' + Day;
 			}
-
-			
 			return date;
 		}
 	},

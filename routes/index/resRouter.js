@@ -141,6 +141,91 @@ router.post('/list', function (req, res, next) {
     });
 });
 
+
+
+router.post('/indexlist', function (req, res, next) {
+    var pageNo = parseInt(req.body.pageNo);
+    var pageSize = parseInt(req.body.pageSize);
+    var moduleId = req.body.moduleId;
+    var moduleMap = sysUtils.getModuleMap();
+    var module = moduleMap[moduleId];
+    var type = req.body.type;
+    if(!type || type == 'undefined'){
+        type = '';
+    }
+    indexModel.getUp(module.id, function (err, result) {
+        if (err || !result || result.length == 0) {
+            logger.error("查找文章出错", err);
+            res.json({
+                success: false,
+                msg: "查找文章出错"
+            });
+        } else {
+            var ids = result[0].aids;
+            if(!ids || ids == ''){
+                return res.json({
+                    success: true,
+                    msg: "查找文章成功",
+                    data: {
+                        list: []
+                    }
+                });
+            }
+
+            var list = [];
+            indexModel.queryUpByIds(ids, function (err, result) {
+                if (err || !result || !commonUtils.isArray(result)) {
+                    logger.error("查找文章出错", err);
+                } else {
+                    for (var i in result) {
+                        var date = new Date(result[i].create_time);
+                        result[i].create_time = commonUtils.formatDate(date);
+                    }
+                    list = result;
+                }
+
+                resourceModel.queryResourceByModuleTotalCount(module, type, function (totalCount) {
+                    var totalPage = 0;
+                    if (totalCount % pageSize == 0) totalPage = totalCount / pageSize;
+                    else totalPage = totalCount / pageSize + 1;
+                    totalPage = parseInt(totalPage, 10);
+                    var start = pageSize * (pageNo - 1);
+                    resourceModel.queryResourceByModule(module, type, start, pageSize, function (err, result) {
+                        if (err || !result || !commonUtils.isArray(result)) {
+                            logger.error("查找文章出错", err);
+                            res.json({
+                                success: false,
+                                msg: "查找文章出错"
+                            });
+                        } else {
+                            for (var i in result) {
+                                // result[i].create_time = commonUtils.formatDate(new Date(result[i].create_time).getTime());
+                                var date = new Date(result[i].create_time);
+                                result[i].create_time = commonUtils.formatDate(date);
+                                list.push(result[i]);
+                            }
+                            if(list.length > 7){
+                                list = list.slice(0,7);
+                            }
+                            res.json({
+                                success: true,
+                                msg: "查找文章成功",
+                                data: {
+                                    list: list
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        }
+    });
+});
+
+
+   
+
+
 router.post('/short', function (req, res, next) {
     var moduleId = req.body.moduleId;
     var moduleMap = sysUtils.getModuleMap();

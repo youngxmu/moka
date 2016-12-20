@@ -133,7 +133,7 @@
 			    content: _this.tpl.dlgEditQuestionTpl.render(question),
 		     	onshow: function(){
 		     		$('#question_type').val(question.qtype);
-		     		if(question.qtype == 2 || question.qtype == 3){
+		     		if(question.qtype != 1 ){
 		     			var answerArr = question.qanswer.split(',');
 						var html = '';
 

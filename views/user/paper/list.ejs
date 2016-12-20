@@ -25,10 +25,10 @@
           <li data-type="题库" style="display:block;">
             <a href="javascript:void(0);" >题库浏览</a>
           </li>
-          <li data-type="test">
+          <li data-type="test" style="display:block;">
             <a href="javascript:void(0);" >模拟考试</a>
           </li>
-          <li data-type="history">
+          <li data-type="history" style="display:block;">
             <a href="javascript:void(0);" >考试查询</a>
           </li>
         </ul>
@@ -86,7 +86,7 @@
     {@each list as obj, index}
     <div data-id="${obj.id}" class="question-list" style="float:left;">
         <div class="qbody">${obj.qbody}</div>
-        {@if obj.qtype == 2 || obj.qtype == 3}
+        {@if obj.qtype != 1}
           <div class="qanswer">$${obj.qanswer|formatAnswer}</div>
         {@/if}
         <div class="showanswer"><a href="javascript:void(0);">显示答案</a></div>
