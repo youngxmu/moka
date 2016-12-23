@@ -279,8 +279,12 @@
 					if(_this.currNode.content){
 						$('#content').html(_this.currNode.content);		
 					}else{
+						var url = 'resource/info/detail/' + _this.currNode.id;
+						if(_this.type == 'other'){
+							url = 'jsll/info/detail/' + _this.currNode.id;
+						}
 						$.ajax({
-							url : 'resource/info/detail/' + _this.currNode.id,
+							url : url,
 							type : 'get',
 							async : false,
 							success : function(data){

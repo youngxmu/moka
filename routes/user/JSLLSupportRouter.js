@@ -62,6 +62,7 @@ router.post('/info/list', function (req, res, next) {
 
 router.post('/info/list/tplan', function (req, res, next) {
     var type = '教案';
+    console.log(1);
     jsjnModel.queryInfosByType(type, function (err, result) {
         if (!err && result) {
             res.json({
@@ -71,6 +72,7 @@ router.post('/info/list/tplan', function (req, res, next) {
                 }
             });
         } else {
+            logger.error(err);
             res.json({
                 success: false,
                 msg: "找不到页面啦！"
