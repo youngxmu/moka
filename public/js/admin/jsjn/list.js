@@ -18,91 +18,48 @@
 		init : function() {
 			$('#hd_menu_resource').addClass('current');
 			_this.data.submenuTpl = juicer($('#submenu-tpl').html());
-			_this.data.resourceTpl = juicer($('#resource-tpl').html());
-			_this.data.picTpl = juicer($('#pic_tpl').html());
-			_this.data.videoTpl = juicer($('#video_tpl').html());
-			_this.data.pptTpl = juicer($('#ppt_tpl').html());
 			_this.data.editMenuDlgTpl = juicer($('#edit_menu_dlg').html());
 			_this.type = 1;
 			_this.initEvent();
 			_this.initEditor();
-			_this.showEditor('130101');
 			_this.changeType({init: true});
+
+			$(".res-menu").dragsort({ 
+				dragSelector: "li", 
+				dragBetween: true, 
+				dragEnd: _this.saveOrder, 
+				placeHolderTemplate: '<li><div class="btn-group"></div></li>'
+			});
 		},
 		initEvent : function(){
-			$('#resource_list').on('click','.view',function(){
-				var id = $(this).attr('data-id');
-				var data = _this.data.resourceList[id];
-				var options = {isPreview : false, resourceType : 2};
-			});
-			
-			$('.resource-opr').on('click', '.add',function(){
-				var zTree = _this.getCurrTree();
-				_this.showAddArticle();
-			});
-
-			$('body').on('keydown','#keyword',function(e){
-		        var event = window.event || e;
-		        if(event.keyCode == 13){
-		          	_this.data.searchData.keyword = $('#keyword').val();
-					_this.searchResource();
-		        }
-		    });
-
-			$('#btn_search').click(function(){
-				_this.data.searchData.keyword = $('#keyword').val();
-				_this.searchResource();
-			});
-			$('body').on('click', '.oper .del', _this.showDelArticle);
-
-			$('body').on('click', '.res-menu button', function(){
-				var mid = $(this).attr('data-id');
-				_this.showEditor(mid);
-			});
-
+			$('body').on('click', '.res-menu button', _this.showEditor);
+			$('body').on('click', '.add', _this.onAdd);
+			$('body').on('click', '.del', _this.onDel);
 			$('body').on('click', '#btn_modify', _this.commitInfo);
-
 			$('body').on('click', '.nav-tabs li', _this.changeType);
-
-			$('.type-panel').on('click', 'li',function(){
-				var $this = $(this);
-				$this.addClass('active').siblings().removeClass('active');
-				_this.type = $this.attr('data-type');
-				_this.initTopic();
-			});
 		},
 		changeType : function(options){
 			var $this = $(this);
 			if(options && options.init){
 				$this = $('.nav-tabs li').first();
 			}
-			
 			$this.addClass('active').siblings('li').removeClass('active');
 			var type = $this.attr('data-type');
 			var mid = $this.attr('data-mid');
 			_this.data.searchData.mid = mid;
-			$('#menu_panel').hide();
-			$('#tree_panel').hide();
-			if(type == 1 || type == 2){
-				$('#menu_panel').show();
-				$.ajax({
-					type : "post",
-					url : 'menu/submenu/' + mid,
-					success : function(data){
-						if(data.success){
-							$('.res-menu').html(_this.data.submenuTpl.render(data.data));
-						}else{
-							alert(data.msg);
-						}
+			$.ajax({
+				type : "post",
+				url : 'menu/submenu/' + mid,
+				success : function(data){
+					if(data.success){
+						$('.res-menu').html(_this.data.submenuTpl.render(data.data));
+						_this.mid = $('.res-menu li').first().attr('data-id');
+						_this.showEditor({mid : _this.mid});
+					}else{
+						alert(data.msg);
 					}
-				});
-				// _this.showEditor(mid);
-			}
-
-			if(type == 3){
-				// _this.searchResource();
-				$('#tree_panel').show();	
-			}
+				}
+			});
 		},
 		initEditor : function(){
 			_this.editor = new Simditor({
@@ -115,19 +72,17 @@
 				    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
 			  	}
 			});
-			_this.txt_editor = $('#txt_editor');
-			// new Simditor({
-			//   	textarea: $('#txt_editor'),
-			//   	upload : {
-			//     	url: 'upload/img',
-			// 	    params: null,
-			// 	    fileKey: 'upload_file',
-			// 	    connectionCount: 3,
-			// 	    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
-			//   	}
-			// });
 		},
-		showEditor : function(mid){
+		showEditor : function(options){
+			var $menu = $(this);
+			var mid = $(this).attr('data-id');
+			if(options && options.mid){
+				mid = options.mid;
+				$menu = $('.res-menu li .btn-info').first();
+			}
+
+			$('.res-menu li .btn-info').removeClass('active');
+			$menu.addClass('active');
 			_this.mid = mid;
 			$.ajax({
 				type : "post",
@@ -142,12 +97,9 @@
 			});
 		},
 		commitInfo : function() {
-			var mid = _this.mid;
-			var content = _this.editor.getValue();
-			
 			var postData = {
-				content : content,
-				mid : mid
+				content : _this.editor.getValue(),
+				mid : _this.mid
 			};
 			$.ajax({
 				url : 'admin/index/info/save',
@@ -161,26 +113,7 @@
 				}
 			});
 		},
-		getMenuPath : function(node){
-			var menuArr = [_this.pid];
-			var level = 0;
-			if(node == null){
-				return '';
-			}else{
-				level = node.level;
-			}
-			for(var i=0;i<=level;i++){
-				menuArr.push(node.id);
-				node = node.getParentNode();
-			}
-			return menuArr.join(',');
-		},
-		showAddArticle : function(){
-			var menuPath = _this.getMenuPath(_this.currNode);
-			window.open('admin/article/upload?menuPath=' + menuPath);
-		},
-		showDelArticle : function(){
-			var id = $(this).attr('data-id');
+		onAdd : function(){
 			util.dialog.confirmDialog(
 				'确认删除',
 				function(){
@@ -191,17 +124,62 @@
 						data : {id:id},
 						success : function(result){
 							if(result.success){
-								_this.searchResource();
+								$this.parent('div').parent('li').remove();
 							}else{
 								alert(result.msg);
 							}
-							
 						}
 					});
 				},
 				function(){},
 				'确认删除'
 			);
+		},
+		onDel : function(){
+			var $this = $(this);
+			var id = $this.attr('data-id');
+			util.dialog.confirmDialog(
+				'确认删除',
+				function(){
+					$.ajax({
+						type : "post",
+						cache : false,
+						url : 'admin/article/del',
+						data : {id:id},
+						success : function(result){
+							if(result.success){
+								$this.parent('div').parent('li').remove();
+							}else{
+								alert(result.msg);
+							}
+						}
+					});
+				},
+				function(){},
+				'确认删除'
+			);
+		},
+		saveOrder : function(){
+			var $menus = $('.res-menu li');
+			var menus = [];
+			$menus.each(function(index){
+				var id = $(this).attr('data-id');
+				menus.push({
+					id : id,
+					index : index
+				});
+			});
+			$.ajax({
+				type : "post",
+				cache : false,
+				url : 'menu/update/indexNo',
+				data : {menus : JSON.stringify(menus)},
+				success : function(result){
+					if(!result.success){
+						util.dialog.toastDialog(result.msg);
+					}
+				}
+			});
 		}
 	};
 }(moka));

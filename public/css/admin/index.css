@@ -86,7 +86,7 @@ display: block;white-space: nowrap;}
 .header-nav li.current a {
     display: inline;
     border-radius: 3px;
-    padding: 5px 10px;
+    padding: 5px;
 }
 .header-nav li.current a {
     color: #FFF;
@@ -532,4 +532,11 @@ width: 960px;margin: auto;
 
 .question-edit .question-option .btn-op.del{
   right: 12px;;top: 37px;
+}
+
+
+.tool-bar{
+  position: absolute;
+  top: 0;
+  right: 10px;
 }

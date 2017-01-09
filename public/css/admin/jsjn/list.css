@@ -10,8 +10,8 @@
   margin-top: 15px;
 }
 
-.res-menu li button{
-  width: 100%;
+.res-menu li .btn-group button:first-child{
+  width: 140px;
 }
 .sidebar ul.res-menu li{
 	line-height: 40px;height: 40px;

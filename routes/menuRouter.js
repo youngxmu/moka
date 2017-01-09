@@ -130,7 +130,6 @@ router.get('/map', function(req, res, next) {
     res.json(menuMap);
 });
 
-
 router.post('/submenu/:mid', function(req, res, next) {
     var mid = req.params.mid;
     menuModel.queryMenuByPid(mid, function (err, result) {
@@ -151,6 +150,26 @@ router.post('/submenu/:mid', function(req, res, next) {
         }
     });
 });
+
+router.post('/update/indexNo', function(req, res, next) {
+    var menus = req.body.menus;
+    var params = JSON.parse(menus);
+    menuModel.updateMenuIndexNo(params, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                msg: "修改失败"
+            });
+        } else {
+            menuUtils.refreshMenu();
+            res.json({
+                success: true,
+                msg: "修改成功"
+            });
+        }
+    });
+});
+
 
 module.exports = router;	
 

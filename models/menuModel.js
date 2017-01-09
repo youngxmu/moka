@@ -64,10 +64,21 @@ exports.delMenu = function (id, callback) {
 
 
 exports.queryMenuByPid = function (pid, callback) {
-    var sql = 'select * from menu where parent_id = ?;';
+    var sql = 'select * from menu where parent_id = ? order by index_no;';
     var params = [pid];
     db.query(sql, params, callback);
 };
 
 
-
+exports.updateMenuIndexNo = function (menus, callback) {
+    var params = [];
+    var sql = 'update menu set index_no = case ';
+    for(var index in menus){
+        sql += ' when id = ? then ? ';
+        var menu = menus[index];
+        params.push(menu.id);
+        params.push(menu.index);
+    }
+    sql += ' end;';
+    db.query(sql, params, callback);
+};

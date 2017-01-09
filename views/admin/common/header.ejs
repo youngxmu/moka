@@ -22,6 +22,9 @@
       <li class="vote"><a href="admin/vote/list"    >国防教育测评</a></li>
       <li class="expert"><a href="admin/expert/list"  >师资力量</a></li>
       <li class="user"><a href="admin/user/list"  >用户管理</a></li>
+      <% if(islogin){ %>
+        <li class="logout" style="float:right;"><a href="auth/admin/logout" >退出</a></li>
+      <% } %>
       <div class="clears"></div>
     </ul>
   </div>
